@@ -28,6 +28,7 @@ import org.slf4j.Logger;
 
 import dev.zontreck.shapedaionresources.blocks.ModBlocks;
 import dev.zontreck.shapedaionresources.configs.SARServerConfig;
+import dev.zontreck.shapedaionresources.events.EventHandler;
 import dev.zontreck.shapedaionresources.items.ModItems;
 import dev.zontreck.shapedaionresources.ore.OreGenerator;
 
@@ -47,6 +48,7 @@ public class ShapedAionResources
         // Register the setup method for modloading
         bus.addListener(this::setup);
 
+
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, SARServerConfig.SPEC, "aion-rss-server.toml");
         
         
@@ -56,7 +58,7 @@ public class ShapedAionResources
 
 
         MinecraftForge.EVENT_BUS.register(this);
-
+        MinecraftForge.EVENT_BUS.register(new EventHandler());
 
         ModBlocks.register(bus);
         ModItems.register(bus);
@@ -72,11 +74,6 @@ public class ShapedAionResources
     public void onServerStarting(ServerStartingEvent event)
     {
 
-    }
-
-    @SubscribeEvent
-    public static void biomeLoadingEvent(final BiomeLoadingEvent ev){
-        //OreGenerator.generateOres(ev);
     }
 
     @SubscribeEvent

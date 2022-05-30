@@ -29,11 +29,16 @@ public class ModBlocks {
 
 
     
-    public static final RegistryObject<Block> AION_ORE_BLOCK = BLOCKS.register("aion_ore_block", () -> new OreBlock(BlockBehaviour.Properties.of(Material.METAL)));
+    public static final RegistryObject<Block> AION_ORE_BLOCK = BLOCKS.register("aion_ore_block", () -> new OreBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(9f).explosionResistance(10).destroyTime(10)));
 
     public static final RegistryObject<Item> AION_ORE_BLOCK_I = ITEMS.register("aion_ore_block", () -> new BlockItem(AION_ORE_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
-    public static final RegistryObject<Block> AION_BLOCK = BLOCKS.register("aion_block", () -> new Block(BlockBehaviour.Properties.of(Material.HEAVY_METAL).explosionResistance(10000).requiresCorrectToolForDrops().strength(9f)));
+
+    public static final RegistryObject<Block> DEEPSLATE_AION_ORE_BLOCK = BLOCKS.register("deepslate_aion_ore_block", () -> new OreBlock(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(9f).explosionResistance(10).destroyTime(10)));
+
+    public static final RegistryObject<Item> DEEPSLATE_AION_ORE_BLOCK_I = ITEMS.register("deepslate_aion_ore_block", () -> new BlockItem(DEEPSLATE_AION_ORE_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+
+    public static final RegistryObject<Block> AION_BLOCK = BLOCKS.register("aion_block", () -> new Block(BlockBehaviour.Properties.of(Material.HEAVY_METAL).requiresCorrectToolForDrops().strength(9f).explosionResistance(10).destroyTime(10)));
 
     public static final RegistryObject<Item> AION_BLOCK_I = ITEMS.register("aion_block", () -> new BlockItem(AION_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 

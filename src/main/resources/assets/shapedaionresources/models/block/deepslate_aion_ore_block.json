@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "shapedaionresources:block/deepslate_aion_ore_block"
+  }
+}
