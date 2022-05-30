@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "shapedaionresources:aion_ore_block"
+  },
+  "result": "shapedaionresources:aion_fragment",
+  "experience": 0.5
+}

@@ -1,0 +1,26 @@
+{
+    "name": "Armor Difficulties",
+    "description": "You are very small, and struggle to wear armor without being weighed down. Additionally, you are allergic to pure iron armor, and cannot wear it.",
+    "type": "origins:conditioned_restrict_armor",
+    "head": {
+        "type": "origins:armor_value",
+        "comparison": ">",
+        "compare_to": 2
+    },
+    "chest": {
+        "type": "origins:armor_value",
+        "comparison": ">",
+        "compare_to": 6
+    },
+    "legs": {
+        "type": "origins:armor_value",
+        "comparison": ">",
+        "compare_to": 5
+    },
+    "feet": {
+        "type": "origins:armor_value",
+        "comparison": ">",
+        "compare_to": 2
+    },
+    "tick_rate": 80
+}

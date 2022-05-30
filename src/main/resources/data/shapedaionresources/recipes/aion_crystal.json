@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      " F ",
+      "FGF",
+      " F "
+    ],
+    "key": {
+      "F": {
+        "item": "shapedaionresources:aion_fragment"
+      },
+      "G": {
+        "item": "minecraft:emerald"
+      }
+    },
+    "result": {
+      "item": "shapedaionresources:aion_crystal",
+      "count": 1
+    }
+  }

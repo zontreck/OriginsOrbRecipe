@@ -1,0 +1,31 @@
+{
+    "name": "Armor allergy",
+    "description": "You are very small, and struggle to wear armor without being weighed down. Additionally, you are allergic to pure iron armor, and cannot wear it.",
+    "hidden": true,
+    "type": "origins:conditioned_restrict_armor",
+    "head": {
+        "type": "origins:ingredient",
+        "ingredient": {
+            "item": "minecraft:iron_helmet"
+        }
+    },
+    "chest": {
+        "type": "origins:ingredient",
+        "ingredient": {
+            "item": "minecraft:iron_chestplate"
+        }
+    },
+    "legs": {
+        "type": "origins:ingredient",
+        "ingredient": {
+            "item": "minecraft:iron_leggings"
+        }
+    },
+    "feet": {
+        "type": "origins:ingredient",
+        "ingredient": {
+            "item": "minecraft:iron_boots"
+        }
+    },
+    "tick_rate": 80
+}

@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "shapedaionresources:block/aion_ore_block"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+    "name": "Nocturnal",
+    "description": "You are naturally nocturnal, and find yourself weaker when in the extreme brightness of sunlight. On the other hand, your adaptation to darkness means that you can see clearly even in pitch black.",
+    "condition": {
+        "type": "origins:and",
+        "conditions": [
+            {
+                "type": "origins:exposed_to_sun"
+            }
+        ]
+    },
+    "type": "origins:stacking_status_effect",
+    "min_stacks": 0,
+    "max_stacks": 2,
+    "duration_per_stack": 30,
+    "tick_rate": 10,
+    "effects": [
+        {
+            "effect": "minecraft:weakness",
+            "duration": 100,
+            "amplifier": 0,
+            "is_ambient": true,
+            "show_particles": false,
+            "show_icon": true
+        }
+    ]
+}
