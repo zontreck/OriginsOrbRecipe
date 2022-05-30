@@ -33,7 +33,7 @@ import dev.zontreck.shapedaionresources.items.ModItems;
 import dev.zontreck.shapedaionresources.ore.OreGenerator;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod("shapedaionresources")
+@Mod(ShapedAionResources.MOD_ID)
 public class ShapedAionResources
 {
     // Directly reference a slf4j logger

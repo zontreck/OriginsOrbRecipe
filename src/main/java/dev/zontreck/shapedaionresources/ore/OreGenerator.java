@@ -53,7 +53,7 @@ public class OreGenerator {
             
         List<Holder<PlacedFeature>> base = ev.getGeneration().getFeatures(GenerationStep.Decoration.UNDERGROUND_ORES);
 
-        ShapedAionResources.LOGGER.info("Register: AION_ORE");
+        //ShapedAionResources.LOGGER.info("Register: AION_ORE");
         base.add(AION_ORE_PLACED);
         //base.add(DEEPSLATE_AION_ORE_PLACED);
     }
