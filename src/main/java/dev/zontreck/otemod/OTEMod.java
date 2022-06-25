@@ -1,4 +1,4 @@
-package dev.zontreck.shapedaionresources;
+package dev.zontreck.otemod;
 
 import java.util.Set;
 import java.util.Map.Entry;
@@ -19,37 +19,35 @@ import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
-import dev.zontreck.shapedaionresources.blocks.ModBlocks;
-import dev.zontreck.shapedaionresources.configs.SARServerConfig;
-import dev.zontreck.shapedaionresources.events.EventHandler;
-import dev.zontreck.shapedaionresources.items.ModItems;
-import dev.zontreck.shapedaionresources.ore.OreGenerator;
+import dev.zontreck.otemod.blocks.ModBlocks;
+import dev.zontreck.otemod.configs.OTEServerConfig;
+import dev.zontreck.otemod.events.EventHandler;
+import dev.zontreck.otemod.items.ModItems;
+import dev.zontreck.otemod.ore.OreGenerator;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod(ShapedAionResources.MOD_ID)
-public class ShapedAionResources
+@Mod(OTEMod.MOD_ID)
+public class OTEMod
 {
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
-    public static final String FIRST_JOIN_TAG = "dev.zontreck.shapedaionresources.firstjoin";
-    public static final String MOD_ID = "shapedaionresources";
+    public static final String FIRST_JOIN_TAG = "dev.zontreck.otemod.firstjoin";
+    public static final String MOD_ID = "otemod";
 
 
-    public ShapedAionResources()
+    public OTEMod()
     {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         // Register the setup method for modloading
         bus.addListener(this::setup);
 
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, SARServerConfig.SPEC, "aion-rss-server.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, OTEServerConfig.SPEC, "aion-rss-server.toml");
         
         
         
@@ -105,7 +103,7 @@ public class ShapedAionResources
         
         Set<String> tags = p.getTags();
 
-        if(tags.contains(ShapedAionResources.FIRST_JOIN_TAG)){
+        if(tags.contains(OTEMod.FIRST_JOIN_TAG)){
             return false;
         }
 

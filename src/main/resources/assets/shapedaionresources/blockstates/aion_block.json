@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "shapedaionresources:block/aion_block"
+      "model": "otemod:block/aion_block"
     }
   }
 }

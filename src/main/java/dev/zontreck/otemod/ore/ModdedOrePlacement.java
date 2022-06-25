@@ -1,4 +1,4 @@
-package dev.zontreck.shapedaionresources.ore;
+package dev.zontreck.otemod.ore;
 
 import java.util.List;
 

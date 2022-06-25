@@ -1,7 +1,0 @@
-{
-    "name": "Weak Wings",
-    "description": "While you can glide like the best of them, you can only fly with some effort, fluttering to slowly gain altitude while gliding.",
-    "type": "origins:elytra_flight",
-    "render_elytra": true,
-    "texture_location": "shapedaionresources:textures/entity/elytra.png"
-}

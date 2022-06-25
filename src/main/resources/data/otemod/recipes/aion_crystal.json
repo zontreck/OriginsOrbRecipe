@@ -7,14 +7,14 @@
     ],
     "key": {
       "F": {
-        "item": "shapedaionresources:aion_fragment"
+        "item": "otemod:aion_fragment"
       },
       "G": {
         "item": "minecraft:emerald"
       }
     },
     "result": {
-      "item": "shapedaionresources:aion_crystal",
+      "item": "otemod:aion_crystal",
       "count": 1
     }
   }

@@ -1,7 +1,0 @@
-{
-    "name": "Night Vision",
-    "description": "Your big eyes have adapted to see within dark spaces.",
-    "hidden": true,
-    "type": "origins:night_vision",
-    "strength": 1
-}

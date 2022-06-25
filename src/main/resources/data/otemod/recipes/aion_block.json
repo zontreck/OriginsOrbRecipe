@@ -7,14 +7,14 @@
     ],
     "key": {
       "C": {
-        "item": "shapedaionresources:aion_crystal"
+        "item": "otemod:aion_crystal"
       },
       "N": {
         "item": "minecraft:nether_star"
       }
     },
     "result": {
-      "item": "shapedaionresources:aion_block",
+      "item": "otemod:aion_block",
       "count": 1
     }
   }

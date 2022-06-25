@@ -1,15 +1,14 @@
-package dev.zontreck.shapedaionresources.blocks;
+package dev.zontreck.otemod.blocks;
 
 import java.util.function.Supplier;
 
-import dev.zontreck.shapedaionresources.ShapedAionResources;
-import dev.zontreck.shapedaionresources.items.ModItems;
+import dev.zontreck.otemod.OTEMod;
+import dev.zontreck.otemod.items.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.OreBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
@@ -19,13 +18,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlocks {
-    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, ShapedAionResources.MOD_ID);
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, ShapedAionResources.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, OTEMod.MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, OTEMod.MOD_ID);
 
     public static void register(IEventBus bus){
         BLOCKS.register(bus);
         ITEMS.register(bus);
-        ShapedAionResources.LOGGER.info("Registering all blocks...");
+        OTEMod.LOGGER.info("Registering all blocks...");
     }
 
 

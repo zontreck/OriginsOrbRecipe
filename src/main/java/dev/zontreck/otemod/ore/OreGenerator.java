@@ -1,10 +1,10 @@
-package dev.zontreck.shapedaionresources.ore;
+package dev.zontreck.otemod.ore;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import dev.zontreck.shapedaionresources.ShapedAionResources;
-import dev.zontreck.shapedaionresources.blocks.ModBlocks;
+import dev.zontreck.otemod.OTEMod;
+import dev.zontreck.otemod.blocks.ModBlocks;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.features.OreFeatures;
@@ -18,7 +18,6 @@ import net.minecraft.world.level.levelgen.feature.OreFeature;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
 
 public class OreGenerator {
     public static final List<ConfiguredFeature<OreConfiguration, OreFeature>> OVERWORLD_ORES = new ArrayList();

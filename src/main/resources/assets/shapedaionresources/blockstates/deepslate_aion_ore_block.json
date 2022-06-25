@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "shapedaionresources:block/deepslate_aion_ore_block"
+      "model": "otemod:block/deepslate_aion_ore_block"
     }
   }
 }

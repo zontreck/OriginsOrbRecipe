@@ -3,15 +3,15 @@
     "itemGroup.refinedfabric.tools": "RefinedFabric Utilities",
     "itemGroup.refinedfabric.blocks": "RefinedFabric Blocks",
 
-    "item.shapedaionresources.aion_ore": "Raw Aion Ore",
-    "item.shapedaionresources.aion_crystal": "Aion Crystal",
-    "item.shapedaionresources.aion_crystal.levels": "Stored XP: ",
-    "item.shapedaionresources.aion_crystal.empty": "* Crystal Is Empty *",
-    "item.shapedaionresources.aion_crystal.need_repair": "Aion Crystal must now be repaired",
-    "item.shapedaionresources.aion_crystal.durability": "Durability: ",
-    "item.shapedaionresources.aion_fragment": "Fragmented Aion Crystal",
+    "item.otemod.aion_ore": "Raw Aion Ore",
+    "item.otemod.aion_crystal": "Aion Crystal",
+    "item.otemod.aion_crystal.levels": "Stored XP: ",
+    "item.otemod.aion_crystal.empty": "* Crystal Is Empty *",
+    "item.otemod.aion_crystal.need_repair": "Aion Crystal must now be repaired",
+    "item.otemod.aion_crystal.durability": "Durability: ",
+    "item.otemod.aion_fragment": "Fragmented Aion Crystal",
 
-    "block.shapedaionresources.aion_ore_block": "Aion Ore",
-    "block.shapedaionresources.deepslate_aion_ore_block": "Deepslate Aion Ore",
-    "block.shapedaionresources.aion_block": "Aion Block"
+    "block.otemod.aion_ore_block": "Aion Ore",
+    "block.otemod.deepslate_aion_ore_block": "Deepslate Aion Ore",
+    "block.otemod.aion_block": "Aion Block"
 }

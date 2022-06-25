@@ -1,14 +1,14 @@
-package dev.zontreck.shapedaionresources.events;
+package dev.zontreck.otemod.events;
 
-import dev.zontreck.shapedaionresources.ShapedAionResources;
-import dev.zontreck.shapedaionresources.ore.OreGenerator;
+import dev.zontreck.otemod.OTEMod;
+import dev.zontreck.otemod.ore.OreGenerator;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@EventBusSubscriber(modid=ShapedAionResources.MOD_ID)
+@EventBusSubscriber(modid=OTEMod.MOD_ID)
 public class EventHandler {
     
 

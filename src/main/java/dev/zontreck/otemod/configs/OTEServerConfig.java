@@ -1,4 +1,4 @@
-package dev.zontreck.shapedaionresources.configs;
+package dev.zontreck.otemod.configs;
 
 
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.Map;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class SARServerConfig {
+public class OTEServerConfig {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
 
@@ -19,7 +19,7 @@ public class SARServerConfig {
     static {
         List<ItemStack> defaults = new ArrayList<ItemStack>();
         
-        BUILDER.push("Configuration for Shaped Aion Cubes Resources");
+        BUILDER.push("Configuration for OTE Mod Resources");
         INITIAL_ITEMS_TO_GIVE_ON_FIRST_JOIN = BUILDER.comment("What items, identified by modid:item, to give to a brand new user on the server").define("New Player Gear", defaults);
 
         BUILDER.pop();
