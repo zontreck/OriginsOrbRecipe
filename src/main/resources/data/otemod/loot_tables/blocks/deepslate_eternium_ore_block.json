@@ -26,7 +26,7 @@
                                     }
                                 }
                             ],
-                            "name": "shapedaionresources:aion_ore_block"
+                            "name": "otemod:deepslate_eternium_ore_block"
                         },
                         {
                             "type": "minecraft:item",
@@ -40,7 +40,7 @@
                                     "function": "minecraft:explosion_decay"
                                 }
                             ],
-                            "name": "shapedaionresources:aion_ore"
+                            "name": "otemod:eternium_ore"
                         }
                     ]
                 }

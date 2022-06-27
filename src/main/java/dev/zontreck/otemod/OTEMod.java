@@ -4,8 +4,10 @@ import java.util.Set;
 import java.util.Map.Entry;
 
 import com.mojang.logging.LogUtils;
+import com.mojang.serialization.Codec;
 
 import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -13,6 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -22,13 +25,17 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+
 import org.slf4j.Logger;
 
 import dev.zontreck.otemod.blocks.ModBlocks;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.events.EventHandler;
 import dev.zontreck.otemod.items.ModItems;
-import dev.zontreck.otemod.ore.OreGenerator;
+import dev.zontreck.otemod.ore.Modifier;
+import dev.zontreck.otemod.ore.Modifier.ModifierOfBiomes;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(OTEMod.MOD_ID)
@@ -38,6 +45,8 @@ public class OTEMod
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String FIRST_JOIN_TAG = "dev.zontreck.otemod.firstjoin";
     public static final String MOD_ID = "otemod";
+    public static final String MODIFY_BIOMES = "modify_biomes";
+    public static final ResourceLocation MODIFY_BIOMES_RL = new ResourceLocation(OTEMod.MOD_ID, MODIFY_BIOMES);
 
 
     public OTEMod()
@@ -47,12 +56,14 @@ public class OTEMod
         bus.addListener(this::setup);
 
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, OTEServerConfig.SPEC, "aion-rss-server.toml");
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, OTEServerConfig.SPEC, "otemod-rss-server.toml");
         
         
         
         // Register ourselves for server and other game events we are interested in
-
+        final DeferredRegister<Codec<? extends BiomeModifier>> serializers = DeferredRegister.create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, OTEMod.MOD_ID);
+        serializers.register(bus);
+        serializers.register(MODIFY_BIOMES, ModifierOfBiomes::makeCodec);
 
 
         MinecraftForge.EVENT_BUS.register(this);

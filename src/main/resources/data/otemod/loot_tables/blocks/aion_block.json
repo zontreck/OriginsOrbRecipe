@@ -6,7 +6,7 @@
         "entries": [
           {
             "type": "minecraft:item",
-            "name": "shapedaionresources:aion_block"
+            "name": "otemod:aion_block"
           }
         ],
         "conditions": [

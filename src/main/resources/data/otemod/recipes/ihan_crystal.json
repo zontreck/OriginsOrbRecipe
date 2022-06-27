@@ -7,14 +7,14 @@
     ],
     "key": {
       "F": {
-        "item": "otemod:aion_fragment"
+        "item": "otemod:eternium_fragment"
       },
       "G": {
         "item": "minecraft:emerald"
       }
     },
     "result": {
-      "item": "otemod:aion_crystal",
+      "item": "otemod:ihan_crystal",
       "count": 1
     }
   }

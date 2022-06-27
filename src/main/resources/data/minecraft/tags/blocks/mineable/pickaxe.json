@@ -1,8 +1,8 @@
 {
     "replace": false,
     "values": [
-        "shapedaionresources:aion_ore_block",
-        "shapedaionresources:deepslate_aion_ore_block",
-        "shapedaionresources:aion_block"
+        "otemod:eternium_ore_block",
+        "otemod:deepslate_eternium_ore_block",
+        "otemod:aion_block"
     ]
 }

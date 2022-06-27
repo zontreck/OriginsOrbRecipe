@@ -11,12 +11,12 @@ import net.minecraftforge.registries.RegistryObject;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, OTEMod.MOD_ID);
 
-    public static final RegistryObject<Item> AION_FRAGMENT = ITEMS.register("aion_fragment", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+    public static final RegistryObject<Item> ETERNIUM_FRAGMENT = ITEMS.register("eternium_fragment", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
-    public static final RegistryObject<Item> AION_CRYSTAL = ITEMS.register("aion_crystal", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+    public static final RegistryObject<Item> IHAN_CRYSTAL = ITEMS.register("ihan_crystal", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
 
-    public static final RegistryObject<Item> AION_RAW_ORE = ITEMS.register("aion_ore", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+    public static final RegistryObject<Item> ETERNIUM_RAW_ORE = ITEMS.register("eternium_ore", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
 
     public static void register(IEventBus bus){

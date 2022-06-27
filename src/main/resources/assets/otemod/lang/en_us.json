@@ -1,0 +1,17 @@
+{
+    "itemGroup.refinedfabric.materials": "RefinedFabric Materials",
+    "itemGroup.refinedfabric.tools": "RefinedFabric Utilities",
+    "itemGroup.refinedfabric.blocks": "RefinedFabric Blocks",
+
+    "item.otemod.eternium_ore": "Raw Eternium Ore",
+    "item.otemod.ihan_crystal": "Ihan Crystal",
+    "item.otemod.ihan_crystal.levels": "Stored XP: ",
+    "item.otemod.ihan_crystal.empty": "* Crystal Is Empty *",
+    "item.otemod.ihan_crystal.need_repair": "Ihan Crystal must now be repaired",
+    "item.otemod.ihan_crystal.durability": "Durability: ",
+    "item.otemod.eternium_fragment": "Fragmented Eternium",
+
+    "block.otemod.eternium_ore_block": "Eternium Ore",
+    "block.otemod.deepslate_eternium_ore_block": "Deepslate Eternium Ore",
+    "block.otemod.aion_block": "Aion Block"
+}
