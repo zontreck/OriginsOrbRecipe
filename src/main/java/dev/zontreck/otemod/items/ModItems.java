@@ -15,6 +15,10 @@ public class ModItems {
 
     public static final RegistryObject<Item> IHAN_CRYSTAL = ITEMS.register("ihan_crystal", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
+    public static final RegistryObject<Item> ETERNIUM_DUST = ITEMS.register("eternium_dust", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+
+    public static final RegistryObject<Item> AURORA_COMPOUND = ITEMS.register("aurora_compound", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
+
 
     public static final RegistryObject<Item> ETERNIUM_RAW_ORE = ITEMS.register("eternium_ore", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 

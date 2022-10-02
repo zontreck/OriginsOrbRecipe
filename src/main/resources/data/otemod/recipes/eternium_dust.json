@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "otemod:eternium_fragment"
+  },
+  "result": "otemod:eternium_dust",
+  "experience": 25,
+  "cookingtime": 60
+}

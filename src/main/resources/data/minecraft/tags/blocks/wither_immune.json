@@ -1,6 +1,6 @@
 {
-    "replace": false,
     "values": [
-        "otemod:aion_block"
+        "otemod:aurora_block",
+        "otemod:aurora_door"
     ]
 }

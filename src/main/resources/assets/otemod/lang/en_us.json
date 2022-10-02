@@ -10,8 +10,11 @@
     "item.otemod.ihan_crystal.need_repair": "Ihan Crystal must now be repaired",
     "item.otemod.ihan_crystal.durability": "Durability: ",
     "item.otemod.eternium_fragment": "Fragmented Eternium",
+    "item.otemod.eternium_dust": "Eternium Dust",
+    "item.otemod.aurora_compound": "Aurora Compound",
 
     "block.otemod.eternium_ore_block": "Eternium Ore",
     "block.otemod.deepslate_eternium_ore_block": "Deepslate Eternium Ore",
-    "block.otemod.aion_block": "Aion Block"
+    "block.otemod.aurora_block": "Aurora Block",
+    "block.otemod.aurora_door": "Aurora Door"
 }

@@ -6,7 +6,7 @@
         "entries": [
           {
             "type": "minecraft:item",
-            "name": "otemod:aion_block"
+            "name": "otemod:aurora_block"
           }
         ],
         "conditions": [
