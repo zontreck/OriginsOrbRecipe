@@ -40,6 +40,7 @@ import org.slf4j.Logger;
 
 import dev.zontreck.otemod.blocks.ModBlocks;
 import dev.zontreck.otemod.commands.DelHomeCommand;
+import dev.zontreck.otemod.commands.FlyCommand;
 import dev.zontreck.otemod.commands.HomeCommand;
 import dev.zontreck.otemod.commands.HomesCommand;
 import dev.zontreck.otemod.commands.SetHomeCommand;
@@ -146,6 +147,8 @@ public class OTEMod
         SetHomeCommand.register(ev.getDispatcher());
         HomeCommand.register(ev.getDispatcher());
         DelHomeCommand.register(ev.getDispatcher());
+
+        FlyCommand.register(ev.getDispatcher());
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
