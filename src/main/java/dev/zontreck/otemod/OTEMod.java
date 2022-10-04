@@ -1,5 +1,8 @@
 package dev.zontreck.otemod;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Set;
 import java.util.Map.Entry;
 
@@ -16,6 +19,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -25,6 +29,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -34,7 +39,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
 import dev.zontreck.otemod.blocks.ModBlocks;
+import dev.zontreck.otemod.commands.DelHomeCommand;
+import dev.zontreck.otemod.commands.HomeCommand;
+import dev.zontreck.otemod.commands.HomesCommand;
+import dev.zontreck.otemod.commands.SetHomeCommand;
 import dev.zontreck.otemod.configs.OTEServerConfig;
+import dev.zontreck.otemod.database.Database;
+import dev.zontreck.otemod.database.Database.DatabaseConnectionException;
 import dev.zontreck.otemod.events.EventHandler;
 import dev.zontreck.otemod.items.ModItems;
 import dev.zontreck.otemod.ore.Modifier;
@@ -50,7 +61,7 @@ public class OTEMod
     public static final String MOD_ID = "otemod";
     public static final String MODIFY_BIOMES = "modify_biomes";
     public static final ResourceLocation MODIFY_BIOMES_RL = new ResourceLocation(OTEMod.MOD_ID, MODIFY_BIOMES);
-
+    public static Database DB=null;
 
     public OTEMod()
     {
@@ -93,6 +104,7 @@ public class OTEMod
 
         Player p = (Player)e;
         
+        
         if(firstJoin(p)){
             // Do first join actions here
 
@@ -127,12 +139,51 @@ public class OTEMod
         //LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
     }
 
+    @SubscribeEvent
+    public void onRegisterCommands(final RegisterCommandsEvent ev)
+    {
+        HomesCommand.register(ev.getDispatcher());
+        SetHomeCommand.register(ev.getDispatcher());
+        HomeCommand.register(ev.getDispatcher());
+        DelHomeCommand.register(ev.getDispatcher());
+    }
+
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
     {
         // Do something when the server starts
         //LOGGER.info("HELLO from server starting");
+
+        try {
+            OTEMod.DB = new Database(this);
+
+            // Validate that the database has been established and that tables exist
+            Connection con = OTEMod.DB.getConnection();
+            con.setAutoCommit(true);
+
+
+            con.beginRequest();
+
+            Statement lookup = con.createStatement();
+            lookup.execute("CREATE TABLE IF NOT EXISTS `homes` (" +
+"                `number` int(11) NOT NULL," +
+"                `user` varchar(255) NOT NULL," +
+"                `home_name` varchar(255) NOT NULL," +
+"                `x` varchar(20) NOT NULL," + 
+"                `y` varchar(20) NOT NULL," +
+"                `z` varchar(20) NOT NULL," +
+"                `rot_x` varchar(20) NOT NULL," + 
+"                `rot_y` varchar(20) NOT NULL," + 
+"                `dimension` varchar(25) NOT NULL)");
+
+            con.endRequest();
+        } catch (DatabaseConnectionException | SQLException e) {
+            e.printStackTrace();
+
+            LOGGER.error("FATAL ERROR\n \n* DATABASE COULD NOT CONNECT *\n* SEE ABOVE STACK TRACE *");
+
+        }
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent

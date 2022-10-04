@@ -16,5 +16,14 @@
     "block.otemod.eternium_ore_block": "Eternium Ore",
     "block.otemod.deepslate_eternium_ore_block": "Deepslate Eternium Ore",
     "block.otemod.aurora_block": "Aurora Block",
-    "block.otemod.aurora_door": "Aurora Door"
+    "block.otemod.aurora_door": "Aurora Door",
+
+    "dev.zontreck.otemod.msgs.homes.only_player": "§cOnly players are allowed to execute this command",
+    "dev.zontreck.otemod.msgs.homes.total": "§3Total number of homes: §6",
+    "dev.zontreck.otemod.msgs.homes.set.success": "§2Home created or updated successfully",
+    "dev.zontreck.otemod.msgs.homes.set.fail": "§cHome could not be created or updated due to an unknown error",
+    "dev.zontreck.otemod.msgs.homes.goto.fail": "§cHome was not found, or a error occured",
+    "dev.zontreck.otemod.msgs.homes.goto.success": "§2Home found, warping home now",
+    "dev.zontreck.otemod.msgs.homes.del.success": "§2Home was deleted successfully",
+    "dev.zontreck.otemod.msgs.homes.del.fail": "§cHome could not be deleted due to an error"
 }
