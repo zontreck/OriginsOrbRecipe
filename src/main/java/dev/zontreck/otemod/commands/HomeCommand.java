@@ -16,6 +16,7 @@ import com.mojang.math.Vector3d;
 
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatColor;
+import dev.zontreck.otemod.configs.PlayerFlyCache;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.contents.TranslatableContents;
@@ -124,12 +125,14 @@ public class HomeCommand {
 
 
 
-                MobEffectInstance inst = new MobEffectInstance(MobEffects.DARKNESS, 10000, 3, true, true);
-                MobEffectInstance regen = new MobEffectInstance(MobEffects.REGENERATION, 5000, 1, true, true);
+                MobEffectInstance inst = new MobEffectInstance(MobEffects.DARKNESS, 200, 1, true, true);
+                MobEffectInstance regen = new MobEffectInstance(MobEffects.REGENERATION, 200, 1, true, true);
+                MobEffectInstance invul = new MobEffectInstance(MobEffects.LEVITATION, 200, 1, true, true);
 
                 
                 p.addEffect(inst);
                 p.addEffect(regen);
+                p.addEffect(invul); // ensure the player can't fall into lava in the short time we are not in control (if the player was silly enough to make a home above lava!!!)
                 
                 // Send boss bar
 
@@ -147,50 +150,19 @@ public class HomeCommand {
                             // TODO Auto-generated catch block
                             e1.printStackTrace();
                         }
-                        boolean dimensionNeedsChanging = false;
-            
-                        if(!f_p.level.dimension().location().getNamespace().equals(f_dim.dimension().location().getNamespace())) dimensionNeedsChanging=true;
-                        if(!f_p.level.dimension().location().getPath().equals(f_dim.dimension().location().getPath())) dimensionNeedsChanging=true;
-                        
-                        f_p.teleportTo(f_dim, f_pos.x, f_pos.y, f_pos.z, f_rot.x, f_rot.y);
-                        if(!dimensionNeedsChanging){
-                        }else {
-                            // Get dimension then change dimension
-                            f_p.server.execute(new Runnable() {
-                                public void run()
-                                {
+                        PlayerFlyCache c = PlayerFlyCache.cachePlayer(f_p);
+                        f_p.teleportTo(f_dim, f_pos.x, f_pos.y, f_pos.z, f_rot.y, f_rot.x);
 
-                                    f_p.changeDimension(f_dim);
-                                    try {
-                                        Thread.sleep(500);
-                                    } catch (InterruptedException e) {
-                                        // TODO Auto-generated catch block
-                                        e.printStackTrace();
-                                    }
-                    
-                                    
-                                    f_p.setPos(f_pos);
-                                    f_p.setXRot(f_rot.x);
-                                    f_p.setYRot(f_rot.y);
-                                }
-                            });
-                        }
                         
                         try {
-                            Thread.sleep(2000);
+                            Thread.sleep(500);
                         } catch (InterruptedException e) {
                             // TODO Auto-generated catch block
                             e.printStackTrace();
                         }
-            
-                        f_p.server.execute(new Runnable() {
-                            public void run()
-                            {
+                        c.Assert(f_p);
 
-                                f_p.removeEffect(MobEffects.DARKNESS);
-                                f_p.removeEffect(MobEffects.REGENERATION);
-                            }
-                        });
+                        f_p.setPos(f_pos);
                     }
                 });
 
