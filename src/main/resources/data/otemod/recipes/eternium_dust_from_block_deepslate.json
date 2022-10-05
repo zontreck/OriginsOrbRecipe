@@ -1,6 +1,6 @@
 {
   "type": "mekanism:enriching",
-  "input": "otemod:eternium_ore",
+  "input": "otemod:deepslate_eternium_ore_block",
   "output": "otemod:eternium_dust",
   "experience": 25,
   "cookingtime": 60

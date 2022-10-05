@@ -116,8 +116,14 @@ public class ChatServerOverride {
         if(XD.prefix != ""){
             prefixStr = ChatColor.DARK_GRAY + "[" + ChatColor.BOLD + XD.prefix_color + XD.prefix + ChatColor.resetChat() + ChatColor.DARK_GRAY + "] ";
         }
+
+        String msg = ev.getMessage().getString();
+        for(ChatColor.ColorOptions color : ChatColor.ColorOptions.values()){
+            msg = msg.replace("!"+color.toString()+"!", ChatColor.from(color));
+        }
+
         String nameStr = ChatColor.resetChat() + "< "+ XD.name_color + XD.nickname + ChatColor.resetChat() + " >";
-        String message = ": "+XD.chat_color + ev.getMessage().getString();
+        String message = ": "+XD.chat_color + msg;
         Style hover = Style.EMPTY;
         hover=hover.withFont(Style.DEFAULT_FONT).withHoverEvent(HoverTip.get(ChatColor.MINECOIN_GOLD+"User Name: "+XD.username));
         ev.setCanceled(true);
@@ -133,6 +139,11 @@ public class ChatServerOverride {
         {
             play.displayClientMessage(message, true); // Send the message!
         }
+        LogToConsole(Component.literal("[all] ").append(message));
+    }
+    public static void LogToConsole(Component Message)
+    {
+        OTEMod.LOGGER.info(Message.getString());
     }
     public static void broadcast(Component message, MinecraftServer s)
     {
@@ -141,17 +152,20 @@ public class ChatServerOverride {
         {
             play.displayClientMessage(message, false); // Send the message!
         }
+        LogToConsole(Component.literal("[all] ").append(message));
     }
     public static void broadcastTo(UUID ID, Component message, MinecraftServer s)
     {
         ServerPlayer play = s.getPlayerList().getPlayer(ID);
         play.displayClientMessage(message, false); // Send the message!
         
+        LogToConsole(Component.literal("[server] -> ["+play.getName().toString()+"] ").append(message));
     }
     public static void broadcastToAbove(UUID ID, Component message, MinecraftServer s)
     {
         ServerPlayer play = s.getPlayerList().getPlayer(ID);
         play.displayClientMessage(message, true); // Send the message!
         
+        LogToConsole(Component.literal("[server] -> ["+play.getName().toString()+"] ").append(message));
     }
 }

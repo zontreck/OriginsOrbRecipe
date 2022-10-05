@@ -9,6 +9,9 @@
     },
     {
       "item": "otemod:deepslate_eternium_ore_block"
+    },
+    {
+      "item": "otemod:eternium_dust"
     }
   ],
   "result": "otemod:eternium_fragment",

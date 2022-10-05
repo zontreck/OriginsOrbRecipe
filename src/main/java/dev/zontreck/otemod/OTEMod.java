@@ -3,6 +3,7 @@ package dev.zontreck.otemod;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,10 +13,15 @@ import java.util.Set;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.entity.Entity.RemovalReason;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -26,6 +32,9 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.entity.item.ItemExpireEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.ItemPickupEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -33,6 +42,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import org.slf4j.Logger;
+
 
 import dev.zontreck.otemod.blocks.ModBlocks;
 import dev.zontreck.otemod.chat.ChatColor;
@@ -54,6 +64,7 @@ public class OTEMod
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String FIRST_JOIN_TAG = "dev.zontreck.otemod.firstjoin";
+    public static final String ITEM_LIVES_TAG = "dev.zontreck.otemod.entity.extralife";
     public static final String MOD_ID = "otemod";
     public static final String MODIFY_BIOMES = "modify_biomes";
     public static final ResourceLocation MODIFY_BIOMES_RL = new ResourceLocation(OTEMod.MOD_ID, MODIFY_BIOMES);
@@ -62,8 +73,9 @@ public class OTEMod
     public static List<TeleportContainer> TeleportRegistry = new ArrayList<>();
     public static MinecraftServer THE_SERVER;
     private static boolean ALIVE;
-
+    
     public static boolean DEVELOPER=false;
+    private static Thread MasterThread;
 
     public OTEMod()
     {
@@ -151,8 +163,15 @@ public class OTEMod
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event)
+    public void onServerStarting(ServerStartedEvent event)
     {
+        // Changed away from Starting event due to multiple calls
+        if(OTEMod.ALIVE){
+            // We were called again?
+            // Wtf... return
+            OTEMod.LOGGER.info("/!\\ ALERT /!\\ ServerStartedEvent was called multiple times. This is a bug in MinecraftForge");
+            return;
+        }
         // Do something when the server starts
         //LOGGER.info("HELLO from server starting");
 
@@ -191,7 +210,7 @@ public class OTEMod
 
             // Set up the repeating task to expire a TeleportContainer
             OTEMod.THE_SERVER = event.getServer();
-            Thread th = new Thread(new Runnable(){
+            OTEMod.MasterThread = new Thread(new Runnable(){
                 public void run()
                 {
                     while(OTEMod.ALIVE){
@@ -199,7 +218,7 @@ public class OTEMod
                         try {
                             Thread.sleep(5000);
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            //e.printStackTrace();
                         }
 
                         for(TeleportContainer cont : OTEMod.TeleportRegistry){
@@ -220,7 +239,7 @@ public class OTEMod
                     OTEMod.LOGGER.info("Tearing down OTEMod teleport queue - The server is going down");
                 }
             });
-            th.start();
+            OTEMod.MasterThread.start();
         } catch (DatabaseConnectionException | SQLException e) {
             e.printStackTrace();
 
@@ -228,12 +247,62 @@ public class OTEMod
 
         }
     }
-
+    @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
-    public static void onStop(final ServerStoppingEvent ev)
+    public void onItemPickup(final ItemPickupEvent ev){
+        // Remove the expire tag
+        if(ev.getStack().getTagElement(OTEMod.ITEM_LIVES_TAG) != null)
+        {
+            ev.getStack().removeTagKey(OTEMod.ITEM_LIVES_TAG);
+            //OTEMod.LOGGER.info("Removed the item expire tag as the item was picked up");
+        }
+    }
+
+    @OnlyIn(Dist.DEDICATED_SERVER)
+    @SubscribeEvent
+    public void onItemExpire(final ItemExpireEvent ev)
+    {
+        CompoundTag ct = ev.getEntity().getItem().getTagElement(OTEMod.ITEM_LIVES_TAG);
+        if(ct == null){
+            int life =0;
+            ct = new CompoundTag();
+
+            ct.putInt("live", life);
+            
+
+        }else {
+            int life = ct.getInt("live");
+            if(life >= OTEServerConfig.ITEM_DESPAWN_TIMER.get()){
+                // Item has expired. we should let it die
+                //OTEMod.LOGGER.info("Item ["+ev.getEntity().getItem().getDisplayName().getString()+"] has expired");
+                ev.setCanceled(false);
+                return;
+            }
+            life++;
+            ct.putInt("live", life);
+        }
+
+
+        ev.getEntity().getItem().removeTagKey(OTEMod.ITEM_LIVES_TAG); // Remove just incase it gets duplicated
+        ev.getEntity().getItem().addTagElement(OTEMod.ITEM_LIVES_TAG, ct);
+        
+        
+        //ev.setExtraLife(0); // reset the life count
+        //OTEMod.LOGGER.info("Item ["+ev.getEntity().getItem().getDisplayName().getString()+"] was given extra life");
+        ev.setCanceled(true);
+        
+    }
+
+    @OnlyIn(Dist.DEDICATED_SERVER)
+    @SubscribeEvent
+    public void onStop(final ServerStoppingEvent ev)
     {
         OTEMod.ALIVE=false; // Tear down all looping threads that will watch this
+        OTEMod.MasterThread.interrupt();
     }
+
+
+
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @Mod.EventBusSubscriber(modid = OTEMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class ClientModEvents

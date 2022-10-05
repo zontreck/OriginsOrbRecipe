@@ -20,6 +20,7 @@ public class OTEServerConfig {
     public static final ForgeConfigSpec.ConfigValue<String> USERNAME;
     public static final ForgeConfigSpec.ConfigValue<String> PASSWORD;
     public static final ForgeConfigSpec.ConfigValue<String> DATABASE;
+    public static final ForgeConfigSpec.ConfigValue<Integer> ITEM_DESPAWN_TIMER;
 
     static {
         List<ItemStack> defaults = new ArrayList<ItemStack>();
@@ -31,6 +32,7 @@ public class OTEServerConfig {
         USERNAME = BUILDER.comment("Database Username (MySQL)").define("user", "ote");
         PASSWORD = BUILDER.comment("Database Password (MySQL)").define("password", "password");
         DATABASE = BUILDER.comment("Database Name (MySQL)").define("database", "otemod");
+        ITEM_DESPAWN_TIMER = BUILDER.comment("How many times should the item's expire be cancelled. The vanilla expire time is 5 minutes, so this would be ticked down once every 5 minutes.").define("item_extra_lives", (60/5));
 
 
         BUILDER.pop();
