@@ -1,7 +1,11 @@
 {
   "type": "mekanism:enriching",
-  "input": "otemod:eternium_ore",
-  "output": "otemod:eternium_dust",
+  "input": {
+    "ingredient": "otemod:eternium_ore"
+  },
+  "output": {
+    "item": "otemod:eternium_dust"
+  },
   "experience": 25,
   "cookingtime": 60
 }

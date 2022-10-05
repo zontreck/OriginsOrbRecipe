@@ -26,6 +26,10 @@
     "dev.zontreck.otemod.msgs.homes.goto.success": "§2Home found, warping home now",
     "dev.zontreck.otemod.msgs.homes.del.success": "§2Home was deleted successfully",
     "dev.zontreck.otemod.msgs.homes.del.fail": "§cHome could not be deleted due to an error",
+
+    "dev.zontreck.otemod.msgs.command_cooling_down": "This command is currently on cooldown. You must wait for ",
+    "dev.zontreck.otemod.msgs.command_cooling_down_seconds": "seconds.",
+
     "minecraft.player.joined": "",
     "minecraft.player.joined.renamed": "",
     "minecraft.player.quit": ""

@@ -21,6 +21,7 @@ public class OTEServerConfig {
     public static final ForgeConfigSpec.ConfigValue<String> PASSWORD;
     public static final ForgeConfigSpec.ConfigValue<String> DATABASE;
     public static final ForgeConfigSpec.ConfigValue<Integer> ITEM_DESPAWN_TIMER;
+    public static final ForgeConfigSpec.ConfigValue<Integer> RTP_COOLDOWN;
 
     static {
         List<ItemStack> defaults = new ArrayList<ItemStack>();
@@ -33,6 +34,10 @@ public class OTEServerConfig {
         PASSWORD = BUILDER.comment("Database Password (MySQL)").define("password", "password");
         DATABASE = BUILDER.comment("Database Name (MySQL)").define("database", "otemod");
         ITEM_DESPAWN_TIMER = BUILDER.comment("How many times should the item's expire be cancelled. The vanilla expire time is 5 minutes, so this would be ticked down once every 5 minutes.").define("item_extra_lives", (60/5));
+        BUILDER.pop();
+        BUILDER.push("COMMANDS");
+
+        RTP_COOLDOWN = BUILDER.comment("How many seconds between RTP uses? This can be quite laggy on the server due to the potential that new chunks are getting generated").define("rtp.cooldown", 30); // Default of 30 should be enough
 
 
         BUILDER.pop();

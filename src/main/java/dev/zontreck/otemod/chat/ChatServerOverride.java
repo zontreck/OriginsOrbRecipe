@@ -118,9 +118,7 @@ public class ChatServerOverride {
         }
 
         String msg = ev.getMessage().getString();
-        for(ChatColor.ColorOptions color : ChatColor.ColorOptions.values()){
-            msg = msg.replace("!"+color.toString()+"!", ChatColor.from(color));
-        }
+        msg=doColors(msg);
 
         String nameStr = ChatColor.resetChat() + "< "+ XD.name_color + XD.nickname + ChatColor.resetChat() + " >";
         String message = ": "+XD.chat_color + msg;
@@ -131,15 +129,27 @@ public class ChatServerOverride {
         ChatServerOverride.broadcast(Component.literal(prefixStr+nameStr+message).setStyle(hover), ev.getPlayer().server);
     }
 
-
-    public static void broadcastAboveToolBar(Component message, MinecraftServer s)
+    public static String doColors(String msg)
     {
-        // This will broadcast to all players
-        for(ServerPlayer play : s.getPlayerList().getPlayers())
-        {
-            play.displayClientMessage(message, true); // Send the message!
+        for(ChatColor.ColorOptions color : ChatColor.ColorOptions.values()){
+            msg = msg.replace("!"+color.toString()+"!", ChatColor.from(color));
         }
-        LogToConsole(Component.literal("[all] ").append(message));
+        return msg;
+    }
+
+    public static void broadcastAbove(Component message, MinecraftServer s)
+    {
+        s.execute(new Runnable() {
+            public void run(){
+
+                // This will broadcast to all players
+                for(ServerPlayer play : s.getPlayerList().getPlayers())
+                {
+                    play.displayClientMessage(message, true); // Send the message!
+                }
+                LogToConsole(Component.literal("[all] ").append(message));
+            }
+        });
     }
     public static void LogToConsole(Component Message)
     {
@@ -147,25 +157,40 @@ public class ChatServerOverride {
     }
     public static void broadcast(Component message, MinecraftServer s)
     {
-        // This will broadcast to all players
-        for(ServerPlayer play : s.getPlayerList().getPlayers())
-        {
-            play.displayClientMessage(message, false); // Send the message!
-        }
-        LogToConsole(Component.literal("[all] ").append(message));
+        s.execute(new Runnable() {
+            public void run(){
+
+                // This will broadcast to all players
+                for(ServerPlayer play : s.getPlayerList().getPlayers())
+                {
+                    play.displayClientMessage(message, false); // Send the message!
+                }
+                LogToConsole(Component.literal("[all] ").append(message));
+            }
+        });
     }
     public static void broadcastTo(UUID ID, Component message, MinecraftServer s)
     {
-        ServerPlayer play = s.getPlayerList().getPlayer(ID);
-        play.displayClientMessage(message, false); // Send the message!
-        
-        LogToConsole(Component.literal("[server] -> ["+play.getName().toString()+"] ").append(message));
+        s.execute(new Runnable() {
+            public void run(){
+
+                ServerPlayer play = s.getPlayerList().getPlayer(ID);
+                play.displayClientMessage(message, false); // Send the message!
+                
+                LogToConsole(Component.literal("[server] -> ["+play.getName().toString()+"] ").append(message));
+            }
+        });
     }
     public static void broadcastToAbove(UUID ID, Component message, MinecraftServer s)
     {
-        ServerPlayer play = s.getPlayerList().getPlayer(ID);
-        play.displayClientMessage(message, true); // Send the message!
-        
-        LogToConsole(Component.literal("[server] -> ["+play.getName().toString()+"] ").append(message));
+        s.execute(new Runnable() {
+            public void run(){
+
+                ServerPlayer play = s.getPlayerList().getPlayer(ID);
+                play.displayClientMessage(message, true); // Send the message!
+                
+                LogToConsole(Component.literal("[server] -> ["+play.getName().toString()+"] ").append(message));
+            }
+        });
     }
 }

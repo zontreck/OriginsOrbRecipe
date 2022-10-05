@@ -50,4 +50,10 @@ public class Vector3
         Vector3 n = new Vector3(x, y, z);
         return n;
     }
+
+    @Override
+    public String toString()
+    {
+        return "<"+String.valueOf(x)+", "+String.valueOf(y)+", "+String.valueOf(z)+">";
+    }
 }
