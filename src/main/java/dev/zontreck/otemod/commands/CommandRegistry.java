@@ -6,11 +6,13 @@ import dev.zontreck.otemod.commands.profilecmds.NameColorCommand;
 import dev.zontreck.otemod.commands.profilecmds.NickCommand;
 import dev.zontreck.otemod.commands.profilecmds.PrefixColorCommand;
 import dev.zontreck.otemod.commands.profilecmds.PrefixCommand;
+import dev.zontreck.otemod.commands.teleport.RTPCommand;
 import dev.zontreck.otemod.commands.teleport.TPACommand;
 import dev.zontreck.otemod.commands.teleport.TPAHereCommand;
 import dev.zontreck.otemod.commands.teleport.TPAcceptCommand;
 import dev.zontreck.otemod.commands.teleport.TPCancelCommand;
 import dev.zontreck.otemod.commands.teleport.TPDenyCommand;
+import dev.zontreck.otemod.commands.vaults.VaultCommand;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -40,6 +42,10 @@ public class CommandRegistry {
         TPDenyCommand.register(ev.getDispatcher());
         TPAcceptCommand.register(ev.getDispatcher());
         TPAHereCommand.register(ev.getDispatcher());
+        RTPCommand.register(ev.getDispatcher());
+
+
+        VaultCommand.register(ev.getDispatcher());
     }
     
 }

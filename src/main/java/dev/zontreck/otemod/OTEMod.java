@@ -63,7 +63,7 @@ public class OTEMod
     public static MinecraftServer THE_SERVER;
     private static boolean ALIVE;
 
-    public static boolean DEVELOPER=true;
+    public static boolean DEVELOPER=false;
 
     public OTEMod()
     {
