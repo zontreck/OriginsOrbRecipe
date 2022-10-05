@@ -205,6 +205,15 @@ public class OTEMod
 "                `rot_y` varchar(20) NOT NULL," + 
 "                `dimension` varchar(25) NOT NULL)");
 
+            lookup.execute("CREATE TABLE IF NOT EXISTS `profiles` ("+
+            "`username` varchar (255) not null,"+
+            "`uuid` varchar (255) not null,"+
+            "`prefix` varchar (255) not null,"+
+            "`nickname` varchar (255) not null,"+
+            "`name_color` varchar (255) not null,"+
+            "`prefix_color` varchar(255) not null,"+
+            "`chat_color` varchar(255) not null)");
+
             con.endRequest();
 
             // Set up the repeating task to expire a TeleportContainer
