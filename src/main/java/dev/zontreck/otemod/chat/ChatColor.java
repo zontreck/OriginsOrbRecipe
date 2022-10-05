@@ -62,13 +62,93 @@ public class ChatColor {
         return RESET+WHITE;
     }
 
-    public static String from(String nick){
-        switch(nick.toLowerCase()){
-            case "black":
+    public static String from(ColorOptions nick){
+        switch(nick){
+            case Black:
             {
                 return BLACK;
             }
-            case "crazy":
+            case Dark_Blue:
+            {
+                return DARK_BLUE;
+            }
+            case Dark_Green:
+            {
+                return DARK_GREEN;
+            }
+            case Dark_Aqua:
+            {
+                return DARK_AQUA;
+            }
+            case Dark_Red:
+            {
+                return DARK_RED;
+            }
+            case Dark_Purple:
+            {
+                return DARK_PURPLE;
+            }
+            case Gold:
+            {
+                return GOLD;
+            }
+            case Gray:
+            {
+                return GRAY;
+            }
+            case Dark_Gray:
+            {
+                return DARK_GRAY;
+            }
+            case Blue:
+            {
+                return BLUE;
+            }
+            case Green:
+            {
+                return GREEN;
+            }
+            case Aqua:
+            {
+                return AQUA;
+            }
+            case Red:
+            {
+                return RED;
+            }
+            case Light_Purple:
+            {
+                return LIGHT_PURPLE;
+            }
+            case Yellow:
+            {
+                return YELLOW;
+            }
+            case White:
+            {
+                return WHITE;
+            }
+            case MinecoinGold:
+            {
+                return MINECOIN_GOLD;
+            }
+            case Underline:
+            {
+                return UNDERLINE;
+            }
+            case Bold:
+            {
+                return BOLD;
+            }
+            case Italic:
+            {
+                return ITALIC;
+            }
+            case Strikethrough:
+            {
+                return STRIKETHROUGH;
+            }
+            case Crazy:
             {
                 return CRAZY;
             }

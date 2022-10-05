@@ -31,9 +31,8 @@ public class ChatColorCommand {
     public static int setchatcolor(CommandSourceStack source, ColorOptions string) {
 
         // Chat Color has a registry of colors that we can use to map back to our desired color
-        String actual_color = string.toString();
         // To code
-        String colorcoded = ChatColor.from(actual_color);
+        String colorcoded = ChatColor.from(string);
 
         // Get profile
         if(source.getPlayer()==null){
@@ -44,7 +43,7 @@ public class ChatColorCommand {
         p.chat_color = colorcoded;
         p.commit();
         OTEMod.PROFILES.put(source.getPlayer().getStringUUID(), p);
-        
+
         source.sendSuccess(Component.literal(ChatColor.DARK_GRAY+ "["+ChatColor.DARK_GREEN+ "OTEMOD" + ChatColor.DARK_GRAY + "] "+ChatColor.DARK_PURPLE + "Your chat color has been updated"), false);
 
         return 0;

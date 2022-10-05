@@ -31,9 +31,8 @@ public class PrefixColorCommand {
     public static int setchatcolor(CommandSourceStack source, ColorOptions string) {
 
         // Chat Color has a registry of colors that we can use to map back to our desired color
-        String actual_color = string.toString();
         // To code
-        String colorcoded = ChatColor.from(actual_color);
+        String colorcoded = ChatColor.from(string);
 
         // Get profile
         if(source.getPlayer()==null){
