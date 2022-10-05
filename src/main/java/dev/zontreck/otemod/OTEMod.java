@@ -3,14 +3,18 @@ package dev.zontreck.otemod;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.world.BiomeModifier;
@@ -23,6 +27,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
+import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -30,6 +35,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
 import dev.zontreck.otemod.blocks.ModBlocks;
+import dev.zontreck.otemod.chat.ChatColor;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.commands.DelHomeCommand;
 import dev.zontreck.otemod.commands.FlyCommand;
@@ -41,6 +47,7 @@ import dev.zontreck.otemod.commands.profilecmds.NameColorCommand;
 import dev.zontreck.otemod.commands.profilecmds.NickCommand;
 import dev.zontreck.otemod.commands.profilecmds.PrefixColorCommand;
 import dev.zontreck.otemod.commands.profilecmds.PrefixCommand;
+import dev.zontreck.otemod.commands.teleport.TeleportContainer;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.configs.Profile;
 import dev.zontreck.otemod.database.Database;
@@ -61,6 +68,10 @@ public class OTEMod
     public static final ResourceLocation MODIFY_BIOMES_RL = new ResourceLocation(OTEMod.MOD_ID, MODIFY_BIOMES);
     public static Database DB=null;
     public static Map<String,Profile> PROFILES = new HashMap<String,Profile>();
+    public static List<TeleportContainer> TeleportRegistry = new ArrayList<>();
+    public static MinecraftServer THE_SERVER;
+    private static boolean ALIVE;
+
 
 
     public OTEMod()
@@ -162,7 +173,7 @@ public class OTEMod
         PrefixCommand.register(ev.getDispatcher());
         NickCommand.register(ev.getDispatcher());
 
-        
+
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -174,7 +185,7 @@ public class OTEMod
 
         try {
             OTEMod.DB = new Database(this);
-
+            OTEMod.ALIVE=true;
             // Validate that the database has been established and that tables exist
             Connection con = OTEMod.DB.getConnection();
             con.setAutoCommit(true);
@@ -195,6 +206,37 @@ public class OTEMod
 "                `dimension` varchar(25) NOT NULL)");
 
             con.endRequest();
+
+            // Set up the repeating task to expire a TeleportContainer
+            OTEMod.THE_SERVER = event.getServer();
+            Thread th = new Thread(new Runnable(){
+                public void run()
+                {
+                    while(OTEMod.ALIVE){
+                        // Check if the teleports have expired
+                        try {
+                            Thread.sleep(5000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                        for(TeleportContainer cont : OTEMod.TeleportRegistry){
+                            if(cont.has_expired())
+                            {
+                                try{
+                                    Component expire = Component.literal(ChatColor.DARK_PURPLE+"Teleport request has expired");
+                                    ChatServerOverride.broadcastTo(cont.FromPlayer, expire, OTEMod.THE_SERVER);
+                                    ChatServerOverride.broadcastTo(cont.ToPlayer, expire, OTEMod.THE_SERVER);
+                                    OTEMod.TeleportRegistry.remove(cont);
+                                }catch(Exception e){
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            th.start();
         } catch (DatabaseConnectionException | SQLException e) {
             e.printStackTrace();
 
@@ -203,6 +245,11 @@ public class OTEMod
         }
     }
 
+    @SubscribeEvent
+    public static void onStop(final ServerStoppingEvent ev)
+    {
+        OTEMod.ALIVE=false; // Tear down all looping threads that will watch this
+    }
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @Mod.EventBusSubscriber(modid = OTEMod.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class ClientModEvents

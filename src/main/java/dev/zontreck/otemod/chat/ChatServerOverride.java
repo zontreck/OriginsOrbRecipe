@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.UUID;
 
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.PlayerFlyCache;
@@ -140,5 +141,17 @@ public class ChatServerOverride {
         {
             play.displayClientMessage(message, false); // Send the message!
         }
+    }
+    public static void broadcastTo(UUID ID, Component message, MinecraftServer s)
+    {
+        ServerPlayer play = s.getPlayerList().getPlayer(ID);
+        play.displayClientMessage(message, false); // Send the message!
+        
+    }
+    public static void broadcastToAbove(UUID ID, Component message, MinecraftServer s)
+    {
+        ServerPlayer play = s.getPlayerList().getPlayer(ID);
+        play.displayClientMessage(message, true); // Send the message!
+        
     }
 }
