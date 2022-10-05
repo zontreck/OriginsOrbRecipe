@@ -1,6 +1,30 @@
 package dev.zontreck.otemod.chat;
 
 public class ChatColor {
+    public enum ColorOptions{
+        Black,
+        Dark_Blue,
+        Dark_Green,
+        Dark_Aqua,
+        Dark_Red,
+        Dark_Purple,
+        Gold,
+        Gray,
+        Dark_Gray,
+        Blue,
+        Green,
+        Aqua,
+        Red,
+        Light_Purple,
+        Yellow,
+        White,
+        MinecoinGold,
+        Underline,
+        Bold,
+        Italic,
+        Strikethrough,
+        Crazy
+    }
     public static char CODE = '§';
     public static String BLACK = build("0");
     public static String DARK_BLUE = build("1");
@@ -36,5 +60,22 @@ public class ChatColor {
     public static String resetChat()
     {
         return RESET+WHITE;
+    }
+
+    public static String from(String nick){
+        switch(nick.toLowerCase()){
+            case "black":
+            {
+                return BLACK;
+            }
+            case "crazy":
+            {
+                return CRAZY;
+            }
+            default:
+            {
+                return RESET+CRAZY;
+            }
+        }
     }
 }

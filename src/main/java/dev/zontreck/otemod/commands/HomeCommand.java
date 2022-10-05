@@ -127,7 +127,7 @@ public class HomeCommand {
 
                 MobEffectInstance inst = new MobEffectInstance(MobEffects.DARKNESS, 200, 1, true, true);
                 MobEffectInstance regen = new MobEffectInstance(MobEffects.REGENERATION, 200, 1, true, true);
-                MobEffectInstance invul = new MobEffectInstance(MobEffects.LEVITATION, 200, 1, true, true);
+                MobEffectInstance invul = new MobEffectInstance(MobEffects.LEVITATION, 75, 1, true, true);
 
                 
                 p.addEffect(inst);

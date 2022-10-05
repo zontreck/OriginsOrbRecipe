@@ -3,23 +3,15 @@ package dev.zontreck.otemod;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
-import java.util.Map.Entry;
 
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.Rotation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -30,7 +22,6 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -39,17 +30,23 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
 import dev.zontreck.otemod.blocks.ModBlocks;
+import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.commands.DelHomeCommand;
 import dev.zontreck.otemod.commands.FlyCommand;
 import dev.zontreck.otemod.commands.HomeCommand;
 import dev.zontreck.otemod.commands.HomesCommand;
 import dev.zontreck.otemod.commands.SetHomeCommand;
+import dev.zontreck.otemod.commands.profilecmds.ChatColorCommand;
+import dev.zontreck.otemod.commands.profilecmds.NameColorCommand;
+import dev.zontreck.otemod.commands.profilecmds.NickCommand;
+import dev.zontreck.otemod.commands.profilecmds.PrefixColorCommand;
+import dev.zontreck.otemod.commands.profilecmds.PrefixCommand;
 import dev.zontreck.otemod.configs.OTEServerConfig;
+import dev.zontreck.otemod.configs.Profile;
 import dev.zontreck.otemod.database.Database;
 import dev.zontreck.otemod.database.Database.DatabaseConnectionException;
 import dev.zontreck.otemod.events.EventHandler;
 import dev.zontreck.otemod.items.ModItems;
-import dev.zontreck.otemod.ore.Modifier;
 import dev.zontreck.otemod.ore.Modifier.ModifierOfBiomes;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -63,6 +60,8 @@ public class OTEMod
     public static final String MODIFY_BIOMES = "modify_biomes";
     public static final ResourceLocation MODIFY_BIOMES_RL = new ResourceLocation(OTEMod.MOD_ID, MODIFY_BIOMES);
     public static Database DB=null;
+    public static Map<String,Profile> PROFILES = new HashMap<String,Profile>();
+
 
     public OTEMod()
     {
@@ -83,6 +82,7 @@ public class OTEMod
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new EventHandler());
+        MinecraftForge.EVENT_BUS.register(new ChatServerOverride());
 
         ModBlocks.register(bus);
         ModItems.register(bus);
@@ -92,7 +92,11 @@ public class OTEMod
     {
     }
 
-
+/*
+ *  @DISABLED DUE TO PlayerEvent.PlayerLoggedInEvent
+ * with that event, we just handle this there.  This code is kept as a reference until the new player gear functions have been added.
+ * Prereq for new player gear: OTEMod Vault API
+ * 
     @SubscribeEvent
     public void onSpawn(EntityJoinLevelEvent ev){
         Level w = ev.getLevel();
@@ -114,10 +118,12 @@ public class OTEMod
                 Inventory i = p.getInventory();
                 
 
-            }*/
+            }
         }
 
     }
+ * 
+ */
 
     public boolean firstJoin(Player p){
         
@@ -149,6 +155,14 @@ public class OTEMod
         DelHomeCommand.register(ev.getDispatcher());
 
         FlyCommand.register(ev.getDispatcher());
+
+        ChatColorCommand.register(ev.getDispatcher());
+        NameColorCommand.register(ev.getDispatcher());
+        PrefixColorCommand.register(ev.getDispatcher());
+        PrefixCommand.register(ev.getDispatcher());
+        NickCommand.register(ev.getDispatcher());
+
+        
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
