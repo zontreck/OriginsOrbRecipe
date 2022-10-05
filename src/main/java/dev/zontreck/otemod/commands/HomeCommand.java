@@ -16,6 +16,8 @@ import com.mojang.math.Vector3d;
 
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatColor;
+import dev.zontreck.otemod.commands.teleport.TeleportActioner;
+import dev.zontreck.otemod.commands.teleport.TeleportContainer;
 import dev.zontreck.otemod.configs.PlayerFlyCache;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -123,51 +125,15 @@ public class HomeCommand {
                     return 1;
                 }
 
-
-
-                MobEffectInstance inst = new MobEffectInstance(MobEffects.DARKNESS, 200, 1, true, true);
-                MobEffectInstance regen = new MobEffectInstance(MobEffects.REGENERATION, 200, 1, true, true);
-                MobEffectInstance invul = new MobEffectInstance(MobEffects.LEVITATION, 75, 1, true, true);
-
-                
-                p.addEffect(inst);
-                p.addEffect(regen);
-                p.addEffect(invul); // ensure the player can't fall into lava in the short time we are not in control (if the player was silly enough to make a home above lava!!!)
-                
-                // Send boss bar
+                TeleportActioner.ApplyTeleportEffect(p);
+                // Instantiate a Teleport Runner
 
                 final ServerPlayer f_p = p;
                 final Vec3 f_pos = position;
                 final Vec2 f_rot = rot;
                 final ServerLevel f_dim = dimL;
-
-                Thread t = new Thread(new Runnable() {
-                    public void run()
-                    {
-                        try {
-                            Thread.sleep(3000);
-                        } catch (InterruptedException e1) {
-                            // TODO Auto-generated catch block
-                            e1.printStackTrace();
-                        }
-                        PlayerFlyCache c = PlayerFlyCache.cachePlayer(f_p);
-                        f_p.teleportTo(f_dim, f_pos.x, f_pos.y, f_pos.z, f_rot.y, f_rot.x);
-
-                        
-                        try {
-                            Thread.sleep(500);
-                        } catch (InterruptedException e) {
-                            // TODO Auto-generated catch block
-                            e.printStackTrace();
-                        }
-                        c.Assert(f_p);
-
-                        f_p.setPos(f_pos);
-                    }
-                });
-
-
-                t.start();
+                TeleportContainer cont = new TeleportContainer(f_p, f_pos, f_rot, f_dim);
+                TeleportActioner.PerformTeleport(cont);
             }
 
             if(!has_home)throw new SQLException("NO HOME");

@@ -37,16 +37,7 @@ import org.slf4j.Logger;
 import dev.zontreck.otemod.blocks.ModBlocks;
 import dev.zontreck.otemod.chat.ChatColor;
 import dev.zontreck.otemod.chat.ChatServerOverride;
-import dev.zontreck.otemod.commands.DelHomeCommand;
-import dev.zontreck.otemod.commands.FlyCommand;
-import dev.zontreck.otemod.commands.HomeCommand;
-import dev.zontreck.otemod.commands.HomesCommand;
-import dev.zontreck.otemod.commands.SetHomeCommand;
-import dev.zontreck.otemod.commands.profilecmds.ChatColorCommand;
-import dev.zontreck.otemod.commands.profilecmds.NameColorCommand;
-import dev.zontreck.otemod.commands.profilecmds.NickCommand;
-import dev.zontreck.otemod.commands.profilecmds.PrefixColorCommand;
-import dev.zontreck.otemod.commands.profilecmds.PrefixCommand;
+import dev.zontreck.otemod.commands.CommandRegistry;
 import dev.zontreck.otemod.commands.teleport.TeleportContainer;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.configs.Profile;
@@ -72,7 +63,7 @@ public class OTEMod
     public static MinecraftServer THE_SERVER;
     private static boolean ALIVE;
 
-
+    public static boolean DEVELOPER=true;
 
     public OTEMod()
     {
@@ -94,6 +85,7 @@ public class OTEMod
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new EventHandler());
         MinecraftForge.EVENT_BUS.register(new ChatServerOverride());
+        MinecraftForge.EVENT_BUS.register(new CommandRegistry());
 
         ModBlocks.register(bus);
         ModItems.register(bus);
@@ -157,25 +149,6 @@ public class OTEMod
         //LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
     }
 
-    @SubscribeEvent
-    public void onRegisterCommands(final RegisterCommandsEvent ev)
-    {
-        HomesCommand.register(ev.getDispatcher());
-        SetHomeCommand.register(ev.getDispatcher());
-        HomeCommand.register(ev.getDispatcher());
-        DelHomeCommand.register(ev.getDispatcher());
-
-        FlyCommand.register(ev.getDispatcher());
-
-        ChatColorCommand.register(ev.getDispatcher());
-        NameColorCommand.register(ev.getDispatcher());
-        PrefixColorCommand.register(ev.getDispatcher());
-        PrefixCommand.register(ev.getDispatcher());
-        NickCommand.register(ev.getDispatcher());
-
-
-    }
-
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)
@@ -203,7 +176,7 @@ public class OTEMod
 "                `z` varchar(20) NOT NULL," +
 "                `rot_x` varchar(20) NOT NULL," + 
 "                `rot_y` varchar(20) NOT NULL," + 
-"                `dimension` varchar(25) NOT NULL)");
+"                `dimension` varchar(255) NOT NULL)"); // 10/04/2022 - fix dimension column size due to a bug where mods might have long names!
 
             lookup.execute("CREATE TABLE IF NOT EXISTS `profiles` ("+
             "`username` varchar (255) not null,"+
@@ -243,6 +216,8 @@ public class OTEMod
                             }
                         }
                     }
+
+                    OTEMod.LOGGER.info("Tearing down OTEMod teleport queue - The server is going down");
                 }
             });
             th.start();

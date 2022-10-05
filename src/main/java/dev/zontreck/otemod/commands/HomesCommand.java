@@ -13,6 +13,7 @@ import com.mojang.brigadier.context.CommandContext;
 
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatColor;
+import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.chat.Clickable;
 import dev.zontreck.otemod.chat.HoverTip;
 import net.minecraft.ChatFormatting;
@@ -63,7 +64,7 @@ public class HomesCommand {
             for (String string : homes) {
                 Style st = Style.EMPTY.withFont(Style.DEFAULT_FONT).withHoverEvent(HoverTip.get(ChatColor.BOLD+ChatColor.DARK_GREEN+"Click here to go to this home")).withClickEvent(Clickable.command("/home "+string));
 
-                ctx.getSource().sendSystemMessage(Component.literal(ChatColor.BOLD + ChatColor.MINECOIN_GOLD+"["+ChatColor.resetChat()+ChatColor.UNDERLINE+ChatColor.BOLD+ChatColor.DARK_GREEN+"HOME"+ChatColor.resetChat()+ChatColor.BOLD+ChatColor.MINECOIN_GOLD+"] "+ChatColor.resetChat()+ChatColor.YELLOW+string).setStyle(st));
+                ChatServerOverride.broadcastTo(ctx.getSource().getPlayer().getUUID(), Component.literal(ChatColor.BOLD + ChatColor.MINECOIN_GOLD+"["+ChatColor.resetChat()+ChatColor.UNDERLINE+ChatColor.BOLD+ChatColor.DARK_GREEN+"HOME"+ChatColor.resetChat()+ChatColor.BOLD+ChatColor.MINECOIN_GOLD+"] "+ChatColor.resetChat()+ChatColor.YELLOW+string).setStyle(st), ctx.getSource().getServer());
                 
             }
         } catch (SQLException e) {

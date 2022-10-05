@@ -1,4 +1,4 @@
-package dev.zontreck.otemod.commands;
+package dev.zontreck.otemod.commands.teleport;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.ArgumentType;
@@ -9,7 +9,6 @@ import dev.zontreck.otemod.chat.ChatColor;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.chat.Clickable;
 import dev.zontreck.otemod.chat.HoverTip;
-import dev.zontreck.otemod.commands.teleport.TeleportContainer;
 import dev.zontreck.otemod.configs.Profile;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -38,6 +37,12 @@ public class TPACommand {
             source.sendFailure(Component.literal(ChatColor.DARK_RED+"Error: Player not found"));
             return 1;
         }
+        if(!OTEMod.DEVELOPER){
+            if(source.getPlayer().getUUID() == serverPlayer.getUUID()){
+                source.sendFailure(Component.literal(ChatColor.DARK_RED+"You cannot teleport to yourself!"));
+                return 1;
+            }
+        }
         TeleportContainer cont = new TeleportContainer(source.getPlayer().getUUID(), serverPlayer.getUUID());
 
         for(TeleportContainer cont2 : OTEMod.TeleportRegistry){
@@ -53,7 +58,7 @@ public class TPACommand {
         }
 
 
-        ClickEvent ce = Clickable.command("tpcancel");
+        ClickEvent ce = Clickable.command("/tpcancel "+cont.TeleportID.toString());
         HoverEvent he = HoverTip.get(ChatColor.DARK_GREEN+"Cancel this teleport request (Not yet implemented)");
 
         Style s = Style.EMPTY.withFont(Style.DEFAULT_FONT).withHoverEvent(he).withClickEvent(ce);
@@ -62,9 +67,9 @@ public class TPACommand {
         ChatServerOverride.broadcastTo(cont.FromPlayer, Component.literal(ChatColor.BOLD + ChatColor.DARK_GREEN +"TPA Request Sent! ").append(Component.literal(ChatColor.BOLD+ChatColor.DARK_GRAY+"["+ChatColor.DARK_RED+"X"+ChatColor.DARK_GRAY+"]").setStyle(s)), serverPlayer.server);
 
 
-        ce = Clickable.command("tpaccept");
+        ce = Clickable.command("/tpaccept "+cont.TeleportID.toString());
         he = HoverTip.get(ChatColor.DARK_GREEN + "Accept tp request");
-        ClickEvent ce2 = Clickable.command("tpdeny");
+        ClickEvent ce2 = Clickable.command("/tpdeny "+cont.TeleportID.toString());
         HoverEvent he2 = HoverTip.get(ChatColor.DARK_RED+"Deny this request");
         s = Style.EMPTY.withFont(Style.DEFAULT_FONT).withClickEvent(ce).withHoverEvent(he);
 
@@ -75,11 +80,12 @@ public class TPACommand {
             append(Component.literal(ChatColor.DARK_GRAY+"["+ChatColor.DARK_GREEN+"ACCEPT" + ChatColor.DARK_GRAY+"] ").setStyle(s)).
             append(Component.literal(ChatColor.DARK_GRAY + "["+ChatColor.DARK_RED+"DENY"+ChatColor.DARK_GRAY+"]").setStyle(s2)), serverPlayer.server);
         
+        OTEMod.TeleportRegistry.add(cont);
         return 0;
     }
 
     private static int usage(CommandSourceStack source) {
-        source.sendSuccess(Component.literal("/tpa USAGE\n\n\t"+ChatColor.BOLD + ChatColor.DARK_GRAY+"/tpa "+ChatColor.DARK_RED+"target_player\n"), false);
+        source.sendSuccess(Component.literal("/tpa USAGE\n\n      "+ChatColor.BOLD + ChatColor.DARK_GRAY+"/tpa "+ChatColor.DARK_RED+"target_player\n"), false);
         return 0;
     }
 }

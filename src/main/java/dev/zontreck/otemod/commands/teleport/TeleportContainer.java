@@ -3,10 +3,25 @@ package dev.zontreck.otemod.commands.teleport;
 import java.time.Instant;
 import java.util.UUID;
 
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.phys.Vec3;
+
 public class TeleportContainer implements Comparable{
     public UUID FromPlayer;
     public UUID ToPlayer;
     public long StartedAt;
+    public UUID TeleportID;
+
+    /*
+     * The following variables are only used when actioning the teleport itself, and should only be initialized once the teleport is about to engage
+     */
+    public ServerPlayer PlayerInst;
+    public Vec3 Position;
+    public Vec2 Rotation;
+    public ServerLevel Dimension;
+    
     
     public boolean has_expired(){
         if(Instant.now().getEpochSecond() > (StartedAt + (60)))
@@ -19,8 +34,20 @@ public class TeleportContainer implements Comparable{
     {
         FromPlayer = From;
         ToPlayer=To;
+        TeleportID = UUID.randomUUID();
 
         StartedAt = Instant.now().getEpochSecond();
+    }
+
+    public TeleportContainer(ServerPlayer f_p, Vec3 f_pos, Vec2 f_rot, ServerLevel f_dim) {
+        SetTeleportDestination(f_p, f_pos, f_rot, f_dim);
+    }
+
+    private void SetTeleportDestination(ServerPlayer f_p, Vec3 f_pos, Vec2 f_rot, ServerLevel f_dim) {
+        PlayerInst = f_p;
+        Position = f_pos;
+        Rotation = f_rot;
+        Dimension = f_dim;
     }
 
     @Override
