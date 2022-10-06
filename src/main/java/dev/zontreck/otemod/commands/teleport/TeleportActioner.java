@@ -20,8 +20,11 @@ public class TeleportActioner
             public void run(){
 
                 MobEffectInstance inst = new MobEffectInstance(MobEffects.DARKNESS, 200, 1, true, true);
-                MobEffectInstance regen = new MobEffectInstance(MobEffects.REGENERATION, 200, 1, true, true);
-                MobEffectInstance invul = new MobEffectInstance(MobEffects.LEVITATION, 75, 1, true, true);
+                MobEffectInstance regen = new MobEffectInstance(MobEffects.REGENERATION, 200, 2, true, true);
+
+                // 10-05-2022   - Adjusted to 100 on duration due to a small issue where it would sometimes stop levitation prior to the teleport taking effect.
+                // Small tradeoff is the player now levitates slightly longer at the destination. This is acceptable. Compensated by increasing regen strength by 1
+                MobEffectInstance invul = new MobEffectInstance(MobEffects.LEVITATION, 100, 1, true, true);
         
                 
                 player.addEffect(inst);

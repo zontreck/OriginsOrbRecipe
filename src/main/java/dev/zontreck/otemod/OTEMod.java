@@ -13,6 +13,7 @@ import java.util.Set;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -54,6 +55,9 @@ import dev.zontreck.otemod.configs.Profile;
 import dev.zontreck.otemod.database.Database;
 import dev.zontreck.otemod.database.Database.DatabaseConnectionException;
 import dev.zontreck.otemod.events.EventHandler;
+import dev.zontreck.otemod.implementation.VaultScreen;
+import dev.zontreck.otemod.implementation.VaultWatcher;
+import dev.zontreck.otemod.implementation.inits.MenuInitializer;
 import dev.zontreck.otemod.items.ModItems;
 import dev.zontreck.otemod.ore.Modifier.ModifierOfBiomes;
 
@@ -98,6 +102,8 @@ public class OTEMod
         MinecraftForge.EVENT_BUS.register(new EventHandler());
         MinecraftForge.EVENT_BUS.register(new ChatServerOverride());
         MinecraftForge.EVENT_BUS.register(new CommandRegistry());
+        MinecraftForge.EVENT_BUS.register(new VaultWatcher());
+        MenuInitializer.CONTAINERS.register(bus);
 
         ModBlocks.register(bus);
         ModItems.register(bus);
@@ -206,6 +212,11 @@ public class OTEMod
             "`prefix_color` varchar(255) not null,"+
             "`chat_color` varchar(255) not null)");
 
+            lookup.execute("CREATE TABLE IF NOT EXISTS `vaults` (" + 
+            "`uuid` varchar (128) NOT NULL, " +
+            "`number` int (11) not null," + 
+            "`data` text not null);");
+
             con.endRequest();
 
             // Set up the repeating task to expire a TeleportContainer
@@ -313,6 +324,8 @@ public class OTEMod
             // Some client setup code
             //LOGGER.info("HELLO FROM CLIENT SETUP");
             //LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+
+            MenuScreens.register(MenuInitializer.VAULT.get(), VaultScreen::new);
         }
     }
 
