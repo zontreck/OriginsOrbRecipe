@@ -45,7 +45,7 @@ public class VaultContainer
         server=player.server;
         serverMenu = theContainer.getServerMenu(myInventory);
         VAULT_NUMBER=vaultNum;
-
+        if(VAULT_NUMBER == -1)return; // Trash ID
 
         Connection con = OTEMod.DB.getConnection();
         // Check database for vault
@@ -74,6 +74,7 @@ public class VaultContainer
 
     public void commit()
     {
+        if(VAULT_NUMBER == -1)return; // We have no need to save the trash
         CompoundTag saved = myInventory.serializeNBT();
         ChatServerOverride.broadcastToAbove(owner, Component.literal(ChatColor.BOLD+ChatColor.DARK_GREEN+"Saving the vault's contents..."), server);
 

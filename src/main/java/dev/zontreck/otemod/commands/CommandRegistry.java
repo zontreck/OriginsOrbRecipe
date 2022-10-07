@@ -16,6 +16,7 @@ import dev.zontreck.otemod.commands.teleport.TPAHereCommand;
 import dev.zontreck.otemod.commands.teleport.TPAcceptCommand;
 import dev.zontreck.otemod.commands.teleport.TPCancelCommand;
 import dev.zontreck.otemod.commands.teleport.TPDenyCommand;
+import dev.zontreck.otemod.commands.vaults.TrashCommand;
 import dev.zontreck.otemod.commands.vaults.VaultCommand;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -104,6 +105,7 @@ public class CommandRegistry {
 
 
         VaultCommand.register(ev.getDispatcher());
+        TrashCommand.register(ev.getDispatcher());
     }
 
     

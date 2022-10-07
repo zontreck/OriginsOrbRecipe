@@ -14,13 +14,17 @@ import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity.RemovalReason;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -68,7 +72,6 @@ public class OTEMod
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String FIRST_JOIN_TAG = "dev.zontreck.otemod.firstjoin";
-    public static final String ITEM_LIVES_TAG = "dev.zontreck.otemod.entity.extralife";
     public static final String MOD_ID = "otemod";
     public static final String MODIFY_BIOMES = "modify_biomes";
     public static final ResourceLocation MODIFY_BIOMES_RL = new ResourceLocation(OTEMod.MOD_ID, MODIFY_BIOMES);
@@ -113,38 +116,6 @@ public class OTEMod
     {
     }
 
-/*
- *  @DISABLED DUE TO PlayerEvent.PlayerLoggedInEvent
- * with that event, we just handle this there.  This code is kept as a reference until the new player gear functions have been added.
- * Prereq for new player gear: OTEMod Vault API
- * 
-    @SubscribeEvent
-    public void onSpawn(EntityJoinLevelEvent ev){
-        Level w = ev.getLevel();
-        if(w.isClientSide){
-            return;
-        }
-
-        Entity e = ev.getEntity();
-        if(!(e instanceof Player))return;
-
-        Player p = (Player)e;
-        
-        
-        if(firstJoin(p)){
-            // Do first join actions here
-
-            /*for (Entry<String,Integer> ent : SARServerConfig.INITIAL_ITEMS_TO_GIVE_ON_FIRST_JOIN.get().entrySet()) {
-                
-                Inventory i = p.getInventory();
-                
-
-            }
-        }
-
-    }
- * 
- */
 
     public boolean firstJoin(Player p){
         
@@ -258,48 +229,27 @@ public class OTEMod
 
         }
     }
-    @OnlyIn(Dist.DEDICATED_SERVER)
-    @SubscribeEvent
-    public void onItemPickup(final ItemPickupEvent ev){
-        // Remove the expire tag
-        if(ev.getStack().getTagElement(OTEMod.ITEM_LIVES_TAG) != null)
-        {
-            ev.getStack().removeTagKey(OTEMod.ITEM_LIVES_TAG);
-            //OTEMod.LOGGER.info("Removed the item expire tag as the item was picked up");
-        }
-    }
+    
 
     @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public void onItemExpire(final ItemExpireEvent ev)
     {
-        CompoundTag ct = ev.getEntity().getItem().getTagElement(OTEMod.ITEM_LIVES_TAG);
-        if(ct == null){
-            int life =0;
-            ct = new CompoundTag();
+        if(OTEServerConfig.ITEM_DESPAWN_TIMER.get()<=0)return;
 
-            ct.putInt("live", life);
+
+        if(ev.getEntity().getAge() != (1200  *  5)) {
             
-
-        }else {
-            int life = ct.getInt("live");
-            if(life >= OTEServerConfig.ITEM_DESPAWN_TIMER.get()){
-                // Item has expired. we should let it die
-                //OTEMod.LOGGER.info("Item ["+ev.getEntity().getItem().getDisplayName().getString()+"] has expired");
-                ev.setCanceled(false);
-                return;
-            }
-            life++;
-            ct.putInt("live", life);
+            //OTEMod.LOGGER.info("Extra life has already been given to item : "+ev.getEntity().getName().getString());
+            return; // We already gave it extra life, the default is 6000, or 5 minutes
         }
-
-
-        ev.getEntity().getItem().removeTagKey(OTEMod.ITEM_LIVES_TAG); // Remove just incase it gets duplicated
-        ev.getEntity().getItem().addTagElement(OTEMod.ITEM_LIVES_TAG, ct);
         
-        
-        //ev.setExtraLife(0); // reset the life count
+        //OTEMod.LOGGER.info("Giving extra life to item : "+ev.getEntity().getName().getString() + "; item age [ "+ev.getEntity().getAge()+ " ]");
+        // 1200 ticks per minute
+        // OTEMod item despawn amplifier is set in 5 minute intervals
+        ev.setExtraLife((1200 * 5)+ ((1200 * 5) * OTEServerConfig.ITEM_DESPAWN_TIMER.get())); // reset the life count
         //OTEMod.LOGGER.info("Item ["+ev.getEntity().getItem().getDisplayName().getString()+"] was given extra life");
+        // Hopefully this works?
         ev.setCanceled(true);
         
     }
@@ -326,6 +276,8 @@ public class OTEMod
             //LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
 
             MenuScreens.register(MenuInitializer.VAULT.get(), VaultScreen::new);
+
+            //ItemBlockRenderTypes.setRenderLayer(ModBlocks.AURORA_DOOR.get(), RenderType.translucent());
         }
     }
 

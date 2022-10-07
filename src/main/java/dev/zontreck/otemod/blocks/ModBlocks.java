@@ -7,6 +7,7 @@ import dev.zontreck.otemod.items.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoorBlock;
@@ -41,7 +42,7 @@ public class ModBlocks {
     public static final RegistryObject<Item> AURORA_BLOCK_I = ITEMS.register("aurora_block", () -> new BlockItem(AURORA_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
 
-    public static final RegistryObject<Block> AURORA_DOOR = BLOCKS.register("aurora_door", () -> new DoorBlock(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(9f).explosionResistance(100000f).destroyTime(10).sound(SoundType.NETHERITE_BLOCK)));
+    public static final RegistryObject<Block> AURORA_DOOR = BLOCKS.register("aurora_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).requiresCorrectToolForDrops().strength(9f).explosionResistance(100000f).destroyTime(10).sound(SoundType.NETHERITE_BLOCK)));
 
     public static final RegistryObject<Item> AURORA_DOOR_I = ITEMS.register("aurora_door", () -> new BlockItem(AURORA_DOOR.get(), new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
