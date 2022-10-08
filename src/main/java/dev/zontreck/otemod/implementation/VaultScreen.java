@@ -54,10 +54,4 @@ public class VaultScreen extends AbstractContainerScreen <VaultMenu>
         RenderSystem.setShaderTexture(0, TEXTURE);
         blit(stack, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
     }
-
-    @Override
-    protected void renderLabels (PoseStack stack, int mouseX, int mouseY)
-    {
-
-    }
 }

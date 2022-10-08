@@ -67,13 +67,21 @@ public class VaultMenu extends AbstractContainerMenu
     public ItemStack quickMoveStack(Player play, int index) {
         ItemStack ret = ItemStack.EMPTY;
         final Slot slot = getSlot(index);
+        boolean moveStack = false;
         if(slot.hasItem()){
             final ItemStack item = slot.getItem();
             ret = item.copy();
-            if(index<27)
+
+            if(index<54)
             {
-                if(!moveItemStackTo(item, 54, this.slots.size(), true)) return ItemStack.EMPTY;
-            }else if(!moveItemStackTo(item, 0, 54, false));
+                moveStack=moveItemStackTo(item, 54, this.slots.size(), true);
+                if(!moveStack) return ItemStack.EMPTY;
+            }else {
+                moveStack = moveItemStackTo(item, 0, 54, false);
+                
+                if(!moveStack)return ItemStack.EMPTY;
+            }
+
 
             if(item.isEmpty()){
                 slot.set(ItemStack.EMPTY);
