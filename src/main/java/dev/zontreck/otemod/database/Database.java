@@ -12,13 +12,55 @@ public class Database {
     private Connection connection;
 
 
-    public Database (OTEMod instance) throws DatabaseConnectionException
+    public Database (OTEMod instance) throws DatabaseConnectionException, SQLException
     {
         mod=instance;
         try{
             this.connect();
         }catch(Exception e){
             throw new DatabaseConnectionException(e.getMessage());
+        }
+
+        Thread tx = new Thread(new Runnable(){
+            public void run()
+            {
+                while(true){
+
+                // Watch the connection for disconnections
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                if(!OTEMod.ALIVE)return;// Exit now. We are being torn down/server is going down
+                try {
+                    if(!OTEMod.DB.isConnected())
+                    {
+                        OTEMod.LOGGER.info("/!\\ Lost connection to data provider. Reconnecting...");
+                        // Refresh
+                        try {
+                            OTEMod.DB.connect();
+
+                            if(OTEMod.DB.isConnected())
+                            {
+                                OTEMod.LOGGER.info("/!\\ Reconnected!");
+                            }
+                        } catch (Exception e) {
+                            // TODO Auto-generated catch block
+                            e.printStackTrace();
+                        }
+                    }
+                } catch (SQLException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                }
+            }
+        });
+
+        if(isConnected()){
+            tx.start();
         }
     }
 

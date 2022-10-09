@@ -79,7 +79,7 @@ public class OTEMod
     public static Map<String,Profile> PROFILES = new HashMap<String,Profile>();
     public static List<TeleportContainer> TeleportRegistry = new ArrayList<>();
     public static MinecraftServer THE_SERVER;
-    private static boolean ALIVE;
+    public static boolean ALIVE;
     
     public static boolean DEVELOPER=false;
     private static Thread MasterThread;
