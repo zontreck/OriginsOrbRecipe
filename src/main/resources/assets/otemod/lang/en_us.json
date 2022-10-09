@@ -21,7 +21,7 @@
     "dev.zontreck.otemod.msgs.only_player": "§cOnly players are allowed to execute this command",
 
     "dev.zontreck.otemod.msgs.homes.total": "§3Total number of homes: §6",
-    "dev.zontreck.otemod.msgs.homes.set.success": "§2Home created or updated successfully",
+    "dev.zontreck.otemod.msgs.homes.set.success": "Home created or updated successfully",
     "dev.zontreck.otemod.msgs.homes.set.fail": "§cHome could not be created or updated due to an unknown error",
     "dev.zontreck.otemod.msgs.homes.goto.fail": "§cHome was not found, or a error occured",
     "dev.zontreck.otemod.msgs.homes.goto.success": "§2Home found, warping home now",

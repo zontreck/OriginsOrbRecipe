@@ -2,6 +2,7 @@ package dev.zontreck.otemod.commands.homes;
 
 import java.sql.Array;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -60,16 +61,23 @@ public class SetHomeCommand {
         Connection con = OTEMod.DB.getConnection();
         try {
             con.beginRequest();
-            Statement stat = con.createStatement();
+            //Statement stat = con.createStatement();
             Vec3 position = p.position();
             Vec2 rot = p.getRotationVector();
 
             TeleportDestination dest = new TeleportDestination(new Vector3(position), new Vector2(rot), p.getLevel().dimension().location().getNamespace() + ":" + p.getLevel().dimension().location().getPath());
 
-            stat.execute("REPLACE INTO `homes` (user, home_name, teleporter) values (\"" + p.getStringUUID() + "\", \""+ homeName + "\", \""+  dest.toString() + "\");");
+            String SQL = "REPLACE INTO `homes` (user, home_name, teleporter) VALUES (?, ?, ?);";
+            PreparedStatement pstat = con.prepareStatement(SQL);
+
+            pstat.setString(1, p.getStringUUID());
+            pstat.setString(2, homeName);
+            pstat.setString(3, dest.toString());
+
+            pstat.execute();
             
+            ChatServerOverride.broadcastTo(p.getUUID(), Component.literal(ChatColor.DARK_GREEN).append(Component.translatable("dev.zontreck.otemod.msgs.homes.set.success")), ctx.getServer());
             
-            ctx.sendSuccess(MutableComponent.create(new TranslatableContents("dev.zontreck.otemod.msgs.homes.set.success")), true);
             con.endRequest();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
