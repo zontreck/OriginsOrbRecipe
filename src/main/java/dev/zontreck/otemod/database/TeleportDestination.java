@@ -1,9 +1,8 @@
 package dev.zontreck.otemod.database;
 
-import com.ibm.icu.impl.InvalidFormatException;
-
 import dev.zontreck.otemod.containers.Vector2;
 import dev.zontreck.otemod.containers.Vector3;
+import dev.zontreck.otemod.exceptions.InvalidDeserialization;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 
@@ -15,7 +14,7 @@ public class TeleportDestination {
     public Vector2 Rotation;
     public String Dimension;
 
-    public TeleportDestination(CompoundTag tag) throws InvalidFormatException
+    public TeleportDestination(CompoundTag tag) throws InvalidDeserialization
     {
         Position = new Vector3(tag.getString("Position"));
         Rotation = new Vector2(tag.getString("Rotation"));

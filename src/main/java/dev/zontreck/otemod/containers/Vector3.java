@@ -1,7 +1,6 @@
 package dev.zontreck.otemod.containers;
 
-import com.ibm.icu.impl.InvalidFormatException;
-
+import dev.zontreck.otemod.exceptions.InvalidDeserialization;
 import net.minecraft.world.phys.Vec3;
 
 public class Vector3 
@@ -33,7 +32,7 @@ public class Vector3
         z=pos.z;
     }
 
-    public Vector3(String pos) throws InvalidFormatException
+    public Vector3(String pos) throws InvalidDeserialization
     {
         // This will be serialized most likely from the ToString method
         // Parse
@@ -48,7 +47,7 @@ public class Vector3
 
             if(positions.length!=3)
             {
-                throw new InvalidFormatException("Positions must be in the same format provided by ToString() (ex. <1,1,1> or <1, 1, 1>");
+                throw new InvalidDeserialization("Positions must be in the same format provided by ToString() (ex. <1,1,1> or <1, 1, 1>");
             }
 
             this.x = Double.parseDouble(positions[0]);

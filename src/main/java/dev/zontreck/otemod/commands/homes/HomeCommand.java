@@ -1,48 +1,31 @@
 package dev.zontreck.otemod.commands.homes;
 
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
-import com.ibm.icu.impl.InvalidFormatException;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
-import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.math.Vector3d;
 
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatColor;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.commands.teleport.TeleportActioner;
 import dev.zontreck.otemod.commands.teleport.TeleportContainer;
-import dev.zontreck.otemod.configs.PlayerFlyCache;
 import dev.zontreck.otemod.database.TeleportDestination;
+import dev.zontreck.otemod.exceptions.InvalidDeserialization;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.TickTask;
-import net.minecraft.server.commands.BossBarCommands;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.BossEvent.BossBarColor;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffectUtil;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.server.command.TextComponentHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
@@ -148,7 +131,7 @@ public class HomeCommand {
                 ctx.sendFailure(Component.translatable("dev.zontreck.otemod.msgs.homes.goto.fail"));
             else
                 ctx.sendFailure(Component.literal("FAILED SQL: "+ ChatColor.GOLD+ SQL));
-        } catch (InvalidFormatException e) {
+        } catch (InvalidDeserialization e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (CommandSyntaxException e) {
