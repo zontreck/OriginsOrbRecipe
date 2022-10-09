@@ -1,8 +1,7 @@
-package dev.zontreck.otemod.commands;
+package dev.zontreck.otemod.commands.homes;
 
 import java.sql.Array;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,6 +14,11 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.math.Vector3d;
 
 import dev.zontreck.otemod.OTEMod;
+import dev.zontreck.otemod.chat.ChatColor;
+import dev.zontreck.otemod.chat.ChatServerOverride;
+import dev.zontreck.otemod.containers.Vector2;
+import dev.zontreck.otemod.containers.Vector3;
+import dev.zontreck.otemod.database.TeleportDestination;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.contents.TranslatableContents;
@@ -27,10 +31,10 @@ import net.minecraftforge.server.command.TextComponentHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 
-public class DelHomeCommand {
+public class SetHomeCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
     {
-        dispatcher.register(Commands.literal("rmhome").executes(c->rmHome(c.getSource(), "default")).then(Commands.argument("nickname", StringArgumentType.string()).executes(c -> rmHome(c.getSource(), StringArgumentType.getString(c, "nickname")))));
+        dispatcher.register(Commands.literal("sethome").executes(c->setHome(c.getSource(), "default")).then(Commands.argument("nickname", StringArgumentType.string()).executes(c -> setHome(c.getSource(), StringArgumentType.getString(c, "nickname")))));
         
         //dispatcher.register(Commands.literal("sethome").then(Commands.argument("nickname", StringArgumentType.string())).executes(command -> {
             //String arg = StringArgumentType.getString(command, "nickname");
@@ -38,7 +42,7 @@ public class DelHomeCommand {
         //}));
     }
 
-    private static int rmHome(CommandSourceStack ctx, String homeName)
+    private static int setHome(CommandSourceStack ctx, String homeName)
     {
         // Request homes
 //        String homeName = "";
@@ -49,33 +53,28 @@ public class DelHomeCommand {
         if(! ctx.isPlayer())
         {
             
-            ctx.sendFailure(MutableComponent.create( new TranslatableContents("dev.zontreck.otemod.msgs.homes.only_player")));
+            ChatServerOverride.broadcastTo(ctx.getPlayer().getUUID(), Component.literal(ChatColor.DARK_RED).append(Component.translatable("dev.zontreck.otemod.msgs.only_player")), ctx.getServer());
             return 1;
         }
         ServerPlayer p = ctx.getPlayer();
         Connection con = OTEMod.DB.getConnection();
         try {
             con.beginRequest();
-            //Statement stat = con.createStatement();
+            Statement stat = con.createStatement();
             Vec3 position = p.position();
             Vec2 rot = p.getRotationVector();
 
+            TeleportDestination dest = new TeleportDestination(new Vector3(position), new Vector2(rot), p.getLevel().dimension().location().getNamespace() + ":" + p.getLevel().dimension().location().getPath());
 
-            String SQL = "DELETE FROM `homes` WHERE `user`=? AND `home_name`=?;";
-
-            PreparedStatement pstat = con.prepareStatement(SQL);
-            pstat.setString(1, p.getStringUUID());
-            pstat.setString(2, homeName);
-
-            pstat.execute();
+            stat.execute("REPLACE INTO `homes` (user, home_name, teleporter) values (\"" + p.getStringUUID() + "\", \""+ homeName + "\", \""+  dest.toString() + "\");");
             
             
-            ctx.sendSuccess(MutableComponent.create(new TranslatableContents("dev.zontreck.otemod.msgs.homes.del.success")), true);
+            ctx.sendSuccess(MutableComponent.create(new TranslatableContents("dev.zontreck.otemod.msgs.homes.set.success")), true);
             con.endRequest();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            ctx.sendFailure(Component.translatable("dev.zontreck.otemod.msgs.homes.del.fail"));
+            ctx.sendFailure(Component.translatable("dev.zontreck.otemod.msgs.homes.set.fail"));
         }
 
         return 0;

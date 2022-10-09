@@ -33,7 +33,7 @@ public class FlyCommand {
         if(! ctx.isPlayer())
         {
             
-            ctx.sendFailure(MutableComponent.create( new TranslatableContents("dev.zontreck.otemod.msgs.homes.only_player")));
+            ctx.sendFailure(MutableComponent.create( new TranslatableContents("dev.zontreck.otemod.msgs.only_player")));
             return 1;
         }
         ServerPlayer p = ctx.getPlayer();

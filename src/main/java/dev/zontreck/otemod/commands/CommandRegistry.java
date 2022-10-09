@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import dev.zontreck.otemod.OTEMod;
+import dev.zontreck.otemod.commands.homes.DelHomeCommand;
+import dev.zontreck.otemod.commands.homes.HomeCommand;
+import dev.zontreck.otemod.commands.homes.HomesCommand;
+import dev.zontreck.otemod.commands.homes.SetHomeCommand;
 import dev.zontreck.otemod.commands.profilecmds.ChatColorCommand;
 import dev.zontreck.otemod.commands.profilecmds.NameColorCommand;
 import dev.zontreck.otemod.commands.profilecmds.NickCommand;
@@ -18,6 +22,11 @@ import dev.zontreck.otemod.commands.teleport.TPCancelCommand;
 import dev.zontreck.otemod.commands.teleport.TPDenyCommand;
 import dev.zontreck.otemod.commands.vaults.TrashCommand;
 import dev.zontreck.otemod.commands.vaults.VaultCommand;
+import dev.zontreck.otemod.commands.warps.DelWarpCommand;
+import dev.zontreck.otemod.commands.warps.RTPWarpCommand;
+import dev.zontreck.otemod.commands.warps.SetWarpCommand;
+import dev.zontreck.otemod.commands.warps.WarpCommand;
+import dev.zontreck.otemod.commands.warps.WarpsCommand;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -106,6 +115,12 @@ public class CommandRegistry {
 
         VaultCommand.register(ev.getDispatcher());
         TrashCommand.register(ev.getDispatcher());
+
+        SetWarpCommand.register(ev.getDispatcher());
+        DelWarpCommand.register(ev.getDispatcher());
+        RTPWarpCommand.register(ev.getDispatcher());
+        WarpsCommand.register(ev.getDispatcher());
+        WarpCommand.register(ev.getDispatcher());
     }
 
     

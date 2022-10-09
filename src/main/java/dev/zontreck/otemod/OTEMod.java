@@ -167,12 +167,7 @@ public class OTEMod
 "                `number` int(11) NOT NULL," +
 "                `user` varchar(255) NOT NULL," +
 "                `home_name` varchar(255) NOT NULL," +
-"                `x` varchar(20) NOT NULL," + 
-"                `y` varchar(20) NOT NULL," +
-"                `z` varchar(20) NOT NULL," +
-"                `rot_x` varchar(20) NOT NULL," + 
-"                `rot_y` varchar(20) NOT NULL," + 
-"                `dimension` varchar(255) NOT NULL)"); // 10/04/2022 - fix dimension column size due to a bug where mods might have long names!
+"                `teleporter` text not null)"); // 10/04/2022 - fix dimension column size due to a bug where mods might have long names!
 
             lookup.execute("CREATE TABLE IF NOT EXISTS `profiles` ("+
             "`username` varchar (255) not null,"+
@@ -187,6 +182,12 @@ public class OTEMod
             "`uuid` varchar (128) NOT NULL, " +
             "`number` int (11) not null," + 
             "`data` text not null);");
+
+            lookup.execute("CREATE TABLE IF NOT EXISTS `warps` (" +
+            "`warpname` varchar (128) not null, " + 
+            "`owner` varchar(128) not null, " +
+            "`warptype` int (2) not null, "+
+            "`teleporter` text not null)"); 
 
             con.endRequest();
 

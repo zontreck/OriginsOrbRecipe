@@ -1,4 +1,4 @@
-package dev.zontreck.otemod.commands;
+package dev.zontreck.otemod.commands.homes;
 
 import java.sql.Array;
 import java.sql.Connection;
@@ -9,18 +9,23 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.ibm.icu.impl.InvalidFormatException;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.math.Vector3d;
 
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatColor;
+import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.commands.teleport.TeleportActioner;
 import dev.zontreck.otemod.commands.teleport.TeleportContainer;
 import dev.zontreck.otemod.configs.PlayerFlyCache;
+import dev.zontreck.otemod.database.TeleportDestination;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -63,7 +68,7 @@ public class HomeCommand {
         if(! ctx.isPlayer())
         {
             
-            ctx.sendFailure(MutableComponent.create( new TranslatableContents("dev.zontreck.otemod.msgs.homes.only_player")));
+            ChatServerOverride.broadcastTo(ctx.getPlayer().getUUID(), Component.literal(ChatColor.DARK_RED).append(Component.translatable("dev.zontreck.otemod.msgs.only_player")), ctx.getServer());
             return 1;
         }
         ServerPlayer p = ctx.getPlayer();
@@ -91,18 +96,14 @@ public class HomeCommand {
             while(rs.next()){
                 has_home=true;
                 // Now, begin to extract the home data
-                double x = Double.parseDouble(rs.getString("x"));
-                double y = Double.parseDouble(rs.getString("y"));
-                double z = Double.parseDouble(rs.getString("z"));
-
-                float rx = Float.parseFloat(rs.getString("rot_x"));
-                float ry = Float.parseFloat(rs.getString("rot_y"));
+                TeleportDestination dest = new TeleportDestination(NbtUtils.snbtToStructure(rs.getString("teleporter")));
+                
 
 
-                position = new Vec3(x, y, z);
-                rot = new Vec2(rx, ry);
+                position = dest.Position.asMinecraftVector();
+                rot = dest.Rotation.asMinecraftVector();
 
-                String dim = rs.getString("dimension");
+                String dim = dest.Dimension;
                 String[] dims = dim.split(":");
 
                 ResourceLocation rl = new ResourceLocation(dims[0], dims[1]);
@@ -147,6 +148,12 @@ public class HomeCommand {
                 ctx.sendFailure(Component.translatable("dev.zontreck.otemod.msgs.homes.goto.fail"));
             else
                 ctx.sendFailure(Component.literal("FAILED SQL: "+ ChatColor.GOLD+ SQL));
+        } catch (InvalidFormatException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (CommandSyntaxException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
 
         return 0;

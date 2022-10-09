@@ -1,4 +1,4 @@
-package dev.zontreck.otemod.commands;
+package dev.zontreck.otemod.commands.homes;
 
 import java.sql.Array;
 import java.sql.Connection;
@@ -44,7 +44,7 @@ public class HomesCommand {
         if(! ctx.getSource().isPlayer())
         {
             
-            ctx.getSource().sendFailure(MutableComponent.create( new TranslatableContents("dev.zontreck.otemod.msgs.homes.only_player")));
+            ChatServerOverride.broadcastTo(ctx.getSource().getPlayer().getUUID(), Component.literal(ChatColor.DARK_RED).append(Component.translatable("dev.zontreck.otemod.msgs.only_player")), ctx.getSource().getServer());
             return 1;
         }
         ServerPlayer p = ctx.getSource().getPlayer();

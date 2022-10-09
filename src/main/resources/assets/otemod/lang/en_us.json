@@ -18,7 +18,8 @@
     "block.otemod.aurora_block": "Aurora Block",
     "block.otemod.aurora_door": "Aurora Door",
 
-    "dev.zontreck.otemod.msgs.homes.only_player": "§cOnly players are allowed to execute this command",
+    "dev.zontreck.otemod.msgs.only_player": "§cOnly players are allowed to execute this command",
+
     "dev.zontreck.otemod.msgs.homes.total": "§3Total number of homes: §6",
     "dev.zontreck.otemod.msgs.homes.set.success": "§2Home created or updated successfully",
     "dev.zontreck.otemod.msgs.homes.set.fail": "§cHome could not be created or updated due to an unknown error",
@@ -29,6 +30,11 @@
 
     "dev.zontreck.otemod.msgs.command_cooling_down": "This command is currently on cooldown. You must wait for ",
     "dev.zontreck.otemod.msgs.command_cooling_down_seconds": "seconds.",
+
+    "dev.zontreck.otemod.msgs.warps.set.success": "Warp successfully created",
+    "dev.zontreck.otemod.msgs.warps.del.success": "Warp successfully deleted",
+    "dev.zontreck.otemod.msgs.warps.set.fail": "Failed to create warp",
+    "dev.zontreck.otemod.msgs.warps.del.fail": "Failed to delete warp",
 
     "minecraft.player.joined": "",
     "minecraft.player.joined.renamed": "",

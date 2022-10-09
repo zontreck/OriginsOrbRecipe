@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatColor;
+import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.chat.ChatColor.ColorOptions;
 import dev.zontreck.otemod.configs.Profile;
 import net.minecraft.commands.CommandSourceStack;
@@ -36,7 +37,7 @@ public class ChatColorCommand {
 
         // Get profile
         if(source.getPlayer()==null){
-            source.sendFailure(Component.literal(ChatColor.DARK_RED+"Only a player can use this command"));
+            ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), Component.literal(ChatColor.DARK_RED).append(Component.translatable("dev.zontreck.otemod.msgs.only_player")), source.getServer());
             return 1;
         }
         Profile p = Profile.get_profile_of(source.getPlayer().getStringUUID());

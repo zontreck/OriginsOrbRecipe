@@ -1,5 +1,7 @@
 package dev.zontreck.otemod.containers;
 
+import com.ibm.icu.impl.InvalidFormatException;
+
 import net.minecraft.world.phys.Vec3;
 
 public class Vector3 
@@ -29,6 +31,31 @@ public class Vector3
         x=pos.x;
         y=pos.y;
         z=pos.z;
+    }
+
+    public Vector3(String pos) throws InvalidFormatException
+    {
+        // This will be serialized most likely from the ToString method
+        // Parse
+        if(pos.startsWith("<"))
+        {
+            pos=pos.substring(1, pos.length()-1); // Rip off the ending bracket too
+            String[] positions = pos.split(", ");
+            if(positions.length!=3)
+            {
+                positions = pos.split(",");
+            }
+
+            if(positions.length!=3)
+            {
+                throw new InvalidFormatException("Positions must be in the same format provided by ToString() (ex. <1,1,1> or <1, 1, 1>");
+            }
+
+            this.x = Double.parseDouble(positions[0]);
+            this.y = Double.parseDouble(positions[1]);
+            this.z = Double.parseDouble(positions[2]);
+            // We are done now
+        }
     }
 
     public Vector3 moveUp()

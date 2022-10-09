@@ -1,5 +1,6 @@
 package dev.zontreck.otemod.commands.teleport;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -18,8 +19,10 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoubleBlockCombiner.BlockType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -36,6 +39,68 @@ public class RTPCommand {
             //String arg = StringArgumentType.getString(command, "nickname");
             //return setHome(command.getSource(), arg);
         //}));
+    }
+
+    public static Vector3 findPosition(ServerLevel lvl, boolean allowWater)
+    {
+        Vector3 v = new Vector3();
+        boolean found_place = false;
+        // We do not care how many tries it takes
+        
+        while (!found_place)
+        {
+    
+            // Take our current position, and send us in a random direction
+            Random rng = new Random(Instant.now().getEpochSecond());
+            v.y = 300;
+            v.x = rng.nextDouble(0xffff);
+            v.z = rng.nextDouble(0xffff);
+
+            boolean is_invalid_location = false;
+            String block_place="";
+
+            while(v.y!=-30)
+            {
+
+                BlockState b = lvl.getBlockState(new BlockPos(v.asMinecraftVector()));
+                BlockState b2 = lvl.getBlockState(new BlockPos(v.moveUp().asMinecraftVector()));
+                BlockState b3 = lvl.getBlockState(new BlockPos(v.moveDown().asMinecraftVector()));
+
+                if(b.isAir()){
+                    if(b2.isAir()){
+                        if(!b3.isAir())
+                        {
+                            // Check names
+                            boolean valid=true;
+                            List<Block> blackLists = new ArrayList<>();
+                            if(!allowWater)
+                                blackLists.add(Blocks.WATER);
+                            blackLists.add(Blocks.LAVA);
+
+                            block_place = b3.getBlock().getName().getString();
+                            OTEMod.LOGGER.info(b3.getBlock().getName().getString());
+                            for(Block bx : blackLists)
+                            {
+                                if(b.is(bx) || b2.is(bx) || b3.is(bx)){
+                                    valid=false;
+                                    is_invalid_location=true;
+                                }
+                            }
+
+                            if(valid){
+
+                                found_place = true;
+                                break;
+                            }
+
+                        }
+                    }
+                }
+                v=v.moveDown();
+            }
+        }
+
+        return v;
     }
 
     private static int rtp(CommandSourceStack source, boolean allowWater) {
@@ -64,6 +129,9 @@ public class RTPCommand {
         
                 int tries=0;
                 ChatServerOverride.broadcastTo(pla.getUUID(), Component.literal(ChatColor.DARK_GRAY + "["+ChatColor.DARK_GREEN+"OTEMOD"+ChatColor.DARK_GRAY+"] "+ChatColor.GREEN+"Searching for a suitable landing location..."), source.getServer());
+                /*
+                 * 
+                 *
                 while(!found_place){  
         
                     // Take our current position, and send us in a random direction
@@ -76,7 +144,7 @@ public class RTPCommand {
                     String block_place="";
 
                     // Begin to scan for ground
-                    while(v.y != 0)
+                    while(v.y != -30)
                     {
                         // check block above and below
                         BlockState b = source.getLevel().getBlockState(new BlockPos(v.asMinecraftVector()));
@@ -144,7 +212,8 @@ public class RTPCommand {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
                     }
-                }
+                }*/
+                v=findPosition(source.getLevel(), allowWater);
         
                 ChatServerOverride.broadcastTo(pla.getUUID(), Component.literal(ChatColor.DARK_GRAY + "["+ChatColor.DARK_GREEN + "OTEMOD" + ChatColor.DARK_GRAY + "] "+ChatColor.DARK_PURPLE+" A suitable location has been found. Wormhole opening now!"), source.getServer());
         
