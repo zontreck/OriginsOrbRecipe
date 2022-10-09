@@ -17,6 +17,7 @@ import dev.zontreck.otemod.chat.ChatColor;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
@@ -24,6 +25,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.CompoundContainer;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.inventory.MenuConstructor;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -87,6 +89,21 @@ public class VaultContainer
             ps.setString(1, owner.toString());
             ps.setInt(2, VAULT_NUMBER);
             ps.setString(3, toSave);
+
+            boolean has_items = false;
+            for (int i = 0; i< myInventory.getSlots(); i++){
+                ItemStack IS = myInventory.getStackInSlot(i);
+                if(!IS.isEmpty()){
+                    has_items=true;
+                }
+            }
+
+            if(!has_items)
+            {
+                ps = con.prepareStatement("DELETE FROM `vaults` WHERE uuid=? AND number=?;");
+                ps.setString(1, owner.toString());
+                ps.setInt(2, VAULT_NUMBER);
+            }
 
             ps.execute();
             con.endRequest();
