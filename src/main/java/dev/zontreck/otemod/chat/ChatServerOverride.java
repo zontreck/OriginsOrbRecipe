@@ -6,22 +6,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
+import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.libzontreck.chat.HoverTip;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.PlayerFlyCache;
 import dev.zontreck.otemod.configs.Profile;
-import dev.zontreck.otemod.database.Database;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.network.ServerPlayerConnection;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.ServerChatEvent;
-import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -118,7 +115,7 @@ public class ChatServerOverride {
         }
 
         String msg = ev.getMessage().getString();
-        msg=doColors(msg);
+        msg= ChatColor.doColors(msg);
 
         String nameStr = ChatColor.resetChat() + "< "+ XD.name_color + XD.nickname + ChatColor.resetChat() + " >";
         String message = ": "+XD.chat_color + msg;
@@ -129,13 +126,6 @@ public class ChatServerOverride {
         ChatServerOverride.broadcast(Component.literal(prefixStr+nameStr+message).setStyle(hover), ev.getPlayer().server);
     }
 
-    public static String doColors(String msg)
-    {
-        for(ChatColor.ColorOptions color : ChatColor.ColorOptions.values()){
-            msg = msg.replace("!"+color.toString()+"!", ChatColor.from(color));
-        }
-        return msg;
-    }
 
     public static void broadcastAbove(Component message, MinecraftServer s)
     {

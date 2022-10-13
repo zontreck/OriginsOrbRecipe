@@ -7,11 +7,11 @@ import java.sql.SQLException;
 
 import com.mojang.brigadier.CommandDispatcher;
 
+import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.libzontreck.chat.Clickable;
+import dev.zontreck.libzontreck.chat.HoverTip;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatColor;
 import dev.zontreck.otemod.chat.ChatServerOverride;
-import dev.zontreck.otemod.chat.Clickable;
-import dev.zontreck.otemod.chat.HoverTip;
 import dev.zontreck.otemod.configs.Profile;
 import dev.zontreck.otemod.containers.Vector2;
 import dev.zontreck.otemod.containers.Vector3;

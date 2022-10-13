@@ -118,6 +118,11 @@ repositories {
         name = "CurseMaven"
         url = "https://cursemaven.com"
     }
+
+    maven {
+        name = "ZNI Creations"
+        url = "https://maven.zontreck.dev"
+    }
 }
 
 dependencies {
@@ -129,6 +134,9 @@ dependencies {
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
     compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
     runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
+
+    compileOnly fg.deobf("dev.zontreck:libzontreck:1.0.0.1:dev")
+    runtimeOnly fg.deobf("dev.zontreck:libzontreck:1.0.0.1")
     // compile against the JEI API but do not include it at runtime
     //compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
     // at runtime, use the full JEI jar
@@ -154,7 +162,7 @@ dependencies {
 jar {
     manifest {
         attributes([
-                "Specification-Title"     : "otemod",
+                "Specification-Title"     : project.name,
                 "Specification-Vendor"    : "Zontreck",
                 "Specification-Version"   : "${my_version}", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,

@@ -2,9 +2,9 @@ package dev.zontreck.otemod.commands.profilecmds;
 
 import com.mojang.brigadier.CommandDispatcher;
 
+import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.libzontreck.chat.ChatColor.ColorOptions;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatColor;
-import dev.zontreck.otemod.chat.ChatColor.ColorOptions;
 import dev.zontreck.otemod.configs.Profile;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;

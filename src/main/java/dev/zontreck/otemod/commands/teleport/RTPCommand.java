@@ -8,12 +8,10 @@ import java.util.UUID;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.BoolArgumentType;
-import com.mojang.brigadier.arguments.StringArgumentType;
 
+import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatColor;
 import dev.zontreck.otemod.chat.ChatServerOverride;
-import dev.zontreck.otemod.commands.CommandRegistry;
 import dev.zontreck.otemod.containers.Vector3;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -23,7 +21,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DoubleBlockCombiner.BlockType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 

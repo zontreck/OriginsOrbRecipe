@@ -7,10 +7,10 @@ import java.sql.ResultSet;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
+import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.libzontreck.chat.Clickable;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatColor;
 import dev.zontreck.otemod.chat.ChatServerOverride;
-import dev.zontreck.otemod.chat.Clickable;
 import dev.zontreck.otemod.commands.teleport.RTPCommand;
 import dev.zontreck.otemod.commands.teleport.TeleportActioner;
 import dev.zontreck.otemod.commands.teleport.TeleportContainer;

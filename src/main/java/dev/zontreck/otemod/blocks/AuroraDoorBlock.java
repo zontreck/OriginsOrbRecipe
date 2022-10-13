@@ -1,6 +1,5 @@
 package dev.zontreck.otemod.blocks;
 
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.DoorBlock;
 
 public class AuroraDoorBlock extends DoorBlock

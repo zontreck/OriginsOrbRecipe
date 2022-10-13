@@ -10,8 +10,8 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
+import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatColor;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.commands.teleport.TeleportActioner;
 import dev.zontreck.otemod.commands.teleport.TeleportContainer;
@@ -20,14 +20,14 @@ import dev.zontreck.otemod.exceptions.InvalidDeserialization;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.nbt.NbtUtils;
-import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 
 public class HomeCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
@@ -122,7 +122,9 @@ public class HomeCommand {
 
             if(!has_home)throw new SQLException("NO HOME");
             
-            ctx.sendSuccess(MutableComponent.create(new TranslatableContents("dev.zontreck.otemod.msgs.homes.goto.success")), true);
+            Style sxx = Style.EMPTY.withColor(TextColor.parseColor(ChatColor.DARK_GREEN)).withFont(Style.DEFAULT_FONT);
+            
+            ctx.sendSuccess(Component.translatable("dev.zontreck.otemod.msgs.homes.goto.success").withStyle(sxx), true);
             con.endRequest();
         } catch (SQLException e) {
             // TODO Auto-generated catch block

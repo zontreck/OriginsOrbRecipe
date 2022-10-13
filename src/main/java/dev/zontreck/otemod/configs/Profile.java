@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatColor;
 import net.minecraft.server.level.ServerPlayer;
 
 public class Profile {

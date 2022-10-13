@@ -5,8 +5,8 @@ import java.util.UUID;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
+import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatColor;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;

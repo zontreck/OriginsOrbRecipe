@@ -12,8 +12,8 @@ import org.mariadb.jdbc.export.Prepare;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
+import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatColor;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;

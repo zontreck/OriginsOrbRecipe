@@ -1,14 +1,12 @@
 package dev.zontreck.otemod.commands.teleport;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.ArgumentType;
-import com.mojang.brigadier.arguments.StringArgumentType;
 
+import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.libzontreck.chat.Clickable;
+import dev.zontreck.libzontreck.chat.HoverTip;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatColor;
 import dev.zontreck.otemod.chat.ChatServerOverride;
-import dev.zontreck.otemod.chat.Clickable;
-import dev.zontreck.otemod.chat.HoverTip;
 import dev.zontreck.otemod.configs.Profile;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;

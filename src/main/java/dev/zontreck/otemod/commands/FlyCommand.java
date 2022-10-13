@@ -3,7 +3,7 @@ package dev.zontreck.otemod.commands;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 
-import dev.zontreck.otemod.chat.ChatColor;
+import dev.zontreck.libzontreck.chat.ChatColor;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.contents.TranslatableContents;

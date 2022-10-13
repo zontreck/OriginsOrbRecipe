@@ -1,11 +1,6 @@
 package dev.zontreck.otemod.commands.vaults;
 
-import java.util.UUID;
-
-import javax.annotation.Nullable;
-
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.IntegerArgumentType;
 
 import dev.zontreck.otemod.implementation.VaultContainer;
 import net.minecraft.commands.CommandSourceStack;

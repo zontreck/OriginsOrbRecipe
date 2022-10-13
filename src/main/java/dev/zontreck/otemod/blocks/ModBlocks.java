@@ -1,13 +1,9 @@
 package dev.zontreck.otemod.blocks;
 
-import java.util.function.Supplier;
-
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.items.ModItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoorBlock;

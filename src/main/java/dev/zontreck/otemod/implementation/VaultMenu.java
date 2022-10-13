@@ -3,15 +3,11 @@ package dev.zontreck.otemod.implementation;
 import java.util.Map;
 import java.util.UUID;
 
-import dev.zontreck.otemod.chat.HoverTip;
 import dev.zontreck.otemod.implementation.inits.MenuInitializer;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ClickType;
-import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.MenuConstructor;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;

@@ -1,33 +1,23 @@
 package dev.zontreck.otemod.commands.homes;
 
-import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
-import com.mojang.brigadier.context.CommandContext;
-import com.mojang.math.Vector3d;
 
+import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatColor;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.contents.TranslatableContents;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.Vec2;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.server.command.TextComponentHelper;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextColor;
 
 public class DelHomeCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
@@ -50,8 +40,10 @@ public class DelHomeCommand {
         
         if(! ctx.isPlayer())
         {
+            Style s = Style.EMPTY.withColor(TextColor.parseColor(ChatColor.DARK_RED)).withFont(Style.DEFAULT_FONT);
             
-            ChatServerOverride.broadcastTo(ctx.getPlayer().getUUID(), Component.literal(ChatColor.DARK_RED).append(Component.translatable("dev.zontreck.otemod.msgs.only_player")), ctx.getServer());
+            
+            ChatServerOverride.broadcastTo(ctx.getPlayer().getUUID(), Component.translatable("dev.zontreck.otemod.msgs.only_player").withStyle(s), ctx.getServer());
             return 1;
         }
         ServerPlayer p = ctx.getPlayer();

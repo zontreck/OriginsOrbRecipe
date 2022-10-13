@@ -48,9 +48,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import org.slf4j.Logger;
 
-
+import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.otemod.blocks.ModBlocks;
-import dev.zontreck.otemod.chat.ChatColor;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.commands.CommandRegistry;
 import dev.zontreck.otemod.commands.teleport.TeleportContainer;
