@@ -40,10 +40,6 @@ public class DelHomeCommand {
         
         if(! ctx.isPlayer())
         {
-            Style s = Style.EMPTY.withColor(TextColor.parseColor(ChatColor.DARK_RED)).withFont(Style.DEFAULT_FONT);
-            
-            
-            ChatServerOverride.broadcastTo(ctx.getPlayer().getUUID(), Component.translatable("dev.zontreck.otemod.msgs.only_player").withStyle(s), ctx.getServer());
             return 1;
         }
         ServerPlayer p = ctx.getPlayer();
@@ -61,13 +57,15 @@ public class DelHomeCommand {
 
             pstat.execute();
             
-            
-            ctx.sendSuccess(MutableComponent.create(new TranslatableContents("dev.zontreck.otemod.msgs.homes.del.success")), true);
+
+            ChatServerOverride.broadcastTo(ctx.getPlayer().getUUID(), Component.literal(OTEMod.OTEPrefix + ChatColor.doColors("!dark_green! Home was deleted successfully")), ctx.getServer());
+
             con.endRequest();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            ctx.sendFailure(Component.translatable("dev.zontreck.otemod.msgs.homes.del.fail"));
+            ChatServerOverride.broadcastTo(ctx.getPlayer().getUUID(), Component.literal(OTEMod.OTEPrefix + ChatColor.doColors("!dark_red! Home was unable to be deleted")), ctx.getServer());
+            return 1;
         }
 
         return 0;

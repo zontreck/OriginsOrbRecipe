@@ -37,7 +37,11 @@ public class WarpCommand {
     }
 
     private static int warp(CommandSourceStack source, String string) {
-        if(!source.isPlayer())return 1;
+        if(!source.isPlayer()){
+            
+            ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), Component.literal(OTEMod.OTEPrefix + OTEMod.ONLY_PLAYER), source.getServer());
+            return 1;
+        }
 
         ServerPlayer p = source.getPlayer();
         Connection con = OTEMod.DB.getConnection();

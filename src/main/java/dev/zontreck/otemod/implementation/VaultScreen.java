@@ -33,9 +33,20 @@ public class VaultScreen extends AbstractContainerScreen <VaultMenu>
     @Override
     public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks)
     {
+        this.renderBackground(stack);
         super.render(stack, mouseX, mouseY, partialTicks);
-        this.font.draw(stack, this.title, this.leftPos + 17, this.topPos + 15, 0xFFFFFF);
-        this.font.draw(stack, this.playerInventoryTitle, this.leftPos + 17, this.topPos + 123, 0xFFFFFF);
+        this.renderTooltip(stack, mouseX, mouseY);
+
+        //this.font.draw(stack, this.title, this.leftPos + 17, this.topPos + 15, 0xFFFFFF);
+        //this.font.draw(stack, this.playerInventoryTitle, this.leftPos + 17, this.topPos + 123, 0xFFFFFF);
+    }
+
+    @Override
+    protected void renderLabels(PoseStack stack, int mouseX, int mouseY)
+    {
+        this.font.draw(stack, this.title.getString(), this.leftPos + 17, this.topPos + 15, 0xFFFFFF);
+        
+        this.font.draw(stack, this.playerInventoryTitle.getString(), this.leftPos + 17, this.topPos + 123, 0xFFFFFF);
     }
 
     @Override

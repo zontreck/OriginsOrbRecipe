@@ -4,6 +4,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.otemod.OTEMod;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.contents.TranslatableContents;
@@ -43,12 +44,12 @@ public class FlyCommand {
             p.getAbilities().flying=false;
             p.onUpdateAbilities();
             
-            ctx.sendSuccess(Component.literal(ChatColor.BOLD + "[" + ChatColor.DARK_GREEN + "OTEMOD" + ChatColor.WHITE + "] "+ChatColor.resetChat() + ChatColor.DARK_PURPLE + "Your ability to fly has been disabled"), false);
+            ctx.sendSuccess(Component.literal(OTEMod.OTEPrefix + ChatColor.DARK_PURPLE + "Your ability to fly has been disabled"), false);
         }else {
             p.getAbilities().mayfly=true;
             p.onUpdateAbilities();
 
-            ctx.sendSuccess(Component.literal(ChatColor.BOLD + "[" + ChatColor.DARK_GREEN + "OTEMOD" + ChatColor.WHITE + "] "+ChatColor.resetChat() + ChatColor.DARK_PURPLE + "You can now fly"), false);
+            ctx.sendSuccess(Component.literal(OTEMod.OTEPrefix + ChatColor.DARK_PURPLE + "You can now fly"), false);
         }
 
         return 0;

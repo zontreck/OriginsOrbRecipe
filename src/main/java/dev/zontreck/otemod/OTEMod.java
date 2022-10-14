@@ -3,7 +3,6 @@ package dev.zontreck.otemod;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,17 +13,10 @@ import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.Entity.RemovalReason;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.MinecraftForge;
@@ -36,11 +28,8 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent.ItemPickupEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -83,8 +72,15 @@ public class OTEMod
     public static boolean DEVELOPER=false;
     private static Thread MasterThread;
 
+    public static String OTEPrefix = "";
+    public static String ONLY_PLAYER = "";
+
     public OTEMod()
     {
+
+        OTEMod.OTEPrefix = ChatColor.doColors("!dark_gray![!dark_green!!bold!OTEMod!reset!!dark_gray!]!reset!");
+        OTEMod.ONLY_PLAYER = ChatColor.doColors("!dark_red!Only a player can execute this command");
+
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         // Register the setup method for modloading
         bus.addListener(this::setup);
@@ -207,7 +203,7 @@ public class OTEMod
                             if(cont.has_expired())
                             {
                                 try{
-                                    Component expire = Component.literal(ChatColor.DARK_PURPLE+"Teleport request has expired");
+                                    Component expire = Component.literal(OTEMod.OTEPrefix + ChatColor.DARK_PURPLE+"Teleport request has expired");
                                     ChatServerOverride.broadcastTo(cont.FromPlayer, expire, OTEMod.THE_SERVER);
                                     ChatServerOverride.broadcastTo(cont.ToPlayer, expire, OTEMod.THE_SERVER);
                                     OTEMod.TeleportRegistry.remove(cont);

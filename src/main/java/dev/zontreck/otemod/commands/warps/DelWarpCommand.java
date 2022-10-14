@@ -36,8 +36,7 @@ public class DelWarpCommand {
         
         if(! source.isPlayer())
         {
-            
-            ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), Component.literal(ChatColor.DARK_RED).append(Component.translatable("dev.zontreck.otemod.msgs.only_player")), source.getServer());
+            ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), Component.literal(OTEMod.OTEPrefix + OTEMod.ONLY_PLAYER), source.getServer());
             return 1;
         }
         ServerPlayer p = source.getPlayer();

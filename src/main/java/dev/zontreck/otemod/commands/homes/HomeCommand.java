@@ -124,7 +124,8 @@ public class HomeCommand {
             
             Style sxx = Style.EMPTY.withColor(TextColor.parseColor(ChatColor.DARK_GREEN)).withFont(Style.DEFAULT_FONT);
             
-            ctx.sendSuccess(Component.translatable("dev.zontreck.otemod.msgs.homes.goto.success").withStyle(sxx), true);
+
+            ChatServerOverride.broadcastTo(ctx.getPlayer().getUUID(), Component.literal(OTEMod.OTEPrefix + ChatColor.doColors("!dark_green!Home found! Wormhole opening now...")), ctx.getServer());
             con.endRequest();
         } catch (SQLException e) {
             // TODO Auto-generated catch block

@@ -36,7 +36,7 @@ public class TPAcceptCommand {
                 ServerPlayer from = source.getServer().getPlayerList().getPlayer(cont.FromPlayer);
                 ServerPlayer to = source.getServer().getPlayerList().getPlayer(cont.ToPlayer);
 
-                Component comp = Component.literal(ChatColor.DARK_GRAY + "["+ ChatColor.DARK_GREEN+ "OTEMOD" + ChatColor.DARK_GRAY+"] " + ChatColor.DARK_PURPLE+"Teleport request was accepted. Opening wormhole!");
+                Component comp = Component.literal(OTEMod.OTEPrefix + " " + ChatColor.DARK_PURPLE+"Teleport request was accepted. Opening wormhole!");
 
                 ChatServerOverride.broadcastTo(cont.FromPlayer, comp, source.getServer());
                 ChatServerOverride.broadcastTo(cont.ToPlayer, comp, source.getServer());

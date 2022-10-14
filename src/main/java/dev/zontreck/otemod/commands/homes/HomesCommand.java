@@ -35,7 +35,6 @@ public class HomesCommand {
         if(! ctx.getSource().isPlayer())
         {
             
-            ChatServerOverride.broadcastTo(ctx.getSource().getPlayer().getUUID(), Component.literal(ChatColor.DARK_RED).append(Component.translatable("dev.zontreck.otemod.msgs.only_player")), ctx.getSource().getServer());
             return 1;
         }
         ServerPlayer p = ctx.getSource().getPlayer();

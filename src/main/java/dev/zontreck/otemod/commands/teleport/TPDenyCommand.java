@@ -31,7 +31,7 @@ public class TPDenyCommand {
         for(TeleportContainer cont : OTEMod.TeleportRegistry){
             if(cont.TeleportID.equals(teleporter)){
                 // Canceling!
-                Component comp = Component.literal(ChatColor.DARK_GRAY + "["+ ChatColor.DARK_GREEN+ "OTEMOD" + ChatColor.DARK_GRAY+"] " + ChatColor.DARK_PURPLE+"Teleport request was denied");
+                Component comp = Component.literal(OTEMod.OTEPrefix + " " + ChatColor.DARK_PURPLE+"Teleport request was denied");
 
                 ChatServerOverride.broadcastTo(cont.FromPlayer, comp, source.getServer());
                 ChatServerOverride.broadcastTo(cont.ToPlayer, comp, source.getServer());

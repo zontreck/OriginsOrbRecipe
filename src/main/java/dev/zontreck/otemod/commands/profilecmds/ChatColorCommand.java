@@ -37,7 +37,6 @@ public class ChatColorCommand {
 
         // Get profile
         if(source.getPlayer()==null){
-            ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), Component.literal(ChatColor.DARK_RED).append(Component.translatable("dev.zontreck.otemod.msgs.only_player")), source.getServer());
             return 1;
         }
         Profile p = Profile.get_profile_of(source.getPlayer().getStringUUID());
@@ -45,7 +44,7 @@ public class ChatColorCommand {
         p.commit();
         OTEMod.PROFILES.put(source.getPlayer().getStringUUID(), p);
 
-        source.sendSuccess(Component.literal(ChatColor.DARK_GRAY+ "["+ChatColor.DARK_GREEN+ "OTEMOD" + ChatColor.DARK_GRAY + "] "+ChatColor.DARK_PURPLE + "Your chat color has been updated"), false);
+        source.sendSuccess(Component.literal(OTEMod.OTEPrefix + " "+ChatColor.DARK_PURPLE + "Your chat color has been updated"), false);
 
         return 0;
     }

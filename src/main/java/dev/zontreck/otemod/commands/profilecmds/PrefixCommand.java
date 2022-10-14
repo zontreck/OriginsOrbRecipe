@@ -39,7 +39,7 @@ public class PrefixCommand {
         p.commit();
         OTEMod.PROFILES.put(source.getPlayer().getStringUUID(), p);
 
-        source.sendSuccess(Component.literal(ChatColor.DARK_GRAY+ "["+ChatColor.DARK_GREEN+ "OTEMOD" + ChatColor.DARK_GRAY + "] "+ChatColor.DARK_PURPLE + "Your prefix has been updated"), false);
+        source.sendSuccess(Component.literal(OTEMod.OTEPrefix+ " "+ChatColor.DARK_PURPLE + "Your prefix has been updated"), false);
 
         return 0;
     }

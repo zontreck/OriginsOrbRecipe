@@ -41,6 +41,7 @@ public class WarpsCommand {
     private static int warps(CommandSourceStack source) {
         if(!source.isPlayer())
         {
+            ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), Component.literal(OTEMod.OTEPrefix + OTEMod.ONLY_PLAYER), source.getServer());
             return 1;
         }
 
@@ -59,7 +60,7 @@ public class WarpsCommand {
                 count++;
             }
             rs=pstat.executeQuery();// Reset the query
-            ChatServerOverride.broadcastTo(p.getUUID(), Component.literal(ChatColor.DARK_GRAY+"["+ChatColor.DARK_GREEN+"OTEMOD" + ChatColor.DARK_GRAY+"] "+ChatColor.resetChat() + "There are "+count+" warps available"), source.getServer());
+            ChatServerOverride.broadcastTo(p.getUUID(), Component.literal(OTEMod.OTEPrefix + " "+ChatColor.resetChat() + "There are "+count+" warps available"), source.getServer());
 
             while(rs.next())
             {

@@ -42,7 +42,6 @@ public class SetHomeCommand {
         if(! ctx.isPlayer())
         {
             
-            ChatServerOverride.broadcastTo(ctx.getPlayer().getUUID(), Component.literal(ChatColor.DARK_RED).append(Component.translatable("dev.zontreck.otemod.msgs.only_player")), ctx.getServer());
             return 1;
         }
         ServerPlayer p = ctx.getPlayer();
@@ -64,13 +63,14 @@ public class SetHomeCommand {
 
             pstat.execute();
             
-            ChatServerOverride.broadcastTo(p.getUUID(), Component.literal(ChatColor.DARK_GREEN).append(Component.translatable("dev.zontreck.otemod.msgs.homes.set.success")), ctx.getServer());
+            ChatServerOverride.broadcastTo(p.getUUID(), Component.literal(OTEMod.OTEPrefix + ChatColor.doColors(" !dark_green!Home was created or updated successfully!")), ctx.getServer());
             
             con.endRequest();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            ctx.sendFailure(Component.translatable("dev.zontreck.otemod.msgs.homes.set.fail"));
+            ChatServerOverride.broadcastTo(p.getUUID(), Component.literal(OTEMod.OTEPrefix + ChatColor.doColors(" !dark_red!Home could not be updated or created for a unknown reason!")), ctx.getServer());
+            return 1;
         }
 
         return 0;
