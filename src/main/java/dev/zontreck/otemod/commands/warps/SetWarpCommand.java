@@ -48,7 +48,7 @@ public class SetWarpCommand {
             Vec3 position = p.position();
             Vec2 rot = p.getRotationVector();
 
-            TeleportDestination dest = new TeleportDestination(new Vector3(position), new Vector2(rot), p.getLevel().dimension().location().getNamespace() + ":" + p.getLevel().dimension().location().getPath());
+            TeleportDestination dest = new TeleportDestination(new Vector3(position), new Vector2(rot), p.getLevel());
 
             String SQL = "REPLACE INTO `warps` (warpname, owner, warptype, teleporter) values (?, ?, ?, ?);";
             pstat = con.prepareStatement(SQL);

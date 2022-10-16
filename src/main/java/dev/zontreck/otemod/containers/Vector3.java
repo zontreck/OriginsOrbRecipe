@@ -1,6 +1,7 @@
 package dev.zontreck.otemod.containers;
 
 import dev.zontreck.otemod.exceptions.InvalidDeserialization;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 
 public class Vector3 
@@ -11,6 +12,11 @@ public class Vector3
     
     public Vec3 asMinecraftVector(){
         return new Vec3(x, y, z);
+    }
+
+    public BlockPos asBlockPos()
+    {
+        return new BlockPos(asMinecraftVector());
     }
 
     public Vector3()
@@ -30,6 +36,13 @@ public class Vector3
         x=pos.x;
         y=pos.y;
         z=pos.z;
+    }
+
+    public Vector3(BlockPos pos)
+    {
+        x=pos.getX();
+        y=pos.getY();
+        z=pos.getZ();
     }
 
     public Vector3(String pos) throws InvalidDeserialization

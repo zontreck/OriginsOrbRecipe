@@ -59,27 +59,9 @@ public class WarpCommand {
             {
                 TeleportDestination dest = new TeleportDestination(NbtUtils.snbtToStructure(rs.getString("teleporter")));
 
-                String dim = dest.Dimension;
-                String[] dims = dim.split(":");
 
-                ResourceLocation rl = new ResourceLocation(dims[0], dims[1]);
+                ServerLevel dimL  = dest.getActualDimension();
 
-                ServerLevel dimL  = null;
-                for (ServerLevel lServerLevel : p.server.getAllLevels()) {
-                    ResourceLocation XL = lServerLevel.dimension().location();
-
-                    if(XL.getNamespace().equals(rl.getNamespace())){
-                        if(XL.getPath().equals(rl.getPath())){
-                            dimL = lServerLevel;
-                        }
-                    }
-                }
-
-                if(dimL == null)
-                {
-                    ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), Component.literal(ChatColor.RED+"DIMENSION COULD NOT BE FOUND"), source.getServer());
-                    return 1;
-                }
 
                 final int type = rs.getInt("warptype");
                 final ServerLevel f_dim = dimL;

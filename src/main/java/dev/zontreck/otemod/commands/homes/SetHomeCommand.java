@@ -52,7 +52,7 @@ public class SetHomeCommand {
             Vec3 position = p.position();
             Vec2 rot = p.getRotationVector();
 
-            TeleportDestination dest = new TeleportDestination(new Vector3(position), new Vector2(rot), p.getLevel().dimension().location().getNamespace() + ":" + p.getLevel().dimension().location().getPath());
+            TeleportDestination dest = new TeleportDestination(new Vector3(position), new Vector2(rot), p.getLevel());
 
             String SQL = "REPLACE INTO `homes` (user, home_name, teleporter) VALUES (?, ?, ?);";
             PreparedStatement pstat = con.prepareStatement(SQL);

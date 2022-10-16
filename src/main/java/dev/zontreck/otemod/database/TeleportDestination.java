@@ -2,41 +2,50 @@ package dev.zontreck.otemod.database;
 
 import dev.zontreck.otemod.containers.Vector2;
 import dev.zontreck.otemod.containers.Vector3;
+import dev.zontreck.otemod.containers.WorldPosition;
 import dev.zontreck.otemod.exceptions.InvalidDeserialization;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
+import net.minecraft.server.level.ServerLevel;
 
 /**
  *  This defines the data structure, and methods for deserializing and serializing teleport destinations, for easier storage in the database
  **/
-public class TeleportDestination {
-    public Vector3 Position;
+public class TeleportDestination extends WorldPosition
+{
     public Vector2 Rotation;
-    public String Dimension;
 
     public TeleportDestination(CompoundTag tag) throws InvalidDeserialization
     {
-        Position = new Vector3(tag.getString("Position"));
+        super(tag);
         Rotation = new Vector2(tag.getString("Rotation"));
-        Dimension = tag.getString("Dimension");
     }
     public TeleportDestination(Vector3 pos, Vector2 rot, String dim)
     {
-        Position = pos;
+        super(pos, dim);
         Rotation = rot;
-        Dimension = dim;
+    }
+
+    public TeleportDestination(Vector3 pos, Vector2 rot, ServerLevel dim)
+    {
+        super(pos,dim);
+        Rotation=rot;
     }
 
     @Override
     public String toString()
     {
-        CompoundTag tag = new CompoundTag();
-        tag.putString("Position", Position.toString());
+
+        return NbtUtils.structureToSnbt(serialize());
+
+    }
+
+    public CompoundTag serialize(){
+
+        CompoundTag tag = super.serialize();
         tag.putString("Rotation", Rotation.toString());
-        tag.putString("Dimension", Dimension);
 
-        return NbtUtils.structureToSnbt(tag);
-
+        return tag;
     }
     
 }

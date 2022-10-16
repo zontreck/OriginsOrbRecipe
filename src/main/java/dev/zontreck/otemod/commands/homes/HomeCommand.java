@@ -86,28 +86,7 @@ public class HomeCommand {
                 position = dest.Position.asMinecraftVector();
                 rot = dest.Rotation.asMinecraftVector();
 
-                String dim = dest.Dimension;
-                String[] dims = dim.split(":");
-
-                ResourceLocation rl = new ResourceLocation(dims[0], dims[1]);
-
-                ServerLevel dimL  = null;
-                for (ServerLevel lServerLevel : p.server.getAllLevels()) {
-                    ResourceLocation XL = lServerLevel.dimension().location();
-
-                    if(XL.getNamespace().equals(rl.getNamespace())){
-                        if(XL.getPath().equals(rl.getPath())){
-                            dimL = lServerLevel;
-                        }
-                    }
-                }
-
-                if(dimL == null)
-                {
-                    SQL = "Failed to find the dimension";
-                    ctx.sendFailure(Component.literal(ChatColor.DARK_RED+ChatColor.BOLD+"FAILED TO LOCATE THAT DIMENSION. CONTACT THE SERVER ADMIN"));
-                    return 1;
-                }
+                ServerLevel dimL  = dest.getActualDimension();
 
                 TeleportActioner.ApplyTeleportEffect(p);
                 // Instantiate a Teleport Runner
