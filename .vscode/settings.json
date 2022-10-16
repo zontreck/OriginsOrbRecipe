@@ -1,6 +1,0 @@
-{
-    "java.configuration.updateBuildConfiguration": "automatic",
-    "java.project.referencedLibraries": [
-        ".private/lib/**/*.jar"
-    ]
-}
