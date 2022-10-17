@@ -13,10 +13,16 @@ public class WorldPosition
     public Vector3 Position;
     public String Dimension;
 
-    public WorldPosition(CompoundTag tag) throws InvalidDeserialization
+    public WorldPosition(CompoundTag tag, boolean pretty) throws InvalidDeserialization
     {
-        Position = new Vector3(tag.getString("Position"));
-        Dimension = tag.getString("Dimension");
+        if(pretty){
+
+            Position = new Vector3(tag.getString("Position"));
+            Dimension = tag.getString("Dimension");
+        }else {
+            Position = new Vector3(tag.getCompound("pos"));
+            Dimension = tag.getString("Dimension");
+        }
 
     }
 
@@ -38,11 +44,20 @@ public class WorldPosition
         return NbtUtils.structureToSnbt(serialize());
     }
 
-    public CompoundTag serialize()
+    public CompoundTag serializePretty()
     {
         CompoundTag tag = new CompoundTag();
         
         tag.putString("Position", Position.toString());
+        tag.putString("Dimension", Dimension);
+
+        return tag;
+    }
+
+    public CompoundTag serialize()
+    {
+        CompoundTag tag = new CompoundTag();
+        tag.put("pos", Position.serialize());
         tag.putString("Dimension", Dimension);
 
         return tag;

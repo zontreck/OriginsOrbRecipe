@@ -38,6 +38,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.otemod.antigrief.HealerManager;
+import dev.zontreck.otemod.antigrief.HealerQueue;
 import dev.zontreck.otemod.blocks.ModBlocks;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.commands.CommandRegistry;
@@ -101,6 +103,7 @@ public class OTEMod
         MinecraftForge.EVENT_BUS.register(new ChatServerOverride());
         MinecraftForge.EVENT_BUS.register(new CommandRegistry());
         MinecraftForge.EVENT_BUS.register(new VaultWatcher());
+        MinecraftForge.EVENT_BUS.register(new dev.zontreck.otemod.antigrief.Handler());
         MenuInitializer.CONTAINERS.register(bus);
 
         ModBlocks.register(bus);
@@ -150,6 +153,9 @@ public class OTEMod
         try {
             OTEMod.DB = new Database(this);
             OTEMod.ALIVE=true;
+            HealerQueue.Initialize(); // Set up the queue
+
+
             // Validate that the database has been established and that tables exist
             Connection con = OTEMod.DB.getConnection();
             con.setAutoCommit(true);

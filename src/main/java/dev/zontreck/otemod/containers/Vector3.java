@@ -2,6 +2,7 @@ package dev.zontreck.otemod.containers;
 
 import dev.zontreck.otemod.exceptions.InvalidDeserialization;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.phys.Vec3;
 
 public class Vector3 
@@ -94,5 +95,31 @@ public class Vector3
     public String toString()
     {
         return "<"+String.valueOf(x)+", "+String.valueOf(y)+", "+String.valueOf(z)+">";
+    }
+
+    public NonAbsVector3 rounded()
+    {
+        NonAbsVector3 cl = new NonAbsVector3(this);
+        return cl;
+    }
+
+    public CompoundTag serialize()
+    {
+        CompoundTag tag = new CompoundTag();
+        tag.putDouble("x", x);
+        tag.putDouble("y", y);
+        tag.putDouble("z", z);
+
+        return tag;
+    }
+
+    public Vector3(CompoundTag tag) {
+        this.deserialize(tag);
+    }
+    public void deserialize(CompoundTag tag)
+    {
+        x=tag.getDouble("x");
+        y=tag.getDouble("y");
+        z=tag.getDouble("z");
     }
 }

@@ -1,23 +1,23 @@
 package dev.zontreck.otemod.antigrief;
 
-import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.commands.teleport.TeleportContainer;
 import dev.zontreck.otemod.containers.Vector3;
 import dev.zontreck.otemod.containers.WorldPosition;
-import net.minecraft.client.Minecraft;
+import dev.zontreck.otemod.exceptions.InvalidDeserialization;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.TagBuilder;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.chunk.storage.ChunkSerializer;
 
 public class StoredBlock {
     public CompoundTag blockData;
 
     private WorldPosition position;
     private BlockState state;
+
+    private CompoundTag blockEntity;
 
     public StoredBlock(final BlockPos pos, final BlockState toSave, final ServerLevel lvl)
     {
@@ -34,7 +34,12 @@ public class StoredBlock {
 
     public final BlockPos getPos()
     {
-        return pos;
+        return position.Position.asBlockPos();
+    }
+
+    public final WorldPosition getWorldPosition()
+    {
+        return position;
     }
 
     public final BlockState getState()
@@ -42,23 +47,58 @@ public class StoredBlock {
         return state;
     }
 
-    public final int getChunkX()
+    public final long getChunkX()
     {
-        return pos.getX() >> 4;
+        Vector3 pos = position.Position;
+        return pos.rounded().x >> 4;
     }
 
-    public final int getChunkZ()
+    public final long getChunkZ()
     {
-        return pos.getZ() >> 4;
+        Vector3 pos = position.Position;
+        return pos.rounded().z >> 4;
+    }
+
+    public void setBlockEntity(BlockEntity entity)
+    {
+        CompoundTag tag = entity.serializeNBT();
+        this.blockEntity=tag;
+    }
+
+    public final CompoundTag getBlockEntity(){
+        return blockEntity;
+    }
+
+    public static boolean hasBlockEntity(final CompoundTag tag){
+        return tag.contains("entity", Tag.TAG_COMPOUND);
     }
 
 
     public CompoundTag serialize()
     {
         final CompoundTag tag = new CompoundTag();
-        
 
-        tag.put("pos", )
+        tag.put("pos", position.serialize());
+        tag.put("state", NbtUtils.writeBlockState(state));
+
+        if(blockEntity != null) tag.put("entity", blockEntity);
+
+        return tag;
+    }
+
+
+    public void deserialize(final CompoundTag tag)
+    {
+        try {
+            position = new WorldPosition(tag.getCompound("pos"), false);
+        } catch (InvalidDeserialization e) {
+            e.printStackTrace();
+        }
+
+        state = NbtUtils.readBlockState(tag.getCompound("state"));
+
+        final CompoundTag tmp = tag.getCompound("entity");
+        blockEntity = tmp.isEmpty() ? null : tmp;
     }
 
 

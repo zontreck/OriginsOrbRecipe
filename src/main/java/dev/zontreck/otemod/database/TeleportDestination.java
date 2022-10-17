@@ -17,7 +17,7 @@ public class TeleportDestination extends WorldPosition
 
     public TeleportDestination(CompoundTag tag) throws InvalidDeserialization
     {
-        super(tag);
+        super(tag, true);
         Rotation = new Vector2(tag.getString("Rotation"));
     }
     public TeleportDestination(Vector3 pos, Vector2 rot, String dim)
@@ -42,7 +42,7 @@ public class TeleportDestination extends WorldPosition
 
     public CompoundTag serialize(){
 
-        CompoundTag tag = super.serialize();
+        CompoundTag tag = super.serializePretty();
         tag.putString("Rotation", Rotation.toString());
 
         return tag;

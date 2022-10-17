@@ -22,9 +22,15 @@ public class OTEServerConfig {
     public static final ForgeConfigSpec.ConfigValue<String> DATABASE;
     public static final ForgeConfigSpec.ConfigValue<Integer> ITEM_DESPAWN_TIMER;
     public static final ForgeConfigSpec.ConfigValue<Integer> RTP_COOLDOWN;
+    public static final ForgeConfigSpec.ConfigValue<Integer> HEALER_TIMER;
+    public static final ForgeConfigSpec.ConfigValue<List<String>> EXCLUDE_DIMENSIONS;
+    public static final ForgeConfigSpec.BooleanValue DEBUG_HEALER;
 
     static {
         List<ItemStack> defaults = new ArrayList<ItemStack>();
+        List<String> defaultExcludeDimensions = new ArrayList<String>();
+        defaultExcludeDimensions.add("minecraft:the_nether"); // Excluded to make mining for Ancient Debris easier
+        defaultExcludeDimensions.add("minecraft:the_end"); // Excluded due to End Crystals
         
         BUILDER.push("OTE");
         INITIAL_ITEMS_TO_GIVE_ON_FIRST_JOIN = BUILDER.comment("What items, identified by modid:item, to give to a brand new user on the server").define("New Player Gear", defaults);
@@ -38,6 +44,13 @@ public class OTEServerConfig {
         BUILDER.push("COMMANDS");
 
         RTP_COOLDOWN = BUILDER.comment("How many seconds between RTP uses? This can be quite laggy on the server due to the potential that new chunks are getting generated").define("rtp.cooldown", 30); // Default of 30 should be enough
+
+        BUILDER.pop();
+        BUILDER.push("ANTIGRIEF").comment("AntiGrief Explosion Healing Events");
+        HEALER_TIMER = BUILDER.comment("Time between healing events (In Seconds)").define("timer", 5); // Should this be lower?
+        EXCLUDE_DIMENSIONS = BUILDER.comment("What dimensions to exclude?  (Namespace:Dimension) in lowercase").define("exclude_dims", defaultExcludeDimensions);
+        DEBUG_HEALER = BUILDER.comment("Whether or not to debug the healer engine.  (Saves as SNBT instead of NBT)").define("debug", false);
+
 
 
         BUILDER.pop();
