@@ -45,55 +45,60 @@ public class HealerQueue {
             configFile = configDir.resolve(HealerQueue.HealerQueueFile);
         }
 
-        OTEMod.LOGGER.info("OTE HEALER TEMPORARY FILE: "+configFile.toFile().getAbsolutePath());
+        //OTEMod.LOGGER.info("OTE HEALER TEMPORARY FILE: "+configFile.toFile().getAbsolutePath());
         return configFile;
     }
 
     public static void Initialize()
     {
-        if(OTEServerConfig.DEBUG_HEALER.get())
-        {
-            // Load the sNBT file
-            Path configFile = getPath();
-            File x = configFile.toFile();
-            String FinalStr = "";
-            try {
-                BufferedReader br = new BufferedReader(new FileReader(x));
-                while(br.ready())
+        Thread tx = new Thread(new Runnable(){
+            public void run(){
+                if(OTEServerConfig.DEBUG_HEALER.get())
                 {
-                    FinalStr += br.readLine();
-                    FinalStr += "\n";
+                    // Load the sNBT file
+                    Path configFile = getPath();
+                    File x = configFile.toFile();
+                    String FinalStr = "";
+                    try {
+                        BufferedReader br = new BufferedReader(new FileReader(x));
+                        while(br.ready())
+                        {
+                            FinalStr += br.readLine();
+                        }
+                        br.close();
+                        
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch(IOException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    
+                    try {
+                        HealerQueue.deserialize(NbtUtils.snbtToStructure(FinalStr));
+                    } catch (CommandSyntaxException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    // Load from normal NBT
+                    Path configFile = getPath();
+                    File x = configFile.toFile();
+                    // Load binary
+                    try {
+                        CompoundTag tag = NbtIo.readCompressed(x);
+                        HealerQueue.deserialize(tag);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-                br.close();
                 
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch(IOException e)
-            {
-                e.printStackTrace();
             }
-            
-            try {
-                HealerQueue.deserialize(NbtUtils.snbtToStructure(FinalStr));
-            } catch (CommandSyntaxException e) {
-                e.printStackTrace();
-            }
-        } else {
-            // Load from normal NBT
-            Path configFile = getPath();
-            File x = configFile.toFile();
-            // Load binary
-            try {
-                CompoundTag tag = NbtIo.readCompressed(x);
-                HealerQueue.deserialize(tag);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        });
+        tx.start();
 
         // Set up the HealerManager / Runner
-        Thread tx = new Thread(new HealerManager());
-        tx.start();
+        Thread txx = new Thread(new HealerManager());
+        txx.start();
     }
 
     public static CompoundTag serialize()
@@ -108,11 +113,13 @@ public class HealerQueue {
         ListTag lst2 = new ListTag();
         for(final StoredBlock block : HealerQueue.ToValidate)
         {
-            lst.add(block.serialize());
+            lst2.add(block.serialize());
         }
 
         tag.put("queue", lst);
         tag.put("validate", lst2);
+
+        //OTEMod.LOGGER.info("HEAL ["+HealerQueue.ToHeal.size()+"] / VALIDATE ["+HealerQueue.ToValidate.size()+"]");
 
         // OK
 
@@ -135,7 +142,14 @@ public class HealerQueue {
                 StoredBlock sb = new StoredBlock(stored);
                 HealerQueue.ToHeal.add(sb);
             }
+        }
 
+        OTEMod.LOGGER.info("Finished loading the queue");
+
+        if(tag.contains("validate"))
+        {
+            HealerQueue.ToValidate.clear();
+            
             ListTag items2 = tag.getList("validate", Tag.TAG_COMPOUND);
             for(int i=0;i<items2.size();i++)
             {
@@ -144,6 +158,8 @@ public class HealerQueue {
                 HealerQueue.ToValidate.add(sb);
             }
         }
+
+        OTEMod.LOGGER.info("Finished loading validation queue for healer");
     }
     public static void dump() throws IOException
     {

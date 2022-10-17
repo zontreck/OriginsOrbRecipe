@@ -65,7 +65,7 @@ public class Handler
         {
             // Check an exclusions list
             if(!OTEServerConfig.EXCLUDE_DIMENSIONS.get().contains(data.getWorldPosition().Dimension))
-                if(!data.getState().isAir() && !data.getState().is(tnt))
+                if(!data.getState().is(tnt))
                     toHeal.add(data);
         }
 

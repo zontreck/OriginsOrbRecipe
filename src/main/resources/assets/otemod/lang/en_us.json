@@ -17,6 +17,7 @@
     "block.otemod.deepslate_eternium_ore_block": "Deepslate Eternium Ore",
     "block.otemod.aurora_block": "Aurora Block",
     "block.otemod.aurora_door": "Aurora Door",
+    "block.otemod.clear_glass_block": "Clear Glass Block",
 
     "dev.zontreck.otemod.msgs.only_player": "§cOnly players are allowed to execute this command",
 

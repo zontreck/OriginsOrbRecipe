@@ -58,6 +58,7 @@ public class HealerManager implements Runnable
                 }
 
                 HealerQueue.ToValidate.clear();
+                OTEMod.LOGGER.info("Validation of restore completed");
 
                 continue;
             }
@@ -70,7 +71,10 @@ public class HealerManager implements Runnable
 
             // Remove the block from the queue now to prevent further issues
             HealerQueue.ToHeal.remove(sb);
-            HealerQueue.ToValidate.add(sb);
+            if( !HealerQueue.ToValidate.add(sb) )
+            {
+                OTEMod.LOGGER.info("Failed to add Block to Validation queue!!! Verification of restore will not work");
+            }
 
             // Healer object should have been added to the validation list
 
@@ -108,14 +112,11 @@ public class HealerManager implements Runnable
             
             
 
-            if(OTEServerConfig.DEBUG_HEALER.get())
-                try {
-                    HealerQueue.dump();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            
-            HealerQueue.Shuffle();
+            try {
+                HealerQueue.dump();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
         OTEMod.LOGGER.info("Tearing down healer jobs. Saving remaining queue, stand by...");
