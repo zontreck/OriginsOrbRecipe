@@ -43,7 +43,7 @@ public class ModBlocks {
     public static final RegistryObject<Item> AURORA_DOOR_I = ITEMS.register("aurora_door", () -> new BlockItem(AURORA_DOOR.get(), new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
 
-    public static final RegistryObject<Block> CLEAR_GLASS_BLOCK = BLOCKS.register("clear_glass_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).requiresCorrectToolForDrops().strength(1f).destroyTime(6)));
+    public static final RegistryObject<Block> CLEAR_GLASS_BLOCK = BLOCKS.register("clear_glass_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).strength(1f).destroyTime(6)));
 
     public static final RegistryObject<Item> CLEAR_GLASS_BLOCK_I = ITEMS.register("clear_glass_block", () -> new BlockItem(CLEAR_GLASS_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 

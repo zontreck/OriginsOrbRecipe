@@ -3,9 +3,9 @@ package dev.zontreck.otemod.antigrief;
 import java.io.IOException;
 import java.util.Random;
 
+import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
-import dev.zontreck.otemod.containers.Vector3;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -20,12 +20,14 @@ public class HealerManager implements Runnable
     }
     @Override
     public void run(){
+        boolean skipWait=false;
         while(OTEMod.ALIVE)
         {
             // Run the queue
             // We want to restore one block per run, then halt for number of seconds in config
             try {
-                Thread.sleep(OTEServerConfig.HEALER_TIMER.get());
+                if(!skipWait)
+                    Thread.sleep(OTEServerConfig.HEALER_TIMER.get());
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
@@ -77,6 +79,13 @@ public class HealerManager implements Runnable
             }
 
             // Healer object should have been added to the validation list
+
+
+            // Check if the block to restore, and the block at the location are identical
+            if(level.getBlockState(sb.getPos()).is(sb.getState().getBlock())){
+                skipWait=true;
+                continue; // Skip the wait, and this block
+            }
 
             
             level.getServer().execute(new Runnable(){

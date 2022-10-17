@@ -32,5 +32,7 @@ public class TeleportRunnable implements Runnable
         c.Assert(Action.PlayerInst);
 
         Action.PlayerInst.setPos(Action.Position);
+
+        Action.PlayerInst.giveExperiencePoints(1); // Attempt to fix experience point bug
     }
 }

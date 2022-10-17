@@ -1,9 +1,9 @@
 package dev.zontreck.otemod.database;
 
-import dev.zontreck.otemod.containers.Vector2;
-import dev.zontreck.otemod.containers.Vector3;
-import dev.zontreck.otemod.containers.WorldPosition;
-import dev.zontreck.otemod.exceptions.InvalidDeserialization;
+import dev.zontreck.libzontreck.vectors.Vector2;
+import dev.zontreck.libzontreck.vectors.Vector3;
+import dev.zontreck.libzontreck.vectors.WorldPosition;
+import dev.zontreck.libzontreck.exceptions.InvalidDeserialization;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.server.level.ServerLevel;

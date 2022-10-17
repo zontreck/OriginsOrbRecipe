@@ -1,8 +1,8 @@
 package dev.zontreck.otemod.antigrief;
 
-import dev.zontreck.otemod.containers.Vector3;
-import dev.zontreck.otemod.containers.WorldPosition;
-import dev.zontreck.otemod.exceptions.InvalidDeserialization;
+import dev.zontreck.libzontreck.exceptions.InvalidDeserialization;
+import dev.zontreck.libzontreck.vectors.Vector3;
+import dev.zontreck.libzontreck.vectors.WorldPosition;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;

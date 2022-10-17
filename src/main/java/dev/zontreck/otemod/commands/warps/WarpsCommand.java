@@ -13,8 +13,6 @@ import dev.zontreck.libzontreck.chat.HoverTip;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.configs.Profile;
-import dev.zontreck.otemod.containers.Vector2;
-import dev.zontreck.otemod.containers.Vector3;
 import dev.zontreck.otemod.database.TeleportDestination;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
