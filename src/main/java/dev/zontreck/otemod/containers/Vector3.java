@@ -71,6 +71,21 @@ public class Vector3
         }
     }
 
+    public Vector3 subtract(Vector3 other)
+    {
+        return new Vector3(x-other.x, y-other.y, z-other.z);
+    }
+    public Vector3 add(Vector3 other)
+    {
+        return new Vector3(x+other.x, y+other.y, z +other.z);
+    }
+
+    public double distance(Vector3 other)
+    {
+        Vector3 sub = subtract(other);
+        return Math.sqrt((sub.x * sub.x + sub.y * sub.y + sub.z * sub.z));
+    }
+
     public Vector3 moveUp()
     {
         Vector3 up = Clone();

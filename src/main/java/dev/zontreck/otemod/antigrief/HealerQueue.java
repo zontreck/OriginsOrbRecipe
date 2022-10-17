@@ -14,6 +14,7 @@ import java.util.List;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
+import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -29,20 +30,23 @@ public class HealerQueue {
     public static final String HealerQueueDebugFile = "OTEHealerLastQueue.snbt";
 
     public static List<StoredBlock> ToHeal = new ArrayList<StoredBlock>();
+    public static List<StoredBlock> ToValidate = new ArrayList<StoredBlock>();
 
     public static Path getPath()
     {
 
         Path configDir = FMLPaths.GAMEDIR.get().resolve(FMLConfig.defaultConfigPath());
+        Path configFile = null;
         if(OTEServerConfig.DEBUG_HEALER.get())
         {
-            Path configFile = configDir.resolve(HealerQueue.HealerQueueDebugFile);
-            return configFile;
+            configFile = configDir.resolve(HealerQueue.HealerQueueDebugFile);
 
         }else {
-            Path configFile = configDir.resolve(HealerQueue.HealerQueueFile);
-            return configFile;
+            configFile = configDir.resolve(HealerQueue.HealerQueueFile);
         }
+
+        OTEMod.LOGGER.info("OTE HEALER TEMPORARY FILE: "+configFile.toFile().getAbsolutePath());
+        return configFile;
     }
 
     public static void Initialize()
@@ -101,8 +105,14 @@ public class HealerQueue {
         {
             lst.add(block.serialize());
         }
+        ListTag lst2 = new ListTag();
+        for(final StoredBlock block : HealerQueue.ToValidate)
+        {
+            lst.add(block.serialize());
+        }
 
         tag.put("queue", lst);
+        tag.put("validate", lst2);
 
         // OK
 
@@ -124,6 +134,14 @@ public class HealerQueue {
                 CompoundTag stored = items.getCompound(i);
                 StoredBlock sb = new StoredBlock(stored);
                 HealerQueue.ToHeal.add(sb);
+            }
+
+            ListTag items2 = tag.getList("validate", Tag.TAG_COMPOUND);
+            for(int i=0;i<items2.size();i++)
+            {
+                CompoundTag stored = items2.getCompound(i);
+                StoredBlock sb = new StoredBlock(stored);
+                HealerQueue.ToValidate.add(sb);
             }
         }
     }

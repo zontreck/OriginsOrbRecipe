@@ -47,7 +47,7 @@ public class OTEServerConfig {
 
         BUILDER.pop();
         BUILDER.push("ANTIGRIEF").comment("AntiGrief Explosion Healing Events");
-        HEALER_TIMER = BUILDER.comment("Time between healing events (In Seconds)").define("timer", 5); // Should this be lower?
+        HEALER_TIMER = BUILDER.comment("Time between healing events (In Milliseconds)").define("timer", 5000); // Should this be lower?
         EXCLUDE_DIMENSIONS = BUILDER.comment("What dimensions to exclude?  (Namespace:Dimension) in lowercase").define("exclude_dims", defaultExcludeDimensions);
         DEBUG_HEALER = BUILDER.comment("Whether or not to debug the healer engine.  (Saves as SNBT instead of NBT)").define("debug", false);
 

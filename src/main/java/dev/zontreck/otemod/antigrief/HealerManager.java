@@ -1,11 +1,13 @@
 package dev.zontreck.otemod.antigrief;
 
 import java.io.IOException;
+import java.util.Random;
 
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.containers.Vector3;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -23,7 +25,7 @@ public class HealerManager implements Runnable
             // Run the queue
             // We want to restore one block per run, then halt for number of seconds in config
             try {
-                Thread.sleep(Long.parseLong(String.valueOf(OTEServerConfig.HEALER_TIMER.get()*1000)));
+                Thread.sleep(OTEServerConfig.HEALER_TIMER.get());
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
@@ -38,24 +40,82 @@ public class HealerManager implements Runnable
             }
 
             // Loop back to start if no items in queue
-            if(HealerQueue.ToHeal.size()==0)continue;
+            if(HealerQueue.ToHeal.size()==0){
+
+                if(HealerQueue.ToValidate.size()==0)continue;
+
+                // Validate success
+                for(StoredBlock sb : HealerQueue.ToValidate)
+                {
+                    final ServerLevel level = sb.getWorldPosition().getActualDimension();
+                    if(!level.getBlockState(sb.getPos()).is(sb.getState().getBlock()))
+                    {
+                        // Redo restore
+                        HealerQueue.ToHeal.addAll(HealerQueue.ToValidate);
+                        HealerQueue.ToValidate.clear();
+                        break;
+                    }
+                }
+
+                HealerQueue.ToValidate.clear();
+
+                continue;
+            }
             // Play a popping sound at the block position
-            SoundEvent pop = SoundEvents.ITEM_PICKUP;
+            final SoundEvent pop = SoundEvents.ITEM_PICKUP;
             // Get the first block in the list
-            StoredBlock sb = HealerQueue.ToHeal.get(0);
+            final StoredBlock sb = HealerQueue.ToHeal.get(0);
+            final ServerLevel level = sb.getWorldPosition().getActualDimension();
+
+
             // Remove the block from the queue now to prevent further issues
             HealerQueue.ToHeal.remove(sb);
-            ServerLevel level = sb.getWorldPosition().getActualDimension();
-            
-            level.setBlock(sb.getPos(), sb.getState(), 0);
-            BlockEntity be = level.getBlockEntity(sb.getPos());
-            be.deserializeNBT(sb.getBlockEntity());
+            HealerQueue.ToValidate.add(sb);
 
-            // Everything is restored, play sound
-            SoundSource ss = SoundSource.BLOCKS;
-            Vector3 v3 = sb.getWorldPosition().Position;
-            level.playSound(null, v3.x, v3.y, v3.z, pop, ss, 0, 0);
+            // Healer object should have been added to the validation list
+
             
+            level.getServer().execute(new Runnable(){
+                public void run()
+                {
+
+                    level.setBlockAndUpdate(sb.getPos(), sb.getState());
+                    BlockEntity be = level.getBlockEntity(sb.getPos());
+                    
+                    if(be!=null)
+                        be.deserializeNBT(sb.getBlockEntity());
+        
+                    // Everything is restored, play sound
+                    SoundSource ss = SoundSource.NEUTRAL;
+                    Vector3 v3 = sb.getWorldPosition().Position;
+                    Random rng = new Random();
+                    
+                    level.playSound(null, v3.asBlockPos(), pop, ss, rng.nextFloat(0.75f,1.0f), rng.nextFloat(1));
+
+                    /*for(ServerPlayer player : level.players())
+                    {
+                        Vector3 playerPos = new Vector3(player.position());
+                        if(sb.getWorldPosition().Position.distance(playerPos) < 15)
+                        {
+                            // have player's client play sound (Packet?)
+                        }
+                    }*/
+
+                    
+
+                }
+            });
+            
+            
+
+            if(OTEServerConfig.DEBUG_HEALER.get())
+                try {
+                    HealerQueue.dump();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            
+            HealerQueue.Shuffle();
         }
 
         OTEMod.LOGGER.info("Tearing down healer jobs. Saving remaining queue, stand by...");
