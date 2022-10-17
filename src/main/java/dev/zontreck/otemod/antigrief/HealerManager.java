@@ -85,7 +85,7 @@ public class HealerManager implements Runnable
             if(level.getBlockState(sb.getPos()).is(sb.getState().getBlock())){
                 skipWait=true;
                 continue; // Skip the wait, and this block
-            }
+            } else skipWait=false;
 
             
             level.getServer().execute(new Runnable(){
