@@ -70,6 +70,8 @@ public class OTEMod
     public static List<TeleportContainer> TeleportRegistry = new ArrayList<>();
     public static MinecraftServer THE_SERVER;
     public static boolean ALIVE;
+    public static boolean HEALER_WAIT=true; // Only on loading finish should this unlock
+    public static Thread HEALER_THREAD;
     
     public static boolean DEVELOPER=false;
     private static Thread MasterThread;

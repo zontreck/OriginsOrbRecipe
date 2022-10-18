@@ -12,15 +12,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-
+import dev.zontreck.libzontreck.vectors.Vector3;
+import dev.zontreck.libzontreck.vectors.WorldPosition;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.fml.loading.FMLConfig;
 import net.minecraftforge.fml.loading.FMLPaths;
 
@@ -31,10 +33,12 @@ public class HealerQueue {
 
     public static List<StoredBlock> ToHeal = new ArrayList<StoredBlock>();
     public static List<StoredBlock> ToValidate = new ArrayList<StoredBlock>();
+    public static List<StoredBlock> FinishedBlocks = new ArrayList<StoredBlock>();
+    
 
     public static Path getPath()
     {
-
+        
         Path configDir = FMLPaths.GAMEDIR.get().resolve(FMLConfig.defaultConfigPath());
         Path configFile = null;
         if(OTEServerConfig.DEBUG_HEALER.get())
@@ -47,6 +51,39 @@ public class HealerQueue {
 
         //OTEMod.LOGGER.info("OTE HEALER TEMPORARY FILE: "+configFile.toFile().getAbsolutePath());
         return configFile;
+    }
+
+    public static StoredBlock locateHighestBlock(List<StoredBlock> list)
+    {
+        StoredBlock sb = null;
+        double currentY = 0;
+        for (StoredBlock storedBlock : ToHeal) {
+            if(storedBlock.getWorldPosition().Position.y > currentY)
+            {
+                currentY = storedBlock.getWorldPosition().Position.y;
+                sb=storedBlock;
+            }
+        }
+
+        return sb;
+    }
+
+    public static boolean HasValidatePosition(BlockPos pos, ServerLevel lvl)
+    {
+        Vector3 realPos = new Vector3(pos);
+        WorldPosition real = new WorldPosition(realPos, lvl);
+
+        for (StoredBlock storedBlock : ToHeal) {
+            if(storedBlock.getWorldPosition().same(real))
+            {
+                return true;
+            }
+        }
+        for (StoredBlock storedBlock : ToValidate) {
+            if(storedBlock.getWorldPosition().same(real))return true;
+        }
+
+        return false;
     }
 
     public static void Initialize()
@@ -76,7 +113,7 @@ public class HealerQueue {
                     
                     try {
                         HealerQueue.deserialize(NbtUtils.snbtToStructure(FinalStr));
-                    } catch (CommandSyntaxException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 } else {
@@ -91,7 +128,7 @@ public class HealerQueue {
                         e.printStackTrace();
                     }
                 }
-                
+                OTEMod.HEALER_WAIT=false;
             }
         });
         tx.start();
@@ -99,6 +136,8 @@ public class HealerQueue {
         // Set up the HealerManager / Runner
         Thread txx = new Thread(new HealerManager());
         txx.start();
+
+        OTEMod.HEALER_THREAD = txx;
     }
 
     public static CompoundTag serialize()
@@ -128,6 +167,7 @@ public class HealerQueue {
 
     public static void deserialize(CompoundTag tag)
     {
+        OTEMod.HEALER_WAIT=true;
         // Begin parsing
         if(tag.contains("queue"))
         {
@@ -144,7 +184,7 @@ public class HealerQueue {
             }
         }
 
-        OTEMod.LOGGER.info("Finished loading the queue");
+        OTEMod.LOGGER.info("Finished loading the queue ["+HealerQueue.ToHeal.size()+"] items");
 
         if(tag.contains("validate"))
         {
@@ -159,7 +199,8 @@ public class HealerQueue {
             }
         }
 
-        OTEMod.LOGGER.info("Finished loading validation queue for healer");
+        OTEMod.LOGGER.info("Finished loading validation queue for healer ["+HealerQueue.ToValidate.size()+"] items");
+        OTEMod.HEALER_WAIT=false;
     }
     public static void dump() throws IOException
     {
