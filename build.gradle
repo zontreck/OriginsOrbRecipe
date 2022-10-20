@@ -105,16 +105,6 @@ repositories {
     mavenCentral()
 
     maven {
-      // location of the maven that hosts JEI files
-      name = "Progwml6 maven"
-      url = "https://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
-      // location of a maven mirror for JEI files, as a fallback
-      name = "ModMaven"
-      url = "https://modmaven.dev"
-    }
-    maven {
         name = "CurseMaven"
         url = "https://cursemaven.com"
     }
@@ -130,10 +120,6 @@ dependencies {
     // that the dep is a ForgeGradle 'patcher' dependency, and its patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 
     implementation fg.deobf("dev.zontreck:libzontreck:${libz_version}:dev")
     compileOnly fg.deobf("dev.zontreck:libzontreck:${libz_version}:dev")

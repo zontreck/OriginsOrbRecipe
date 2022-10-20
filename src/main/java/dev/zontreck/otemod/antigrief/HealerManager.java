@@ -2,9 +2,12 @@ package dev.zontreck.otemod.antigrief;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import dev.zontreck.libzontreck.vectors.Vector3;
+import dev.zontreck.libzontreck.vectors.WorldPosition;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import net.minecraft.server.commands.SetBlockCommand;
@@ -15,6 +18,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.SandBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -23,8 +27,18 @@ import net.minecraftforge.common.util.BlockSnapshot;
 
 public class HealerManager implements Runnable
 {
+    private List<HealerWorker> Workers = new ArrayList<>();
     public HealerManager(){
 
+    }
+    public void registerWorker(HealerWorker worker)
+    {
+        Workers.add(worker);
+    }
+
+    public void deregisterWorker(HealerWorker worker)
+    {
+        Workers.remove(worker);
     }
     @Override
     public void run(){
@@ -33,33 +47,158 @@ public class HealerManager implements Runnable
         long lastSave = 0;
         final long saveInterval = (2*60); // Every 2 minutes
         boolean lastWait = false;
+        // Heal pass 1 is set all positions to bedrock
+        // Pass 2 is assert all solid blocks (Not air)
+        // Pass 3 is to set the air blocks and remove bedrock
+
 
         while(OTEMod.ALIVE)
         {
             try{
-                // Run the queue
-                // We want to restore one block per run, then halt for number of seconds in config
-                try {
-                    if(!skipWait)
-                        Thread.sleep(OTEServerConfig.HEALER_TIMER.get());
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                if(lastWait != OTEMod.HEALER_WAIT){
-                    OTEMod.LOGGER.info("Healer wait flag was toggled");
-                }
-                lastWait = OTEMod.HEALER_WAIT;
-                if(OTEMod.HEALER_WAIT)
-                    continue; // Wait until the saved queue has been fully imported
+                try{
+                    if(!skipWait) Thread.sleep(OTEServerConfig.HEALER_TIMER.get());
+                }catch(Exception E){}
 
-                if(!OTEMod.ALIVE)
-                {
-                    // Server has begun to shut down while we were sleeping
-                    // Begin tear down
-                    break;
+                if(lastWait != OTEMod.HEALER_WAIT) OTEMod.LOGGER.info("Healer Wait Flag was Toggled");
+                lastWait = OTEMod.HEALER_WAIT;
+                if(OTEMod.HEALER_WAIT) continue; // Wait to process until import completes
+
+                if(!OTEMod.ALIVE) break; // Begin tear down, server has shut down
+
+                for (HealerWorker healerWorker : Workers) {
+                    healerWorker.doTick=true;
                 }
+
+                if(HealerQueue.ToHeal.size()==0 && HealerQueue.ToValidate.size()==0)
+                {
+                    HealerQueue.Pass=0;
+                    if(HealerQueue.dirty())
+                        HealerQueue.dump();
+                    continue;
+                }
+
+                // Get the first block in the list
+                final StoredBlock sb = HealerQueue.locateLowestBlock(HealerQueue.ToHeal);
+                ServerLevel level = null;
+                StoredBlock below = null;
+
+                if(sb != null)
+                {
+                    level = sb.getWorldPosition().getActualDimension();
+                    below = HealerQueue.getExact(new WorldPosition(sb.getWorldPosition().Position.moveDown(), level));
+                }
+
+
+                switch(HealerQueue.Pass)
+                {
+                    case 0:
+                    {
+                        // Pass 1. Set all positions to bedrock
+                        // The code will check is the block is solid. If the block below it is not solid, it will set it to air, regardless of if it is a falling block of not
+
+                        if(HealerQueue.ToHeal.size()==0)
+                        {
+                            // Move the validate list back into healer queue, and increment pass
+                            OTEMod.LOGGER.info("Pass 1 completed, moving to pass 2");
+                            HealerQueue.Pass=1;
+                            HealerQueue.ToHeal = HealerQueue.ToValidate;
+                            HealerQueue.ToValidate = new ArrayList<>();
+                            HealerQueue.dump();
+                            break; // Exit this loop
+                        }
+
+                        if(below == null){
+                            // This line will prevent the block below from getting set to Sculk
+                            below = StoredBlock.getSculk(new WorldPosition(sb.getWorldPosition().Position.moveDown(), level)); // below is null so it is a unknown, accept a loss if its a falling block
+                        }
+                        
+
+                        if(!sb.getState().isAir() && below.getState().isAir())
+                        {
+                            HealRunner.scheduleHeal(StoredBlock.getSculk(below.getWorldPosition()));
+                            skipWait=false;
+                        }else {
+                            if(!sb.getState().isAir())
+                            {
+                                HealRunner.scheduleHeal(StoredBlock.getSculk(sb.getWorldPosition()));
+                                skipWait=false;
+                            } else {
+                                skipWait=true;
+                            }
+                        }
+                        HealerQueue.ToValidate.add(sb);
+                        HealerQueue.ToHeal.remove(sb);
+                        break;
+                    }
+                    case 1:
+                    {
+                        // Pass 2 only sets the solid blocks
+                        if(HealerQueue.ToHeal.size()==0)
+                        {
+                            OTEMod.LOGGER.info("Pass 2 completed, moving to pass 3");
+                            HealerQueue.Pass++;
+                            HealerQueue.ToHeal = HealerQueue.ToValidate;
+                            HealerQueue.ToValidate = new ArrayList<>();
+                            HealerQueue.dump();
+                            break;
+                        }
+
+                        if(!sb.getState().isAir())
+                        {
+                            skipWait=false;
+                            HealRunner.scheduleHeal(sb);
+                        }else{
+                            skipWait=true;
+
+                            HealerQueue.ToValidate.add(sb);
+                        }
+                        HealerQueue.ToHeal.remove(sb);
+                        break;
+                    }
+
+                    case 2:
+                    {
+                        // Pass 3 removes bedrock by setting blocks that are air
+                        if(HealerQueue.ToHeal.size()==0)
+                        {
+                            OTEMod.LOGGER.info("Pass 3 has been completed. Ending restore");
+                            HealerQueue.Pass=0;
+                            HealerQueue.ToHeal.clear();
+                            HealerQueue.ToValidate.clear();
+                            HealerQueue.dump();
+                            break;
+                        }
+                        HealerQueue.ToHeal.remove(sb);
+
+                        if(sb.getState().isAir())
+                        {
+                            BlockState bs = sb.getWorldPosition().getActualDimension().getBlockState(sb.getPos());
+                            if(!bs.isAir() && !bs.is(Blocks.SCULK))
+                            {
+                                skipWait=true;
+                                continue;
+                            }
+                            if(!bs.isAir()){
+                                skipWait=false;
+                                HealRunner.scheduleHeal(sb);
+                            }else skipWait=true;
+                        }else skipWait=true;
+                        break;
+                    }
+                    default:
+                    {
+                        HealerQueue.Pass=0;
+                        OTEMod.LOGGER.info("/!\\ ALERT /!\\\n\nWARNING: Unknown pass operation was added to the HealQueue");
+                        break;
+                    }
+                }
+
+            }catch(Exception e){}
+        }
+        OTEMod.ALIVE=false;
+        /*while(OTEMod.ALIVE) // do nothing, code is disabled here.
+        {
+            try{
 
                 // Loop back to start if no items in queue
                 if(HealerQueue.ToHeal.size()==0){
@@ -94,12 +233,9 @@ public class HealerManager implements Runnable
                     continue;
                 }
                 
-                // Play a popping sound at the block position
-                final SoundEvent pop = SoundEvents.ITEM_PICKUP;
                 // Get the first block in the list
                 final StoredBlock sb = HealerQueue.locateHighestBlock(HealerQueue.ToHeal);
                 final ServerLevel level = sb.getWorldPosition().getActualDimension();
-
 
                 // Remove the block from the queue now to prevent further issues
                 if( !HealerQueue.ToValidate.add(sb) )
@@ -128,53 +264,6 @@ public class HealerManager implements Runnable
                         skipCount++;
                     }
                 }else skipCount=0;
-
-                
-                level.getServer().execute(new Runnable(){
-                    public void run()
-                    {
-
-                        //BlockSnapshot bs = BlockSnapshot.create(level.dimension(), level, sb.getPos());
-                        
-                        //BlockState current = level.getBlockState(sb.getPos());
-                        BlockState nState = Block.updateFromNeighbourShapes(sb.getState(), level, sb.getPos());
-                        level.setBlock(sb.getPos(), nState, Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE); // no update?
-                        
-                        
-                        //level.setBlocksDirty(sb.getPos(), sb.getState(), level.getBlockState(sb.getPos()));
-                        //level.markAndNotifyBlock(sb.getPos(), level.getChunkAt(sb.getPos()), sb.getState(), level.getBlockState(sb.getPos()), 2, 0);
-
-                        //level.getChunkAt(sb.getPos()).setBlockState(sb.getPos(), sb.getState(), false);
-                        
-                        BlockEntity be = level.getBlockEntity(sb.getPos());
-                        
-                        if(be!=null){
-                            //be.deserializeNBT(sb.getBlockEntity());
-                            be.load(sb.getBlockEntity());
-                            be.setChanged();
-                            
-                        }
-            
-                        // Everything is restored, play sound
-                        SoundSource ss = SoundSource.NEUTRAL;
-                        Vector3 v3 = sb.getWorldPosition().Position;
-                        Random rng = new Random();
-                        
-                        level.playSound(null, v3.asBlockPos(), pop, ss, rng.nextFloat(0.75f,1.0f), rng.nextFloat(1));
-
-                        /*for(ServerPlayer player : level.players())
-                        {
-                            Vector3 playerPos = new Vector3(player.position());
-                            if(sb.getWorldPosition().Position.distance(playerPos) < 15)
-                            {
-                                // have player's client play sound (Packet?)
-                            }
-                        }*/
-
-                        
-
-                    }
-                });
                 
                 
 
@@ -197,7 +286,7 @@ public class HealerManager implements Runnable
                 e.printStackTrace();
             }
             
-        }
+        }*/
 
         OTEMod.LOGGER.info("Tearing down healer jobs. Saving remaining queue, stand by...");
         try {

@@ -3,6 +3,7 @@ package dev.zontreck.otemod.antigrief;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.libzontreck.vectors.WorldPosition;
@@ -60,7 +61,7 @@ public class Handler
         if(exploder==null)return ; // TODO: Make this check config
 
         final Collection<StoredBlock> affectedBlocks = buildBlocks(level, event.getAffectedBlocks());
-        final Collection<StoredBlock> toHeal = new ArrayList<StoredBlock>(affectedBlocks.size());
+        Collection<StoredBlock> toHeal = new ArrayList<StoredBlock>(affectedBlocks.size());
 
         Block tnt = Blocks.TNT;
 
@@ -96,7 +97,22 @@ public class Handler
         }
 
         // Add to the healing queue
-        HealerQueue.ToHeal.addAll(toHeal);
+        List<StoredBlock> mainList = new ArrayList<>();
+        mainList.addAll(toHeal);
+        mainList = HealerQueue.removeSame(mainList);
+
+        HealerWorker work = new HealerWorker(mainList);
+        HealerQueue.ManagerInstance.registerWorker(work);
+        Thread tx = new Thread(work);
+        tx.start();
+
+        HealerQueue.ToHeal.addAll(mainList);
+
+
+        HealerQueue.Pass=0;
+        HealerQueue.ToHeal.addAll(HealerQueue.ToValidate);
+        HealerQueue.ToValidate = new ArrayList<>();
+
         HealerQueue.Shuffle();
 
     }

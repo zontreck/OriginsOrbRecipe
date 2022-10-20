@@ -69,7 +69,7 @@ public class OTEMod
     public static Map<String,Profile> PROFILES = new HashMap<String,Profile>();
     public static List<TeleportContainer> TeleportRegistry = new ArrayList<>();
     public static MinecraftServer THE_SERVER;
-    public static boolean ALIVE;
+    public static boolean ALIVE=false;
     public static boolean HEALER_WAIT=true; // Only on loading finish should this unlock
     public static Thread HEALER_THREAD;
     
