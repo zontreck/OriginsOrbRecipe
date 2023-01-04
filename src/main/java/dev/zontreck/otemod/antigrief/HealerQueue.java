@@ -32,13 +32,11 @@ public class HealerQueue {
     public static final String HealerQueueDebugFile = "OTEHealerLastQueue.snbt";
 
     public static List<StoredBlock> ToHeal = new ArrayList<StoredBlock>(); // Air and Solid Blocks get set to bedrock initially
-    public static List<StoredBlock> ToValidate = new ArrayList<StoredBlock>(); // This contains all the blocks except air
-    
+
     public static int Pass = 0;
 
     
     private static List<StoredBlock> LastToHeal = new ArrayList<StoredBlock>();
-    private static List<StoredBlock> LastToValidate = new ArrayList<StoredBlock>();
     private static int LastPass = 0;
 
     public static HealerManager ManagerInstance=null;
@@ -91,15 +89,33 @@ public class HealerQueue {
         return sb;
     }
 
+    public static StoredBlock locateLowestBlockForWorker(List<StoredBlock> list, HealerWorker worker)
+    {
+        StoredBlock sb = null;
+        double currentY = 300;
+        for (StoredBlock storedBlock : ToHeal) {
+            if(storedBlock.getWorldPosition().Position.y < currentY && storedBlock.isClaimedBy(worker))
+            {
+                currentY = storedBlock.getWorldPosition().Position.y;
+                sb=storedBlock;
+            }
+        }
+
+        return sb;
+    }
+
+    public static List<StoredBlock> getBlocksByWorker(HealerWorker worker)
+    {
+        List<StoredBlock> blocks = new ArrayList<>();
+        for (StoredBlock storedBlock : ToHeal) {
+            if(storedBlock.isClaimedBy(worker))blocks.add(storedBlock);
+        }
+        return blocks;
+    }
+
     public static StoredBlock getExact(WorldPosition wp)
     {
         for (StoredBlock storedBlock : ToHeal) {
-            if(storedBlock.getWorldPosition().same(wp))
-            {
-                return storedBlock;
-            }
-        }
-        for (StoredBlock storedBlock : ToValidate) {
             if(storedBlock.getWorldPosition().same(wp))
             {
                 return storedBlock;
@@ -120,9 +136,6 @@ public class HealerQueue {
             {
                 return true;
             }
-        }
-        for (StoredBlock storedBlock : ToValidate) {
-            if(storedBlock.getWorldPosition().same(real))return true;
         }
 
         return false;
@@ -180,6 +193,11 @@ public class HealerQueue {
         Thread txx = new Thread(ManagerInstance);
         txx.start();
 
+        HealerWorker worker = new HealerWorker(ToHeal);
+        Thread txxx = new Thread(worker);
+        ManagerInstance.registerWorker(worker);
+        txxx.start();
+
         OTEMod.HEALER_THREAD = txx;
     }
 
@@ -192,14 +210,8 @@ public class HealerQueue {
         {
             lst.add(block.serialize());
         }
-        ListTag lst2 = new ListTag();
-        for(final StoredBlock block : HealerQueue.ToValidate)
-        {
-            lst2.add(block.serialize());
-        }
 
         tag.put("queue", lst);
-        tag.put("validate", lst2);
         tag.putInt("pass", HealerQueue.Pass);
 
         //OTEMod.LOGGER.info("HEAL ["+HealerQueue.ToHeal.size()+"] / VALIDATE ["+HealerQueue.ToValidate.size()+"]");
@@ -212,7 +224,6 @@ public class HealerQueue {
     public static List<StoredBlock> removeSame(List<StoredBlock> other)
     {
         other=removeSameFrom(ToHeal, other);
-        other=removeSameFrom(ToValidate,other);
 
         return other;
     }
@@ -243,11 +254,6 @@ public class HealerQueue {
                 ToHeal.remove(i);
             }
         }
-        for (int i = 0; i < ToValidate.size(); i++) {
-            if(ToValidate.get(i).getWorldPosition().same(pos)){
-                ToValidate.remove(i);
-            }
-        }
     }
 
 
@@ -261,6 +267,7 @@ public class HealerQueue {
             // Read the list
 
             ListTag items = tag.getList("queue", Tag.TAG_COMPOUND);
+
             
             for(int i=0;i<items.size();i++)
             {
@@ -268,33 +275,20 @@ public class HealerQueue {
                 StoredBlock sb = new StoredBlock(stored);
                 HealerQueue.ToHeal.add(sb);
             }
+
         }
 
         OTEMod.LOGGER.info("Finished loading the queue ["+HealerQueue.ToHeal.size()+"] items");
 
-        if(tag.contains("validate"))
-        {
-            HealerQueue.ToValidate.clear();
-            
-            ListTag items2 = tag.getList("validate", Tag.TAG_COMPOUND);
-            for(int i=0;i<items2.size();i++)
-            {
-                CompoundTag stored = items2.getCompound(i);
-                StoredBlock sb = new StoredBlock(stored);
-                HealerQueue.ToValidate.add(sb);
-            }
-        }
 
         HealerQueue.Pass = tag.getInt("pass");
 
-        OTEMod.LOGGER.info("Finished loading validation queue for healer ["+HealerQueue.ToValidate.size()+"] items");
         OTEMod.HEALER_WAIT=false;
     }
 
     public static boolean dirty()
     {
         if(ToHeal!=LastToHeal)return true;
-        if(ToValidate!=LastToValidate)return true;
         if(Pass != LastPass)return true;
         return false;
     }
@@ -302,7 +296,6 @@ public class HealerQueue {
     public static void dump() throws IOException
     {
         LastToHeal = ToHeal;
-        LastToValidate = ToValidate;
         LastPass = Pass;
         CompoundTag serialized = HealerQueue.serialize();
         if(OTEServerConfig.DEBUG_HEALER.get())

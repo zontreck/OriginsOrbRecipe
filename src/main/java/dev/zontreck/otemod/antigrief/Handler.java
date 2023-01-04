@@ -110,8 +110,6 @@ public class Handler
 
 
         HealerQueue.Pass=0;
-        HealerQueue.ToHeal.addAll(HealerQueue.ToValidate);
-        HealerQueue.ToValidate = new ArrayList<>();
 
         HealerQueue.Shuffle();
 

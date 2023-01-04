@@ -76,6 +76,12 @@ public class StoredBlock implements Comparable
         claimed_by=tx;
     }
 
+    public boolean isClaimedBy(HealerWorker worker)
+    {
+        if(worker.MyThread == claimed_by && claimed())return true;
+        return false;
+    }
+
 
     public StoredBlock(final BlockPos pos, final BlockState toSave, final ServerLevel lvl)
     {
@@ -159,6 +165,7 @@ public class StoredBlock implements Comparable
         final CompoundTag tmp = tag.getCompound("entity");
         blockEntity = tmp.isEmpty() ? null : tmp;
     }
+    
     @Override
     public int compareTo(Object o) {
         if(o instanceof StoredBlock)
