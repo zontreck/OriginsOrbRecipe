@@ -105,7 +105,7 @@ public class OTEMod
         MinecraftForge.EVENT_BUS.register(new ChatServerOverride());
         MinecraftForge.EVENT_BUS.register(new CommandRegistry());
         MinecraftForge.EVENT_BUS.register(new VaultWatcher());
-        MinecraftForge.EVENT_BUS.register(new dev.zontreck.otemod.antigrief.Handler());
+        MinecraftForge.EVENT_BUS.register(new dev.zontreck.otemod.zschem.EventHandler());
         MenuInitializer.CONTAINERS.register(bus);
 
         ModBlocks.register(bus);

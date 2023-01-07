@@ -1,4 +1,4 @@
-package dev.zontreck.otemod.antigrief;
+package dev.zontreck.otemod.zschem;
 
 import java.util.Random;
 

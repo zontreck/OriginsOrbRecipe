@@ -1,29 +1,11 @@
 package dev.zontreck.otemod.antigrief;
 
 import java.io.IOException;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-import dev.zontreck.libzontreck.vectors.Vector3;
-import dev.zontreck.libzontreck.vectors.WorldPosition;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
-import net.minecraft.server.commands.SetBlockCommand;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.item.FallingBlockEntity;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.FallingBlock;
-import net.minecraft.world.level.block.SandBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.util.BlockSnapshot;
 
 public class HealerManager implements Runnable
 {

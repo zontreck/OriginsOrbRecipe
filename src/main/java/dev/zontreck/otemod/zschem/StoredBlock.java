@@ -1,85 +1,41 @@
-package dev.zontreck.otemod.antigrief;
-
-import java.time.Instant;
+package dev.zontreck.otemod.zschem;
 
 import dev.zontreck.libzontreck.exceptions.InvalidDeserialization;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.libzontreck.vectors.WorldPosition;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderGetter;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class StoredBlock implements Comparable
+public class StoredBlock
 {
-
-    public static final StoredBlock getBedrock(WorldPosition pos){
-        StoredBlock sb = new StoredBlock(pos.Position.asBlockPos(), Blocks.BEDROCK.defaultBlockState(), pos.getActualDimension());
-
-        return sb;
-    }
-    public static final StoredBlock getAir(WorldPosition pos){
-        StoredBlock sb = new StoredBlock(pos.Position.asBlockPos(), Blocks.AIR.defaultBlockState(), pos.getActualDimension());
-
-        return sb;
-    }
-
-    public static final StoredBlock getSculk(WorldPosition pos){
-        StoredBlock sb = new StoredBlock(pos.Position.asBlockPos(), Blocks.SCULK.defaultBlockState()   ,pos.getActualDimension());
-        return sb;
-    }
-
     
-
-    public static final int UNSET = 0;
-    public static final int PHASE1 = 1;
-    public static final int PHASE2 = 2;
-    public static final int PHSAE3 = 4;
 
     public CompoundTag blockData;
 
     private WorldPosition position;
     private BlockState state;
     private CompoundTag blockEntity;
+    private int tick;
 
-    private boolean claim = false;
-    private long claimed_at = 0;
-    private Thread claimed_by;
 
-    public void setClaimed()
-    {
-        claimed_at = Instant.now().getEpochSecond();
-        claim=true;
+    public void tick(){
+        this.tick--;
     }
 
-    public boolean claimed()
-    {
-        if(claimed_by == null)
-        {
-            if(claim)
-            {
-                if(Instant.now().getEpochSecond() > claimed_at+30)
-                {
-                    claim=false;
-                    claimed_at = 0; // The claim timed out as no thread was set
-                    return false;
-                }else return true; // Temporary lock on claim
-            }else return false; // Not claimed
-        }else return true; // Permanent process lock
-    }
 
-    public void setClaimedBy(Thread tx){
-        claimed_by=tx;
-    }
-
-    public boolean isClaimedBy(HealerWorker worker)
-    {
-        if(worker.MyThread == claimed_by && claimed())return true;
-        return false;
+    public boolean isExpired() {
+        return tick <= 0;
     }
 
 
@@ -126,7 +82,7 @@ public class StoredBlock implements Comparable
 
     public void setBlockEntity(BlockEntity entity)
     {
-        CompoundTag tag = entity.serializeNBT();
+        CompoundTag tag = entity.saveWithoutMetadata();
         this.blockEntity=tag;
     }
 
@@ -159,6 +115,7 @@ public class StoredBlock implements Comparable
         } catch (InvalidDeserialization e) {
             e.printStackTrace();
         }
+        
 
         state = NbtUtils.readBlockState(tag.getCompound("state"));
 
@@ -166,21 +123,6 @@ public class StoredBlock implements Comparable
         blockEntity = tmp.isEmpty() ? null : tmp;
     }
     
-    @Override
-    public int compareTo(Object o) {
-        if(o instanceof StoredBlock)
-        {
-            StoredBlock sb = (StoredBlock)o;
-            if(sb.position.same(position))
-            {
-                if(sb.state.equals(state))
-                {
-                    return 0;
-                }return -1;
-            }else return -1;
-
-        }return -1;
-    }
 
 
 }
