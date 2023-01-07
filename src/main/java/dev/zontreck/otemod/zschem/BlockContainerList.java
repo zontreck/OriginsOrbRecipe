@@ -15,7 +15,7 @@ public class BlockContainerList {
     private final Lock lock;
     private final List<StoredBlock> containers;
 
-    private BlockContainerList()
+    public BlockContainerList()
     {
         this.lock = new ReentrantLock();
         this.containers = new ArrayList<>();

@@ -25,11 +25,6 @@ public class BlockSaver {
         executor=service;
     }
 
-    public static void InitialLoad()
-    {
-        
-    }
-
     public void start()
     {
         executor.scheduleAtFixedRate(()->{
