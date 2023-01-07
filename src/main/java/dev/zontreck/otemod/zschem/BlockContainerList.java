@@ -1,14 +1,18 @@
 package dev.zontreck.otemod.zschem;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import dev.zontreck.libzontreck.vectors.WorldPosition;
+import dev.zontreck.otemod.configs.OTEServerConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
+import net.minecraft.world.level.block.state.BlockState;
 
 public class BlockContainerList {
     private static final BlockContainerList INSTANCE =new BlockContainerList();
@@ -48,11 +52,24 @@ public class BlockContainerList {
     {
         lock.lock();
         try{
-            for (StoredBlock storedBlock : containers) {
+            Iterator<StoredBlock> isb = containers.iterator();
+            while(isb.hasNext())
+            {
+                StoredBlock storedBlock = isb.next();
                 storedBlock.tick();
                 if(storedBlock.isExpired()){
-                    HealRunner.scheduleHeal(storedBlock);
-                    containers.remove(storedBlock);
+                    WorldPosition wp = storedBlock.getWorldPosition();
+                    BlockState bs = wp.getActualDimension().getBlockState(wp.Position.asBlockPos());
+                    if(bs.is(storedBlock.getState().getBlock()) || storedBlock.getTries() >= OTEServerConfig.MAX_TRIES_HEAL.get())
+                    {
+
+                        HealRunner.scheduleHeal(storedBlock);
+                        isb.remove();
+                    }else {
+                        HealRunner.scheduleHeal(storedBlock);
+                        storedBlock.setTick(OTEServerConfig.HEALER_TIMER.get());
+                        storedBlock.tickTries();
+                    }
                 }
             }
         }finally{

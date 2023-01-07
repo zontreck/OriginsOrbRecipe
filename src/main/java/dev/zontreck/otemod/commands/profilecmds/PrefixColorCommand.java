@@ -40,7 +40,7 @@ public class PrefixColorCommand {
             return 1;
         }
         Profile p = Profile.get_profile_of(source.getPlayer().getStringUUID());
-        p.name_color = colorcoded;
+        p.prefix_color = colorcoded;
         p.commit();
         OTEMod.PROFILES.put(source.getPlayer().getStringUUID(), p);
 

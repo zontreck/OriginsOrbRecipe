@@ -23,8 +23,10 @@ public class OTEServerConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> ITEM_DESPAWN_TIMER;
     public static final ForgeConfigSpec.ConfigValue<Integer> RTP_COOLDOWN;
     public static final ForgeConfigSpec.ConfigValue<Integer> HEALER_TIMER;
-    public static final ForgeConfigSpec.ConfigValue<List<String>> EXCLUDE_DIMENSIONS;
     public static final ForgeConfigSpec.BooleanValue DEBUG_HEALER;
+    public static final ForgeConfigSpec.ConfigValue<Integer> TIME_BETWEEN_BLOCKS;
+    public static final ForgeConfigSpec.ConfigValue<Integer> MAX_TRIES_HEAL;
+
 
     static {
         List<ItemStack> defaults = new ArrayList<ItemStack>();
@@ -47,10 +49,11 @@ public class OTEServerConfig {
 
         BUILDER.pop();
         BUILDER.push("ANTIGRIEF").comment("AntiGrief Explosion Healing Events");
-        HEALER_TIMER = BUILDER.comment("Time between healing events (In Milliseconds)").define("timer", 5000); // Should this be lower?
-        EXCLUDE_DIMENSIONS = BUILDER.comment("What dimensions to exclude?  (Namespace:Dimension) in lowercase").define("exclude_dims", defaultExcludeDimensions);
+        HEALER_TIMER = BUILDER.comment("Time between healing events (In Milliseconds)").define("timer", 1000); // Should this be lower?
         DEBUG_HEALER = BUILDER.comment("Whether or not to debug the healer engine.  (Saves as SNBT instead of NBT)").define("debug", false);
-
+        TIME_BETWEEN_BLOCKS = BUILDER.comment("The amount of time between restoring blocks (Maximum). This is in ticks").define("time_between", 250);
+        
+        MAX_TRIES_HEAL = BUILDER.comment("Maximum amount of retries to restore a block").define("max_tries", 6);
 
 
         BUILDER.pop();

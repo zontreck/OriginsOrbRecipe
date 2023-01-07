@@ -8,6 +8,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.level.ExplosionEvent;
 import net.minecraftforge.event.level.LevelEvent;
+import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class EventHandler {
@@ -50,6 +51,18 @@ public class EventHandler {
         {
             healers.remove(ev.getLevel());
         }
+    }
+
+    @SubscribeEvent
+    public void onShutdown(ServerStoppingEvent ev)
+    {
+        WorldProp.SaveAll();
+    }
+
+    @SubscribeEvent
+    public void onSaving(LevelEvent.Save ev)
+    {
+        WorldProp.SaveAll();
     }
 
     @SubscribeEvent

@@ -62,23 +62,26 @@ public class BlockSaver {
 
     
     // Healer Queue's data source is a NBT File in the config folder
-    public static final String HealerQueueFile = "OTEHealerLastQueue.nbt";
-    public static final String HealerQueueDebugFile = "OTEHealerLastQueue.snbt";
+    public static final String HealerQueueFile = ".nbt";
+    public static final String HealerQueueDebugFile = ".dev.nbt";
 
     public static Path getPath()
     {
         
         Path configDir = FMLPaths.GAMEDIR.get().resolve(FMLConfig.defaultConfigPath());
         Path configFile = null;
+        return configDir.resolve("ote_queue");
+    }
+
+    public static String getExtension()
+    {
+        
         if(OTEServerConfig.DEBUG_HEALER.get())
         {
-            configFile = configDir.resolve(BlockSaver.HealerQueueDebugFile);
+            return BlockSaver.HealerQueueDebugFile;
 
         }else {
-            configFile = configDir.resolve(BlockSaver.HealerQueueFile);
+            return BlockSaver.HealerQueueFile;
         }
-
-        //OTEMod.LOGGER.info("OTE HEALER TEMPORARY FILE: "+configFile.toFile().getAbsolutePath());
-        return configFile;
     }
 }

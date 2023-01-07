@@ -21,10 +21,15 @@ public class StoredBlock
     private BlockState state;
     private CompoundTag blockEntity;
     private int tick;
+    private int tries;
 
 
     public void tick(){
         this.tick--;
+    }
+
+    public void setTick(int tick){
+        this.tick=tick;
     }
 
 
@@ -95,12 +100,20 @@ public class StoredBlock
 
         tag.put("pos", position.serialize());
         tag.put("state", NbtUtils.writeBlockState(state));
+        tag.putInt("tick", tick);
+        tag.putInt("tries", tries);
 
         if(blockEntity != null) tag.put("entity", blockEntity);
 
         return tag;
     }
+    public int getTries(){
+        return tries;
+    }
 
+    public void tickTries(){
+        tries++;
+    }
 
     public void deserialize(final CompoundTag tag)
     {
@@ -115,6 +128,9 @@ public class StoredBlock
 
         final CompoundTag tmp = tag.getCompound("entity");
         blockEntity = tmp.isEmpty() ? null : tmp;
+
+        tick = tag.getInt("tick");
+        tries=tag.getInt("tries");
     }
     
 
