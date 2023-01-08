@@ -9,7 +9,6 @@ import dev.zontreck.otemod.configs.Profile;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.server.command.EnumArgument;
 
 public class NickCommand {
     

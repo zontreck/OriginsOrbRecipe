@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.UUID;
 
 import dev.zontreck.otemod.OTEMod;
-import net.minecraft.client.gui.components.events.ContainerEventHandler;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;

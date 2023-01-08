@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import org.mariadb.jdbc.export.Prepare;
-
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
@@ -17,16 +15,12 @@ import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.CompoundContainer;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.inventory.MenuConstructor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class VaultContainer

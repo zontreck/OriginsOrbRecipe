@@ -26,6 +26,7 @@ public class OTEServerConfig {
     public static final ForgeConfigSpec.BooleanValue DEBUG_HEALER;
     public static final ForgeConfigSpec.ConfigValue<Integer> TIME_BETWEEN_BLOCKS;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_TRIES_HEAL;
+    public static final ForgeConfigSpec.ConfigValue<List<String>> EXCLUDE_DIMS;
 
 
     static {
@@ -55,6 +56,11 @@ public class OTEServerConfig {
         
         MAX_TRIES_HEAL = BUILDER.comment("Maximum amount of retries to restore a block").define("max_tries", 6);
 
+        List<String> defDims = new ArrayList<String>();
+        defDims.add("minecraft:the_end");
+        defDims.add("minecraft:the_nether");
+        defDims.add("otemod:resource");
+        EXCLUDE_DIMS = BUILDER.comment("Dimension names (ex. minecraft:overworld) to exclude from the explosion healing events").define("exclude_dimensions", defDims);
 
         BUILDER.pop();
         SPEC=BUILDER.build();
