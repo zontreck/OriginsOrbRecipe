@@ -72,6 +72,8 @@ public class EventHandler {
             if(wp!=null){
                 wp.onTick();
             }
+
+            MemoryHolder.tick();
         }
     }
 }

@@ -1,5 +1,6 @@
 package dev.zontreck.otemod.commands.zschem;
 
+import java.util.Iterator;
 import java.util.List;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -16,13 +17,14 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.block.Blocks;
 
 // This command will place the loaded schematic in world. The schematic will originate from position 1. The positions are relative and are added onto position 1.
-public class Place {
+public class PlaceAsAir {
     
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
     {
-        dispatcher.register(Commands.literal("placezschem").executes(c-> place(c.getSource())));
+        dispatcher.register(Commands.literal("zsetair").executes(c-> place(c.getSource())));
         
         //dispatcher.register(Commands.literal("sethome").then(Commands.argument("nickname", StringArgumentType.string())).executes(command -> {
             //String arg = StringArgumentType.getString(command, "nickname");
@@ -37,27 +39,30 @@ public class Place {
 
         if(!MemoryHolder.hasPlayerCached(play)){
 
-            ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first load the zschem!")), OTEMod.THE_SERVER);
+            ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first set the positions!")), OTEMod.THE_SERVER);
 
             return 1;
         }
 
         Container cont = MemoryHolder.getContainer(play);
-        List<StoredBlock> blocks = cont.blocks;
 
-        if(cont.Pos1 != OTEMod.ZERO_VECTOR)
+        if(cont.Pos1 != OTEMod.ZERO_VECTOR && cont.Pos2 != OTEMod.ZERO_VECTOR)
         {
             WorldProp system = WorldProp.acquire(cont.lvl);
             // Begin the process
-            for (StoredBlock storedBlock : blocks) {
-                // alter the stored block and send it off to the queue system for the relevant world!
-                
-                system.customEnqueue(storedBlock);
+            List<Vector3> positions = cont.Pos1.makeCube(cont.Pos2);
+            Iterator<Vector3> v3 = positions.iterator();
+            while(v3.hasNext())
+            {
+                Vector3 pos = v3.next();
+                StoredBlock sb = new StoredBlock(pos.asBlockPos(), Blocks.AIR.defaultBlockState(), source.getLevel());
+                system.customEnqueue(sb);
             }
+
             
         }else {
             
-            ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first load the zschem!")), OTEMod.THE_SERVER);
+            ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first set the positions!")), OTEMod.THE_SERVER);
 
             return 1;
         }

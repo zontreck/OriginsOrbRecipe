@@ -27,6 +27,9 @@ import dev.zontreck.otemod.commands.warps.RTPWarpCommand;
 import dev.zontreck.otemod.commands.warps.SetWarpCommand;
 import dev.zontreck.otemod.commands.warps.WarpCommand;
 import dev.zontreck.otemod.commands.warps.WarpsCommand;
+import dev.zontreck.otemod.commands.zschem.LoadSchem;
+import dev.zontreck.otemod.commands.zschem.Place;
+import dev.zontreck.otemod.commands.zschem.PlaceAsAir;
 import dev.zontreck.otemod.commands.zschem.SaveSchem;
 import dev.zontreck.otemod.commands.zschem.SetPos1;
 import dev.zontreck.otemod.commands.zschem.SetPos2;
@@ -128,7 +131,8 @@ public class CommandRegistry {
         SetPos1.register(ev.getDispatcher());
         SetPos2.register(ev.getDispatcher());
         SaveSchem.register(ev.getDispatcher());
+        LoadSchem.register(ev.getDispatcher());
+        Place.register(ev.getDispatcher());
+        PlaceAsAir.register(ev.getDispatcher());
     }
-
-    
 }

@@ -54,6 +54,13 @@ public class WorldProp implements Supplier<Object>
         }
     }
 
+    public void customEnqueue(StoredBlock sb)
+    {
+        int ticks = task.getNewLongestTick();
+        sb.setTick(ticks);
+        task.add(sb);
+    }
+
     private void addHeal(BlockPos p, BlockState s, Level w, int tick)
     {
         StoredBlock sb = new StoredBlock(p, s, (ServerLevel)w);

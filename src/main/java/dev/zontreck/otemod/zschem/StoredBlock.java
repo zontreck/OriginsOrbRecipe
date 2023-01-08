@@ -24,6 +24,17 @@ public class StoredBlock
     private int tries;
 
 
+    public void setPosition(Vector3 pos)
+    {
+        position.Position=pos;
+    }
+
+    public void updateWorld(ServerLevel lv)
+    {
+        position = new WorldPosition(position.Position, lv);
+    }
+
+
     public void tick(){
         this.tick--;
     }
@@ -35,6 +46,11 @@ public class StoredBlock
 
     public boolean isExpired() {
         return tick <= 0;
+    }
+
+    public void replaceBlockState(BlockState state)
+    {
+        this.state=state;
     }
 
 

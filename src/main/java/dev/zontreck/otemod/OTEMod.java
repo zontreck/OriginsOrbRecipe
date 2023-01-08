@@ -38,6 +38,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.blocks.ModBlocks;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.commands.CommandRegistry;
@@ -57,6 +58,7 @@ import dev.zontreck.otemod.ore.Modifier.ModifierOfBiomes;
 @Mod(OTEMod.MOD_ID)
 public class OTEMod
 {
+    public static final Vector3 ZERO_VECTOR = new Vector3(0,0,0);
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String FIRST_JOIN_TAG = "dev.zontreck.otemod.firstjoin";

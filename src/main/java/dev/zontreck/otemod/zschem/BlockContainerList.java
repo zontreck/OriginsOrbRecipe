@@ -82,10 +82,10 @@ public class BlockContainerList {
                     if(bs.is(storedBlock.getState().getBlock()) || storedBlock.getTries() >= OTEServerConfig.MAX_TRIES_HEAL.get())
                     {
 
-                        HealRunner.scheduleHeal(storedBlock);
+                        //HealRunner.scheduleHeal(storedBlock);
                         isb.remove();
                         
-                        wp.getActualDimension().playSound(null, wp.Position.asBlockPos(), SoundEvents.ANVIL_USE, SoundSource.NEUTRAL, new Random().nextFloat(0.75f,1.0f), new Random().nextFloat(1));
+                        //wp.getActualDimension().playSound(null, wp.Position.asBlockPos(), SoundEvents.ANVIL_USE, SoundSource.NEUTRAL, new Random().nextFloat(0.75f,1.0f), new Random().nextFloat(1));
 
                     }else {
                         HealRunner.scheduleHeal(storedBlock);
@@ -117,7 +117,7 @@ public class BlockContainerList {
     public static BlockContainerList load(CompoundTag tag){
         BlockContainerList lst = new BlockContainerList();
         
-        ListTag xlst = tag.getList("blocks", CompoundTag.TAG_BYTE);
+        ListTag xlst = tag.getList("blocks", CompoundTag.TAG_COMPOUND);
         ListIterator<Tag> it = xlst.listIterator();
         while(it.hasNext()){
             Tag tg = it.next();
