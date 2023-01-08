@@ -30,6 +30,22 @@ public class BlockContainerList {
         return INSTANCE;
     }
 
+    public int getNewLongestTick()
+    {
+        //Random rng = new Random();
+        int newLonger = OTEServerConfig.TIME_BETWEEN_BLOCKS.get();
+        int cur = 0;
+
+        for (StoredBlock storedBlock : containers) {
+            if(cur < storedBlock.getTickValue()){
+                cur = storedBlock.getTickValue();
+            }
+        }
+        if(cur == 0)cur = OTEServerConfig.HEALER_TIMER.get();
+
+        return cur + newLonger;
+    }
+
     public void add(StoredBlock item)
     {
         lock.lock();
@@ -67,7 +83,7 @@ public class BlockContainerList {
                         isb.remove();
                     }else {
                         HealRunner.scheduleHeal(storedBlock);
-                        storedBlock.setTick(OTEServerConfig.HEALER_TIMER.get());
+                        storedBlock.setTick(getNewLongestTick());
                         storedBlock.tickTries();
                     }
                 }

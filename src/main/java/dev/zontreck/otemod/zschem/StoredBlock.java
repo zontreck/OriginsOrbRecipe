@@ -110,6 +110,10 @@ public class StoredBlock
     public int getTries(){
         return tries;
     }
+    public int getTickValue()
+    {
+        return tick;
+    }
 
     public void tickTries(){
         tries++;

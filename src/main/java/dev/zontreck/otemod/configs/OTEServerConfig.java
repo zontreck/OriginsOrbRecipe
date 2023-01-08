@@ -49,9 +49,9 @@ public class OTEServerConfig {
 
         BUILDER.pop();
         BUILDER.push("ANTIGRIEF").comment("AntiGrief Explosion Healing Events");
-        HEALER_TIMER = BUILDER.comment("Time between healing events (In Milliseconds)").define("timer", 1000); // Should this be lower?
+        HEALER_TIMER = BUILDER.comment("Time between healing events (In Milliseconds)").define("timer", 250); // Should this be lower?
         DEBUG_HEALER = BUILDER.comment("Whether or not to debug the healer engine.  (Saves as SNBT instead of NBT)").define("debug", false);
-        TIME_BETWEEN_BLOCKS = BUILDER.comment("The amount of time between restoring blocks (Maximum). This is in ticks").define("time_between", 250);
+        TIME_BETWEEN_BLOCKS = BUILDER.comment("The amount of time between restoring blocks (Maximum). This is in ticks").define("time_between", 25);
         
         MAX_TRIES_HEAL = BUILDER.comment("Maximum amount of retries to restore a block").define("max_tries", 6);
 

@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.level.ExplosionEvent;
 import net.minecraftforge.event.level.LevelEvent;
@@ -18,7 +17,7 @@ public class EventHandler {
     {
         if(ev.getLevel().isClientSide)return;
 
-        Entity explodes = ev.getExplosion().getSourceMob();
+        //Entity explodes = ev.getExplosion().getSourceMob();
         // Register blocks to be healed
         WorldProp wp = WorldProp.acquire((ServerLevel)ev.getLevel());
         if(wp!=null){

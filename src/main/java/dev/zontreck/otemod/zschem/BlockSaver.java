@@ -69,7 +69,7 @@ public class BlockSaver {
     {
         
         Path configDir = FMLPaths.GAMEDIR.get().resolve(FMLConfig.defaultConfigPath());
-        Path configFile = null;
+        //Path configFile = null;
         return configDir.resolve("ote_queue");
     }
 
