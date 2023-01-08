@@ -3,7 +3,6 @@ package dev.zontreck.otemod.commands.warps;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import com.mojang.brigadier.CommandDispatcher;
 
@@ -13,7 +12,6 @@ import dev.zontreck.libzontreck.chat.HoverTip;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.configs.Profile;
-import dev.zontreck.otemod.database.TeleportDestination;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.ClickEvent;
@@ -21,8 +19,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.phys.Vec2;
-import net.minecraft.world.phys.Vec3;
 
 public class WarpsCommand {
     

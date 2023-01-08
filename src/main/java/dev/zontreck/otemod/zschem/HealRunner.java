@@ -47,8 +47,11 @@ public class HealRunner implements Runnable
         
         if(be!=null){
             //be.deserializeNBT(sb.getBlockEntity());
-            be.load(BlockToSet.getBlockEntity());
-            be.setChanged();
+            if(BlockToSet.getBlockEntity()!=null){
+
+                be.load(BlockToSet.getBlockEntity());
+                be.setChanged();
+            }
             
         }
 

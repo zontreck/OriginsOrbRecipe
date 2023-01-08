@@ -6,9 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
-import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.libzontreck.vectors.WorldPosition;
-import dev.zontreck.otemod.configs.OTEServerConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
@@ -80,8 +78,7 @@ public class WorldProp implements Supplier<Object>
 
         for (Map.Entry<ServerLevel, WorldProp> entry : props.entrySet()) {
             // Perform saving
-            WorldPosition wp = new WorldPosition(new Vector3(), entry.getKey());
-            String dimsafe = wp.DimSafe;
+            String dimsafe = WorldPosition.getDimSafe(entry.getKey());
             String pathTemp = destBase.toString()+"_"+dimsafe+ext;
 
             Path finalPath = Path.of(pathTemp);
@@ -110,8 +107,7 @@ public class WorldProp implements Supplier<Object>
         }
         Path destBase = BlockSaver.getPath();
         String ext = BlockSaver.getExtension();
-        WorldPosition wp = new WorldPosition(new Vector3(), w);
-        String dimsafe = wp.DimSafe;
+        String dimsafe = WorldPosition.getDimSafe(w);
         String pathTemp = destBase.toString()+"_"+dimsafe+ext;
 
         Path finalPath = Path.of(pathTemp);

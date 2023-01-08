@@ -27,6 +27,9 @@ import dev.zontreck.otemod.commands.warps.RTPWarpCommand;
 import dev.zontreck.otemod.commands.warps.SetWarpCommand;
 import dev.zontreck.otemod.commands.warps.WarpCommand;
 import dev.zontreck.otemod.commands.warps.WarpsCommand;
+import dev.zontreck.otemod.commands.zschem.SaveSchem;
+import dev.zontreck.otemod.commands.zschem.SetPos1;
+import dev.zontreck.otemod.commands.zschem.SetPos2;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -121,6 +124,10 @@ public class CommandRegistry {
         RTPWarpCommand.register(ev.getDispatcher());
         WarpsCommand.register(ev.getDispatcher());
         WarpCommand.register(ev.getDispatcher());
+
+        SetPos1.register(ev.getDispatcher());
+        SetPos2.register(ev.getDispatcher());
+        SaveSchem.register(ev.getDispatcher());
     }
 
     
