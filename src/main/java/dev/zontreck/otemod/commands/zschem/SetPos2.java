@@ -6,6 +6,8 @@ import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
+import dev.zontreck.otemod.integrations.LuckPermsHelper;
+import dev.zontreck.otemod.permissions.Permissions;
 import dev.zontreck.otemod.zschem.MemoryHolder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -28,6 +30,11 @@ public class SetPos2 {
         ServerPlayer play = source.getPlayer();
         if(play==null)return 1;
 
+        if(!LuckPermsHelper.hasGroupOrPerm(play, Permissions.zschem, Permissions.zschem_pos2)){
+            LuckPermsHelper.sendNoPermissionsMessage(play, Permissions.zschem_pos2, Permissions.zschem);
+            return 1;
+        }
+        
         MemoryHolder.setPos2(play, new Vector3(source.getPosition()));
         MemoryHolder.setLevel(play, source.getLevel());
 

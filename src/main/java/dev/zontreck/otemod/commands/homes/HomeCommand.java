@@ -49,8 +49,6 @@ public class HomeCommand {
         
         if(! ctx.isPlayer())
         {
-            
-            ChatServerOverride.broadcastTo(ctx.getPlayer().getUUID(), Component.literal(ChatColor.DARK_RED).append(Component.translatable("dev.zontreck.otemod.msgs.only_player")), ctx.getServer());
             return 1;
         }
         ServerPlayer p = ctx.getPlayer();
@@ -109,7 +107,7 @@ public class HomeCommand {
             // TODO Auto-generated catch block
             e.printStackTrace();
             if(!e.getMessage().equals("%%"))
-                ctx.sendFailure(Component.translatable("dev.zontreck.otemod.msgs.homes.goto.fail"));
+                ChatServerOverride.broadcastTo(ctx.getPlayer().getUUID(), Component.literal(OTEMod.OTEPrefix + ChatColor.doColors("!Dark_Red! Could not go to the home")), ctx.getServer());
             else
                 ctx.sendFailure(Component.literal("FAILED SQL: "+ ChatColor.GOLD+ SQL));
         } catch (InvalidDeserialization e) {

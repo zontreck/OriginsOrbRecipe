@@ -110,6 +110,7 @@ public class CommandRegistry {
         PrefixColorCommand.register(ev.getDispatcher());
         PrefixCommand.register(ev.getDispatcher());
         NickCommand.register(ev.getDispatcher());
+        
 
         TPACommand.register(ev.getDispatcher());
         TPCancelCommand.register(ev.getDispatcher());

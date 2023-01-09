@@ -5,9 +5,10 @@ import java.util.List;
 import com.mojang.brigadier.CommandDispatcher;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
-import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
+import dev.zontreck.otemod.integrations.LuckPermsHelper;
+import dev.zontreck.otemod.permissions.Permissions;
 import dev.zontreck.otemod.zschem.MemoryHolder;
 import dev.zontreck.otemod.zschem.StoredBlock;
 import dev.zontreck.otemod.zschem.WorldProp;
@@ -35,6 +36,11 @@ public class Place {
         ServerPlayer play = source.getPlayer();
         if(play==null)return 1;
 
+        if(!LuckPermsHelper.hasGroupOrPerm(play, Permissions.zschem, Permissions.zschem_place)){
+            LuckPermsHelper.sendNoPermissionsMessage(play, Permissions.zschem_place, Permissions.zschem);
+            return 1;
+        }
+        
         if(!MemoryHolder.hasPlayerCached(play)){
 
             ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first load the zschem!")), OTEMod.THE_SERVER);

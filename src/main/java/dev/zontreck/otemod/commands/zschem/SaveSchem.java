@@ -13,6 +13,8 @@ import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
+import dev.zontreck.otemod.integrations.LuckPermsHelper;
+import dev.zontreck.otemod.permissions.Permissions;
 import dev.zontreck.otemod.zschem.MemoryHolder;
 import dev.zontreck.otemod.zschem.MemoryHolder.Container;
 import dev.zontreck.otemod.zschem.StoredBlock;
@@ -45,6 +47,12 @@ public class SaveSchem {
 
         ServerPlayer play = source.getPlayer();
         if(play==null)return 1;
+        
+        if(!LuckPermsHelper.hasGroupOrPerm(play, Permissions.zschem, Permissions.zschem_save)){
+            LuckPermsHelper.sendNoPermissionsMessage(play, Permissions.zschem_save, Permissions.zschem);
+            return 1;
+        }
+
         if(MemoryHolder.hasPlayerCached(play))
         {
             Container cont = MemoryHolder.getContainer(play);

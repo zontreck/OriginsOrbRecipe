@@ -9,6 +9,7 @@ import java.util.UUID;
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.chat.HoverTip;
 import dev.zontreck.otemod.OTEMod;
+import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.configs.PlayerFlyCache;
 import dev.zontreck.otemod.configs.Profile;
 import net.minecraft.network.chat.Component;
@@ -68,6 +69,8 @@ public class ChatServerOverride {
             OTEMod.LOGGER.error("FATAL: Profile was null for "+ev.getEntity().getName().getString());
             return;
         }
+
+        if(!OTEServerConfig.USE_CUSTOM_JOINLEAVE.get()) return;
         
         ChatServerOverride.broadcast(Component.literal(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_GREEN + "+" + ChatColor.DARK_GRAY + "] "+ ChatColor.BOLD + ChatColor.DARK_AQUA + prof.nickname), ev.getEntity().getServer());
     }
@@ -80,6 +83,8 @@ public class ChatServerOverride {
         Profile px = Profile.get_profile_of(ev.getEntity().getStringUUID());
 
         if(px==null)return;
+
+        if(!OTEServerConfig.USE_CUSTOM_JOINLEAVE.get()) return;
 
         // Send the alert
         ChatServerOverride.broadcast(Component.literal(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "-" + ChatColor.DARK_GRAY + "] "+ChatColor.BOLD + ChatColor.DARK_AQUA + px.nickname), ev.getEntity().getServer());
@@ -104,6 +109,9 @@ public class ChatServerOverride {
     @SubscribeEvent
     public void onChat(final ServerChatEvent ev){
         // Player has chatted, apply override
+        if(!OTEServerConfig.USE_CUSTOM_CHATREPLACER.get()) return;
+
+        
         ServerPlayer sp = ev.getPlayer();
         // Get profile
         Profile XD = Profile.get_profile_of(sp.getStringUUID());

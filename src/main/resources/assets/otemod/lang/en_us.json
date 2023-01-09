@@ -21,8 +21,6 @@
 
     "dev.zontreck.otemod.msgs.only_player": "§cOnly players are allowed to execute this command",
 
-    "dev.zontreck.otemod.msgs.homes.total": "§3Total number of homes: §6",
-
     "dev.zontreck.otemod.msgs.command_cooling_down": "This command is currently on cooldown. You must wait for ",
     "dev.zontreck.otemod.msgs.command_cooling_down_seconds": "seconds.",
 

@@ -17,10 +17,8 @@ import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 
 public class HomesCommand {
@@ -48,7 +46,7 @@ public class HomesCommand {
                 homes.add(rs.getString("home_name"));
             }
             
-            ctx.getSource().sendSuccess(MutableComponent.create(new TranslatableContents("dev.zontreck.otemod.msgs.homes.total")).append(""+String.valueOf(homes.size())), true);
+            ChatServerOverride.broadcastTo(p.getUUID(), Component.literal(OTEMod.OTEPrefix + ChatColor.doColors(" !Dark_Purple!There are !gold!"+String.valueOf(homes.size())+" !dark_purple!total homes.")), p.server);
             con.endRequest();
 
             for (String string : homes) {

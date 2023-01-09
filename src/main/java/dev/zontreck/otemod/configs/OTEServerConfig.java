@@ -21,12 +21,20 @@ public class OTEServerConfig {
     public static final ForgeConfigSpec.ConfigValue<String> PASSWORD;
     public static final ForgeConfigSpec.ConfigValue<String> DATABASE;
     public static final ForgeConfigSpec.ConfigValue<Integer> ITEM_DESPAWN_TIMER;
+
+
     public static final ForgeConfigSpec.ConfigValue<Integer> RTP_COOLDOWN;
+
+
     public static final ForgeConfigSpec.ConfigValue<Integer> HEALER_TIMER;
     public static final ForgeConfigSpec.BooleanValue DEBUG_HEALER;
     public static final ForgeConfigSpec.ConfigValue<Integer> TIME_BETWEEN_BLOCKS;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_TRIES_HEAL;
     public static final ForgeConfigSpec.ConfigValue<List<String>> EXCLUDE_DIMS;
+
+
+    public static final ForgeConfigSpec.BooleanValue USE_CUSTOM_JOINLEAVE;
+    public static final ForgeConfigSpec.BooleanValue USE_CUSTOM_CHATREPLACER;
 
 
     static {
@@ -61,6 +69,12 @@ public class OTEServerConfig {
         defDims.add("minecraft:the_nether");
         defDims.add("otemod:resource");
         EXCLUDE_DIMS = BUILDER.comment("Dimension names (ex. minecraft:overworld) to exclude from the explosion healing events").define("exclude_dimensions", defDims);
+
+        BUILDER.pop();
+
+        BUILDER.push("CHATSERVER");
+        USE_CUSTOM_JOINLEAVE = BUILDER.comment("Whether to use the custom join and leave messages").define("join_leave_messages", true);
+        USE_CUSTOM_CHATREPLACER = BUILDER.comment("Whether to use the custom chat replacer (If disabled the relevant commands will be removed)").define("chatprettifier", true);
 
         BUILDER.pop();
         SPEC=BUILDER.build();
