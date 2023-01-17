@@ -6,6 +6,8 @@
         "otemod:aurora_door",
 
         "otemod:cobalt_ore",
-        "otemod:raw_cobalt_ore"
+        "otemod:raw_cobalt_ore",
+
+        "otemod:item_scrubber"
     ]
 }
