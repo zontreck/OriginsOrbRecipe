@@ -1,21 +1,7 @@
-Eternium Ore                                [done]
-Eternium Fragment                           [done]
-Eternium Dust                               [partial]          [ smelt fragment into dust. 1x.  crush/grind = 4x ]
-Ihan Crystal                                [partially]         [XP is stored or retrieved. But is used by the mod as a charge. Eternium Dust will be used in the center]
-Aurora Block                                [done/partial]      [blasting > 4x dust]
-Aurora Door                                 [done]
-Aurora Pressure Plate                       [not done]
-Reinforced Auroran Compound                 [not done]
-Aurora Portal Frame                         [not done]          [stonecutting -> portal frame] [2 slots. 1 for eyes of ender, other reverse side for charged ihan crystals. portal verical. portal uses nether portal logic.]
+Liquids
+    * Liquified Soul Energy
+    * Liquified Experience
 
-* Dimension contents up in air
-* Dimension will be timelocked, changes do not persist, and the world reverts itself after a period of time.
-* Natural structures within the fractured dimension can be a refinery which can refine materials you mine in the realm
-* Minerals not refined in the eternium dimension have a property where they will be destroyed from inventory if removed from dimension, and cannot be used in a normal crafting recipe.
-* Dimension water acts like a fountain of youth
-* As everything happening in the dimension canonically is happening all at once, the dimension will have a unique feature where server chat will not function
-The player may also encounter other explorers, but they will be very glitched, their actions will make little sense, if they are mining, they may vanish into the ground like a ghost
-The player cannot stay there too long as the ihan crystal charges will eventually run out
-* Mekanism plugin machine: Skulk Extractor
-    This machine will rip skulk blocks apart atom by atom to get every last drop of XP stored within and can charge a crystal, or convert it into a single use ihan crystal with a lesser charge.
-* Adventure system with unique villager NPC that gives quests. This could be within the Eternium Dimension, or it could be from village to village. Rewards not yet determined.
+
+Super Furnace
+    * Melts materials into liquids. This is how to obtain the OTEMod liquids.

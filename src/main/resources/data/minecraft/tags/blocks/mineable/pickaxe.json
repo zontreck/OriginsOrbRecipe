@@ -3,6 +3,9 @@
         "otemod:eternium_ore_block",
         "otemod:deepslate_eternium_ore_block",
         "otemod:aurora_block",
-        "otemod:aurora_door"
+        "otemod:aurora_door",
+
+        "otemod:cobalt_ore",
+        "otemod:raw_cobalt_ore"
     ]
 }

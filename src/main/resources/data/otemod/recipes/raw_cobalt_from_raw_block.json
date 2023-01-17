@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "otemod:raw_cobalt_ore"
+    }
+  ],
+  "result": {
+    "item": "otemod:raw_cobalt",
+    "count": 9
+  }
+}

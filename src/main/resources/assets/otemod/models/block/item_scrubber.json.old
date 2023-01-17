@@ -1,0 +1,12 @@
+{
+    "parent": "minecraft:block/cube",
+    "textures": {
+      "down": "otemod:block/scrubber/scrubber_bottom",
+      "up": "otemod:block/scrubber/scrubber_top",
+      "south": "otemod:block/scrubber/scrubber_front",
+      "west": "otemod:block/scrubber/scrubber_left",
+      "north": "otemod:block/scrubber/scrubber_back",
+      "east": "otemod:block/scrubber/scrubber_right"
+    }
+  }
+  

@@ -12,12 +12,25 @@
     "item.otemod.eternium_fragment": "Fragmented Eternium",
     "item.otemod.eternium_dust": "Eternium Dust",
     "item.otemod.aurora_compound": "Aurora Compound",
+    "item.otemod.raw_cobalt": "Raw Cobalt",
+    "item.otemod.cobalt_nugget": "Cobalt Nugget",
+    "item.otemod.cobalt_ingot": "Cobalt Ingot",
+    "item.otemod.pattern": "Pattern",
+    "item.otemod.scorched_brick": "Scorched Brick",
+    "item.otemod.copper_can": "Copper Can",
 
     "block.otemod.eternium_ore_block": "Eternium Ore",
     "block.otemod.deepslate_eternium_ore_block": "Deepslate Eternium Ore",
     "block.otemod.aurora_block": "Aurora Block",
     "block.otemod.aurora_door": "Aurora Door",
     "block.otemod.clear_glass_block": "Clear Glass Block",
+    "block.otemod.cobalt_ore": "Cobalt Ore",
+    "block.otemod.raw_cobalt_ore": "Raw Cobalt Ore",
+    "block.otemod.gold_bars": "Gold Bars",
+    "block.otemod.cobalt_block": "Cobalt",
+    "block.otemod.nether_grout": "Nether Grout",
+    "block.otemod.scorched_table": "Scorched Table",
+    "block.otemod.item_scrubber": "Item Scrubber",
 
     "dev.zontreck.otemod.msgs.only_player": "§cOnly players are allowed to execute this command",
 
@@ -27,9 +40,5 @@
     "dev.zontreck.otemod.msgs.warps.set.success": "Warp successfully created",
     "dev.zontreck.otemod.msgs.warps.del.success": "Warp successfully deleted",
     "dev.zontreck.otemod.msgs.warps.set.fail": "Failed to create warp",
-    "dev.zontreck.otemod.msgs.warps.del.fail": "Failed to delete warp",
-
-    "minecraft.player.joined": "",
-    "minecraft.player.joined.renamed": "",
-    "minecraft.player.quit": ""
+    "dev.zontreck.otemod.msgs.warps.del.fail": "Failed to delete warp"
 }

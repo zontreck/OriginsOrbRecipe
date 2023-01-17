@@ -1,0 +1,6 @@
+{
+    "type": "forge:add_features",
+    "features": ["otemod:large_cobalt_ore", "otemod:small_cobalt_ore"],
+    "biomes": "#is_nether",
+    "step": "underground_ores"
+}

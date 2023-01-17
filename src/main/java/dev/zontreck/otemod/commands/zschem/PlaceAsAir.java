@@ -1,5 +1,6 @@
 package dev.zontreck.otemod.commands.zschem;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -58,7 +59,9 @@ public class PlaceAsAir {
             WorldProp system = WorldProp.acquire(cont.lvl);
             // Begin the process
             List<Vector3> positions = cont.Pos1.makeCube(cont.Pos2);
+            Collections.shuffle(positions);
             Iterator<Vector3> v3 = positions.iterator();
+            
             while(v3.hasNext())
             {
                 Vector3 pos = v3.next();

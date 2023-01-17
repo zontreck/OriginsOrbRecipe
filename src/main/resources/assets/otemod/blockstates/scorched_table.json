@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "otemod:block/scorched_table" },
+    "facing=south": { "model": "otemod:block/scorched_table", "y": 180 },
+    "facing=west":  { "model": "otemod:block/scorched_table", "y": 270 },
+    "facing=east":  { "model": "otemod:block/scorched_table", "y":  90 }
+  }
+}

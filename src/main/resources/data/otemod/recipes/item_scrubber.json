@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "A": {
+            "tag": "forge:unusual/experience_blocks"
+        },
+        "B": {
+            "tag": "forge:ingots/cobalt"
+        }
+    },
+    "pattern": [
+        "ABA",
+        "B B",
+        "ABA"
+    ],
+    "result":{
+        "item": "otemod:item_scrubber"
+    }
+}

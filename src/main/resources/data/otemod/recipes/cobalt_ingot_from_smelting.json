@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "item": "otemod:raw_cobalt"
+    },
+    {
+      "item": "otemod:cobalt_ore"
+    }
+  ],
+  "result": "otemod:cobalt_ingot",
+  "experience": 1.5,
+  "cookingtime": 200
+}

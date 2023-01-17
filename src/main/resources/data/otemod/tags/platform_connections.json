@@ -1,0 +1,17 @@
+{
+    "values": [
+        "otemod:gold_bars",
+        "minecraft:lever",
+        "minecraft:ladder",
+        "minecraft:iron_bars",
+        "minecraft:tripwire_hook",
+        "minecraft:wall_torch",
+        "minecraft:soul_wall_torch",
+        "minecraft:redstone_wall_torch",
+        "minecraft:glass_panes",
+        "minecraft:buttons",
+        "minecraft:fences",
+        "minecraft:walls",
+        "minecraft:wall_signs"
+    ]
+}

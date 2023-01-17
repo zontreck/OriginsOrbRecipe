@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "otemod:nether_grout"
+  },
+  "result": "otemod:scorched_brick",
+  "experience": 0.3,
+  "cookingtime": 200
+}

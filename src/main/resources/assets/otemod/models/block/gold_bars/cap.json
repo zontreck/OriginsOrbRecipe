@@ -1,0 +1,9 @@
+{
+    "parent": "block/iron_bars_cap",
+    "render_type": "minecraft:translucent",
+    "textures": {
+        "particle": "otemod:block/gold_bars",
+        "bars":     "otemod:block/gold_bars",
+        "edge":     "otemod:block/gold_bars"
+    }
+}

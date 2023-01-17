@@ -1,0 +1,8 @@
+{
+  "parent": "otemod:block/template/table",
+  "textures": {
+    "side":   "otemod:block/scorched_table/table_side",
+    "top":    "otemod:block/scorched_table/table_top",
+    "bottom": "otemod:block/scorched_table/table_bottom"
+  }
+}

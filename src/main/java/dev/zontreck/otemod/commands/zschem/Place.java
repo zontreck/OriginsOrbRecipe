@@ -1,5 +1,6 @@
 package dev.zontreck.otemod.commands.zschem;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.mojang.brigadier.CommandDispatcher;
@@ -50,6 +51,7 @@ public class Place {
 
         Container cont = MemoryHolder.getContainer(play);
         List<StoredBlock> blocks = cont.blocks;
+        Collections.shuffle(blocks);
 
         if(cont.Pos1 != OTEMod.ZERO_VECTOR)
         {

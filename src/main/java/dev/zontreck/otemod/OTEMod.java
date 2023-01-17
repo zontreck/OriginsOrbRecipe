@@ -40,6 +40,7 @@ import org.slf4j.Logger;
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.blocks.ModBlocks;
+import dev.zontreck.otemod.blocks.entity.ModEntities;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.commands.CommandRegistry;
 import dev.zontreck.otemod.commands.teleport.TeleportContainer;
@@ -48,9 +49,10 @@ import dev.zontreck.otemod.configs.Profile;
 import dev.zontreck.otemod.database.Database;
 import dev.zontreck.otemod.database.Database.DatabaseConnectionException;
 import dev.zontreck.otemod.events.EventHandler;
-import dev.zontreck.otemod.implementation.VaultScreen;
-import dev.zontreck.otemod.implementation.VaultWatcher;
-import dev.zontreck.otemod.implementation.inits.MenuInitializer;
+import dev.zontreck.otemod.implementation.inits.ModMenuTypes;
+import dev.zontreck.otemod.implementation.scrubber.ScrubberScreen;
+import dev.zontreck.otemod.implementation.vault.VaultScreen;
+import dev.zontreck.otemod.implementation.vault.VaultWatcher;
 import dev.zontreck.otemod.items.ModItems;
 import dev.zontreck.otemod.ore.Modifier.ModifierOfBiomes;
 
@@ -106,10 +108,12 @@ public class OTEMod
         MinecraftForge.EVENT_BUS.register(new CommandRegistry());
         MinecraftForge.EVENT_BUS.register(new VaultWatcher());
         MinecraftForge.EVENT_BUS.register(new dev.zontreck.otemod.zschem.EventHandler());
-        MenuInitializer.CONTAINERS.register(bus);
+        ModMenuTypes.CONTAINERS.register(bus);
 
         ModBlocks.register(bus);
         ModItems.register(bus);
+        ModEntities.register(bus);
+        //MenuInitializer.register(bus);
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -279,7 +283,8 @@ public class OTEMod
             //LOGGER.info("HELLO FROM CLIENT SETUP");
             //LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
 
-            MenuScreens.register(MenuInitializer.VAULT.get(), VaultScreen::new);
+            MenuScreens.register(ModMenuTypes.VAULT.get(), VaultScreen::new);
+            MenuScreens.register(ModMenuTypes.SCRUBBER.get(), ScrubberScreen::new);
 
             //ItemBlockRenderTypes.setRenderLayer(ModBlocks.AURORA_DOOR.get(), RenderType.translucent());
         }
