@@ -8,7 +8,7 @@ plugins {
 
 
 
-version = "${my_version}"
+version = "${mc_version}-${my_version}"
 group = 'dev.zontreck.otemod' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'otemod'
 
