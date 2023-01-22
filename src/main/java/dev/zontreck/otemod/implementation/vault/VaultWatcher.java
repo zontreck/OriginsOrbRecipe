@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import dev.zontreck.otemod.OTEMod;
+import net.minecraftforge.client.event.ContainerScreenEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -30,5 +31,4 @@ public class VaultWatcher {
             }
         }
     }
-    
 }

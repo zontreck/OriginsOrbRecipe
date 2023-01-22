@@ -32,6 +32,8 @@
     "block.otemod.scorched_table": "Scorched Table",
     "block.otemod.item_scrubber": "Item Scrubber",
 
+    "enchantment.otemod.mob_egging": "Mob Egging",
+
     "dev.zontreck.otemod.msgs.only_player": "§cOnly players are allowed to execute this command",
 
     "dev.zontreck.otemod.msgs.command_cooling_down": "This command is currently on cooldown. You must wait for ",

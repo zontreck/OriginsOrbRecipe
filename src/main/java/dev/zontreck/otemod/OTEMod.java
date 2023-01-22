@@ -48,13 +48,15 @@ import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.configs.Profile;
 import dev.zontreck.otemod.database.Database;
 import dev.zontreck.otemod.database.Database.DatabaseConnectionException;
+import dev.zontreck.otemod.enchantments.ModEnchantments;
 import dev.zontreck.otemod.events.EventHandler;
+import dev.zontreck.otemod.events.LoreHandlers;
 import dev.zontreck.otemod.implementation.inits.ModMenuTypes;
 import dev.zontreck.otemod.implementation.scrubber.ScrubberScreen;
 import dev.zontreck.otemod.implementation.vault.VaultScreen;
 import dev.zontreck.otemod.implementation.vault.VaultWatcher;
 import dev.zontreck.otemod.items.ModItems;
-import dev.zontreck.otemod.ore.Modifier.ModifierOfBiomes;
+//import dev.zontreck.otemod.ore.Modifier.ModifierOfBiomes;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(OTEMod.MOD_ID)
@@ -97,13 +99,14 @@ public class OTEMod
         
         
         // Register ourselves for server and other game events we are interested in
-        final DeferredRegister<Codec<? extends BiomeModifier>> serializers = DeferredRegister.create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, OTEMod.MOD_ID);
-        serializers.register(bus);
-        serializers.register(MODIFY_BIOMES, ModifierOfBiomes::makeCodec);
+        //final DeferredRegister<Codec<? extends BiomeModifier>> serializers = DeferredRegister.create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, OTEMod.MOD_ID);
+        //serializers.register(bus);
+        //serializers.register(MODIFY_BIOMES, ModifierOfBiomes::makeCodec);
 
 
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new EventHandler());
+        MinecraftForge.EVENT_BUS.register(new LoreHandlers());
         MinecraftForge.EVENT_BUS.register(new ChatServerOverride());
         MinecraftForge.EVENT_BUS.register(new CommandRegistry());
         MinecraftForge.EVENT_BUS.register(new VaultWatcher());
@@ -113,6 +116,7 @@ public class OTEMod
         ModBlocks.register(bus);
         ModItems.register(bus);
         ModEntities.register(bus);
+        ModEnchantments.register(bus);
         //MenuInitializer.register(bus);
     }
 
