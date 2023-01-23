@@ -17,7 +17,7 @@ public class MobEggEnchantment extends Enchantment
     @Override
     public int getMaxLevel()
     {
-        return 4;
+        return 6;
     }
 
     @Override
@@ -37,6 +37,22 @@ public class MobEggEnchantment extends Enchantment
     public boolean canApplyAtEnchantingTable(ItemStack stack)
     {
         return super.canApplyAtEnchantingTable(stack);
+    }
+
+    @Override
+    public boolean isTreasureOnly(){
+        return false;
+    }
+    @Override
+    public boolean isTradeable()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean isDiscoverable()
+    {
+        return false;
     }
     
 }

@@ -16,8 +16,9 @@ public class Profile {
     public String name_color; // ChatColor.X
     public String prefix_color;
     public String chat_color;
+    public Boolean flying;
 
-    public Profile(String username, String prefix, String nickname, String name_color, String ID, String prefix_color, String chat_color) {
+    public Profile(String username, String prefix, String nickname, String name_color, String ID, String prefix_color, String chat_color, Boolean isFlying) {
         this.username = username;
         this.prefix = prefix;
         this.nickname = nickname;
@@ -25,6 +26,7 @@ public class Profile {
         this.user_id = ID;
         this.prefix_color = prefix_color;
         this.chat_color = chat_color;
+        this.flying=isFlying;
     }
 
 
@@ -41,7 +43,7 @@ public class Profile {
 
     public static Profile factory(ServerPlayer play)
     {
-        Profile p = new Profile(play.getName().getString(), "Member", play.getDisplayName().getString(), ChatColor.GREEN, play.getStringUUID(), ChatColor.AQUA, ChatColor.WHITE);
+        Profile p = new Profile(play.getName().getString(), "Member", play.getDisplayName().getString(), ChatColor.GREEN, play.getStringUUID(), ChatColor.AQUA, ChatColor.WHITE, false);
         return p;
     }
 
@@ -49,7 +51,7 @@ public class Profile {
     {
         // Send player to server!
         Connection con = OTEMod.DB.getConnection();
-        String SQL = "REPLACE INTO `profiles` (username, uuid, prefix, nickname, name_color, prefix_color, chat_color) values (?, ?, ?, ?, ?, ?, ?);";
+        String SQL = "REPLACE INTO `profiles` (username, uuid, prefix, nickname, name_color, prefix_color, chat_color, flying) values (?, ?, ?, ?, ?, ?, ?, ?);";
         try {
             PreparedStatement pstat = con.prepareStatement(SQL);
             pstat.setString(1, username);
@@ -59,6 +61,7 @@ public class Profile {
             pstat.setString(5, name_color);
             pstat.setString(6, prefix_color);
             pstat.setString(7, chat_color);
+            pstat.setBoolean(8, flying);
 
             pstat.execute();
         } catch (SQLException e) {

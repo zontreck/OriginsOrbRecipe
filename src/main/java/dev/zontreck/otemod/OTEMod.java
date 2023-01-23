@@ -19,6 +19,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -57,6 +59,7 @@ import dev.zontreck.otemod.implementation.vault.VaultScreen;
 import dev.zontreck.otemod.implementation.vault.VaultWatcher;
 import dev.zontreck.otemod.items.ModItems;
 //import dev.zontreck.otemod.ore.Modifier.ModifierOfBiomes;
+import dev.zontreck.otemod.networking.ModMessages;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(OTEMod.MOD_ID)
@@ -122,6 +125,7 @@ public class OTEMod
 
     private void setup(final FMLCommonSetupEvent event)
     {
+        ModMessages.register();
     }
 
 
@@ -137,13 +141,6 @@ public class OTEMod
         
         
         return true;
-    }
-    
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
-        // Some common setup code
-        //LOGGER.info("HELLO FROM COMMON SETUP");
-        //LOGGER.info("DIRT BLOCK >> {}", ForgeRegistries.BLOCKS.getKey(Blocks.DIRT));
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -243,10 +240,11 @@ public class OTEMod
     }
     
 
-    @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public void onItemExpire(final ItemExpireEvent ev)
     {
+        if(ev.getEntity().level.isClientSide)return;
+
         if(OTEServerConfig.ITEM_DESPAWN_TIMER.get()<=0)return;
 
 
@@ -266,7 +264,7 @@ public class OTEMod
         
     }
 
-    @OnlyIn(Dist.DEDICATED_SERVER)
+    
     @SubscribeEvent
     public void onStop(final ServerStoppingEvent ev)
     {
@@ -292,6 +290,7 @@ public class OTEMod
 
             //ItemBlockRenderTypes.setRenderLayer(ModBlocks.AURORA_DOOR.get(), RenderType.translucent());
         }
+
     }
 
 }

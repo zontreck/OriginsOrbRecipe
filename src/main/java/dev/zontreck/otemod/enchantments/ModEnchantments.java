@@ -12,6 +12,8 @@ public class ModEnchantments {
 
     public static final RegistryObject<Enchantment> MOB_EGGING_ENCHANTMENT = REGISTERS.register("mob_egging", ()->new MobEggEnchantment());
 
+    public static final RegistryObject<Enchantment> FLIGHT_ENCHANTMENT = REGISTERS.register("player_flight", ()->new FlightEnchantment());
+
     public static void register(IEventBus bus){
         REGISTERS.register(bus);
     }

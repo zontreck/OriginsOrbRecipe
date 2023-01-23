@@ -1,4 +1,8 @@
 {
+    "key.otemod.open_vault": "Opens Vault 0",
+    "key.category.otemod": "Only The Essentials",
+
+
     "itemGroup.refinedfabric.materials": "RefinedFabric Materials",
     "itemGroup.refinedfabric.tools": "RefinedFabric Utilities",
     "itemGroup.refinedfabric.blocks": "RefinedFabric Blocks",
@@ -33,6 +37,9 @@
     "block.otemod.item_scrubber": "Item Scrubber",
 
     "enchantment.otemod.mob_egging": "Mob Egging",
+    "enchantment.otemod.player_flight": "Flight",
+    "enchantment.otemod.mob_egging.desc": "Chance of mob spawn eggs to drop",
+    "enchantment.otemod.player_flight.desc": "Allows you to fly!",
 
     "dev.zontreck.otemod.msgs.only_player": "§cOnly players are allowed to execute this command",
 

@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.MenuConstructor;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
@@ -19,16 +20,20 @@ public class VaultMenu extends AbstractContainerMenu
 {
     //private final ContainerLevelAccess containerAccess;
     public final UUID VaultMenuID;
+    public final Player thePlayer;
+    public final int VAULT_NUMBER;
 
     public VaultMenu (int id, Inventory player)
     {
-        this(id, player, new ItemStackHandler(54), BlockPos.ZERO);
+        this(id, player, new ItemStackHandler(54), BlockPos.ZERO, player.player, 0);
     }
 
-    public VaultMenu (int id, Inventory player, IItemHandler slots, BlockPos pos)
+    public VaultMenu (int id, Inventory player, IItemHandler slots, BlockPos pos, Player play, int vaultNum)
     {
         super(ModMenuTypes.VAULT.get(), id);
+        thePlayer=play;
         VaultMenuID=UUID.randomUUID();
+        VAULT_NUMBER=vaultNum;
         //this.containerAccess = ContainerLevelAccess.create(player.player.level, pos);
 
         final int slotSize = 18; 
@@ -104,8 +109,8 @@ public class VaultMenu extends AbstractContainerMenu
         return true; // We have no block
     }
     
-    public static MenuConstructor getServerMenu (ItemStackHandler inventory){
-        return (id, player, play) -> new VaultMenu(id, player, inventory, BlockPos.ZERO);
+    public static MenuConstructor getServerMenu (ItemStackHandler inventory, int vaultNum){
+        return (id, player, play) -> new VaultMenu(id, player, inventory, BlockPos.ZERO, player.player, vaultNum);
     }
 
 

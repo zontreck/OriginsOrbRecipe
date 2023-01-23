@@ -103,7 +103,7 @@ public class CommandRegistry {
         HomeCommand.register(ev.getDispatcher());
         DelHomeCommand.register(ev.getDispatcher());
 
-        FlyCommand.register(ev.getDispatcher());
+        //FlyCommand.register(ev.getDispatcher());
 
         ChatColorCommand.register(ev.getDispatcher());
         NameColorCommand.register(ev.getDispatcher());

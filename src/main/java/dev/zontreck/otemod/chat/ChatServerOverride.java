@@ -12,11 +12,15 @@ import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.configs.PlayerFlyCache;
 import dev.zontreck.otemod.configs.Profile;
+import dev.zontreck.otemod.enchantments.ModEnchantments;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.ServerChatEvent;
@@ -28,11 +32,12 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 @EventBusSubscriber(modid=OTEMod.MOD_ID, bus=Mod.EventBusSubscriber.Bus.FORGE)
 public class ChatServerOverride {
 
-    @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public void onJoin(final PlayerEvent.PlayerLoggedInEvent ev)
     {
         //Player joined, send custom alert
+        if(ev.getEntity().level.isClientSide)return;
+        ServerPlayer play = (ServerPlayer)ev.getEntity();
         
         // Download user data from database
         try{
@@ -48,18 +53,17 @@ public class ChatServerOverride {
                 has_profile=true;
 
                 
-                OTEMod.PROFILES.put(ev.getEntity().getStringUUID(), new Profile(rs.getString("username"), rs.getString("prefix"), rs.getString("nickname"), rs.getString("name_color"), ev.getEntity().getStringUUID(), rs.getString("prefix_color"), rs.getString("chat_color")));
+                OTEMod.PROFILES.put(ev.getEntity().getStringUUID(), new Profile(rs.getString("username"), rs.getString("prefix"), rs.getString("nickname"), rs.getString("name_color"), ev.getEntity().getStringUUID(), rs.getString("prefix_color"), rs.getString("chat_color"), rs.getBoolean("flying")));
             }
 
             if(!has_profile)
             {
                 // Create profile!
-                ServerPlayer play = (ServerPlayer)ev.getEntity();
                 Profile p = Profile.factory(play);
                 OTEMod.PROFILES.put(play.getStringUUID(), p);
                 p.commit(); // Commits the profile to the server
 
-                ev.getEntity().displayClientMessage(Component.literal(ChatColor.BOLD+ ChatColor.DARK_GRAY + "["+ChatColor.DARK_GREEN + "OTEMOD" + ChatColor.DARK_GRAY + "] "+ChatColor.DARK_GREEN + "First join! Your server profile has been created"), false);
+                ev.getEntity().displayClientMessage(Component.literal(ChatColor.doColors( OTEMod.OTEPrefix +" !Dark_Green!First join! Your server profile has been created")), false);
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -70,17 +74,36 @@ public class ChatServerOverride {
             return;
         }
 
+        if(prof.flying)
+        {
+            play.getAbilities().flying=true;
+            play.onUpdateAbilities();
+        }
+
+        Abilities playerAbilities = play.getAbilities();
+        boolean mayFly = false;
+        ItemStack feet = play.getItemBySlot(EquipmentSlot.FEET);
+        ItemStack legs = play.getItemBySlot(EquipmentSlot.LEGS);
+        if(feet.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get())>0)mayFly=true;
+        if(legs.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get())>0)mayFly=true;
+
+        playerAbilities.mayfly=mayFly;
+        play.onUpdateAbilities();
+
         if(!OTEServerConfig.USE_CUSTOM_JOINLEAVE.get()) return;
         
-        ChatServerOverride.broadcast(Component.literal(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_GREEN + "+" + ChatColor.DARK_GRAY + "] "+ ChatColor.BOLD + ChatColor.DARK_AQUA + prof.nickname), ev.getEntity().getServer());
+        ChatServerOverride.broadcast(Component.literal(ChatColor.doColors("!Dark_Gray![!Dark_Green!+!Dark_Gray!] !Bold!!Dark_Aqua!"+prof.nickname)), ev.getEntity().getServer());
+        
     }
 
-    @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public void onLeave(final PlayerEvent.PlayerLoggedOutEvent ev)
     {
+        if(ev.getEntity().level.isClientSide)return;
         // Get player profile, send disconnect alert, then commit profile and remove it from memory
         Profile px = Profile.get_profile_of(ev.getEntity().getStringUUID());
+        ServerPlayer sp = (ServerPlayer)ev.getEntity();
+
 
         if(px==null)return;
 
@@ -89,14 +112,15 @@ public class ChatServerOverride {
         // Send the alert
         ChatServerOverride.broadcast(Component.literal(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "-" + ChatColor.DARK_GRAY + "] "+ChatColor.BOLD + ChatColor.DARK_AQUA + px.nickname), ev.getEntity().getServer());
 
+        px.flying=sp.getAbilities().flying;
         px.commit();
         OTEMod.PROFILES.remove(ev.getEntity().getStringUUID());
     }
 
-    @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public void onClone(final PlayerEvent.Clone ev)
     {
+        if(ev.getEntity().level.isClientSide)return;
         // Fix for fly ability not copying to new instance on death or other circumstances
         Player old = ev.getOriginal();
         Player n = ev.getEntity();
@@ -105,9 +129,9 @@ public class ChatServerOverride {
         c.Assert((ServerPlayer)n);
     }
 
-    @OnlyIn(Dist.DEDICATED_SERVER)
     @SubscribeEvent
     public void onChat(final ServerChatEvent ev){
+        if(ev.getPlayer().level.isClientSide)return;
         // Player has chatted, apply override
         if(!OTEServerConfig.USE_CUSTOM_CHATREPLACER.get()) return;
 

@@ -31,15 +31,15 @@ public class VaultContainer
     public MenuConstructor serverMenu;
     public UUID owner;
     private MinecraftServer server;
-    private final int VAULT_NUMBER;
+    public final int VAULT_NUMBER;
     public final UUID VaultID;
     public VaultContainer(ServerPlayer player, int vaultNum) {
         myInventory = new ItemStackHandler(54); // Vaults have a fixed size at the same as a double chest
-        theContainer = new VaultMenu(player.containerCounter+1, player.getInventory(), myInventory, BlockPos.ZERO);
+        theContainer = new VaultMenu(player.containerCounter+1, player.getInventory(), myInventory, BlockPos.ZERO, player, vaultNum);
         VaultID = theContainer.VaultMenuID;
         owner = player.getUUID();
         server=player.server;
-        serverMenu = theContainer.getServerMenu(myInventory);
+        serverMenu = theContainer.getServerMenu(myInventory, vaultNum);
         VAULT_NUMBER=vaultNum;
         if(VAULT_NUMBER == -1)return; // Trash ID
 
