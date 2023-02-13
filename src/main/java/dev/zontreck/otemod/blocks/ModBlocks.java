@@ -91,9 +91,18 @@ public class ModBlocks {
 
     public static final RegistryObject<Item> ITEM_SCRUBBER_I = ITEMS.register("item_scrubber", ()->new BlockItem(ITEM_SCRUBBER.get(), new Item.Properties().tab(CreativeModeTab.TAB_REDSTONE)));
 
+    public static final RegistryObject<Block> MAGICAL_SCRUBBER = BLOCKS.register("magical_scrubber", ()->new MagicalScrubberBlock(BlockBehaviour.Properties.copy(ModBlocks.AURORA_BLOCK.get()).noOcclusion().isViewBlocking(ModBlocks::never)));
 
+    public static final RegistryObject<Item> MAGICAL_SCRUBBER_I = ITEMS.register("magical_scrubber", ()->new BlockItem(MAGICAL_SCRUBBER.get(), new Item.Properties().tab(CreativeModeTab.TAB_REDSTONE)));
     
-   private static boolean never(BlockState p_50806_, BlockGetter p_50807_, BlockPos p_50808_) {
-    return false;
- }
+
+    public static final RegistryObject<Block> STABLE_SINGULARITY = BLOCKS.register("stable_singularity", ()->new Block(BlockBehaviour.Properties.copy(ModBlocks.AURORA_BLOCK.get()).noOcclusion().isViewBlocking(ModBlocks::never)));
+
+    public static final RegistryObject<Item> STABLE_SINGULARITY_I = ITEMS.register("stable_singularity", ()->new BlockItem(STABLE_SINGULARITY.get(), new Item.Properties().tab(CreativeModeTab.TAB_REDSTONE)));
+
+
+
+    private static boolean never(BlockState p_50806_, BlockGetter p_50807_, BlockPos p_50808_) {
+        return false;
+    }
 }

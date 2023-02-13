@@ -14,7 +14,7 @@ public class OTEServerConfig {
     public static final ForgeConfigSpec SPEC;
 
     public static final ForgeConfigSpec.ConfigValue<List<ItemStack>> INITIAL_ITEMS_TO_GIVE_ON_FIRST_JOIN;
-    public static final ForgeConfigSpec.ConfigValue<Float> SPAWN_EGG_CHANCE;
+    public static final ForgeConfigSpec.ConfigValue<Double> SPAWN_EGG_CHANCE;
 
     public static final ForgeConfigSpec.ConfigValue<String> HOST_ADDR;
     public static final ForgeConfigSpec.ConfigValue<Integer> PORT;
@@ -46,7 +46,7 @@ public class OTEServerConfig {
         
         BUILDER.push("OTE");
         INITIAL_ITEMS_TO_GIVE_ON_FIRST_JOIN = BUILDER.comment("What items, identified by modid:item, to give to a brand new user on the server").define("New Player Gear", defaults);
-        SPAWN_EGG_CHANCE = BUILDER.comment("What is the chance for a spawn egg to drop from a mob when looting 3 is used? Default: 0.25").define("spawn_egg_chance", 0.25F);
+        SPAWN_EGG_CHANCE = BUILDER.comment("What is the chance for a spawn egg to drop from a mob when looting 3 is used? Default: 0.25").define("spawn_egg_chance", 0.25);
         BUILDER.pop();
 
         BUILDER.push("DATABASE");

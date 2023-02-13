@@ -1,7 +1,8 @@
 package dev.zontreck.otemod.networking;
 
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.networking.packets.OpenVaultPacket;
+import dev.zontreck.otemod.networking.packets.EnergySyncS2CPacket;
+import dev.zontreck.otemod.networking.packets.OpenVaultC2SPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -28,10 +29,16 @@ public class ModMessages {
         
         INSTANCE=net;
 
-        net.messageBuilder(OpenVaultPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-            .decoder(OpenVaultPacket::new)
-            .encoder(OpenVaultPacket::toBytes)
-            .consumerMainThread(OpenVaultPacket::handle)
+        net.messageBuilder(OpenVaultC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+            .decoder(OpenVaultC2SPacket::new)
+            .encoder(OpenVaultC2SPacket::toBytes)
+            .consumerMainThread(OpenVaultC2SPacket::handle)
+            .add();
+
+        net.messageBuilder(EnergySyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
+            .decoder(EnergySyncS2CPacket::new)
+            .encoder(EnergySyncS2CPacket::toBytes)
+            .consumerMainThread(EnergySyncS2CPacket::handle)
             .add();
     }
 
@@ -42,5 +49,10 @@ public class ModMessages {
     public static <MSG> void sendToPlayer(MSG message, ServerPlayer player)
     {
         INSTANCE.send(PacketDistributor.PLAYER.with(()->player), message);
+    }
+
+    public static <MSG> void sendToAll(MSG message)
+    {
+        INSTANCE.send(PacketDistributor.ALL.noArg(), message);
     }
 }

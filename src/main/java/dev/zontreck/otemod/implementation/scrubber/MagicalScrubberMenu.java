@@ -1,7 +1,7 @@
 package dev.zontreck.otemod.implementation.scrubber;
 
 import dev.zontreck.otemod.blocks.ModBlocks;
-import dev.zontreck.otemod.blocks.entity.ItemScrubberBlockEntity;
+import dev.zontreck.otemod.blocks.entity.MagicalScrubberBlockEntity;
 import dev.zontreck.otemod.implementation.inits.ModMenuTypes;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
@@ -18,22 +18,22 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ScrubberMenu extends AbstractContainerMenu
+public class MagicalScrubberMenu extends AbstractContainerMenu
 {
-    public final ItemScrubberBlockEntity entity;
+    public final MagicalScrubberBlockEntity entity;
     private final Level level;
     private final ContainerData data;
 
-    public ScrubberMenu(int id, Inventory inv, FriendlyByteBuf buf)
+    public MagicalScrubberMenu(int id, Inventory inv, FriendlyByteBuf buf)
     {
         this(id, inv, inv.player.level.getBlockEntity(buf.readBlockPos()), new SimpleContainerData(1));
     }
 
-    public ScrubberMenu(int id, Inventory inv, BlockEntity entity, ContainerData data){
-        super(ModMenuTypes.SCRUBBER.get(), id);
+    public MagicalScrubberMenu(int id, Inventory inv, BlockEntity entity, ContainerData data){
+        super(ModMenuTypes.MAGIC_SCRUBBER.get(), id);
 
         checkContainerSize(inv, 1);
-        this.entity = (ItemScrubberBlockEntity)entity;
+        this.entity = (MagicalScrubberBlockEntity)entity;
         this.data=data;
         this.level = inv.player.level;
 
@@ -60,7 +60,7 @@ public class ScrubberMenu extends AbstractContainerMenu
     {
         if(!isCrafting())return 0;
         int progress = this.data.get(0);
-        int max = ItemScrubberBlockEntity.MAXIMUM_PROCESSING_TICKS;
+        int max = MagicalScrubberBlockEntity.MAXIMUM_PROCESSING_TICKS;
 
         int progressArrow = 125;
 
@@ -128,7 +128,7 @@ public class ScrubberMenu extends AbstractContainerMenu
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, entity.getBlockPos()), player, ModBlocks.ITEM_SCRUBBER.get());
+        return stillValid(ContainerLevelAccess.create(level, entity.getBlockPos()), player, ModBlocks.MAGICAL_SCRUBBER.get());
     }
 
     private static final int PLAYER_INVENTORY_FIRST_SLOT_HEIGHT = 69;

@@ -37,6 +37,9 @@ public class ItemStatistics {
             case SHEARS -> {
                 lore += "Sheep Shaved: ";
             }
+            case EGGING -> {
+                lore += "Mobs Egged: ";
+            }
         }
         lore += ChatColor.doColors("!Green!"+val);
         return lore;

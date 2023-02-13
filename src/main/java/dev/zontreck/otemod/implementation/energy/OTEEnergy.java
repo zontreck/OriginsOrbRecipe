@@ -1,4 +1,4 @@
-package dev.zontreck.otemod.implementation;
+package dev.zontreck.otemod.implementation.energy;
 
 import net.minecraftforge.energy.EnergyStorage;
 

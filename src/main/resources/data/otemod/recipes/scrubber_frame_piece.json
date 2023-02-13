@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["cgc"],
+  "key": {
+    "c": {
+      "item": "otemod:stable_singularity"
+    },
+    "g": {
+      "tag": "forge:rods/eternium"
+    }
+  },
+  "result": {
+    "item": "otemod:scrubber_frame_piece",
+    "count": 1
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "item": "minecraft:nether_star"
+    }
+  ],
+  "result": "otemod:melted_nether_star",
+  "experience": 3,
+  "cookingtime": 60
+}

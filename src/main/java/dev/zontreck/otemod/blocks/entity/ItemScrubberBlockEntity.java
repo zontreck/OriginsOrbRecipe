@@ -3,7 +3,10 @@ package dev.zontreck.otemod.blocks.entity;
 import javax.annotation.Nullable;
 
 import dev.zontreck.otemod.implementation.OutputItemStackHandler;
-import dev.zontreck.otemod.implementation.scrubber.ScrubberMenu;
+import dev.zontreck.otemod.implementation.energy.OTEEnergy;
+import dev.zontreck.otemod.implementation.scrubber.ItemScrubberMenu;
+import dev.zontreck.otemod.networking.ModMessages;
+import dev.zontreck.otemod.networking.packets.EnergySyncS2CPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -23,6 +26,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -44,6 +48,20 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
         }
     };
     private ItemStackHandler outputSlot;
+
+    private final OTEEnergy ENERGY_STORAGE = new OTEEnergy(ENERGY_REQ*3, ENERGY_REQ+512) {
+
+        @Override
+        public void onChanged() {
+            setChanged();
+
+            ModMessages.sendToAll(new EnergySyncS2CPacket(energy, getBlockPos()));
+        }
+        
+    };
+
+    private static final int ENERGY_REQ = 15000;
+    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
     private LazyOptional<IItemHandler> lazyOutputItems = LazyOptional.empty();
@@ -88,7 +106,7 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
     @Override
     @Nullable
     public AbstractContainerMenu createMenu(int id, Inventory inv, Player player) {
-        return new ScrubberMenu(id, inv, this, this.data);
+        return new ItemScrubberMenu(id, inv, this, this.data);
     }
 
     @Override
@@ -99,6 +117,10 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side)
     {
+        if(cap == ForgeCapabilities.ENERGY)
+        {
+            return lazyEnergyHandler.cast();
+        }
         if(side == Direction.DOWN && cap == ForgeCapabilities.ITEM_HANDLER)
         {
             // Return the output slot only
@@ -119,6 +141,7 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
         super.onLoad();
         lazyItemHandler = LazyOptional.of(()->itemsHandler);
         lazyOutputItems = LazyOptional.of(()->outputSlot);
+        lazyEnergyHandler = LazyOptional.of(()->ENERGY_STORAGE);
     }
 
 
@@ -128,6 +151,7 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
         super.invalidateCaps();
         lazyItemHandler.invalidate();
         lazyOutputItems.invalidate();
+        lazyEnergyHandler.invalidate();
     }
     
     @Override
@@ -136,6 +160,7 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
         nbt.put("inventory", itemsHandler.serializeNBT());
         nbt.put("output", outputItems.serializeNBT());
         nbt.putInt("prog", progress);
+        nbt.putInt("energy", ENERGY_STORAGE.getEnergyStored());
 
         super.saveAdditional(nbt);
     }
@@ -147,6 +172,7 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
         itemsHandler.deserializeNBT(nbt.getCompound("inventory"));
         outputItems.deserializeNBT(nbt.getCompound("output"));
         progress = nbt.getInt("prog");
+        ENERGY_STORAGE.setEnergy(nbt.getInt("energy"));
     }
 
     public void doDrop()
@@ -167,10 +193,13 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
     {
         if(lvl.isClientSide())return;
 
+
         if(hasRecipe(entity))
         {
+            if(!hasEnergy(entity))return; // Halt until sufficient energy has been received
             entity.progress++;
             setChanged(lvl, pos, state);
+            drain(entity);
 
             if(entity.progress >= ItemScrubberBlockEntity.MAXIMUM_PROCESSING_TICKS)
             {
@@ -182,6 +211,14 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
                 setChanged(lvl, pos, state);
             }
         }
+    }
+
+    private static void drain(ItemScrubberBlockEntity entity) {
+        entity.ENERGY_STORAGE.extractEnergy(ENERGY_REQ, false);
+    }
+
+    private static boolean hasEnergy(ItemScrubberBlockEntity entity) {
+        return (entity.ENERGY_STORAGE.getEnergyStored() >= ENERGY_REQ);
     }
 
     private static void craftItem(ItemScrubberBlockEntity entity) {
@@ -243,5 +280,13 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
     {
         ItemStack newItem = new ItemStack(original.getItem(),1);
         return newItem;
+    }
+
+    public IEnergyStorage getEnergyStorage() {
+        return ENERGY_STORAGE;
+    }
+
+    public void setEnergy(int energy) {
+        ENERGY_STORAGE.setEnergy(energy);
     }
 }

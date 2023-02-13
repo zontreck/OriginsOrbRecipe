@@ -1,15 +1,22 @@
 package dev.zontreck.otemod.enchantments;
 
 import dev.zontreck.otemod.OTEMod;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerPlayerGameMode;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.enchantment.SoulSpeedEnchantment;
 import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 
 public class FlightEnchantment extends Enchantment
@@ -23,39 +30,52 @@ public class FlightEnchantment extends Enchantment
             {
                 if(ev.getEntity().level.isClientSide)return;
 
+
                 ServerPlayer sp = (ServerPlayer)ev.getEntity();
-                ItemStack feet = sp.getItemBySlot(EquipmentSlot.FEET);
-                ItemStack legs = sp.getItemBySlot(EquipmentSlot.LEGS);
+                recheck(sp);
+            }
+        }
 
-                boolean hasFlight = false;
+        private static void recheck(ServerPlayer sp)
+        {
+            if(sp.gameMode.isCreative())return; // Don't mess with the creative mode attributes
 
-                if(feet.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get())>0)hasFlight=true;
-                if(legs.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get())>0)hasFlight=true;
+            ItemStack feet = sp.getItemBySlot(EquipmentSlot.FEET);
 
-                Abilities playerAbilities = sp.getAbilities();
-                if(playerAbilities.mayfly == false)
-                {
-                    if(hasFlight){
-                        playerAbilities.mayfly=true;
-                        sp.onUpdateAbilities();
-                    }
-                }else {
-                    if(!hasFlight){
+            boolean hasFlight = false;
 
-                        playerAbilities.mayfly=false;
-                        playerAbilities.flying=false;
+            if(feet.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get())>0)hasFlight=true;
 
-                        sp.onUpdateAbilities();
-                    }
+            Abilities playerAbilities = sp.getAbilities();
+            if(playerAbilities.mayfly == false)
+            {
+                if(hasFlight){
+                    playerAbilities.mayfly=true;
+                    sp.onUpdateAbilities();
+                }
+            }else {
+                if(!hasFlight){
+
+                    playerAbilities.mayfly=false;
+                    playerAbilities.flying=false;
+
+                    sp.onUpdateAbilities();
                 }
             }
         }
+
+        @SubscribeEvent
+        public static void onGameModeChange(PlayerEvent.PlayerChangeGameModeEvent ev)
+        {
+            if(ev.getEntity().level.isClientSide)return;
+
+            recheck((ServerPlayer)ev.getEntity());
+        }
     }
 
-    public FlightEnchantment()
+    public FlightEnchantment(EquipmentSlot... slots)
     {
-        super(Rarity.RARE, EnchantmentCategory.ARMOR, new EquipmentSlot[] {EquipmentSlot.FEET, EquipmentSlot.LEGS});
-
+        super(Rarity.VERY_RARE, EnchantmentCategory.ARMOR_FEET, slots);
     }
     
     @Override
@@ -75,11 +95,7 @@ public class FlightEnchantment extends Enchantment
     {
         return this.getMinCost(level) + 15;
     }
-    @Override
-    public boolean canApplyAtEnchantingTable(ItemStack stack)
-    {
-        return false;
-    }
+    
     @Override
     public boolean isTreasureOnly(){
         return true;
@@ -90,7 +106,8 @@ public class FlightEnchantment extends Enchantment
         return true;
     }
 
-    // Not a bug. Flight is meant to be a permanent upgrade to a item. It is considered a curse due to unstable behavior that can randomly happen if the enchantment level is now maxxed out.
+    // Not a bug. Flight is meant to be a permanent upgrade to a item. It is considered a curse due to unstable behavior. Flight will eat up durability and forge energy
+    // Flight should NOT be able to be removed via the grindstone
     @Override
     public boolean isCurse()
     {

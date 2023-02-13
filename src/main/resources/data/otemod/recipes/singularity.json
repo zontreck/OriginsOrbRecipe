@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["ccc", "c c", "ccc"],
+  "key": {
+    "c": {
+      "item": "otemod:melted_nether_star"
+    }
+  },
+  "result": {
+    "item": "otemod:singularity",
+    "count": 1
+  }
+}

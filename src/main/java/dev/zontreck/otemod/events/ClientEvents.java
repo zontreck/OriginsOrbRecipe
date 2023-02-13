@@ -3,7 +3,7 @@ package dev.zontreck.otemod.events;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.integrations.KeyBindings;
 import dev.zontreck.otemod.networking.ModMessages;
-import dev.zontreck.otemod.networking.packets.OpenVaultPacket;
+import dev.zontreck.otemod.networking.packets.OpenVaultC2SPacket;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
@@ -21,7 +21,7 @@ public class ClientEvents {
             //OTEMod.LOGGER.info("KEY PRESS: "+event.getKey());
             if(KeyBindings.OPEN_VAULT.consumeClick())
             {
-                ModMessages.sendToServer(new OpenVaultPacket(0, false, 0));
+                ModMessages.sendToServer(new OpenVaultC2SPacket(0, false, 0));
             }
         }
     }

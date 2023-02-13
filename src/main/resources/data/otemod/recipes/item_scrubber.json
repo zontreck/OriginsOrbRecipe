@@ -2,16 +2,16 @@
     "type": "minecraft:crafting_shaped",
     "key": {
         "A": {
-            "tag": "forge:unusual/experience_blocks"
+            "item": "otemod:scrubber_frame"
         },
         "B": {
-            "tag": "forge:ingots/cobalt"
+            "item": "otemod:singularity"
         }
     },
     "pattern": [
+        "AAA",
         "ABA",
-        "B B",
-        "ABA"
+        "AAA"
     ],
     "result":{
         "item": "otemod:item_scrubber"

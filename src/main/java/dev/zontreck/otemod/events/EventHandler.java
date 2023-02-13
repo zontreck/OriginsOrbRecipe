@@ -2,10 +2,14 @@ package dev.zontreck.otemod.events;
 
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
+import dev.zontreck.otemod.enchantments.MobEggEnchantment;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
+import dev.zontreck.otemod.items.tags.ItemStatType;
+import dev.zontreck.otemod.items.tags.ItemStatistics;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -35,19 +39,29 @@ public class EventHandler {
             ServerPlayer play = (ServerPlayer)ent;
             LivingEntity killed = ev.getEntity();
 
-            int levelOfEgging = play.getMainHandItem().getEnchantmentLevel(ModEnchantments.MOB_EGGING_ENCHANTMENT.get());
-            float CHANCE = (OTEServerConfig.SPAWN_EGG_CHANCE.get()*1000);
+            ItemStack stack = play.getMainHandItem();
+            int levelOfEgging = stack.getEnchantmentLevel(ModEnchantments.MOB_EGGING_ENCHANTMENT.get());
+            
+            if(levelOfEgging==0)return;
+            CompoundTag tag = stack.getTag();
+            int bias = tag.getInt(MobEggEnchantment.TAG_BIAS);
 
-            CHANCE += (levelOfEgging * 0.5f);
-            if(killed.level.random.nextInt(0,100000) <= CHANCE)
+
+            if(MobEggEnchantment.givesEgg(levelOfEgging, bias))
             {
+                bias=0;
+                tag.putInt(MobEggEnchantment.TAG_BIAS, bias);
                 // .25% chance
                 // Check enchantment level for looting
-                int level = play.getMainHandItem().getEnchantmentLevel(Enchantments.MOB_LOOTING);
+                int level = stack.getEnchantmentLevel(Enchantments.MOB_LOOTING);
                 if(level==3){
                     ItemStack egg = new ItemStack(ForgeSpawnEggItem.fromEntityType(killed.getType()));
                     ev.getDrops().add(new ItemEntity(killed.level, killed.getX(), killed.getY(), killed.getZ(), egg));
+                    LoreHandlers.updateItem(stack, ItemStatType.EGGING);
                 }
+            }else{
+                bias += 1;
+                tag.putInt(MobEggEnchantment.TAG_BIAS, bias);
             }
         }
     }

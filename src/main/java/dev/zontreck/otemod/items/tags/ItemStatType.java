@@ -8,5 +8,6 @@ public enum ItemStatType {
     SHOVEL,
     SHOVELPATH,
     HOE,
-    SHEARS
+    SHEARS,
+    EGGING
 }

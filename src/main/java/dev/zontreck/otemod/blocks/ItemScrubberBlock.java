@@ -4,6 +4,8 @@ import javax.annotation.Nullable;
 
 import dev.zontreck.otemod.blocks.entity.ItemScrubberBlockEntity;
 import dev.zontreck.otemod.blocks.entity.ModEntities;
+import dev.zontreck.otemod.networking.ModMessages;
+import dev.zontreck.otemod.networking.packets.EnergySyncS2CPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -62,7 +64,11 @@ public class ItemScrubberBlock extends BaseEntityBlock
             BlockEntity be = lvl.getBlockEntity(pos);
             if(be instanceof ItemScrubberBlockEntity)
             {
-                NetworkHooks.openScreen(((ServerPlayer)player), (ItemScrubberBlockEntity)be, pos);
+                ItemScrubberBlockEntity entity = (ItemScrubberBlockEntity)be;
+                NetworkHooks.openScreen(((ServerPlayer)player), entity, pos);
+
+                ModMessages.sendToPlayer(new EnergySyncS2CPacket(entity.getEnergyStorage().getEnergyStored(), entity.getBlockPos()), (ServerPlayer)player);
+
             }else{
                 throw new IllegalStateException("Our container is missing!");
             }

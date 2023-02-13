@@ -1,7 +1,8 @@
 package dev.zontreck.otemod.implementation.inits;
 
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.implementation.scrubber.ScrubberMenu;
+import dev.zontreck.otemod.implementation.scrubber.ItemScrubberMenu;
+import dev.zontreck.otemod.implementation.scrubber.MagicalScrubberMenu;
 import dev.zontreck.otemod.implementation.vault.VaultMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -18,7 +19,8 @@ public final class ModMenuTypes
 
     public static final RegistryObject <MenuType <VaultMenu>> VAULT = CONTAINERS.register("vault", ()-> new MenuType<>(VaultMenu::new));
 
-    public static final RegistryObject<MenuType<ScrubberMenu>> SCRUBBER = registerMenuType(ScrubberMenu::new, "item_scrubber_menu");
+    public static final RegistryObject<MenuType<ItemScrubberMenu>> SCRUBBER = registerMenuType(ItemScrubberMenu::new, "item_scrubber_menu");
+    public static final RegistryObject<MenuType<MagicalScrubberMenu>> MAGIC_SCRUBBER = registerMenuType(MagicalScrubberMenu::new, "magical_scrubber_menu");
 
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory, String name)

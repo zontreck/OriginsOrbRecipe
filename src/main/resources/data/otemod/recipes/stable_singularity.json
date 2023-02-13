@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["ccc", "cbc", "ccc"],
+  "key": {
+    "c": {
+      "item": "minecraft:obsidian"
+    },
+    "b": {
+      "item": "otemod:singularity"
+    }
+  },
+  "result": {
+    "item": "otemod:stable_singularity",
+    "count": 1
+  }
+}

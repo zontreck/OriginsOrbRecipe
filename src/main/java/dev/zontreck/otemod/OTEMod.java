@@ -54,7 +54,8 @@ import dev.zontreck.otemod.enchantments.ModEnchantments;
 import dev.zontreck.otemod.events.EventHandler;
 import dev.zontreck.otemod.events.LoreHandlers;
 import dev.zontreck.otemod.implementation.inits.ModMenuTypes;
-import dev.zontreck.otemod.implementation.scrubber.ScrubberScreen;
+import dev.zontreck.otemod.implementation.scrubber.ItemScrubberScreen;
+import dev.zontreck.otemod.implementation.scrubber.MagicalScrubberScreen;
 import dev.zontreck.otemod.implementation.vault.VaultScreen;
 import dev.zontreck.otemod.implementation.vault.VaultWatcher;
 import dev.zontreck.otemod.items.ModItems;
@@ -286,7 +287,8 @@ public class OTEMod
             //LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
 
             MenuScreens.register(ModMenuTypes.VAULT.get(), VaultScreen::new);
-            MenuScreens.register(ModMenuTypes.SCRUBBER.get(), ScrubberScreen::new);
+            MenuScreens.register(ModMenuTypes.SCRUBBER.get(), ItemScrubberScreen::new);
+            MenuScreens.register(ModMenuTypes.MAGIC_SCRUBBER.get(), MagicalScrubberScreen::new);
 
             //ItemBlockRenderTypes.setRenderLayer(ModBlocks.AURORA_DOOR.get(), RenderType.translucent());
         }

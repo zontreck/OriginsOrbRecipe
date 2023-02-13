@@ -8,7 +8,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.commands.vaults.VaultCommand;
 import dev.zontreck.otemod.networking.ModMessages;
-import dev.zontreck.otemod.networking.packets.OpenVaultPacket;
+import dev.zontreck.otemod.networking.packets.OpenVaultC2SPacket;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Button.OnPress;
 import net.minecraft.client.gui.font.TextFieldHelper;
@@ -72,12 +72,12 @@ public class VaultScreen extends AbstractContainerScreen <VaultMenu>
         this.addWidget(new Button(this.leftPos+7,this.topPos+84,16,16,Component.literal(""), (button)->{
             thePlayer.closeContainer();
 
-            ModMessages.sendToServer(new OpenVaultPacket(0,true,-1));
+            ModMessages.sendToServer(new OpenVaultC2SPacket(0,true,-1));
         } ));
 
         this.addWidget(new Button(this.leftPos+187,this.topPos+84,16,16,Component.literal(""), (button)->{
             thePlayer.closeContainer();
-            ModMessages.sendToServer(new OpenVaultPacket(0, true, 1));
+            ModMessages.sendToServer(new OpenVaultC2SPacket(0, true, 1));
         } ));
     }
 

@@ -6,22 +6,21 @@ import dev.zontreck.otemod.commands.vaults.VaultCommand;
 import dev.zontreck.otemod.implementation.vault.VaultContainer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.event.level.NoteBlockEvent.Change;
 import net.minecraftforge.network.NetworkEvent;
 
 // This packet is only ever sent from the client to the server when requesting to open vaults using the EaseOfUse Buttons
-public class OpenVaultPacket {
+public class OpenVaultC2SPacket {
     private int vault=0;
     private boolean change = false; // This is set to true when going previous or next.
     private int changeDir = 0; // This is only in the packet when change is true. This is either a 1 or a -1.
-    public OpenVaultPacket(int vaultNum, boolean change, int changeDir)
+    public OpenVaultC2SPacket(int vaultNum, boolean change, int changeDir)
     {
         this.vault = vaultNum;
         this.change = change;
         this.changeDir=changeDir;
     }
 
-    public OpenVaultPacket(FriendlyByteBuf buf)
+    public OpenVaultC2SPacket(FriendlyByteBuf buf)
     {
         this.change = buf.readBoolean();
         if(this.change)

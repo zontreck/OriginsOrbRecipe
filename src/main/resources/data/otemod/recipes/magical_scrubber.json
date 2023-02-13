@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "A": {
+            "item": "otemod:scrubber_frame"
+        },
+        "B": {
+            "item": "otemod:item_scrubber"
+        }
+    },
+    "pattern": [
+        "AAA",
+        "ABA",
+        "AAA"
+    ],
+    "result":{
+        "item": "otemod:magical_scrubber"
+    }
+}

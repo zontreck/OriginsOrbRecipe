@@ -134,7 +134,8 @@ public class LoreHandlers {
 
     }
 
-    private void updateItem(ItemStack weaponUsed, ItemStatType type)
+    // Only valid to be used by OTEMod
+    protected static void updateItem(ItemStack weaponUsed, ItemStatType type)
     {
     
         // Update the mob kill count

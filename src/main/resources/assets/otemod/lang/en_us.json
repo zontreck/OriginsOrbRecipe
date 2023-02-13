@@ -22,6 +22,13 @@
     "item.otemod.pattern": "Pattern",
     "item.otemod.scorched_brick": "Scorched Brick",
     "item.otemod.copper_can": "Copper Can",
+    "item.otemod.melted_nether_star": "Melted Nether Star",
+    "item.otemod.eternium_ingot": "Eternium Ingot",
+    "item.otemod.eternium_rod": "Eternium Rod",
+    "item.otemod.singularity": "Singularity",
+    "item.otemod.scrubber_frame_piece": "Scrubber Frame Component",
+    "item.otemod.scrubber_frame": "Scrubber Frame",
+
 
     "block.otemod.eternium_ore_block": "Eternium Ore",
     "block.otemod.deepslate_eternium_ore_block": "Deepslate Eternium Ore",
@@ -35,6 +42,9 @@
     "block.otemod.nether_grout": "Nether Grout",
     "block.otemod.scorched_table": "Scorched Table",
     "block.otemod.item_scrubber": "Item Scrubber",
+    "block.otemod.magical_scrubber": "Magical Scrubber",
+    "block.otemod.stable_singularity": "Stable Singularity",
+
 
     "enchantment.otemod.mob_egging": "Mob Egging",
     "enchantment.otemod.player_flight": "Flight",

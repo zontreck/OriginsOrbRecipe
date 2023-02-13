@@ -1,5 +1,9 @@
 package dev.zontreck.otemod.enchantments;
 
+import java.util.Random;
+
+import dev.zontreck.otemod.configs.OTEServerConfig;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
@@ -8,6 +12,7 @@ import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class MobEggEnchantment extends Enchantment
 {
+    public static final String TAG_BIAS = "mob_egging_bias";
 
     public MobEggEnchantment()
     {
@@ -54,5 +59,15 @@ public class MobEggEnchantment extends Enchantment
     {
         return false;
     }
-    
+
+    public static boolean givesEgg(int level, int bias)
+    {
+        double CHANCE = OTEServerConfig.SPAWN_EGG_CHANCE.get() * 100;
+
+        CHANCE *= (level / 0.5);
+        CHANCE += bias;
+
+        double rng = Math.random()*100000;
+        return (rng <= CHANCE);
+    }
 }

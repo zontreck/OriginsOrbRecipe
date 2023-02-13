@@ -145,6 +145,8 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
     api 'curse.maven:mariadb-jdbc-561883:3586357'
+
+    runtimeOnly fg.deobf("curse.maven:mekanism-268560:4385637")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
