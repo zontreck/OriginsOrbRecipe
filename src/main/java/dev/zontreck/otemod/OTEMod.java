@@ -13,6 +13,7 @@ import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Codec;
 
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
@@ -36,6 +37,7 @@ import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import software.bernie.geckolib3.GeckoLib;
 
 import org.slf4j.Logger;
 
@@ -51,6 +53,8 @@ import dev.zontreck.otemod.configs.Profile;
 import dev.zontreck.otemod.database.Database;
 import dev.zontreck.otemod.database.Database.DatabaseConnectionException;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
+import dev.zontreck.otemod.entities.ModEntityTypes;
+import dev.zontreck.otemod.entities.monsters.client.PossumRenderer;
 import dev.zontreck.otemod.events.EventHandler;
 import dev.zontreck.otemod.events.LoreHandlers;
 import dev.zontreck.otemod.implementation.inits.ModMenuTypes;
@@ -109,7 +113,6 @@ public class OTEMod
 
 
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(new EventHandler());
         MinecraftForge.EVENT_BUS.register(new LoreHandlers());
         MinecraftForge.EVENT_BUS.register(new ChatServerOverride());
         MinecraftForge.EVENT_BUS.register(new CommandRegistry());
@@ -121,6 +124,9 @@ public class OTEMod
         ModItems.register(bus);
         ModEntities.register(bus);
         ModEnchantments.register(bus);
+        ModEntityTypes.register(bus);
+
+        GeckoLib.initialize();
         //MenuInitializer.register(bus);
     }
 
@@ -291,6 +297,8 @@ public class OTEMod
             MenuScreens.register(ModMenuTypes.MAGIC_SCRUBBER.get(), MagicalScrubberScreen::new);
 
             //ItemBlockRenderTypes.setRenderLayer(ModBlocks.AURORA_DOOR.get(), RenderType.translucent());
+
+            EntityRenderers.register(ModEntityTypes.POSSUM.get(), PossumRenderer::new);
         }
 
     }

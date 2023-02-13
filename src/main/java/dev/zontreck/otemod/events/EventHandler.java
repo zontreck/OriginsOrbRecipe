@@ -4,6 +4,8 @@ import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.enchantments.MobEggEnchantment;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
+import dev.zontreck.otemod.entities.ModEntityTypes;
+import dev.zontreck.otemod.entities.monsters.PossumEntity;
 import dev.zontreck.otemod.items.tags.ItemStatType;
 import dev.zontreck.otemod.items.tags.ItemStatistics;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -12,15 +14,17 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
-@EventBusSubscriber(modid=OTEMod.MOD_ID, bus=Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid=OTEMod.MOD_ID)
 public class EventHandler {
     /*
     @SubscribeEvent(priority = EventPriority.HIGH)
@@ -65,4 +69,5 @@ public class EventHandler {
             }
         }
     }
+    
 }

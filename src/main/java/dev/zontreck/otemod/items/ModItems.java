@@ -1,10 +1,12 @@
 package dev.zontreck.otemod.items;
 
 import dev.zontreck.otemod.OTEMod;
+import dev.zontreck.otemod.entities.ModEntityTypes;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.SimpleFoiledItem;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -39,6 +41,11 @@ public class ModItems {
     public static final RegistryObject<Item> ETERNIUM_ROD = ITEMS.register("eternium_rod", () -> new SimpleFoiledItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(64)));
     public static final RegistryObject<Item> SCRUBBER_FRAME_PIECE = ITEMS.register("scrubber_frame_piece", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(64)));
     public static final RegistryObject<Item> SCRUBBER_FRAME = ITEMS.register("scrubber_frame", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(64)));
+
+
+
+    
+    public static final RegistryObject<Item> POSSUM_SPAWN_EGG = ITEMS.register("possum_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.POSSUM, 0x938686, 0xc68787, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
 
 

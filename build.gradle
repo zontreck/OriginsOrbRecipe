@@ -114,6 +114,11 @@ repositories {
         name = "ZNI Creations"
         url = "https://maven.zontreck.dev"
     }
+
+    maven {
+        name = "GeckoLib"
+        url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
+    }
 }
 
 dependencies {
@@ -125,6 +130,9 @@ dependencies {
     implementation fg.deobf("dev.zontreck:libzontreck:${mc_version}-${libz_version}:dev")
     compileOnly fg.deobf("dev.zontreck:libzontreck:${mc_version}-${libz_version}:dev")
     runtimeOnly fg.deobf("dev.zontreck:libzontreck:${mc_version}-${libz_version}")
+
+
+    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.19:3.1.39')
 
     //compileOnly "net.luckperms:api:${luckperms_version}"
     // compile against the JEI API but do not include it at runtime
