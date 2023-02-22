@@ -6,6 +6,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.energy.IEnergyStorage;
 
 /*
@@ -32,7 +33,7 @@ public class EnergyInfoArea extends InfoArea {
     }
 
     public List<Component> getTooltips() {
-        return List.of(Component.literal(energy.getEnergyStored()+"/"+energy.getMaxEnergyStored()+" FE"));
+        return List.of(new TextComponent(energy.getEnergyStored()+"/"+energy.getMaxEnergyStored()+" FE"));
     }
 
     @Override

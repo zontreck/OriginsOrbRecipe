@@ -6,6 +6,8 @@ import dev.zontreck.otemod.implementation.vault.VaultContainer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraftforge.network.NetworkHooks;
 
@@ -24,14 +26,15 @@ public class TrashCommand {
     private static int vault(CommandSourceStack source) {
         //VaultContainer cont = new VaultContainer(i, source.getPlayer().getUUID());
         //cont.startOpen(source.getPlayer());
+        ServerPlayer play = (ServerPlayer)source.getEntity();
+
+        VaultContainer container = new VaultContainer(play, -1);
         
-        VaultContainer container = new VaultContainer(source.getPlayer(), -1);
-        
-        NetworkHooks.openScreen(source.getPlayer(), new SimpleMenuProvider(container.serverMenu, Component.literal("Trash")));
+        NetworkHooks.openGui(play, new SimpleMenuProvider(container.serverMenu, new TextComponent("Trash")));
         
         // Add to the master vault registry
-        if(VaultContainer.VAULT_REGISTRY.containsKey(source.getPlayer().getUUID()))VaultContainer.VAULT_REGISTRY.remove(source.getPlayer().getUUID());
-        VaultContainer.VAULT_REGISTRY.put(source.getPlayer().getUUID(), container);
+        if(VaultContainer.VAULT_REGISTRY.containsKey(play.getUUID()))VaultContainer.VAULT_REGISTRY.remove(play.getUUID());
+        VaultContainer.VAULT_REGISTRY.put(play.getUUID(), container);
         
         return 0;
     }

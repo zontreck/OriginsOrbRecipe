@@ -18,8 +18,9 @@ import dev.zontreck.otemod.chat.ChatServerOverride;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextComponent;
 
 public class HomesCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
@@ -30,12 +31,12 @@ public class HomesCommand {
     private static int getHomes(CommandContext<CommandSourceStack> ctx)
     {
         // Request homes
-        if(! ctx.getSource().isPlayer())
+        if(!(ctx.getSource().getEntity() instanceof Player))
         {
             
             return 1;
         }
-        ServerPlayer p = ctx.getSource().getPlayer();
+        ServerPlayer p = (ServerPlayer)ctx.getSource().getEntity();
         Connection con = OTEMod.DB.getConnection();
         try {
             con.beginRequest();
@@ -46,13 +47,13 @@ public class HomesCommand {
                 homes.add(rs.getString("home_name"));
             }
             
-            ChatServerOverride.broadcastTo(p.getUUID(), Component.literal(OTEMod.OTEPrefix + ChatColor.doColors(" !Dark_Purple!There are !gold!"+String.valueOf(homes.size())+" !dark_purple!total homes.")), p.server);
+            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !Dark_Purple!There are !gold!"+String.valueOf(homes.size())+" !dark_purple!total homes.")), p.server);
             con.endRequest();
 
             for (String string : homes) {
                 Style st = Style.EMPTY.withFont(Style.DEFAULT_FONT).withHoverEvent(HoverTip.get(ChatColor.BOLD+ChatColor.DARK_GREEN+"Click here to go to this home")).withClickEvent(Clickable.command("/home "+string));
 
-                ChatServerOverride.broadcastTo(ctx.getSource().getPlayer().getUUID(), Component.literal(ChatColor.BOLD + ChatColor.MINECOIN_GOLD+"["+ChatColor.resetChat()+ChatColor.UNDERLINE+ChatColor.BOLD+ChatColor.DARK_GREEN+"HOME"+ChatColor.resetChat()+ChatColor.BOLD+ChatColor.MINECOIN_GOLD+"] "+ChatColor.resetChat()+ChatColor.YELLOW+string).setStyle(st), ctx.getSource().getServer());
+                ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(ChatColor.BOLD + ChatColor.MINECOIN_GOLD+"["+ChatColor.resetChat()+ChatColor.UNDERLINE+ChatColor.BOLD+ChatColor.DARK_GREEN+"HOME"+ChatColor.resetChat()+ChatColor.BOLD+ChatColor.MINECOIN_GOLD+"] "+ChatColor.resetChat()+ChatColor.YELLOW+string).setStyle(st), ctx.getSource().getServer());
                 
             }
         } catch (SQLException e) {

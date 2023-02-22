@@ -16,6 +16,8 @@ import dev.zontreck.otemod.database.TeleportDestination;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
@@ -34,14 +36,7 @@ public class RTPWarpCommand {
 
     private static int setWarp(CommandSourceStack source, String string) {
         
-        if(! source.isPlayer())
-        {
-            
-            
-            ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), Component.literal(OTEMod.OTEPrefix + OTEMod.ONLY_PLAYER), source.getServer());
-            return 1;
-        }
-        ServerPlayer p = source.getPlayer();
+        ServerPlayer p = (ServerPlayer)source.getEntity();
         Connection con = OTEMod.DB.getConnection();
         try {
             con.beginRequest();
@@ -60,13 +55,13 @@ public class RTPWarpCommand {
             pstat.execute();
             
 
-            ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), Component.literal(ChatColor.GREEN).append(Component.translatable("dev.zontreck.otemod.msgs.warps.set.success")), source.getServer());
+            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(ChatColor.GREEN).append(new TranslatableComponent("dev.zontreck.otemod.msgs.warps.set.success")), source.getServer());
 
             con.endRequest();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), Component.literal(ChatColor.DARK_RED).append(Component.translatable("dev.zontreck.otemod.msgs.warps.set.fail")), source.getServer());
+            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(ChatColor.DARK_RED).append(new TranslatableComponent("dev.zontreck.otemod.msgs.warps.set.fail")), source.getServer());
         }
 
         return 0;

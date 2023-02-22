@@ -1,5 +1,6 @@
 package dev.zontreck.otemod.enchantments;
 
+import dev.zontreck.libzontreck.util.ItemUtils;
 import dev.zontreck.otemod.OTEMod;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
@@ -44,7 +45,7 @@ public class FlightEnchantment extends Enchantment
 
             boolean hasFlight = false;
 
-            if(feet.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get())>0)hasFlight=true;
+            if(ItemUtils.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get(), feet)>0)hasFlight=true;
 
             Abilities playerAbilities = sp.getAbilities();
             if(playerAbilities.mayfly == false)

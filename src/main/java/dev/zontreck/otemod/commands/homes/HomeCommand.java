@@ -12,6 +12,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.exceptions.InvalidDeserialization;
+import dev.zontreck.libzontreck.exceptions.InvalidSideException;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.commands.teleport.TeleportActioner;
@@ -22,11 +23,12 @@ import net.minecraft.commands.Commands;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextColor;
+import net.minecraft.network.chat.TextComponent;
 
 public class HomeCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
@@ -47,11 +49,11 @@ public class HomeCommand {
 //        homeName = StringArgumentType.getString(ctx2, "nickname");
 //        if(homeName==null)return 0;
         
-        if(! ctx.isPlayer())
+        if(!(ctx.getEntity() instanceof Player))
         {
             return 1;
         }
-        ServerPlayer p = ctx.getPlayer();
+        ServerPlayer p = (ServerPlayer)ctx.getEntity();
         Connection con = OTEMod.DB.getConnection();
         String SQL="";
         try {
@@ -83,7 +85,13 @@ public class HomeCommand {
                 position = dest.Position.asMinecraftVector();
                 rot = dest.Rotation.asMinecraftVector();
 
-                ServerLevel dimL  = dest.getActualDimension();
+                ServerLevel dimL=null;
+                try {
+                    dimL = (ServerLevel)dest.getActualDimension();
+                } catch (InvalidSideException e) {
+                    e.printStackTrace();
+                    return 1;
+                }
 
                 TeleportActioner.ApplyTeleportEffect(p);
                 // Instantiate a Teleport Runner
@@ -101,15 +109,15 @@ public class HomeCommand {
             Style sxx = Style.EMPTY.withColor(TextColor.parseColor(ChatColor.DARK_GREEN)).withFont(Style.DEFAULT_FONT);
             
 
-            ChatServerOverride.broadcastTo(ctx.getPlayer().getUUID(), Component.literal(OTEMod.OTEPrefix + ChatColor.doColors("!dark_green!Home found! Wormhole opening now...")), ctx.getServer());
+            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !dark_green!Home found! Wormhole opening now...")), ctx.getServer());
             con.endRequest();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             if(!e.getMessage().equals("%%"))
-                ChatServerOverride.broadcastTo(ctx.getPlayer().getUUID(), Component.literal(OTEMod.OTEPrefix + ChatColor.doColors("!Dark_Red! Could not go to the home")), ctx.getServer());
+                ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !Dark_Red! Could not go to the home")), ctx.getServer());
             else
-                ctx.sendFailure(Component.literal("FAILED SQL: "+ ChatColor.GOLD+ SQL));
+                ctx.sendFailure(new TextComponent("FAILED SQL: "+ ChatColor.GOLD+ SQL));
         } catch (InvalidDeserialization e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

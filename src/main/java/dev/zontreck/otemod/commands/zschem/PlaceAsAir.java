@@ -19,6 +19,7 @@ import dev.zontreck.otemod.zschem.MemoryHolder.Container;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.Blocks;
 
@@ -37,7 +38,7 @@ public class PlaceAsAir {
 
     private static int place(CommandSourceStack source) {
 
-        ServerPlayer play = source.getPlayer();
+        ServerPlayer play = (ServerPlayer)source.getEntity();
         if(play==null)return 1;
 
         if(!LuckPermsHelper.hasGroupOrPerm(play, Permissions.zschem, Permissions.zschem_air)){
@@ -47,7 +48,7 @@ public class PlaceAsAir {
 
         if(!MemoryHolder.hasPlayerCached(play)){
 
-            ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first set the positions!")), OTEMod.THE_SERVER);
+            ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first set the positions!")), OTEMod.THE_SERVER);
 
             return 1;
         }
@@ -72,13 +73,13 @@ public class PlaceAsAir {
             
         }else {
             
-            ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first set the positions!")), OTEMod.THE_SERVER);
+            ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first set the positions!")), OTEMod.THE_SERVER);
 
             return 1;
         }
 
 
-        ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!Enqueued!")), OTEMod.THE_SERVER);
+        ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!Enqueued!")), OTEMod.THE_SERVER);
 
         return 0;
     }

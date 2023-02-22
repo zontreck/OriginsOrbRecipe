@@ -1,27 +1,21 @@
 package dev.zontreck.otemod.events;
 
+import dev.zontreck.libzontreck.util.ItemUtils;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.enchantments.MobEggEnchantment;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
-import dev.zontreck.otemod.entities.ModEntityTypes;
-import dev.zontreck.otemod.entities.monsters.PossumEntity;
 import dev.zontreck.otemod.items.tags.ItemStatType;
-import dev.zontreck.otemod.items.tags.ItemStatistics;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 
 @Mod.EventBusSubscriber(modid=OTEMod.MOD_ID)
@@ -41,10 +35,10 @@ public class EventHandler {
         if(ent instanceof Player)
         {
             ServerPlayer play = (ServerPlayer)ent;
-            LivingEntity killed = ev.getEntity();
+            LivingEntity killed = ev.getEntityLiving();
 
             ItemStack stack = play.getMainHandItem();
-            int levelOfEgging = stack.getEnchantmentLevel(ModEnchantments.MOB_EGGING_ENCHANTMENT.get());
+            int levelOfEgging = ItemUtils.getEnchantmentLevel(ModEnchantments.MOB_EGGING_ENCHANTMENT.get(),stack);
             
             if(levelOfEgging==0)return;
             CompoundTag tag = stack.getTag();
@@ -57,7 +51,7 @@ public class EventHandler {
                 tag.putInt(MobEggEnchantment.TAG_BIAS, bias);
                 // .25% chance
                 // Check enchantment level for looting
-                int level = stack.getEnchantmentLevel(Enchantments.MOB_LOOTING);
+                int level = ItemUtils.getEnchantmentLevel (Enchantments.MOB_LOOTING,stack);
                 if(level==3){
                     ItemStack egg = new ItemStack(ForgeSpawnEggItem.fromEntityType(killed.getType()));
                     ev.getDrops().add(new ItemEntity(killed.level, killed.getX(), killed.getY(), killed.getZ(), egg));

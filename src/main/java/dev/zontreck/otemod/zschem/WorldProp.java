@@ -15,7 +15,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.event.level.ExplosionEvent;
+import net.minecraftforge.event.world.ExplosionEvent;
 
 public class WorldProp implements Supplier<Object>
 {
@@ -34,7 +34,7 @@ public class WorldProp implements Supplier<Object>
 
     public void onDetonate(ExplosionEvent.Detonate ev)
     {
-        Level w = ev.getLevel();
+        Level w = ev.getWorld();
         //int maxTicks = 0;
 
         for(BlockPos p : ev.getAffectedBlocks())

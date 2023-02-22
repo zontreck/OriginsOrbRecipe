@@ -17,8 +17,10 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -109,8 +111,12 @@ public class RTPCommand {
             //return 0; // Removed until the player data registry is implemented
         }
         CommandRegistry.markUsed("rtp");*/
-        ServerPlayer pla = source.getPlayer();
-        TeleportContainer cont = new TeleportContainer(pla, null, source.getPlayer().getRotationVector(), source.getLevel());
+        if(!(source.getEntity() instanceof Player)){
+            return 1;
+        }
+        ServerPlayer pla = (ServerPlayer)source.getEntity();
+        
+        TeleportContainer cont = new TeleportContainer(pla, null, pla.getRotationVector(), source.getLevel());
         
 
 
@@ -125,7 +131,7 @@ public class RTPCommand {
                 boolean found_place= false;
         
                 int tries=0;
-                ChatServerOverride.broadcastTo(pla.getUUID(), Component.literal(ChatColor.DARK_GRAY + "["+ChatColor.DARK_GREEN+"OTEMOD"+ChatColor.DARK_GRAY+"] "+ChatColor.GREEN+"Searching for a suitable landing location..."), source.getServer());
+                ChatServerOverride.broadcastTo(pla.getUUID(), new TextComponent(ChatColor.DARK_GRAY + "["+ChatColor.DARK_GREEN+"OTEMOD"+ChatColor.DARK_GRAY+"] "+ChatColor.GREEN+"Searching for a suitable landing location..."), source.getServer());
                 /*
                  * 
                  *
@@ -212,7 +218,7 @@ public class RTPCommand {
                 }*/
                 v=findPosition(source.getLevel(), allowWater);
         
-                ChatServerOverride.broadcastTo(pla.getUUID(), Component.literal(ChatColor.DARK_GRAY + "["+ChatColor.DARK_GREEN + "OTEMOD" + ChatColor.DARK_GRAY + "] "+ChatColor.DARK_PURPLE+" A suitable location has been found. Wormhole opening now!"), source.getServer());
+                ChatServerOverride.broadcastTo(pla.getUUID(), new TextComponent(ChatColor.DARK_GRAY + "["+ChatColor.DARK_GREEN + "OTEMOD" + ChatColor.DARK_GRAY + "] "+ChatColor.DARK_PURPLE+" A suitable location has been found. Wormhole opening now!"), source.getServer());
         
                 // Apply the effect
                 TeleportActioner.ApplyTeleportEffect(pla);
@@ -230,6 +236,8 @@ public class RTPCommand {
     }
 
     private static int doCancel(CommandSourceStack source, String TPID) {
+        
+        ServerPlayer play = (ServerPlayer)source.getEntity();
         UUID teleporter = UUID.fromString(TPID);
         for(TeleportContainer cont : OTEMod.TeleportRegistry){
             if(cont.TeleportID.equals(teleporter)){
@@ -238,7 +246,7 @@ public class RTPCommand {
                 ServerPlayer from = source.getServer().getPlayerList().getPlayer(cont.FromPlayer);
                 ServerPlayer to = source.getServer().getPlayerList().getPlayer(cont.ToPlayer);
 
-                Component comp = Component.literal(ChatColor.DARK_GRAY + "["+ ChatColor.DARK_GREEN+ "OTEMOD" + ChatColor.DARK_GRAY+"] " + ChatColor.DARK_PURPLE+"Teleport request was accepted. Opening wormhole!");
+                Component comp = new TextComponent(ChatColor.DARK_GRAY + "["+ ChatColor.DARK_GREEN+ "OTEMOD" + ChatColor.DARK_GRAY+"] " + ChatColor.DARK_PURPLE+"Teleport request was accepted. Opening wormhole!");
 
                 ChatServerOverride.broadcastTo(cont.FromPlayer, comp, source.getServer());
                 ChatServerOverride.broadcastTo(cont.ToPlayer, comp, source.getServer());
@@ -257,9 +265,9 @@ public class RTPCommand {
             }
         }
 
-        Component comp = Component.literal(ChatColor.DARK_RED+"The teleport was not found, perhaps the request expired or was already cancelled/denied");
+        Component comp = new TextComponent(ChatColor.DARK_RED+"The teleport was not found, perhaps the request expired or was already cancelled/denied");
 
-        ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), comp, source.getServer());
+        ChatServerOverride.broadcastTo(play.getUUID(), comp, source.getServer());
 
         return 0;
     }

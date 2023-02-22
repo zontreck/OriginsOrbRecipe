@@ -15,6 +15,7 @@ import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 
 public class TPAHereCommand {
@@ -31,25 +32,27 @@ public class TPAHereCommand {
 
     private static int tpa(CommandSourceStack source, ServerPlayer serverPlayer) {
         // Send the request to player
+
+        ServerPlayer play = (ServerPlayer)source.getEntity();
         if(serverPlayer == null){
-            source.sendFailure(Component.literal(ChatColor.DARK_RED+"Error: Player not found"));
+            source.sendFailure(new TextComponent(ChatColor.DARK_RED+"Error: Player not found"));
             return 1;
         }
         if(!OTEMod.DEVELOPER){
-            if(source.getPlayer().getUUID() == serverPlayer.getUUID()){
-                source.sendFailure(Component.literal(ChatColor.DARK_RED+"You cannot teleport to yourself!"));
+            if(play.getUUID() == serverPlayer.getUUID()){
+                source.sendFailure(new TextComponent(ChatColor.DARK_RED+"You cannot teleport to yourself!"));
                 return 1;
             }
         }
-        TeleportContainer cont = new TeleportContainer(serverPlayer.getUUID(), source.getPlayer().getUUID());
+        TeleportContainer cont = new TeleportContainer(serverPlayer.getUUID(), play.getUUID());
 
         for(TeleportContainer cont2 : OTEMod.TeleportRegistry){
             if(cont2.compareTo(cont)==0){
-                ChatServerOverride.broadcastTo(cont.ToPlayer, Component.literal(ChatColor.DARK_RED+ "You already have a TPA Request active, wait for it to expire, or use the cancel button/command"), source.getServer());
+                ChatServerOverride.broadcastTo(cont.ToPlayer, new TextComponent(ChatColor.DARK_RED+ "You already have a TPA Request active, wait for it to expire, or use the cancel button/command"), source.getServer());
                 return 0;
             }else {
                 if(cont2.ToPlayer.equals(cont.ToPlayer)){
-                    ChatServerOverride.broadcastTo(cont.FromPlayer, Component.literal(ChatColor.DARK_RED+ "You already have a TPA Request active, wait for it to expire, or use the cancel button/command"), source.getServer());
+                    ChatServerOverride.broadcastTo(cont.FromPlayer, new TextComponent(ChatColor.DARK_RED+ "You already have a TPA Request active, wait for it to expire, or use the cancel button/command"), source.getServer());
                     return 0;
                 }
             }
@@ -62,7 +65,7 @@ public class TPAHereCommand {
         Style s = Style.EMPTY.withFont(Style.DEFAULT_FONT).withHoverEvent(he).withClickEvent(ce);
 
         // Send the alerts
-        ChatServerOverride.broadcastTo(cont.ToPlayer, Component.literal(ChatColor.BOLD + ChatColor.DARK_GREEN +"TPA Request Sent! ").append(Component.literal(ChatColor.BOLD+ChatColor.DARK_GRAY+"["+ChatColor.DARK_RED+"X"+ChatColor.DARK_GRAY+"]").setStyle(s)), serverPlayer.server);
+        ChatServerOverride.broadcastTo(cont.ToPlayer, new TextComponent(ChatColor.BOLD + ChatColor.DARK_GREEN +"TPA Request Sent! ").append(new TextComponent(ChatColor.BOLD+ChatColor.DARK_GRAY+"["+ChatColor.DARK_RED+"X"+ChatColor.DARK_GRAY+"]").setStyle(s)), serverPlayer.server);
 
 
         ce = Clickable.command("/tpaccept "+cont.TeleportID.toString());
@@ -74,16 +77,16 @@ public class TPAHereCommand {
         Style s2 = Style.EMPTY.withFont(Style.DEFAULT_FONT).withClickEvent(ce2).withHoverEvent(he2);
 
         Profile p = Profile.get_profile_of(cont.ToPlayer.toString());
-        ChatServerOverride.broadcastTo(cont.FromPlayer, Component.literal(p.name_color+p.nickname + ChatColor.BOLD + ChatColor.DARK_PURPLE+" is requesting you to teleport to them\n \n").
-            append(Component.literal(ChatColor.DARK_GRAY+"["+ChatColor.DARK_GREEN+"ACCEPT" + ChatColor.DARK_GRAY+"] ").setStyle(s)).
-            append(Component.literal(ChatColor.DARK_GRAY + "["+ChatColor.DARK_RED+"DENY"+ChatColor.DARK_GRAY+"]").setStyle(s2)), serverPlayer.server);
+        ChatServerOverride.broadcastTo(cont.FromPlayer, new TextComponent(p.name_color+p.nickname + ChatColor.BOLD + ChatColor.DARK_PURPLE+" is requesting you to teleport to them\n \n").
+            append(new TextComponent(ChatColor.DARK_GRAY+"["+ChatColor.DARK_GREEN+"ACCEPT" + ChatColor.DARK_GRAY+"] ").setStyle(s)).
+            append(new TextComponent(ChatColor.DARK_GRAY + "["+ChatColor.DARK_RED+"DENY"+ChatColor.DARK_GRAY+"]").setStyle(s2)), serverPlayer.server);
         
         OTEMod.TeleportRegistry.add(cont);
         return 0;
     }
 
     private static int usage(CommandSourceStack source) {
-        source.sendSuccess(Component.literal("/tpa USAGE\n\n      "+ChatColor.BOLD + ChatColor.DARK_GRAY+"/tpa "+ChatColor.DARK_RED+"target_player\n"), false);
+        source.sendSuccess(new TextComponent("/tpa USAGE\n\n      "+ChatColor.BOLD + ChatColor.DARK_GRAY+"/tpa "+ChatColor.DARK_RED+"target_player\n"), false);
         return 0;
     }
 }

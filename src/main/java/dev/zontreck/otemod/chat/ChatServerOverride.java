@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.chat.HoverTip;
+import dev.zontreck.libzontreck.util.ItemUtils;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.configs.PlayerFlyCache;
@@ -15,14 +16,13 @@ import dev.zontreck.otemod.configs.Profile;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Abilities;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.ServerChatEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -63,7 +63,8 @@ public class ChatServerOverride {
                 OTEMod.PROFILES.put(play.getStringUUID(), p);
                 p.commit(); // Commits the profile to the server
 
-                ev.getEntity().displayClientMessage(Component.literal(ChatColor.doColors( OTEMod.OTEPrefix +" !Dark_Green!First join! Your server profile has been created")), false);
+
+                play.displayClientMessage(new TextComponent(ChatColor.doColors( OTEMod.OTEPrefix +" !Dark_Green!First join! Your server profile has been created")), false);
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -84,15 +85,14 @@ public class ChatServerOverride {
         boolean mayFly = false;
         ItemStack feet = play.getItemBySlot(EquipmentSlot.FEET);
         ItemStack legs = play.getItemBySlot(EquipmentSlot.LEGS);
-        if(feet.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get())>0)mayFly=true;
-        if(legs.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get())>0)mayFly=true;
+        if(ItemUtils.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get(), feet)>0)mayFly = true;
 
         playerAbilities.mayfly=mayFly;
         play.onUpdateAbilities();
 
         if(!OTEServerConfig.USE_CUSTOM_JOINLEAVE.get()) return;
         
-        ChatServerOverride.broadcast(Component.literal(ChatColor.doColors("!Dark_Gray![!Dark_Green!+!Dark_Gray!] !Bold!!Dark_Aqua!"+prof.nickname)), ev.getEntity().getServer());
+        ChatServerOverride.broadcast(new TextComponent(ChatColor.doColors("!Dark_Gray![!Dark_Green!+!Dark_Gray!] !Bold!!Dark_Aqua!"+prof.nickname)), ev.getEntity().getServer());
         
     }
 
@@ -110,7 +110,7 @@ public class ChatServerOverride {
         if(!OTEServerConfig.USE_CUSTOM_JOINLEAVE.get()) return;
 
         // Send the alert
-        ChatServerOverride.broadcast(Component.literal(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "-" + ChatColor.DARK_GRAY + "] "+ChatColor.BOLD + ChatColor.DARK_AQUA + px.nickname), ev.getEntity().getServer());
+        ChatServerOverride.broadcast(new TextComponent(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "-" + ChatColor.DARK_GRAY + "] "+ChatColor.BOLD + ChatColor.DARK_AQUA + px.nickname), ev.getEntity().getServer());
 
         px.flying=sp.getAbilities().flying;
         px.commit();
@@ -123,7 +123,7 @@ public class ChatServerOverride {
         if(ev.getEntity().level.isClientSide)return;
         // Fix for fly ability not copying to new instance on death or other circumstances
         Player old = ev.getOriginal();
-        Player n = ev.getEntity();
+        Player n = ev.getPlayer();
 
         PlayerFlyCache c = PlayerFlyCache.cachePlayer((ServerPlayer)old);
         c.Assert((ServerPlayer)n);
@@ -146,7 +146,7 @@ public class ChatServerOverride {
             prefixStr = ChatColor.DARK_GRAY + "[" + ChatColor.BOLD + XD.prefix_color + XD.prefix + ChatColor.resetChat() + ChatColor.DARK_GRAY + "] ";
         }
 
-        String msg = ev.getMessage().getString();
+        String msg = ev.getMessage();
         msg= ChatColor.doColors(msg);
 
         String nameStr = ChatColor.resetChat() + "< "+ XD.name_color + XD.nickname + ChatColor.resetChat() + " >";
@@ -155,7 +155,7 @@ public class ChatServerOverride {
         hover=hover.withFont(Style.DEFAULT_FONT).withHoverEvent(HoverTip.get(ChatColor.MINECOIN_GOLD+"User Name: "+XD.username));
         ev.setCanceled(true);
 
-        ChatServerOverride.broadcast(Component.literal(prefixStr+nameStr+message).setStyle(hover), ev.getPlayer().server);
+        ChatServerOverride.broadcast(new TextComponent(prefixStr+nameStr+message).setStyle(hover), ev.getPlayer().server);
     }
 
 
@@ -169,7 +169,7 @@ public class ChatServerOverride {
                 {
                     play.displayClientMessage(message, true); // Send the message!
                 }
-                LogToConsole(Component.literal("[all] ").append(message));
+                LogToConsole(new TextComponent("[all] ").append(message));
             }
         });
     }
@@ -187,7 +187,7 @@ public class ChatServerOverride {
                 {
                     play.displayClientMessage(message, false); // Send the message!
                 }
-                LogToConsole(Component.literal("[all] ").append(message));
+                LogToConsole(new TextComponent("[all] ").append(message));
             }
         });
     }
@@ -199,7 +199,7 @@ public class ChatServerOverride {
                 ServerPlayer play = s.getPlayerList().getPlayer(ID);
                 play.displayClientMessage(message, false); // Send the message!
                 
-                LogToConsole(Component.literal("[server] -> ["+play.getName().toString()+"] ").append(message));
+                LogToConsole(new TextComponent("[server] -> ["+play.getName().toString()+"] ").append(message));
             }
         });
     }
@@ -211,7 +211,7 @@ public class ChatServerOverride {
                 ServerPlayer play = s.getPlayerList().getPlayer(ID);
                 play.displayClientMessage(message, true); // Send the message!
                 
-                LogToConsole(Component.literal("[server] -> ["+play.getName().toString()+"] ").append(message));
+                LogToConsole(new TextComponent("[server] -> ["+play.getName().toString()+"] ").append(message));
             }
         });
     }

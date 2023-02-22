@@ -9,6 +9,7 @@ import dev.zontreck.otemod.commands.homes.DelHomeCommand;
 import dev.zontreck.otemod.commands.homes.HomeCommand;
 import dev.zontreck.otemod.commands.homes.HomesCommand;
 import dev.zontreck.otemod.commands.homes.SetHomeCommand;
+import dev.zontreck.otemod.commands.items.ShareItemInChatCommand;
 import dev.zontreck.otemod.commands.profilecmds.ChatColorCommand;
 import dev.zontreck.otemod.commands.profilecmds.NameColorCommand;
 import dev.zontreck.otemod.commands.profilecmds.NickCommand;
@@ -135,5 +136,7 @@ public class CommandRegistry {
         LoadSchem.register(ev.getDispatcher());
         Place.register(ev.getDispatcher());
         PlaceAsAir.register(ev.getDispatcher());
+
+        ShareItemInChatCommand.register(ev.getDispatcher());
     }
 }

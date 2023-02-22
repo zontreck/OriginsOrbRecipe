@@ -1,12 +1,10 @@
 package dev.zontreck.otemod.blocks.entity;
 
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
-
 import javax.annotation.Nullable;
 
+import dev.zontreck.libzontreck.util.ItemUtils;
 import dev.zontreck.otemod.implementation.OutputItemStackHandler;
 import dev.zontreck.otemod.implementation.energy.OTEEnergy;
 import dev.zontreck.otemod.implementation.scrubber.MagicalScrubberMenu;
@@ -15,8 +13,8 @@ import dev.zontreck.otemod.networking.packets.EnergySyncS2CPacket;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -25,20 +23,18 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.EnchantedBookItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.Item.Properties;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentInstance;
-import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -123,22 +119,22 @@ public class MagicalScrubberBlockEntity extends BlockEntity implements MenuProvi
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("block.otemod.magical_scrubber");
+        return new TranslatableComponent("block.otemod.magical_scrubber");
     }
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side)
     {
-        if(cap == ForgeCapabilities.ENERGY)
+        if(cap == CapabilityEnergy.ENERGY)
         {
             return lazyEnergyHandler.cast();
         }
-        if(side == Direction.DOWN && cap == ForgeCapabilities.ITEM_HANDLER)
+        if(side == Direction.DOWN && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
             // Return the output slot only
             return lazyOutputItems.cast();
         }
-        if(cap == ForgeCapabilities.ITEM_HANDLER)
+        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
             return lazyItemHandler.cast();
         }
@@ -238,16 +234,18 @@ public class MagicalScrubberBlockEntity extends BlockEntity implements MenuProvi
             ItemStack existing = entity.outputItems.getStackInSlot(0);
             ItemStack main = entity.itemsHandler.getStackInSlot(0);
 
-            Map<Enchantment, Integer> enchants = main.getAllEnchantments();
-            if(enchants.size()>0)
+            //Map<Enchantment, Integer> enchants = main.getAllEnchantments();
+            Map<Enchantment, Integer> enchantments = ItemUtils.getEnchantments(main);
+
+            if(enchantments.size()>0)
             {
-                Iterator<Map.Entry<Enchantment,Integer>> iEntries = enchants.entrySet().iterator();
+                Iterator<Map.Entry<Enchantment,Integer>> iEntries = enchantments.entrySet().iterator();
                 Map.Entry<Enchantment,Integer> entry = iEntries.next();
 
                 EnchantmentInstance eInst = new EnchantmentInstance(entry.getKey(), entry.getValue());
                 existing = EnchantedBookItem.createForEnchantment(eInst);
 
-                main.getAllEnchantments().remove(entry.getKey());
+                enchantments.remove(entry.getKey());
                 //iEntries.remove();
                 main = makeOutputItem(main);
                 while(iEntries.hasNext())
@@ -256,7 +254,7 @@ public class MagicalScrubberBlockEntity extends BlockEntity implements MenuProvi
                     main.enchant(entry.getKey(), entry.getValue());
                 }
 
-                if(main.getAllEnchantments().size()==0){
+                if(enchantments.size()==0){
                     entity.itemsHandler.extractItem(0, 1, false);
                 }else entity.itemsHandler.setStackInSlot(0, main);
                 

@@ -18,6 +18,7 @@ import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 
 public class WarpsCommand {
@@ -33,13 +34,9 @@ public class WarpsCommand {
     }
 
     private static int warps(CommandSourceStack source) {
-        if(!source.isPlayer())
-        {
-            ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), Component.literal(OTEMod.OTEPrefix + OTEMod.ONLY_PLAYER), source.getServer());
-            return 1;
-        }
+        
 
-        ServerPlayer p = source.getPlayer();
+        ServerPlayer p = (ServerPlayer)source.getEntity();
         Connection con = OTEMod.DB.getConnection();
         try{
             // Begin
@@ -54,7 +51,7 @@ public class WarpsCommand {
                 count++;
             }
             rs=pstat.executeQuery();// Reset the query
-            ChatServerOverride.broadcastTo(p.getUUID(), Component.literal(OTEMod.OTEPrefix + " "+ChatColor.resetChat() + "There are "+count+" warps available"), source.getServer());
+            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix + " "+ChatColor.resetChat() + "There are "+count+" warps available"), source.getServer());
 
             while(rs.next())
             {
@@ -69,16 +66,16 @@ public class WarpsCommand {
                 ClickEvent click = Clickable.command("/warp "+warpName);
                 Style S = Style.EMPTY.withFont(Style.DEFAULT_FONT).withHoverEvent(hover).withClickEvent(click);
 
-                Component warpMsg = Component.literal(ChatColor.GREEN + warpName + ChatColor.resetChat()).withStyle(S);
+                Component warpMsg = new TextComponent(ChatColor.GREEN + warpName + ChatColor.resetChat()).withStyle(S);
                 
                 // Now, display the warp name, along with the warp's owner information
                 HoverEvent h2 = HoverTip.get(prof.name_color+prof.nickname+ChatColor.resetChat()+ChatColor.AQUA+" is the owner of this warp");
                 S = Style.EMPTY.withFont(Style.DEFAULT_FONT).withHoverEvent(h2);
-                Component ownerInfo = Component.literal(ChatColor.GOLD+ "  [Hover to see the warp's info]").withStyle(S);
+                Component ownerInfo = new TextComponent(ChatColor.GOLD+ "  [Hover to see the warp's info]").withStyle(S);
 
                 // Combine the two
-                warpMsg = Component.literal("").append(warpMsg).append(ownerInfo);
-                ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), warpMsg, source.getServer());
+                warpMsg = new TextComponent("").append(warpMsg).append(ownerInfo);
+                ChatServerOverride.broadcastTo(p.getUUID(), warpMsg, source.getServer());
             }
         }catch (Exception E)
         {

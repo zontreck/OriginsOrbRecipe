@@ -15,15 +15,15 @@ import com.mojang.serialization.Codec;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.common.world.BiomeModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -223,7 +223,7 @@ public class OTEMod
                             if(cont.has_expired())
                             {
                                 try{
-                                    Component expire = Component.literal(OTEMod.OTEPrefix + ChatColor.DARK_PURPLE+"Teleport request has expired");
+                                    Component expire = new TextComponent(OTEMod.OTEPrefix + ChatColor.DARK_PURPLE+" Teleport request has expired");
                                     ChatServerOverride.broadcastTo(cont.FromPlayer, expire, OTEMod.THE_SERVER);
                                     ChatServerOverride.broadcastTo(cont.ToPlayer, expire, OTEMod.THE_SERVER);
                                     OTEMod.TeleportRegistry.remove(cont);
@@ -254,8 +254,8 @@ public class OTEMod
 
         if(OTEServerConfig.ITEM_DESPAWN_TIMER.get()<=0)return;
 
-
-        if(ev.getEntity().getAge() != (1200  *  5)) {
+        ItemEntity ite = (ItemEntity)ev.getEntity();
+        if(ite.getAge() != (1200  *  5)) {
             
             //OTEMod.LOGGER.info("Extra life has already been given to item : "+ev.getEntity().getName().getString());
             return; // We already gave it extra life, the default is 6000, or 5 minutes

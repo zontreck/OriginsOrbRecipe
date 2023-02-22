@@ -26,7 +26,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.fml.loading.FMLConfig;
@@ -46,9 +46,9 @@ public class LoadSchem {
 
     private static int loadSchematic(CommandSourceStack source, String name) {
         // Perform sanity checks
-        if(!source.isPlayer())return 1;
+        
 
-        ServerPlayer play = source.getPlayer();
+        ServerPlayer play = (ServerPlayer)source.getEntity();
         if(play==null)return 1;
 
         if(!LuckPermsHelper.hasGroupOrPerm(play, Permissions.zschem, Permissions.zschem_load)){
@@ -115,17 +115,17 @@ public class LoadSchem {
                         MemoryHolder.setBlocks(play, blocks);
                         
                     }else {
-                        ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(OTEMod.OTEPrefix + ChatColor.doColors(" !Dark_Red!No such ZSchem exists!")), source.getServer());
+                        ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !Dark_Red!No such ZSchem exists!")), source.getServer());
                         return 0;
                     }
                     
 
-                    ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!ZSchem loaded from disk!")), OTEMod.THE_SERVER);
+                    ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!ZSchem loaded from disk!")), OTEMod.THE_SERVER);
                     return 0;
                 }
             }
         }
-        ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(ChatColor.doColors("!Dark_Red! You must set the first position")), OTEMod.THE_SERVER);
+        ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(ChatColor.doColors("!Dark_Red! You must set the first position")), OTEMod.THE_SERVER);
 
         return 0;
     }
@@ -134,9 +134,9 @@ public class LoadSchem {
     {
         String usage = OTEMod.OTEPrefix;
         usage += ChatColor.doColors("!gold! /loadzschem [string:name]");
-        ServerPlayer play=source.getPlayer();
+        ServerPlayer play=(ServerPlayer)source.getEntity();
         if(play==null)return 1;
-        ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(usage), OTEMod.THE_SERVER);
+        ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(usage), OTEMod.THE_SERVER);
         return 0;
     }
 }

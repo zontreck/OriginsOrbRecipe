@@ -13,7 +13,8 @@ import dev.zontreck.otemod.chat.ChatServerOverride;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.network.chat.TextComponent;
 
 public class DelHomeCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
@@ -34,11 +35,11 @@ public class DelHomeCommand {
 //        homeName = StringArgumentType.getString(ctx2, "nickname");
 //        if(homeName==null)return 0;
         
-        if(! ctx.isPlayer())
+        if(!(ctx.getEntity() instanceof Player))
         {
             return 1;
         }
-        ServerPlayer p = ctx.getPlayer();
+        ServerPlayer p = (ServerPlayer) ctx.getEntity();
         Connection con = OTEMod.DB.getConnection();
         try {
             con.beginRequest();
@@ -54,13 +55,13 @@ public class DelHomeCommand {
             pstat.execute();
             
 
-            ChatServerOverride.broadcastTo(ctx.getPlayer().getUUID(), Component.literal(OTEMod.OTEPrefix + ChatColor.doColors("!dark_green! Home was deleted successfully")), ctx.getServer());
+            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors("!dark_green! Home was deleted successfully")), ctx.getServer());
 
             con.endRequest();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            ChatServerOverride.broadcastTo(ctx.getPlayer().getUUID(), Component.literal(OTEMod.OTEPrefix + ChatColor.doColors("!dark_red! Home was unable to be deleted")), ctx.getServer());
+            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors("!dark_red! Home was unable to be deleted")), ctx.getServer());
             return 1;
         }
 

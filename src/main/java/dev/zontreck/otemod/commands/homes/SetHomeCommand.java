@@ -16,9 +16,10 @@ import dev.zontreck.otemod.database.TeleportDestination;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 
 public class SetHomeCommand {
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
@@ -39,12 +40,12 @@ public class SetHomeCommand {
 //        homeName = StringArgumentType.getString(ctx2, "nickname");
 //        if(homeName==null)return 0;
         
-        if(! ctx.isPlayer())
+        if(!(ctx.getEntity() instanceof Player))
         {
             
             return 1;
         }
-        ServerPlayer p = ctx.getPlayer();
+        ServerPlayer p = (ServerPlayer)ctx.getEntity();
         Connection con = OTEMod.DB.getConnection();
         try {
             con.beginRequest();
@@ -63,13 +64,13 @@ public class SetHomeCommand {
 
             pstat.execute();
             
-            ChatServerOverride.broadcastTo(p.getUUID(), Component.literal(OTEMod.OTEPrefix + ChatColor.doColors(" !dark_green!Home was created or updated successfully!")), ctx.getServer());
+            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !dark_green!Home was created or updated successfully!")), ctx.getServer());
             
             con.endRequest();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-            ChatServerOverride.broadcastTo(p.getUUID(), Component.literal(OTEMod.OTEPrefix + ChatColor.doColors(" !dark_red!Home could not be updated or created for a unknown reason!")), ctx.getServer());
+            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !dark_red!Home could not be updated or created for a unknown reason!")), ctx.getServer());
             return 1;
         }
 

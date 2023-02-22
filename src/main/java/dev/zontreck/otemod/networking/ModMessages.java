@@ -32,13 +32,13 @@ public class ModMessages {
         net.messageBuilder(OpenVaultC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
             .decoder(OpenVaultC2SPacket::new)
             .encoder(OpenVaultC2SPacket::toBytes)
-            .consumerMainThread(OpenVaultC2SPacket::handle)
+            .consumer(OpenVaultC2SPacket::handle)
             .add();
 
         net.messageBuilder(EnergySyncS2CPacket.class, id(), NetworkDirection.PLAY_TO_CLIENT)
             .decoder(EnergySyncS2CPacket::new)
             .encoder(EnergySyncS2CPacket::toBytes)
-            .consumerMainThread(EnergySyncS2CPacket::handle)
+            .consumer(EnergySyncS2CPacket::handle)
             .add();
     }
 

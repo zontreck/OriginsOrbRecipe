@@ -9,13 +9,16 @@ import dev.zontreck.otemod.configs.Profile;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 
 public class NickCommand {
     
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
     {
         dispatcher.register(Commands.literal("nick")
-            .executes(c->setchatcolor(c.getSource(), c.getSource().getPlayer().getName().getString()))
+            .executes(c->setchatcolor(c.getSource(), c.getSource().getPlayerOrException().getName().getString()))
             .then(Commands.argument("new_name", StringArgumentType.string())//StringArgumentType.string())
                 .executes(c -> setchatcolor(c.getSource(), StringArgumentType.getString(c, "new_name")))// EnumArgument.getS(c, "color")))
             )
@@ -30,16 +33,17 @@ public class NickCommand {
     public static int setchatcolor(CommandSourceStack source, String string) {
 
         // Get profile
-        if(source.getPlayer()==null){
-            source.sendFailure(Component.literal(ChatColor.DARK_RED+"Only a player can use this command"));
+        if(!(source.getEntity() instanceof Player)){
             return 1;
         }
-        Profile p = Profile.get_profile_of(source.getPlayer().getStringUUID());
+        ServerPlayer play = (ServerPlayer)source.getEntity();
+        
+        Profile p = Profile.get_profile_of(play.getStringUUID());
         p.nickname = string;
         p.commit();
-        OTEMod.PROFILES.put(source.getPlayer().getStringUUID(), p);
+        OTEMod.PROFILES.put(play.getStringUUID(), p);
 
-        source.sendSuccess(Component.literal(OTEMod.OTEPrefix+ " "+ChatColor.DARK_PURPLE + "Your nickname has been updated"), false);
+        source.sendSuccess(new TextComponent(OTEMod.OTEPrefix+ " "+ChatColor.DARK_PURPLE + "Your nickname has been updated"), false);
 
         return 0;
     }

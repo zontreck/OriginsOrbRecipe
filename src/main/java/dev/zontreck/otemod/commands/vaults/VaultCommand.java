@@ -10,6 +10,7 @@ import dev.zontreck.otemod.implementation.vault.VaultContainer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
@@ -31,12 +32,13 @@ public class VaultCommand {
     private static int vault(CommandSourceStack source, int i) {
         //VaultContainer cont = new VaultContainer(i, source.getPlayer().getUUID());
         //cont.startOpen(source.getPlayer());
+        ServerPlayer play = (ServerPlayer)source.getEntity();
         if(i <0)
         {
-            ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), Component.literal(ChatColor.doColors(OTEMod.OTEPrefix+" !Dark_Red!You can only specify a vault number in the positive range")), source.getServer());
+            ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(ChatColor.doColors(OTEMod.OTEPrefix+" !Dark_Red!You can only specify a vault number in the positive range")), source.getServer());
             return 0;
         }
-        doOpen(source.getPlayer(), i);
+        doOpen(play, i);
         
         
         return 0;
@@ -46,7 +48,7 @@ public class VaultCommand {
 
         VaultContainer container = new VaultContainer(p, i);
         
-        NetworkHooks.openScreen(p, new SimpleMenuProvider(container.serverMenu, Component.literal("Vault "+i)));
+        NetworkHooks.openGui(p, new SimpleMenuProvider(container.serverMenu, new TextComponent("Vault "+i)));
         
         // Add to the master vault registry
         if(VaultContainer.VAULT_REGISTRY.containsKey(p.getUUID()))VaultContainer.VAULT_REGISTRY.remove(p.getUUID());

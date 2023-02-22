@@ -12,6 +12,7 @@ import dev.zontreck.otemod.zschem.MemoryHolder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 
 public class SetPos1 {
@@ -28,7 +29,7 @@ public class SetPos1 {
 
     private static int setzPos1(CommandSourceStack source) {
 
-        ServerPlayer play = source.getPlayer();
+        ServerPlayer play = (ServerPlayer)source.getEntity();
         if(play==null)return 1;
 
         if(!LuckPermsHelper.hasGroupOrPerm(play, Permissions.zschem, Permissions.zschem_pos1)){
@@ -38,7 +39,7 @@ public class SetPos1 {
         MemoryHolder.setPos1(play, new Vector3(source.getPosition()));
         MemoryHolder.setLevel(play, source.getLevel());
 
-        ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!Position 1 set!")), OTEMod.THE_SERVER);
+        ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!Position 1 set!")), OTEMod.THE_SERVER);
 
         return 0;
     }

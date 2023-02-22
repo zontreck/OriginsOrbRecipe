@@ -17,6 +17,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.MenuConstructor;
@@ -72,7 +73,7 @@ public class VaultContainer
     {
         if(VAULT_NUMBER == -1)return; // We have no need to save the trash
         CompoundTag saved = myInventory.serializeNBT();
-        ChatServerOverride.broadcastToAbove(owner, Component.literal(ChatColor.BOLD+ChatColor.DARK_GREEN+"Saving the vault's contents..."), server);
+        ChatServerOverride.broadcastToAbove(owner, new TextComponent(ChatColor.BOLD+ChatColor.DARK_GREEN+"Saving the vault's contents..."), server);
 
         String toSave= NbtUtils.structureToSnbt(saved);
 

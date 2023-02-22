@@ -2,6 +2,7 @@ package dev.zontreck.otemod.zschem;
 
 import java.util.Random;
 
+import dev.zontreck.libzontreck.exceptions.InvalidSideException;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -23,7 +24,12 @@ public class HealRunner implements Runnable
         BlockToSet = sb;
     }
     public static void scheduleHeal(StoredBlock sb){
-        sb.getWorldPosition().getActualDimension().getServer().execute(new HealRunner(sb));
+        try {
+            sb.getWorldPosition().getActualDimension().getServer().execute(new HealRunner(sb));
+        } catch (InvalidSideException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
     @Override
     public void run()
@@ -32,7 +38,14 @@ public class HealRunner implements Runnable
         //BlockSnapshot bs = BlockSnapshot.create(level.dimension(), level, sb.getPos());
         
         //BlockState current = level.getBlockState(sb.getPos());
-        final ServerLevel level = BlockToSet.getWorldPosition().getActualDimension();
+        ServerLevel level=null;
+        try {
+            level = (ServerLevel) BlockToSet.getWorldPosition().getActualDimension();
+        } catch (InvalidSideException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return;
+        }
 
         BlockState nState = Block.updateFromNeighbourShapes(BlockToSet.getState(), level, BlockToSet.getPos());
         level.setBlock(BlockToSet.getPos(), nState, Block.UPDATE_CLIENTS); // no update?

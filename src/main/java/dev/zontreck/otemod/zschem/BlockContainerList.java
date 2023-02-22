@@ -7,6 +7,7 @@ import java.util.ListIterator;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import dev.zontreck.libzontreck.exceptions.InvalidSideException;
 import dev.zontreck.libzontreck.vectors.WorldPosition;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import net.minecraft.nbt.CompoundTag;
@@ -75,7 +76,13 @@ public class BlockContainerList {
                 storedBlock.tick();
                 if(storedBlock.isExpired()){
                     WorldPosition wp = storedBlock.getWorldPosition();
-                    BlockState bs = wp.getActualDimension().getBlockState(wp.Position.asBlockPos());
+                    BlockState bs=null;
+                    try {
+                        bs = wp.getActualDimension().getBlockState(wp.Position.asBlockPos());
+                    } catch (InvalidSideException e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
                     if(bs.is(storedBlock.getState().getBlock()) || storedBlock.getTries() >= OTEServerConfig.MAX_TRIES_HEAL.get())
                     {
 

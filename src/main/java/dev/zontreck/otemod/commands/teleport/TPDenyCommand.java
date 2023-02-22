@@ -11,6 +11,8 @@ import dev.zontreck.otemod.chat.ChatServerOverride;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.server.level.ServerPlayer;
 
 public class TPDenyCommand {
     
@@ -28,10 +30,12 @@ public class TPDenyCommand {
 
     private static int doCancel(CommandSourceStack source, String TPID) {
         UUID teleporter = UUID.fromString(TPID);
+        ServerPlayer play = (ServerPlayer)source.getEntity();
+        
         for(TeleportContainer cont : OTEMod.TeleportRegistry){
             if(cont.TeleportID.equals(teleporter)){
                 // Canceling!
-                Component comp = Component.literal(OTEMod.OTEPrefix + " " + ChatColor.DARK_PURPLE+"Teleport request was denied");
+                Component comp = new TextComponent(OTEMod.OTEPrefix + " " + ChatColor.DARK_PURPLE+"Teleport request was denied");
 
                 ChatServerOverride.broadcastTo(cont.FromPlayer, comp, source.getServer());
                 ChatServerOverride.broadcastTo(cont.ToPlayer, comp, source.getServer());
@@ -41,9 +45,9 @@ public class TPDenyCommand {
             }
         }
 
-        Component comp = Component.literal(ChatColor.DARK_RED+"The teleport was not found, perhaps the request expired or was already cancelled/denied");
+        Component comp = new TextComponent(ChatColor.DARK_RED+"The teleport was not found, perhaps the request expired or was already cancelled/denied");
 
-        ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), comp, source.getServer());
+        ChatServerOverride.broadcastTo(play.getUUID(), comp, source.getServer());
 
         return 0;
     }

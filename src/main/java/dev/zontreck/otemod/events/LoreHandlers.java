@@ -24,7 +24,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.level.BlockEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -35,7 +35,7 @@ public class LoreHandlers {
     @SubscribeEvent
     public void onBlockMined(BlockEvent.BreakEvent ev)
     {
-        if(ev.getLevel().isClientSide())return;
+        if(ev.getWorld().isClientSide())return;
 
         ServerPlayer sp = (ServerPlayer)ev.getPlayer();
         ItemStack itemUsed = sp.getItemInHand(InteractionHand.MAIN_HAND);
@@ -55,7 +55,7 @@ public class LoreHandlers {
     public void onBlock(BlockEvent.BlockToolModificationEvent ev)
     {
         
-        if(ev.getLevel().isClientSide())return;
+        if(ev.getWorld().isClientSide())return;
     
         // Check the block right clicked, and the item in hand
 
@@ -85,7 +85,7 @@ public class LoreHandlers {
     public void onShears(PlayerInteractEvent.EntityInteract ev)
     {
         
-        if(ev.getLevel().isClientSide)return;
+        if(ev.getWorld().isClientSide)return;
         if(ev.getCancellationResult() == InteractionResult.PASS)
         {
             // Check the entity right clicked, and the item in hand

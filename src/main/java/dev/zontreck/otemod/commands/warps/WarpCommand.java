@@ -9,6 +9,7 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.chat.Clickable;
+import dev.zontreck.libzontreck.exceptions.InvalidSideException;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.commands.teleport.RTPCommand;
@@ -18,8 +19,8 @@ import dev.zontreck.otemod.database.TeleportDestination;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.nbt.NbtUtils;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -36,13 +37,8 @@ public class WarpCommand {
     }
 
     private static int warp(CommandSourceStack source, String string) {
-        if(!source.isPlayer()){
-            
-            ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), Component.literal(OTEMod.OTEPrefix + OTEMod.ONLY_PLAYER), source.getServer());
-            return 1;
-        }
-
-        ServerPlayer p = source.getPlayer();
+        
+        ServerPlayer p = (ServerPlayer)source.getEntity();
         Connection con = OTEMod.DB.getConnection();
         String SQL = "";
         try{
@@ -59,8 +55,13 @@ public class WarpCommand {
                 TeleportDestination dest = new TeleportDestination(NbtUtils.snbtToStructure(rs.getString("teleporter")));
 
 
-                ServerLevel dimL  = dest.getActualDimension();
-
+                ServerLevel dimL  = null;
+                try{
+                    dimL=(ServerLevel) dest.getActualDimension();
+                }catch(InvalidSideException e)
+                {
+                    return 1;
+                }
 
                 final int type = rs.getInt("warptype");
                 final ServerLevel f_dim = dimL;
@@ -79,7 +80,7 @@ public class WarpCommand {
                 });
                 tx.start();
             }else {
-                ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), Component.literal(ChatColor.DARK_RED+"No such warp"), source.getServer());
+                ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(ChatColor.DARK_RED+"No such warp"), source.getServer());
             }
 
 
@@ -91,7 +92,8 @@ public class WarpCommand {
     }
 
     private static int nowarp(CommandSourceStack source) {
-        ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), Component.literal(ChatColor.DARK_RED + "You must supply the warp name. If you need to know what warps are available, please use the warps command, or click this message.").withStyle(Style.EMPTY.withFont(Style.DEFAULT_FONT).withClickEvent(Clickable.command("/warps"))), source.getServer());
+        ServerPlayer p = (ServerPlayer)source.getEntity();
+        ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(ChatColor.DARK_RED + "You must supply the warp name. If you need to know what warps are available, please use the warps command, or click this message.").withStyle(Style.EMPTY.withFont(Style.DEFAULT_FONT).withClickEvent(Clickable.command("/warps"))), source.getServer());
         return 0;
     }
 

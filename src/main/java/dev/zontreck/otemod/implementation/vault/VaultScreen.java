@@ -15,6 +15,7 @@ import net.minecraft.client.gui.font.TextFieldHelper;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
@@ -69,13 +70,13 @@ public class VaultScreen extends AbstractContainerScreen <VaultMenu>
         super.init();
         // This is where custom controls would be added!
 
-        this.addWidget(new Button(this.leftPos+7,this.topPos+84,16,16,Component.literal(""), (button)->{
+        this.addWidget(new Button(this.leftPos+7,this.topPos+84,16,16,new TextComponent(""), (button)->{
             thePlayer.closeContainer();
 
             ModMessages.sendToServer(new OpenVaultC2SPacket(0,true,-1));
         } ));
 
-        this.addWidget(new Button(this.leftPos+187,this.topPos+84,16,16,Component.literal(""), (button)->{
+        this.addWidget(new Button(this.leftPos+187,this.topPos+84,16,16,new TextComponent(""), (button)->{
             thePlayer.closeContainer();
             ModMessages.sendToServer(new OpenVaultC2SPacket(0, true, 1));
         } ));

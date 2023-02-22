@@ -25,6 +25,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.fml.loading.FMLConfig;
 import net.minecraftforge.fml.loading.FMLPaths;
@@ -43,9 +44,8 @@ public class SaveSchem {
 
     private static int saveSchematic(CommandSourceStack source, String name) {
         // Perform sanity checks
-        if(!source.isPlayer())return 1;
 
-        ServerPlayer play = source.getPlayer();
+        ServerPlayer play = (ServerPlayer)source.getEntity();
         if(play==null)return 1;
         
         if(!LuckPermsHelper.hasGroupOrPerm(play, Permissions.zschem, Permissions.zschem_save)){
@@ -107,12 +107,12 @@ public class SaveSchem {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!ZSchem saved to disk!")), OTEMod.THE_SERVER);
+                    ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!ZSchem saved to disk!")), OTEMod.THE_SERVER);
                     return 0;
                 }
             }
         }
-        ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(ChatColor.doColors("!Dark_Red! You must first set the positions")), OTEMod.THE_SERVER);
+        ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(ChatColor.doColors("!Dark_Red! You must first set the positions")), OTEMod.THE_SERVER);
 
         return 0;
     }
@@ -121,9 +121,9 @@ public class SaveSchem {
     {
         String usage = OTEMod.OTEPrefix;
         usage += ChatColor.doColors("!gold! /savezschem [string:name]");
-        ServerPlayer play=source.getPlayer();
+        ServerPlayer play=(ServerPlayer)source.getEntity();
         if(play==null)return 1;
-        ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(usage), OTEMod.THE_SERVER);
+        ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(usage), OTEMod.THE_SERVER);
         return 0;
     }
 }

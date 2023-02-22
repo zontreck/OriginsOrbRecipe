@@ -3,7 +3,6 @@ package dev.zontreck.otemod.enchantments;
 import java.util.Random;
 
 import dev.zontreck.otemod.configs.OTEServerConfig;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;

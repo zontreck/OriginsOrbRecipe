@@ -6,7 +6,6 @@ import dev.zontreck.otemod.networking.ModMessages;
 import dev.zontreck.otemod.networking.packets.OpenVaultC2SPacket;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -16,7 +15,7 @@ public class ClientEvents {
     {
 
         @SubscribeEvent
-        public static void onKeyInput(InputEvent.Key event)
+        public static void onKeyInput(InputEvent.ClickInputEvent event)
         {
             //OTEMod.LOGGER.info("KEY PRESS: "+event.getKey());
             if(KeyBindings.OPEN_VAULT.consumeClick())
@@ -30,10 +29,5 @@ public class ClientEvents {
     public static class ClientModBus
     {
 
-        @SubscribeEvent
-        public static void onKeyRegister(RegisterKeyMappingsEvent event)
-        {
-            event.register(KeyBindings.OPEN_VAULT);
-        }
     }
 }

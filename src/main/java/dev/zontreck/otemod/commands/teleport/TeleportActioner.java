@@ -19,7 +19,7 @@ public class TeleportActioner
         player.server.execute(new Runnable(){
             public void run(){
 
-                MobEffectInstance inst = new MobEffectInstance(MobEffects.DARKNESS, 200, 1, true, true);
+                MobEffectInstance inst = new MobEffectInstance(MobEffects.BLINDNESS, 200, 1, true, true);
                 MobEffectInstance regen = new MobEffectInstance(MobEffects.REGENERATION, 200, 2, true, true);
 
                 // 10-05-2022   - Adjusted to 100 on duration due to a small issue where it would sometimes stop levitation prior to the teleport taking effect.

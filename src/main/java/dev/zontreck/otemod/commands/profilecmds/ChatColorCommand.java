@@ -9,6 +9,9 @@ import dev.zontreck.otemod.configs.Profile;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.server.command.EnumArgument;
 
 public class ChatColorCommand {
@@ -35,15 +38,16 @@ public class ChatColorCommand {
         String colorcoded = ChatColor.from(string);
 
         // Get profile
-        if(source.getPlayer()==null){
+        if(!(source.getEntity() instanceof Player)){
             return 1;
         }
-        Profile p = Profile.get_profile_of(source.getPlayer().getStringUUID());
+        ServerPlayer play = (ServerPlayer)source.getEntity();
+        Profile p = Profile.get_profile_of(play.getStringUUID());
         p.chat_color = colorcoded;
         p.commit();
-        OTEMod.PROFILES.put(source.getPlayer().getStringUUID(), p);
+        OTEMod.PROFILES.put(play.getStringUUID(), p);
 
-        source.sendSuccess(Component.literal(OTEMod.OTEPrefix + " "+ChatColor.DARK_PURPLE + "Your chat color has been updated"), false);
+        source.sendSuccess(new TextComponent(OTEMod.OTEPrefix + " "+ChatColor.DARK_PURPLE + "Your chat color has been updated"), false);
 
         return 0;
     }

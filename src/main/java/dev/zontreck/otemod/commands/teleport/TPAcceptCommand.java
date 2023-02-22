@@ -11,6 +11,7 @@ import dev.zontreck.otemod.chat.ChatServerOverride;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 
 public class TPAcceptCommand {
@@ -29,6 +30,8 @@ public class TPAcceptCommand {
 
     private static int doCancel(CommandSourceStack source, String TPID) {
         UUID teleporter = UUID.fromString(TPID);
+        
+        ServerPlayer play = (ServerPlayer)source.getEntity();
         for(TeleportContainer cont : OTEMod.TeleportRegistry){
             if(cont.TeleportID.equals(teleporter)){
                 // Accepting!
@@ -36,7 +39,7 @@ public class TPAcceptCommand {
                 ServerPlayer from = source.getServer().getPlayerList().getPlayer(cont.FromPlayer);
                 ServerPlayer to = source.getServer().getPlayerList().getPlayer(cont.ToPlayer);
 
-                Component comp = Component.literal(OTEMod.OTEPrefix + " " + ChatColor.DARK_PURPLE+"Teleport request was accepted. Opening wormhole!");
+                Component comp = new TextComponent(OTEMod.OTEPrefix + " " + ChatColor.DARK_PURPLE+"Teleport request was accepted. Opening wormhole!");
 
                 ChatServerOverride.broadcastTo(cont.FromPlayer, comp, source.getServer());
                 ChatServerOverride.broadcastTo(cont.ToPlayer, comp, source.getServer());
@@ -55,9 +58,9 @@ public class TPAcceptCommand {
             }
         }
 
-        Component comp = Component.literal(ChatColor.DARK_RED+"The teleport was not found, perhaps the request expired or was already cancelled/denied");
+        Component comp = new TextComponent(ChatColor.DARK_RED+"The teleport was not found, perhaps the request expired or was already cancelled/denied");
 
-        ChatServerOverride.broadcastTo(source.getPlayer().getUUID(), comp, source.getServer());
+        ChatServerOverride.broadcastTo(play.getUUID(), comp, source.getServer());
 
         return 0;
     }

@@ -17,6 +17,7 @@ import dev.zontreck.otemod.zschem.MemoryHolder.Container;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 
 // This command will place the loaded schematic in world. The schematic will originate from position 1. The positions are relative and are added onto position 1.
@@ -34,7 +35,7 @@ public class Place {
 
     private static int place(CommandSourceStack source) {
 
-        ServerPlayer play = source.getPlayer();
+        ServerPlayer play = (ServerPlayer)source.getEntity();
         if(play==null)return 1;
 
         if(!LuckPermsHelper.hasGroupOrPerm(play, Permissions.zschem, Permissions.zschem_place)){
@@ -44,7 +45,7 @@ public class Place {
         
         if(!MemoryHolder.hasPlayerCached(play)){
 
-            ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first load the zschem!")), OTEMod.THE_SERVER);
+            ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first load the zschem!")), OTEMod.THE_SERVER);
 
             return 1;
         }
@@ -65,13 +66,13 @@ public class Place {
             
         }else {
             
-            ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first load the zschem!")), OTEMod.THE_SERVER);
+            ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first load the zschem!")), OTEMod.THE_SERVER);
 
             return 1;
         }
 
 
-        ChatServerOverride.broadcastTo(play.getUUID(), Component.literal(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!Enqueued!")), OTEMod.THE_SERVER);
+        ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!Enqueued!")), OTEMod.THE_SERVER);
 
         return 0;
     }
