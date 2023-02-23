@@ -17,8 +17,9 @@ public class Profile {
     public String prefix_color;
     public String chat_color;
     public Boolean flying;
+    public int available_vaults;
 
-    public Profile(String username, String prefix, String nickname, String name_color, String ID, String prefix_color, String chat_color, Boolean isFlying) {
+    public Profile(String username, String prefix, String nickname, String name_color, String ID, String prefix_color, String chat_color, Boolean isFlying, int vaults) {
         this.username = username;
         this.prefix = prefix;
         this.nickname = nickname;
@@ -27,6 +28,7 @@ public class Profile {
         this.prefix_color = prefix_color;
         this.chat_color = chat_color;
         this.flying=isFlying;
+        this.available_vaults=vaults;
     }
 
 
@@ -43,7 +45,7 @@ public class Profile {
 
     public static Profile factory(ServerPlayer play)
     {
-        Profile p = new Profile(play.getName().getString(), "Member", play.getDisplayName().getString(), ChatColor.GREEN, play.getStringUUID(), ChatColor.AQUA, ChatColor.WHITE, false);
+        Profile p = new Profile(play.getName().getString(), "Member", play.getDisplayName().getString(), ChatColor.GREEN, play.getStringUUID(), ChatColor.AQUA, ChatColor.WHITE, false, 0);
         return p;
     }
 
@@ -51,7 +53,7 @@ public class Profile {
     {
         // Send player to server!
         Connection con = OTEMod.DB.getConnection();
-        String SQL = "REPLACE INTO `profiles` (username, uuid, prefix, nickname, name_color, prefix_color, chat_color, flying) values (?, ?, ?, ?, ?, ?, ?, ?);";
+        String SQL = "REPLACE INTO `profiles` (username, uuid, prefix, nickname, name_color, prefix_color, chat_color, flying, vaults) values (?, ?, ?, ?, ?, ?, ?, ?, ?);";
         try {
             PreparedStatement pstat = con.prepareStatement(SQL);
             pstat.setString(1, username);
@@ -62,10 +64,10 @@ public class Profile {
             pstat.setString(6, prefix_color);
             pstat.setString(7, chat_color);
             pstat.setBoolean(8, flying);
+            pstat.setInt(9, available_vaults);
 
             pstat.execute();
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

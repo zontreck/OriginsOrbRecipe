@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "EEE",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "otemod:vault_steel_ingot"
+    },
+    "E": {
+      "tag": "forge:ingots/eternium"
+    }
+  },
+  "result": {
+    "item": "otemod:vault_fragment_upper",
+    "count": 1
+  }
+}

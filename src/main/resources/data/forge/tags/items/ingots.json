@@ -1,6 +1,7 @@
 {
     "values": [
         "#forge:ingots/cobalt",
-        "#forge:ingots/eternium"
+        "#forge:ingots/eternium",
+        "#forge:ingots/vaultsteel"
     ]
 }

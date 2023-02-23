@@ -10,8 +10,6 @@ import java.util.Map;
 import java.util.Set;
 
 import com.mojang.logging.LogUtils;
-import com.mojang.serialization.Codec;
-
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.network.chat.Component;
@@ -20,9 +18,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -35,8 +30,6 @@ import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.GeckoLib;
 
 import org.slf4j.Logger;
@@ -55,7 +48,6 @@ import dev.zontreck.otemod.database.Database.DatabaseConnectionException;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
 import dev.zontreck.otemod.entities.ModEntityTypes;
 import dev.zontreck.otemod.entities.monsters.client.PossumRenderer;
-import dev.zontreck.otemod.events.EventHandler;
 import dev.zontreck.otemod.events.LoreHandlers;
 import dev.zontreck.otemod.implementation.inits.ModMenuTypes;
 import dev.zontreck.otemod.implementation.scrubber.ItemScrubberScreen;

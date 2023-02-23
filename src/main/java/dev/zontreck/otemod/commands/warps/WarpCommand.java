@@ -55,13 +55,8 @@ public class WarpCommand {
                 TeleportDestination dest = new TeleportDestination(NbtUtils.snbtToStructure(rs.getString("teleporter")));
 
 
-                ServerLevel dimL  = null;
-                try{
-                    dimL=(ServerLevel) dest.getActualDimension();
-                }catch(InvalidSideException e)
-                {
-                    return 1;
-                }
+                ServerLevel dimL=(ServerLevel) dest.getActualDimension();
+                
 
                 final int type = rs.getInt("warptype");
                 final ServerLevel f_dim = dimL;

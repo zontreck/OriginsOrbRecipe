@@ -24,12 +24,8 @@ public class HealRunner implements Runnable
         BlockToSet = sb;
     }
     public static void scheduleHeal(StoredBlock sb){
-        try {
-            sb.getWorldPosition().getActualDimension().getServer().execute(new HealRunner(sb));
-        } catch (InvalidSideException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        sb.getWorldPosition().getActualDimension().getServer().execute(new HealRunner(sb));
+        
     }
     @Override
     public void run()
@@ -38,14 +34,8 @@ public class HealRunner implements Runnable
         //BlockSnapshot bs = BlockSnapshot.create(level.dimension(), level, sb.getPos());
         
         //BlockState current = level.getBlockState(sb.getPos());
-        ServerLevel level=null;
-        try {
-            level = (ServerLevel) BlockToSet.getWorldPosition().getActualDimension();
-        } catch (InvalidSideException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            return;
-        }
+        ServerLevel level = (ServerLevel) BlockToSet.getWorldPosition().getActualDimension();
+        
 
         BlockState nState = Block.updateFromNeighbourShapes(BlockToSet.getState(), level, BlockToSet.getPos());
         level.setBlock(BlockToSet.getPos(), nState, Block.UPDATE_CLIENTS); // no update?

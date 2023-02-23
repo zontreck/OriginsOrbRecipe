@@ -114,10 +114,19 @@ repositories {
         name = "ZNI Creations"
         url = "https://maven.zontreck.dev"
     }
-
+    maven {
+        // location of the maven that hosts JEI files
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
     maven {
         name = "GeckoLib"
         url = "https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
     }
 }
 
@@ -132,7 +141,7 @@ dependencies {
     runtimeOnly fg.deobf("dev.zontreck:libzontreck:${mc_version}-${libz_version}")
 
 
-    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.19:3.1.39')
+    implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.18:3.0.57')
 
     //compileOnly "net.luckperms:api:${luckperms_version}"
     // compile against the JEI API but do not include it at runtime
@@ -140,8 +149,8 @@ dependencies {
     // at runtime, use the full JEI jar
     //runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
     // Real mod deobf dependency examples - these get remapped to your current mappings
-    // compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api") // Adds JEI API as a compile dependency
-    // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}") // Adds the full JEI mod as a runtime dependency
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}") // Adds JEI API as a compile dependency
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}") // Adds the full JEI mod as a runtime dependency
     // implementation fg.deobf("com.tterrag.registrate:Registrate:MC${mc_version}-${registrate_version}") // Adds registrate as a dependency
 
     // Examples using mod jars from ./libs
@@ -154,7 +163,7 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
     api 'curse.maven:mariadb-jdbc-561883:3586357'
 
-    runtimeOnly fg.deobf("curse.maven:mekanism-268560:4385637")
+    runtimeOnly fg.deobf("curse.maven:mekanism-268560:3875976")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

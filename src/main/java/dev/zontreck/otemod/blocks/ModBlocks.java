@@ -36,6 +36,10 @@ public class ModBlocks {
 
     public static final RegistryObject<Item> ETERNIUM_ORE_BLOCK_I = ITEMS.register("eternium_ore_block", () -> new BlockItem(ETERNIUM_ORE_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
+    public static final RegistryObject<Block> VAULT_STEEL_ORE_BLOCK = BLOCKS.register("vault_steel_ore_block", ()->new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(8F).explosionResistance(1200).destroyTime(100)));
+
+    public static final RegistryObject<Item> VAULT_STEEL_ORE_BLOCK_I = ITEMS.register("vault_steel_ore_block", ()->new BlockItem(VAULT_STEEL_ORE_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+
     //#region TINKERS BLOCKS
 
     public static final RegistryObject<Block> COBALT_ORE_BLOCK = BLOCKS.register("cobalt_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.NETHER).sound(SoundType.NETHER_ORE).requiresCorrectToolForDrops().strength(10.0F)));
@@ -46,24 +50,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Item> RAW_COBALT_ORE_ITEM = ITEMS.register("raw_cobalt_ore", ()->new BlockItem(RAW_COBALT_ORE_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 
-    public static final RegistryObject<Block> GOLD_BARS = BLOCKS.register("gold_bars", ()-> new IronBarsBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.NONE).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.METAL).noOcclusion()));
-
-    public static final RegistryObject<Item> GOLD_BARS_I = ITEMS.register("gold_bars", ()-> new BlockItem(GOLD_BARS.get(), new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-
     public static final RegistryObject<Block> COBALT_BLOCK = BLOCKS.register("cobalt_block", ()-> new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_BLUE).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.METAL)));
 
     public static final RegistryObject<Item> COBALT_BLOCK_I = ITEMS.register("cobalt_block", ()-> new BlockItem(COBALT_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-
-    public static final RegistryObject<Block> NETHER_GROUT = BLOCKS.register("nether_grout", ()-> new Block(BlockBehaviour.Properties.of(Material.SAND, MaterialColor.NONE).strength(3.0F).friction(0.8F).sound(SoundType.SOUL_SOIL)));
-
-    public static final RegistryObject<Item> NETHER_GROUT_I = ITEMS.register("nether_grout", ()-> new BlockItem(NETHER_GROUT.get(), new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-
-    public static final BlockBehaviour.Properties SCORCHED_BASE = BlockBehaviour.Properties.of(Material.STONE, MaterialColor.TERRACOTTA_BROWN).requiresCorrectToolForDrops().strength(2.5F, 8.0F);
-    public static final BlockBehaviour.Properties SCORCHED_BASE_NONSOLID = SCORCHED_BASE.noOcclusion();
-
-    public static final RegistryObject<Block> SCORCHED_TABLE = BLOCKS.register("scorched_table", ()-> new Block(SCORCHED_BASE_NONSOLID));
-
-    public static final RegistryObject<Item> SCORCHED_TABLE_I = ITEMS.register("scorched_table", ()-> new BlockItem(SCORCHED_TABLE.get(), new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 
     //#endregion
 

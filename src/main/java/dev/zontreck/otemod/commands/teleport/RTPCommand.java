@@ -67,7 +67,7 @@ public class RTPCommand {
 
                 if(b.isAir()){
                     if(b2.isAir()){
-                        if(!b3.isAir())
+                        if(!b3.isAir() && !b3.is(Blocks.BEDROCK))
                         {
                             // Check names
                             boolean valid=true;

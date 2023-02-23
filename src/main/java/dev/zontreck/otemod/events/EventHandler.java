@@ -5,6 +5,8 @@ import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.enchantments.MobEggEnchantment;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
 import dev.zontreck.otemod.items.tags.ItemStatType;
+import dev.zontreck.otemod.ore.OreGenerator;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraft.nbt.CompoundTag;
@@ -15,17 +17,21 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.world.BiomeLoadingEvent;
 
 @Mod.EventBusSubscriber(modid=OTEMod.MOD_ID)
 public class EventHandler {
-    /*
+    
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void addOresToBiomes(final BiomeLoadingEvent ev){
         //ShapedAionResources.LOGGER.info("Biome loading event called. Registering aion ores");
+        OTEMod.LOGGER.info("/!\\ Registering OTEMod ores /!\\");
         OreGenerator.generateOres(ev);
-    }*/
+    }
 
     @SubscribeEvent
     public void onEntityKilled(LivingDropsEvent ev){

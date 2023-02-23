@@ -31,6 +31,7 @@ public class OTEServerConfig {
     public static final ForgeConfigSpec.BooleanValue DEBUG_HEALER;
     public static final ForgeConfigSpec.ConfigValue<Integer> TIME_BETWEEN_BLOCKS;
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_TRIES_HEAL;
+    public static final ForgeConfigSpec.ConfigValue<Integer> MAX_VAULTS;
     public static final ForgeConfigSpec.ConfigValue<List<String>> EXCLUDE_DIMS;
 
 
@@ -47,6 +48,7 @@ public class OTEServerConfig {
         BUILDER.push("OTE");
         INITIAL_ITEMS_TO_GIVE_ON_FIRST_JOIN = BUILDER.comment("What items, identified by modid:item, to give to a brand new user on the server").define("New Player Gear", defaults);
         SPAWN_EGG_CHANCE = BUILDER.comment("What is the chance for a spawn egg to drop from a mob when looting 3 is used? Default: 0.25").define("spawn_egg_chance", 0.25);
+        MAX_VAULTS = BUILDER.comment("What is the maximum number of vaults a player may have available? (0 is unlimited)").define("max_vaults", 0);
         BUILDER.pop();
 
         BUILDER.push("DATABASE");

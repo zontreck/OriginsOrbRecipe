@@ -53,7 +53,7 @@ public class ChatServerOverride {
                 has_profile=true;
 
                 
-                OTEMod.PROFILES.put(ev.getEntity().getStringUUID(), new Profile(rs.getString("username"), rs.getString("prefix"), rs.getString("nickname"), rs.getString("name_color"), ev.getEntity().getStringUUID(), rs.getString("prefix_color"), rs.getString("chat_color"), rs.getBoolean("flying")));
+                OTEMod.PROFILES.put(ev.getEntity().getStringUUID(), new Profile(rs.getString("username"), rs.getString("prefix"), rs.getString("nickname"), rs.getString("name_color"), ev.getEntity().getStringUUID(), rs.getString("prefix_color"), rs.getString("chat_color"), rs.getBoolean("flying"), rs.getInt("vaults")));
             }
 
             if(!has_profile)

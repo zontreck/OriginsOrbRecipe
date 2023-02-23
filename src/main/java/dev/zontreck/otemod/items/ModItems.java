@@ -19,8 +19,6 @@ public class ModItems {
 
     public static final RegistryObject<Item> IHAN_CRYSTAL = ITEMS.register("ihan_crystal", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
-    public static final RegistryObject<Item> ETERNIUM_DUST = ITEMS.register("eternium_dust", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
-
     public static final RegistryObject<Item> AURORA_COMPOUND = ITEMS.register("aurora_compound", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
 
@@ -29,9 +27,6 @@ public class ModItems {
     public static final RegistryObject<Item> RAW_COBALT = ITEMS.register("raw_cobalt", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
     public static final RegistryObject<Item> COBALT_NUGGET = ITEMS.register("cobalt_nugget", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
     public static final RegistryObject<Item> COBALT_INGOT = ITEMS.register("cobalt_ingot", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
-    public static final RegistryObject<Item> PATTERN = ITEMS.register("pattern", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
-    public static final RegistryObject<Item> SCORCHED_BRICK = ITEMS.register("scorched_brick", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
-    public static final RegistryObject<Item> COPPER_CAN = ITEMS.register("copper_can", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(16)));
     public static final RegistryObject<Item> ETERNIUM_INGOT = ITEMS.register("eternium_ingot", ()-> new SimpleFoiledItem(new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 
 
@@ -43,6 +38,21 @@ public class ModItems {
     public static final RegistryObject<Item> SCRUBBER_FRAME = ITEMS.register("scrubber_frame", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(64)));
 
 
+    public static final RegistryObject<Item> VAULTSTEEL_INGOT = ITEMS.register("vault_steel_ingot", () -> new SimpleFoiledItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(64)));
+    public static final RegistryObject<Item> VAULT_FRAG_BL = ITEMS.register("vault_fragment_lower_left", () -> new SimpleFoiledItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(64)));
+    public static final RegistryObject<Item> VAULT_FRAG_LC = ITEMS.register("vault_fragment_lower", () -> new SimpleFoiledItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(64)));
+    public static final RegistryObject<Item> VAULT_FRAG_BR = ITEMS.register("vault_fragment_lower_right", () -> new SimpleFoiledItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(64)));
+    public static final RegistryObject<Item> VAULT_FRAG_L = ITEMS.register("vault_fragment_left", () -> new SimpleFoiledItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(64)));
+    public static final RegistryObject<Item> VAULT_FRAG_R = ITEMS.register("vault_fragment_right", () -> new SimpleFoiledItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(64)));
+    public static final RegistryObject<Item> VAULT_FRAG_UR = ITEMS.register("vault_fragment_upper_right", () -> new SimpleFoiledItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(64)));
+    public static final RegistryObject<Item> VAULT_FRAG_UL = ITEMS.register("vault_fragment_upper_left", () -> new SimpleFoiledItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(64)));
+    public static final RegistryObject<Item> VAULT_FRAG_U = ITEMS.register("vault_fragment_upper", () -> new SimpleFoiledItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(64)));
+    public static final RegistryObject<Item> VAULT_FRAG_C = ITEMS.register("vault_fragment_center", () -> new SimpleFoiledItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(64)));
+
+    
+    public static final RegistryObject<Item> VAULT = ITEMS.register("vault", () -> new VaultItem(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(64)));
+    
+    public static final RegistryObject<Item> VAULT_RAW_ORE = ITEMS.register("raw_vault_steel_ore", () -> new Item(new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(64)));
 
     
     public static final RegistryObject<Item> POSSUM_SPAWN_EGG = ITEMS.register("possum_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.POSSUM, 0x938686, 0xc68787, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));

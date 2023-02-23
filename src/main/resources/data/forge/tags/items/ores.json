@@ -1,6 +1,7 @@
 {
     "values": [
         "#forge:ores/cobalt",
-        "#forge:ores/eternium"
+        "#forge:ores/eternium",
+        "#forge:ores/vaultsteel"
     ]
 }

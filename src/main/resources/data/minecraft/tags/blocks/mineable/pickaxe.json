@@ -8,6 +8,9 @@
         "otemod:cobalt_ore",
         "otemod:raw_cobalt_ore",
 
-        "otemod:item_scrubber"
+        "otemod:item_scrubber",
+        "otemod:magical_scrubber",
+
+        "otemod:vault_steel_ore_block"
     ]
 }

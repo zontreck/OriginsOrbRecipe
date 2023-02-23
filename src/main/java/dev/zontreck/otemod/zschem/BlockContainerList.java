@@ -76,13 +76,8 @@ public class BlockContainerList {
                 storedBlock.tick();
                 if(storedBlock.isExpired()){
                     WorldPosition wp = storedBlock.getWorldPosition();
-                    BlockState bs=null;
-                    try {
-                        bs = wp.getActualDimension().getBlockState(wp.Position.asBlockPos());
-                    } catch (InvalidSideException e) {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
+                    BlockState bs = wp.getActualDimension().getBlockState(wp.Position.asBlockPos());
+                    
                     if(bs.is(storedBlock.getState().getBlock()) || storedBlock.getTries() >= OTEServerConfig.MAX_TRIES_HEAL.get())
                     {
 

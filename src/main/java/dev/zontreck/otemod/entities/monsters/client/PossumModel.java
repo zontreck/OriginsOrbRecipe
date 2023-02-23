@@ -9,17 +9,17 @@ public class PossumModel extends AnimatedGeoModel<PossumEntity>
 {
 
     @Override
-    public ResourceLocation getAnimationResource(PossumEntity animatable) {
+    public ResourceLocation getAnimationFileLocation(PossumEntity animatable) {
         return new ResourceLocation(OTEMod.MOD_ID, "animations/possum.animation.json");
     }
 
     @Override
-    public ResourceLocation getModelResource(PossumEntity object) {
+    public ResourceLocation getModelLocation(PossumEntity object) {
         return new ResourceLocation(OTEMod.MOD_ID, "geo/possum.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(PossumEntity object) {
+    public ResourceLocation getTextureLocation(PossumEntity object) {
         return new ResourceLocation(OTEMod.MOD_ID, "textures/entity/possum_texture.png");
     }
 

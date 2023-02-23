@@ -85,14 +85,8 @@ public class HomeCommand {
                 position = dest.Position.asMinecraftVector();
                 rot = dest.Rotation.asMinecraftVector();
 
-                ServerLevel dimL=null;
-                try {
-                    dimL = (ServerLevel)dest.getActualDimension();
-                } catch (InvalidSideException e) {
-                    e.printStackTrace();
-                    return 1;
-                }
-
+                ServerLevel dimL = (ServerLevel)dest.getActualDimension();
+                
                 TeleportActioner.ApplyTeleportEffect(p);
                 // Instantiate a Teleport Runner
 

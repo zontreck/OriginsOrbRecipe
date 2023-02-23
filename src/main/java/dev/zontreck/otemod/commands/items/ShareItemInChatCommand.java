@@ -5,6 +5,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.chat.HoverTip;
 import dev.zontreck.otemod.OTEMod;
+import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.configs.Profile;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -43,11 +44,11 @@ public class ShareItemInChatCommand {
 
             Profile prof = Profile.get_profile_of(play.getUUID().toString());
 
-            MutableComponent component = new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !Dark_Green!" + is.getDisplayName()+" !White!-!Dark_Purple! Hover here to see the item that "+prof.name_color+prof.nickname+"!Dark_Purple! shared"));
+            MutableComponent component = new TextComponent(OTEMod.OTEPrefix).append(is.getDisplayName()).append(new TextComponent(ChatColor.doColors(" !White!-!Dark_Purple! Hover here to see the item that "+prof.name_color+prof.nickname+"!Dark_Purple! shared")));
             Style style = Style.EMPTY.withFont(Style.DEFAULT_FONT);
             component = component.withStyle(style.withHoverEvent(HoverTip.getItem(is)));
 
-            play.server.sendMessage(component, play.getUUID());
+            ChatServerOverride.broadcast(component, OTEMod.THE_SERVER);
 
         }else {
             return 1;
