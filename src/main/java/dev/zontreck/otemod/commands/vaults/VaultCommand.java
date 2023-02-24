@@ -6,7 +6,11 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
+import dev.zontreck.otemod.implementation.profiles.Profile;
+import dev.zontreck.otemod.implementation.vault.NoMoreVaultException;
+import dev.zontreck.otemod.implementation.vault.Vault;
 import dev.zontreck.otemod.implementation.vault.VaultContainer;
+import dev.zontreck.otemod.implementation.vault.VaultProvider;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -46,7 +50,13 @@ public class VaultCommand {
 
     public static void doOpen(ServerPlayer p, int i){
 
-        VaultContainer container = new VaultContainer(p, i);
+        VaultContainer container;
+        try {
+            container = new VaultContainer(p, i);
+        } catch (NoMoreVaultException e) {
+            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You cannot open anymore vaults. Craft a new vault!")), p.server);
+            return;
+        }
         
         NetworkHooks.openGui(p, new SimpleMenuProvider(container.serverMenu, new TextComponent("Vault "+i)));
         

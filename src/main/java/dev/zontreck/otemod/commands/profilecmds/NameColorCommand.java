@@ -5,7 +5,8 @@ import com.mojang.brigadier.CommandDispatcher;
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.chat.ChatColor.ColorOptions;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.configs.Profile;
+import dev.zontreck.otemod.implementation.profiles.Profile;
+import dev.zontreck.otemod.implementation.profiles.UserProfileNotYetExistsException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -42,7 +43,12 @@ public class NameColorCommand {
             return 1;
         }
         ServerPlayer play = (ServerPlayer)source.getEntity();
-        Profile p = Profile.get_profile_of(play.getStringUUID());
+        Profile p;
+        try {
+            p = Profile.get_profile_of(play.getStringUUID());
+        } catch (UserProfileNotYetExistsException e) {
+            return 1;
+        }
         p.name_color = colorcoded;
         p.commit();
         OTEMod.PROFILES.put(play.getStringUUID(), p);

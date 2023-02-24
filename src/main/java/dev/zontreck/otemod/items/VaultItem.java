@@ -7,8 +7,9 @@ import dev.zontreck.libzontreck.items.lore.LoreEntry;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.configs.OTEServerConfig;
-import dev.zontreck.otemod.configs.Profile;
 import dev.zontreck.otemod.events.LoreHandlers;
+import dev.zontreck.otemod.implementation.profiles.Profile;
+import dev.zontreck.otemod.implementation.profiles.UserProfileNotYetExistsException;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.InteractionHand;
@@ -48,28 +49,34 @@ public class VaultItem extends Item
         {
             ItemStack is = pPlayer.getItemInHand(pUsedHand);
 
-            Profile p = Profile.get_profile_of(pPlayer.getStringUUID());
-            if(OTEServerConfig.MAX_VAULTS.get()>0)
-            {
-                if(p.available_vaults >= OTEServerConfig.MAX_VAULTS.get())
+            Profile p;
+            try {
+                p = Profile.get_profile_of(pPlayer.getStringUUID());
+                if(OTEServerConfig.MAX_VAULTS.get()>0)
                 {
-                    ChatServerOverride.broadcastTo(pPlayer.getUUID(), new TextComponent(ChatColor.doColors(OTEMod.OTEPrefix+" !Dark_Red!You cannot activate anymore vaults due to the maximum set by the server admin")), OTEMod.THE_SERVER);
-                    return InteractionResultHolder.pass(is);
-                } else {
+                    if(p.available_vaults >= OTEServerConfig.MAX_VAULTS.get())
+                    {
+                        ChatServerOverride.broadcastTo(pPlayer.getUUID(), new TextComponent(ChatColor.doColors(OTEMod.OTEPrefix+" !Dark_Red!You cannot activate anymore vaults due to the maximum set by the server admin")), OTEMod.THE_SERVER);
+                        return InteractionResultHolder.pass(is);
+                    } else {
+                        p.available_vaults++;
+                        p.commit();
+                        ChatServerOverride.broadcastTo(pPlayer.getUUID(), new TextComponent(ChatColor.doColors(OTEMod.OTEPrefix+" !Dark_Green!You now have "+String.valueOf(p.available_vaults)+" available vaults")), OTEMod.THE_SERVER);
+                        pPlayer.setItemInHand(pUsedHand, new ItemStack(Items.AIR));
+    
+                        return InteractionResultHolder.consume(is);
+                    }
+                }else {
                     p.available_vaults++;
                     p.commit();
                     ChatServerOverride.broadcastTo(pPlayer.getUUID(), new TextComponent(ChatColor.doColors(OTEMod.OTEPrefix+" !Dark_Green!You now have "+String.valueOf(p.available_vaults)+" available vaults")), OTEMod.THE_SERVER);
                     pPlayer.setItemInHand(pUsedHand, new ItemStack(Items.AIR));
-
+    
                     return InteractionResultHolder.consume(is);
                 }
-            }else {
-                p.available_vaults++;
-                p.commit();
-                ChatServerOverride.broadcastTo(pPlayer.getUUID(), new TextComponent(ChatColor.doColors(OTEMod.OTEPrefix+" !Dark_Green!You now have "+String.valueOf(p.available_vaults)+" available vaults")), OTEMod.THE_SERVER);
-                pPlayer.setItemInHand(pUsedHand, new ItemStack(Items.AIR));
-
-                return InteractionResultHolder.consume(is);
+            } catch (UserProfileNotYetExistsException e) {
+                e.printStackTrace();
+                return super.use(pLevel, pPlayer, pUsedHand);
             }
         }
         

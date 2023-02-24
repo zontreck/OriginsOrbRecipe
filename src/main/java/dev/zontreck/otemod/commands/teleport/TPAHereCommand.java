@@ -7,7 +7,8 @@ import dev.zontreck.libzontreck.chat.Clickable;
 import dev.zontreck.libzontreck.chat.HoverTip;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
-import dev.zontreck.otemod.configs.Profile;
+import dev.zontreck.otemod.implementation.profiles.Profile;
+import dev.zontreck.otemod.implementation.profiles.UserProfileNotYetExistsException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -76,7 +77,12 @@ public class TPAHereCommand {
 
         Style s2 = Style.EMPTY.withFont(Style.DEFAULT_FONT).withClickEvent(ce2).withHoverEvent(he2);
 
-        Profile p = Profile.get_profile_of(cont.ToPlayer.toString());
+        Profile p;
+        try {
+            p = Profile.get_profile_of(cont.ToPlayer.toString());
+        } catch (UserProfileNotYetExistsException e) {
+            return 1;
+        }
         ChatServerOverride.broadcastTo(cont.FromPlayer, new TextComponent(p.name_color+p.nickname + ChatColor.BOLD + ChatColor.DARK_PURPLE+" is requesting you to teleport to them\n \n").
             append(new TextComponent(ChatColor.DARK_GRAY+"["+ChatColor.DARK_GREEN+"ACCEPT" + ChatColor.DARK_GRAY+"] ").setStyle(s)).
             append(new TextComponent(ChatColor.DARK_GRAY + "["+ChatColor.DARK_RED+"DENY"+ChatColor.DARK_GRAY+"]").setStyle(s2)), serverPlayer.server);

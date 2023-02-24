@@ -29,3 +29,8 @@ fill ~-10 ~-32 ~-10 ~10 ~15 ~10 minecraft:air replace mekanism:deepslate_fluorit
 fill ~-10 ~-32 ~-10 ~10 ~15 ~10 minecraft:air replace mekanism:deepslate_uranium_ore
 fill ~-10 ~-32 ~-10 ~10 ~15 ~10 minecraft:air replace mekanism:deepslate_osmium_ore
 fill ~-10 ~-32 ~-10 ~10 ~15 ~10 minecraft:air replace mekanism:deepslate_tin_ore
+fill ~-10 ~-32 ~-10 ~10 ~15 ~10 minecraft:air replace minecraft:netherrack
+fill ~-10 ~-32 ~-10 ~10 ~15 ~10 minecraft:air replace minecraft:soul_sand
+fill ~-10 ~-32 ~-10 ~10 ~15 ~10 minecraft:air replace minecraft:soul_soil
+fill ~-10 ~-32 ~-10 ~10 ~15 ~10 minecraft:air replace minecraft:magma_block
+fill ~-10 ~-32 ~-10 ~10 ~15 ~10 minecraft:air replace minecraft:blackstone

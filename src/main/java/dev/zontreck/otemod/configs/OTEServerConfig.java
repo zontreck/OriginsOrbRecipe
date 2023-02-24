@@ -16,11 +16,6 @@ public class OTEServerConfig {
     public static final ForgeConfigSpec.ConfigValue<List<ItemStack>> INITIAL_ITEMS_TO_GIVE_ON_FIRST_JOIN;
     public static final ForgeConfigSpec.ConfigValue<Double> SPAWN_EGG_CHANCE;
 
-    public static final ForgeConfigSpec.ConfigValue<String> HOST_ADDR;
-    public static final ForgeConfigSpec.ConfigValue<Integer> PORT;
-    public static final ForgeConfigSpec.ConfigValue<String> USERNAME;
-    public static final ForgeConfigSpec.ConfigValue<String> PASSWORD;
-    public static final ForgeConfigSpec.ConfigValue<String> DATABASE;
     public static final ForgeConfigSpec.ConfigValue<Integer> ITEM_DESPAWN_TIMER;
 
 
@@ -49,15 +44,7 @@ public class OTEServerConfig {
         INITIAL_ITEMS_TO_GIVE_ON_FIRST_JOIN = BUILDER.comment("What items, identified by modid:item, to give to a brand new user on the server").define("New Player Gear", defaults);
         SPAWN_EGG_CHANCE = BUILDER.comment("What is the chance for a spawn egg to drop from a mob when looting 3 is used? Default: 0.25").define("spawn_egg_chance", 0.25);
         MAX_VAULTS = BUILDER.comment("What is the maximum number of vaults a player may have available? (0 is unlimited)").define("max_vaults", 0);
-        BUILDER.pop();
-
-        BUILDER.push("DATABASE");
-        HOST_ADDR = BUILDER.comment("Database Host (MySQL)").define("host", "127.0.0.1");
-        PORT = BUILDER.comment("Database Port (MySQL)").define("port", 3306);
-        USERNAME = BUILDER.comment("Database Username (MySQL)").define("user", "ote");
-        PASSWORD = BUILDER.comment("Database Password (MySQL)").define("password", "password");
-        DATABASE = BUILDER.comment("Database Name (MySQL)").define("database", "otemod");
-        ITEM_DESPAWN_TIMER = BUILDER.comment("How many times should the item's expire be cancelled. The vanilla expire time is 5 minutes, so this would be ticked down once every 5 minutes.").define("item_extra_lives", (60/5));
+        ITEM_DESPAWN_TIMER = BUILDER.comment("How many times should the item's expire be cancelled. The vanilla expire time is 5 minutes, so this would be ticked down once every 5 minutes.").define("item_extra_lives", 2);
         BUILDER.pop();
         BUILDER.push("COMMANDS");
 

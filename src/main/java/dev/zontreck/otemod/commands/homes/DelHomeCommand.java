@@ -1,19 +1,15 @@
 package dev.zontreck.otemod.commands.homes;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
+import dev.zontreck.otemod.implementation.profiles.Profile;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.network.chat.TextComponent;
 
 public class DelHomeCommand {
@@ -34,37 +30,18 @@ public class DelHomeCommand {
 //        CommandSourceStack ctx = ctx2.getSource();
 //        homeName = StringArgumentType.getString(ctx2, "nickname");
 //        if(homeName==null)return 0;
-        
-        if(!(ctx.getEntity() instanceof Player))
-        {
-            return 1;
-        }
-        ServerPlayer p = (ServerPlayer) ctx.getEntity();
-        Connection con = OTEMod.DB.getConnection();
-        try {
-            con.beginRequest();
-            //Statement stat = con.createStatement();
-
-
-            String SQL = "DELETE FROM `homes` WHERE `user`=? AND `home_name`=?;";
-
-            PreparedStatement pstat = con.prepareStatement(SQL);
-            pstat.setString(1, p.getStringUUID());
-            pstat.setString(2, homeName);
-
-            pstat.execute();
-            
+        try{
+            ServerPlayer p = ctx.getPlayerOrException();
+            Profile prof = Profile.get_profile_of(p.getStringUUID());
+            prof.player_homes.delete(homeName);
 
             ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors("!dark_green! Home was deleted successfully")), ctx.getServer());
-
-            con.endRequest();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
+        }catch(Exception e)
+        {
             e.printStackTrace();
-            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors("!dark_red! Home was unable to be deleted")), ctx.getServer());
-            return 1;
-        }
 
+            ChatServerOverride.broadcastTo(ctx.getEntity().getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors("!dark_red! Home could not be deleted due to an unknown error")), ctx.getServer());
+        }
         return 0;
     }
     

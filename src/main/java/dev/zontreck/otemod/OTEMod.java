@@ -42,14 +42,12 @@ import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.commands.CommandRegistry;
 import dev.zontreck.otemod.commands.teleport.TeleportContainer;
 import dev.zontreck.otemod.configs.OTEServerConfig;
-import dev.zontreck.otemod.configs.Profile;
-import dev.zontreck.otemod.database.Database;
-import dev.zontreck.otemod.database.Database.DatabaseConnectionException;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
 import dev.zontreck.otemod.entities.ModEntityTypes;
 import dev.zontreck.otemod.entities.monsters.client.PossumRenderer;
 import dev.zontreck.otemod.events.LoreHandlers;
 import dev.zontreck.otemod.implementation.inits.ModMenuTypes;
+import dev.zontreck.otemod.implementation.profiles.Profile;
 import dev.zontreck.otemod.implementation.scrubber.ItemScrubberScreen;
 import dev.zontreck.otemod.implementation.scrubber.MagicalScrubberScreen;
 import dev.zontreck.otemod.implementation.vault.VaultScreen;
@@ -69,7 +67,6 @@ public class OTEMod
     public static final String MOD_ID = "otemod";
     public static final String MODIFY_BIOMES = "modify_biomes";
     public static final ResourceLocation MODIFY_BIOMES_RL = new ResourceLocation(OTEMod.MOD_ID, MODIFY_BIOMES);
-    public static Database DB=null;
     public static Map<String,Profile> PROFILES = new HashMap<String,Profile>();
     public static List<TeleportContainer> TeleportRegistry = new ArrayList<>();
     public static MinecraftServer THE_SERVER;
@@ -82,6 +79,7 @@ public class OTEMod
 
     public static String OTEPrefix = "";
     public static String ONLY_PLAYER = "";
+    public static IEventBus bus;
 
     public OTEMod()
     {
@@ -89,7 +87,7 @@ public class OTEMod
         OTEMod.OTEPrefix = ChatColor.doColors("!dark_gray![!dark_green!!bold!OTEMod!reset!!dark_gray!]!reset!");
         OTEMod.ONLY_PLAYER = ChatColor.doColors("!dark_red!Only a player can execute this command");
 
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+        bus = FMLJavaModLoadingContext.get().getModEventBus();
         // Register the setup method for modloading
         bus.addListener(this::setup);
 
@@ -156,86 +154,42 @@ public class OTEMod
         // Do something when the server starts
         //LOGGER.info("HELLO from server starting");
 
-        try {
-            OTEMod.DB = new Database(this);
-            OTEMod.ALIVE=true;
-            //HealerQueue.Initialize(); // Set up the queue
+        OTEMod.ALIVE=true;
+        //HealerQueue.Initialize(); // Set up the queue
 
+        // Set up the repeating task to expire a TeleportContainer
+        OTEMod.THE_SERVER = event.getServer();
+        OTEMod.MasterThread = new Thread(new Runnable(){
+            public void run()
+            {
+                while(OTEMod.ALIVE){
+                    // Check if the teleports have expired
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        //e.printStackTrace();
+                    }
 
-            // Validate that the database has been established and that tables exist
-            Connection con = OTEMod.DB.getConnection();
-            con.setAutoCommit(true);
-
-
-            con.beginRequest();
-
-            Statement lookup = con.createStatement();
-            lookup.execute("CREATE TABLE IF NOT EXISTS `homes` (" +
-"                `number` int(11) NOT NULL," +
-"                `user` varchar(255) NOT NULL," +
-"                `home_name` varchar(255) NOT NULL," +
-"                `teleporter` text not null)"); // 10/04/2022 - fix dimension column size due to a bug where mods might have long names!
-
-            lookup.execute("CREATE TABLE IF NOT EXISTS `profiles` ("+
-            "`username` varchar (255) not null,"+
-            "`uuid` varchar (255) not null,"+
-            "`prefix` varchar (255) not null,"+
-            "`nickname` varchar (255) not null,"+
-            "`name_color` varchar (255) not null,"+
-            "`prefix_color` varchar(255) not null,"+
-            "`chat_color` varchar(255) not null)");
-
-            lookup.execute("CREATE TABLE IF NOT EXISTS `vaults` (" + 
-            "`uuid` varchar (128) NOT NULL, " +
-            "`number` int (11) not null," + 
-            "`data` text not null);");
-
-            lookup.execute("CREATE TABLE IF NOT EXISTS `warps` (" +
-            "`warpname` varchar (128) not null, " + 
-            "`owner` varchar(128) not null, " +
-            "`warptype` int (2) not null, "+
-            "`teleporter` text not null)"); 
-
-            con.endRequest();
-
-            // Set up the repeating task to expire a TeleportContainer
-            OTEMod.THE_SERVER = event.getServer();
-            OTEMod.MasterThread = new Thread(new Runnable(){
-                public void run()
-                {
-                    while(OTEMod.ALIVE){
-                        // Check if the teleports have expired
-                        try {
-                            Thread.sleep(5000);
-                        } catch (InterruptedException e) {
-                            //e.printStackTrace();
-                        }
-
-                        for(TeleportContainer cont : OTEMod.TeleportRegistry){
-                            if(cont.has_expired())
-                            {
-                                try{
-                                    Component expire = new TextComponent(OTEMod.OTEPrefix + ChatColor.DARK_PURPLE+" Teleport request has expired");
-                                    ChatServerOverride.broadcastTo(cont.FromPlayer, expire, OTEMod.THE_SERVER);
-                                    ChatServerOverride.broadcastTo(cont.ToPlayer, expire, OTEMod.THE_SERVER);
-                                    OTEMod.TeleportRegistry.remove(cont);
-                                }catch(Exception e){
-                                    break;
-                                }
+                    for(TeleportContainer cont : OTEMod.TeleportRegistry){
+                        if(cont.has_expired())
+                        {
+                            try{
+                                Component expire = new TextComponent(OTEMod.OTEPrefix + ChatColor.DARK_PURPLE+" Teleport request has expired");
+                                ChatServerOverride.broadcastTo(cont.FromPlayer, expire, OTEMod.THE_SERVER);
+                                ChatServerOverride.broadcastTo(cont.ToPlayer, expire, OTEMod.THE_SERVER);
+                                OTEMod.TeleportRegistry.remove(cont);
+                            }catch(Exception e){
+                                break;
                             }
                         }
                     }
-
-                    OTEMod.LOGGER.info("Tearing down OTEMod teleport queue - The server is going down");
                 }
-            });
-            OTEMod.MasterThread.start();
-        } catch (DatabaseConnectionException | SQLException e) {
-            e.printStackTrace();
 
-            LOGGER.error("FATAL ERROR\n \n* DATABASE COULD NOT CONNECT *\n* SEE ABOVE STACK TRACE *");
-
-        }
+                OTEMod.LOGGER.info("Tearing down OTEMod teleport queue - The server is going down");
+            }
+        });
+        OTEMod.MasterThread.start();
+        
     }
     
 

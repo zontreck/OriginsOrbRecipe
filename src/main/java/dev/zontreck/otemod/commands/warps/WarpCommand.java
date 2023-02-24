@@ -3,9 +3,12 @@ package dev.zontreck.otemod.commands.warps;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Iterator;
+import java.util.List;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.chat.Clickable;
@@ -16,6 +19,9 @@ import dev.zontreck.otemod.commands.teleport.RTPCommand;
 import dev.zontreck.otemod.commands.teleport.TeleportActioner;
 import dev.zontreck.otemod.commands.teleport.TeleportContainer;
 import dev.zontreck.otemod.database.TeleportDestination;
+import dev.zontreck.otemod.implementation.warps.NoSuchWarpException;
+import dev.zontreck.otemod.implementation.warps.Warp;
+import dev.zontreck.otemod.implementation.warps.WarpsProvider;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.nbt.NbtUtils;
@@ -38,49 +44,36 @@ public class WarpCommand {
 
     private static int warp(CommandSourceStack source, String string) {
         
-        ServerPlayer p = (ServerPlayer)source.getEntity();
-        Connection con = OTEMod.DB.getConnection();
-        String SQL = "";
+        final ServerPlayer p;
         try{
-            con.beginRequest();
+            p=source.getPlayerOrException();
+            Warp warp = WarpsProvider.WARPS_INSTANCE.getNamedWarp(string);
 
-            PreparedStatement pstat;
-            SQL = "SELECT * FROM `warps` WHERE `warpname`=?;";
-            pstat=con.prepareStatement(SQL);
-            pstat.setString(1, string);
-            ResultSet rs = pstat.executeQuery();
-            // Get the first result
-            if(rs.next())
-            {
-                TeleportDestination dest = new TeleportDestination(NbtUtils.snbtToStructure(rs.getString("teleporter")));
+            TeleportDestination dest = warp.destination;
 
+            ServerLevel dimL=(ServerLevel) dest.getActualDimension();
+            
 
-                ServerLevel dimL=(ServerLevel) dest.getActualDimension();
-                
+            final int type = warp.RTP ? 1 : 0;
+            final ServerLevel f_dim = dimL;
 
-                final int type = rs.getInt("warptype");
-                final ServerLevel f_dim = dimL;
+            Thread tx = new Thread(new Runnable(){
+                public void run(){
 
-                Thread tx = new Thread(new Runnable(){
-                    public void run(){
-
-                        if(type==1){
-                            dest.Position = RTPCommand.findPosition(source.getLevel(), false);
-                        }
-        
-                        TeleportActioner.ApplyTeleportEffect(p);
-                        TeleportContainer tc = new TeleportContainer(p, dest.Position.asMinecraftVector(), dest.Rotation.asMinecraftVector(), f_dim);
-                        TeleportActioner.PerformTeleport(tc);
+                    if(type==1){
+                        dest.Position = RTPCommand.findPosition(source.getLevel(), false);
                     }
-                });
-                tx.start();
-            }else {
-                ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(ChatColor.DARK_RED+"No such warp"), source.getServer());
-            }
-
-
-            con.endRequest();
-        }catch(Exception e){
+    
+                    TeleportActioner.ApplyTeleportEffect(p);
+                    TeleportContainer tc = new TeleportContainer(p, dest.Position.asMinecraftVector(), dest.Rotation.asMinecraftVector(), f_dim);
+                    TeleportActioner.PerformTeleport(tc);
+                }
+            });
+            tx.start();
+        }catch(NoSuchWarpException e)
+        {
+            ChatServerOverride.broadcastTo(source.getEntity().getUUID(), new TextComponent(ChatColor.DARK_RED+"No such warp"), source.getServer());
+        } catch (CommandSyntaxException e) {
             e.printStackTrace();
         }
         return 0;

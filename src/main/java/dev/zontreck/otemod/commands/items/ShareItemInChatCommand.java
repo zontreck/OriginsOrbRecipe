@@ -6,7 +6,8 @@ import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.chat.HoverTip;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
-import dev.zontreck.otemod.configs.Profile;
+import dev.zontreck.otemod.implementation.profiles.Profile;
+import dev.zontreck.otemod.implementation.profiles.UserProfileNotYetExistsException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.MutableComponent;
@@ -42,7 +43,12 @@ public class ShareItemInChatCommand {
                 return 0;
             }
 
-            Profile prof = Profile.get_profile_of(play.getUUID().toString());
+            Profile prof;
+            try {
+                prof = Profile.get_profile_of(play.getUUID().toString());
+            } catch (UserProfileNotYetExistsException e) {
+                return 1;
+            }
 
             MutableComponent component = new TextComponent(OTEMod.OTEPrefix).append(is.getDisplayName()).append(new TextComponent(ChatColor.doColors(" !White!-!Dark_Purple! Hover here to see the item that "+prof.name_color+prof.nickname+"!Dark_Purple! shared")));
             Style style = Style.EMPTY.withFont(Style.DEFAULT_FONT);

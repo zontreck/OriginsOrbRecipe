@@ -13,6 +13,9 @@ import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.database.TeleportDestination;
+import dev.zontreck.otemod.implementation.warps.NoSuchWarpException;
+import dev.zontreck.otemod.implementation.warps.Warp;
+import dev.zontreck.otemod.implementation.warps.WarpsProvider;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -37,31 +40,30 @@ public class DelWarpCommand {
     private static int setWarp(CommandSourceStack source, String string) {
         
         ServerPlayer p = (ServerPlayer)source.getEntity();
-        Connection con = OTEMod.DB.getConnection();
+
+        Warp warp;
         try {
-            con.beginRequest();
-            PreparedStatement pstat;
-            Vec3 position = p.position();
-            Vec2 rot = p.getRotationVector();
-
-            TeleportDestination dest = new TeleportDestination(new Vector3(position), new Vector2(rot), p.getLevel().dimension().location().getNamespace() + ":" + p.getLevel().dimension().location().getPath());
-
-            String SQL = "DELETE FROM `warps` WHERE `warpname`=? AND `owner`=?;";
-            pstat = con.prepareStatement(SQL);
-            pstat.setString(1, string);
-            pstat.setString(2, p.getStringUUID());
-            pstat.execute();
-            
-
-            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(ChatColor.GREEN).append(new TranslatableComponent("dev.zontreck.otemod.msgs.warps.del.success")), source.getServer());
-
-            con.endRequest();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(ChatColor.DARK_RED).append(new TranslatableComponent("dev.zontreck.otemod.msgs.warps.del.fail")), source.getServer());
+            warp = WarpsProvider.WARPS_INSTANCE.getNamedWarp(string);
+        } catch (NoSuchWarpException e) {
+            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!That warp does not exist")), p.server);
+            return 0;
         }
-
+        if(p.getUUID().equals(warp.owner) || p.hasPermissions(5))
+        {
+            try {
+                WarpsProvider.WARPS_INSTANCE.delete(WarpsProvider.WARPS_INSTANCE.getNamedWarp(string));
+            } catch (NoSuchWarpException e) {
+                ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!That warp does not exist")), p.server);
+                return 0;
+            }
+        
+            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!Warp deleted successfully")), p.server);
+    
+        }else {
+            
+            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!Warp could not be deleted, because you do not own the warp.")), p.server);
+        }
+    
         return 0;
     }
 }

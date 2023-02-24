@@ -12,8 +12,9 @@ import dev.zontreck.libzontreck.util.ItemUtils;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.configs.PlayerFlyCache;
-import dev.zontreck.otemod.configs.Profile;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
+import dev.zontreck.otemod.implementation.profiles.Profile;
+import dev.zontreck.otemod.implementation.profiles.UserProfileNotYetExistsException;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;
@@ -38,42 +39,8 @@ public class ChatServerOverride {
         //Player joined, send custom alert
         if(ev.getEntity().level.isClientSide)return;
         ServerPlayer play = (ServerPlayer)ev.getEntity();
+        Profile prof = Profile.factory(play);
         
-        // Download user data from database
-        try{
-            Connection c = OTEMod.DB.getConnection();
-            String SQL = "SELECT * FROM `profiles` WHERE `uuid`=?;";
-            PreparedStatement pst = c.prepareStatement(SQL);
-            pst.setString(1,ev.getEntity().getStringUUID());
-
-            ResultSet rs = pst.executeQuery();
-            boolean has_profile=false;
-            while(rs.next())
-            {
-                has_profile=true;
-
-                
-                OTEMod.PROFILES.put(ev.getEntity().getStringUUID(), new Profile(rs.getString("username"), rs.getString("prefix"), rs.getString("nickname"), rs.getString("name_color"), ev.getEntity().getStringUUID(), rs.getString("prefix_color"), rs.getString("chat_color"), rs.getBoolean("flying"), rs.getInt("vaults")));
-            }
-
-            if(!has_profile)
-            {
-                // Create profile!
-                Profile p = Profile.factory(play);
-                OTEMod.PROFILES.put(play.getStringUUID(), p);
-                p.commit(); // Commits the profile to the server
-
-
-                play.displayClientMessage(new TextComponent(ChatColor.doColors( OTEMod.OTEPrefix +" !Dark_Green!First join! Your server profile has been created")), false);
-            }
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
-        Profile prof = Profile.get_profile_of(ev.getEntity().getStringUUID());
-        if(prof == null){
-            OTEMod.LOGGER.error("FATAL: Profile was null for "+ev.getEntity().getName().getString());
-            return;
-        }
 
         if(prof.flying)
         {
@@ -84,11 +51,13 @@ public class ChatServerOverride {
         Abilities playerAbilities = play.getAbilities();
         boolean mayFly = false;
         ItemStack feet = play.getItemBySlot(EquipmentSlot.FEET);
-        ItemStack legs = play.getItemBySlot(EquipmentSlot.LEGS);
         if(ItemUtils.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get(), feet)>0)mayFly = true;
 
         playerAbilities.mayfly=mayFly;
-        play.onUpdateAbilities();
+        PlayerFlyCache c = PlayerFlyCache.cachePlayer(play);
+        c.Flying=prof.flying;
+        c.FlyEnabled = mayFly;
+        c.Assert(play);
 
         if(!OTEServerConfig.USE_CUSTOM_JOINLEAVE.get()) return;
         
@@ -101,7 +70,13 @@ public class ChatServerOverride {
     {
         if(ev.getEntity().level.isClientSide)return;
         // Get player profile, send disconnect alert, then commit profile and remove it from memory
-        Profile px = Profile.get_profile_of(ev.getEntity().getStringUUID());
+        Profile px=null;
+        try {
+            px = Profile.get_profile_of(ev.getEntity().getStringUUID());
+        } catch (UserProfileNotYetExistsException e) {
+            e.printStackTrace();
+        }
+        Profile.unload(px);
         ServerPlayer sp = (ServerPlayer)ev.getEntity();
 
 
@@ -114,7 +89,6 @@ public class ChatServerOverride {
 
         px.flying=sp.getAbilities().flying;
         px.commit();
-        OTEMod.PROFILES.remove(ev.getEntity().getStringUUID());
     }
 
     @SubscribeEvent
@@ -138,7 +112,13 @@ public class ChatServerOverride {
         
         ServerPlayer sp = ev.getPlayer();
         // Get profile
-        Profile XD = Profile.get_profile_of(sp.getStringUUID());
+        Profile XD=null;
+        try {
+            XD = Profile.get_profile_of(sp.getStringUUID());
+        } catch (UserProfileNotYetExistsException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         
         // Override the chat!
         String prefixStr = "";

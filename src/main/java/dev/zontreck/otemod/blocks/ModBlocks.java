@@ -40,6 +40,11 @@ public class ModBlocks {
 
     public static final RegistryObject<Item> VAULT_STEEL_ORE_BLOCK_I = ITEMS.register("vault_steel_ore_block", ()->new BlockItem(VAULT_STEEL_ORE_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 
+
+    public static final RegistryObject<Block> NETHER_VAULT_STEEL_ORE_BLOCK = BLOCKS.register("nether_vault_steel_ore_block", ()->new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(8F).explosionResistance(1200).destroyTime(100)));
+
+    public static final RegistryObject<Item> NETHER_VAULT_STEEL_ORE_BLOCK_I = ITEMS.register("nether_vault_steel_ore_block", ()->new BlockItem(NETHER_VAULT_STEEL_ORE_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
+
     //#region TINKERS BLOCKS
 
     public static final RegistryObject<Block> COBALT_ORE_BLOCK = BLOCKS.register("cobalt_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.NETHER).sound(SoundType.NETHER_ORE).requiresCorrectToolForDrops().strength(10.0F)));

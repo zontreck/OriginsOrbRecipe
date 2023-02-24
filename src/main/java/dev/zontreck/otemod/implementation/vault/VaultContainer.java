@@ -13,15 +13,23 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
+import dev.zontreck.otemod.implementation.events.VaultModifiedEvent;
+import dev.zontreck.otemod.implementation.profiles.Profile;
+import dev.zontreck.otemod.implementation.profiles.UserProfileNotYetExistsException;
+import dev.zontreck.otemod.implementation.vault.VaultProvider.VaultAccessStrategy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuConstructor;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class VaultContainer
@@ -29,13 +37,16 @@ public class VaultContainer
     public static Map<UUID, VaultContainer> VAULT_REGISTRY = new HashMap<>();
     public VaultMenu theContainer;
     public ItemStackHandler myInventory;
+    public ItemStackHandler startingInventory;
     public MenuConstructor serverMenu;
     public UUID owner;
     private MinecraftServer server;
     public final int VAULT_NUMBER;
     public final UUID VaultID;
-    public VaultContainer(ServerPlayer player, int vaultNum) {
+    public Vault main_accessor;
+    public VaultContainer(ServerPlayer player, int vaultNum) throws NoMoreVaultException {
         myInventory = new ItemStackHandler(54); // Vaults have a fixed size at the same as a double chest
+        startingInventory = new ItemStackHandler(64);
         theContainer = new VaultMenu(player.containerCounter+1, player.getInventory(), myInventory, BlockPos.ZERO, player, vaultNum);
         VaultID = theContainer.VaultMenuID;
         owner = player.getUUID();
@@ -44,67 +55,66 @@ public class VaultContainer
         VAULT_NUMBER=vaultNum;
         if(VAULT_NUMBER == -1)return; // Trash ID
 
-        Connection con = OTEMod.DB.getConnection();
         // Check database for vault
-
-        PreparedStatement pstat;
+        VaultAccessStrategy strategy;
         try {
-            con.beginRequest();
-            pstat = con.prepareStatement("SELECT * FROM `vaults` WHERE `uuid`=? AND `number`=?;");
-            pstat.setString(1, player.getStringUUID());
-            pstat.setInt(2, vaultNum);
-    
-            ResultSet rs = pstat.executeQuery();
-            while(rs.next())
+            strategy = VaultProvider.check(Profile.get_profile_of(player.getStringUUID()), vaultNum);
+            if(strategy == VaultAccessStrategy.CREATE || strategy == VaultAccessStrategy.OPEN)
             {
-                // We have a vault, deserialize the container
-                String data = rs.getString("data");
-                CompoundTag inv = NbtUtils.snbtToStructure(data);
-                myInventory.deserializeNBT(inv);
+                Vault accessor = VaultProvider.get(Profile.get_profile_of(player.getStringUUID()), vaultNum);
+                if(accessor.isNew)
+                {
+                    main_accessor=accessor;
+                    return;
+                }else {
+                    myInventory.deserializeNBT(accessor.getContents());
+                    startingInventory.deserializeNBT(accessor.getContents());
+                }
+                main_accessor=accessor;
+            }else {
+                // DENY
+                throw new NoMoreVaultException("No more vaults can be created", vaultNum);
             }
-            con.endRequest();
-        } catch (SQLException | CommandSyntaxException e) {
-            e.printStackTrace();
+        } catch (UserProfileNotYetExistsException e) {
+            throw new NoMoreVaultException("User profile not exists. No vault can be opened or created", -9999);
         }
+
         // Container is now ready to be sent to the client!
     }
 
     public void commit()
     {
         if(VAULT_NUMBER == -1)return; // We have no need to save the trash
+        boolean isEmpty=true;
         CompoundTag saved = myInventory.serializeNBT();
         ChatServerOverride.broadcastToAbove(owner, new TextComponent(ChatColor.BOLD+ChatColor.DARK_GREEN+"Saving the vault's contents..."), server);
 
-        String toSave= NbtUtils.structureToSnbt(saved);
-
-        Connection con = OTEMod.DB.getConnection();
-        try{
-            con.beginRequest();
-            PreparedStatement ps = con.prepareStatement("REPLACE INTO `vaults` (uuid, number, data) VALUES (?,?,?);");
-            ps.setString(1, owner.toString());
-            ps.setInt(2, VAULT_NUMBER);
-            ps.setString(3, toSave);
-
-            boolean has_items = false;
-            for (int i = 0; i< myInventory.getSlots(); i++){
-                ItemStack IS = myInventory.getStackInSlot(i);
-                if(!IS.isEmpty()){
-                    has_items=true;
-                }
-            }
-
-            if(!has_items)
-            {
-                ps = con.prepareStatement("DELETE FROM `vaults` WHERE uuid=? AND number=?;");
-                ps.setString(1, owner.toString());
-                ps.setInt(2, VAULT_NUMBER);
-            }
-
-            ps.execute();
-            con.endRequest();
-        }catch(SQLException e){
+        Profile profile=null;
+        try {
+            profile = Profile.get_profile_of(owner.toString());
+        } catch (UserProfileNotYetExistsException e) {
             e.printStackTrace();
+            return;
         }
+
+        for(int i = 0;i<myInventory.getSlots();i++)
+        {
+            ItemStack is = myInventory.getStackInSlot(i);
+            if(!is.is(Items.AIR))
+            {
+                isEmpty=false;
+            }
+        }
+
+
+        if(!isEmpty)
+            main_accessor.setContents(saved);
+        else
+            main_accessor.delete();
+
+        
+        VaultModifiedEvent vme = new VaultModifiedEvent(VAULT_NUMBER, profile, VaultProvider.getInUse(profile), myInventory, startingInventory);
+        OTEMod.bus.post(vme);
     }
 
 }

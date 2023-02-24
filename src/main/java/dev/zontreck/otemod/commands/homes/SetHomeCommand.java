@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.vectors.Vector2;
@@ -13,6 +14,11 @@ import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.database.TeleportDestination;
+import dev.zontreck.otemod.implementation.homes.Home;
+import dev.zontreck.otemod.implementation.homes.Homes;
+import dev.zontreck.otemod.implementation.homes.HomesProvider;
+import dev.zontreck.otemod.implementation.profiles.Profile;
+import dev.zontreck.otemod.implementation.profiles.UserProfileNotYetExistsException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
@@ -40,39 +46,30 @@ public class SetHomeCommand {
 //        homeName = StringArgumentType.getString(ctx2, "nickname");
 //        if(homeName==null)return 0;
         
-        if(!(ctx.getEntity() instanceof Player))
-        {
-            
-            return 1;
-        }
-        ServerPlayer p = (ServerPlayer)ctx.getEntity();
-        Connection con = OTEMod.DB.getConnection();
+        ServerPlayer p;
         try {
-            con.beginRequest();
-            //Statement stat = con.createStatement();
+            p = ctx.getPlayerOrException();
             Vec3 position = p.position();
             Vec2 rot = p.getRotationVector();
-
+    
             TeleportDestination dest = new TeleportDestination(new Vector3(position), new Vector2(rot), p.getLevel());
-
-            String SQL = "REPLACE INTO `homes` (user, home_name, teleporter) VALUES (?, ?, ?);";
-            PreparedStatement pstat = con.prepareStatement(SQL);
-
-            pstat.setString(1, p.getStringUUID());
-            pstat.setString(2, homeName);
-            pstat.setString(3, dest.toString());
-
-            pstat.execute();
+    
+            Home newhome = new Home(p, homeName, dest);
+            Profile profile = Profile.get_profile_of(p.getStringUUID());
+            Homes homes = profile.player_homes;
+            homes.add(newhome);
             
+                
             ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !dark_green!Home was created or updated successfully!")), ctx.getServer());
+        } catch (CommandSyntaxException e) {
             
-            con.endRequest();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
+            ChatServerOverride.broadcastTo(ctx.getEntity().getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !dark_red!Home could not be created or updated!")), ctx.getServer());
             e.printStackTrace();
-            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !dark_red!Home could not be updated or created for a unknown reason!")), ctx.getServer());
-            return 1;
+        } catch (UserProfileNotYetExistsException e) {
+            ChatServerOverride.broadcastTo(ctx.getEntity().getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !dark_red!Home could not be created or updated!")), ctx.getServer());
+            e.printStackTrace();
         }
+        
 
         return 0;
     }

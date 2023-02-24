@@ -13,6 +13,8 @@ import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.database.TeleportDestination;
+import dev.zontreck.otemod.implementation.warps.Warp;
+import dev.zontreck.otemod.implementation.warps.WarpsProvider;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -37,32 +39,16 @@ public class SetWarpCommand {
     private static int setWarp(CommandSourceStack source, String string) {
         
         ServerPlayer p = (ServerPlayer)source.getEntity();
-        Connection con = OTEMod.DB.getConnection();
-        try {
-            con.beginRequest();
-            PreparedStatement pstat;
-            Vec3 position = p.position();
-            Vec2 rot = p.getRotationVector();
+        
 
-            TeleportDestination dest = new TeleportDestination(new Vector3(position), new Vector2(rot), p.getLevel());
+        Vec3 position = p.position();
+        Vec2 rot = p.getRotationVector();
 
-            String SQL = "REPLACE INTO `warps` (warpname, owner, warptype, teleporter) values (?, ?, ?, ?);";
-            pstat = con.prepareStatement(SQL);
-            pstat.setString(1, string);
-            pstat.setString(2, p.getStringUUID());
-            pstat.setInt(3, 0);
-            pstat.setString(4, dest.toString());
-            pstat.execute();
-            
+        TeleportDestination dest = new TeleportDestination(new Vector3(position), new Vector2(rot), p.getLevel());
+        Warp w = new Warp(p.getUUID(), string, false, true, dest);
+        WarpsProvider.WARPS_INSTANCE.add(w);
 
-            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(ChatColor.GREEN).append(new TranslatableComponent("dev.zontreck.otemod.msgs.warps.set.success")), source.getServer());
-
-            con.endRequest();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(ChatColor.DARK_RED).append(new TranslatableComponent("dev.zontreck.otemod.msgs.warps.set.fail")), source.getServer());
-        }
+        ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!Warp created successfully")), p.server);
 
         return 0;
     }

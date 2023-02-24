@@ -1,33 +1,22 @@
 package dev.zontreck.otemod.commands.homes;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
-import dev.zontreck.libzontreck.exceptions.InvalidDeserialization;
-import dev.zontreck.libzontreck.exceptions.InvalidSideException;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.commands.teleport.TeleportActioner;
 import dev.zontreck.otemod.commands.teleport.TeleportContainer;
 import dev.zontreck.otemod.database.TeleportDestination;
+import dev.zontreck.otemod.implementation.homes.Home;
+import dev.zontreck.otemod.implementation.homes.NoSuchHomeException;
+import dev.zontreck.otemod.implementation.profiles.Profile;
+import dev.zontreck.otemod.implementation.profiles.UserProfileNotYetExistsException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.nbt.NbtUtils;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.phys.Vec2;
-import net.minecraft.world.phys.Vec3;
-import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TextColor;
 import net.minecraft.network.chat.TextComponent;
 
 public class HomeCommand {
@@ -48,77 +37,31 @@ public class HomeCommand {
 //        CommandSourceStack ctx = ctx2.getSource();
 //        homeName = StringArgumentType.getString(ctx2, "nickname");
 //        if(homeName==null)return 0;
-        
-        if(!(ctx.getEntity() instanceof Player))
-        {
-            return 1;
-        }
-        ServerPlayer p = (ServerPlayer)ctx.getEntity();
-        Connection con = OTEMod.DB.getConnection();
-        String SQL="";
-        try {
-            con.beginRequest();
-            Statement stat = con.createStatement();
-            Vec3 position = p.position();
-            
-            Vec2 rot = p.getRotationVector();
-            
-            //stat.execute("REPLACE INTO `homes` (user, home_name, x, y, z, rot_x, rot_y, dimension) values (\"" + p.getStringUUID() + "\", \""+ homeName + "\", "+String.valueOf(position.x)+", "+String.valueOf(position.y)+", "+String.valueOf(position.z)+", "+String.valueOf(rot.x)+", "+String.valueOf(rot.y)+", \"" + p.getLevel().dimension().location().getNamespace() + ":" + p.getLevel().dimension().location().getPath() + "\");");
-            // Query database now
-            SQL = "SELECT * FROM `homes` WHERE `user`=? AND `home_name`=?;";
-            //ResultSet rs = stat.executeQuery(SQL);
-            
-            PreparedStatement pstat = con.prepareStatement(SQL);
-            pstat.setString(1, p.getStringUUID());
-            pstat.setString(2, homeName);
+        try{
+            ServerPlayer p = ctx.getPlayerOrException();
+            Profile prof = Profile.get_profile_of(p.getStringUUID());
+            Home home = prof.player_homes.get(homeName);
 
-            ResultSet rs = pstat.executeQuery();
-
-            boolean has_home = false;
-            while(rs.next()){
-                has_home=true;
-                // Now, begin to extract the home data
-                TeleportDestination dest = new TeleportDestination(NbtUtils.snbtToStructure(rs.getString("teleporter")));
-                
-
-
-                position = dest.Position.asMinecraftVector();
-                rot = dest.Rotation.asMinecraftVector();
-
-                ServerLevel dimL = (ServerLevel)dest.getActualDimension();
-                
-                TeleportActioner.ApplyTeleportEffect(p);
-                // Instantiate a Teleport Runner
-
-                final ServerPlayer f_p = p;
-                final Vec3 f_pos = position;
-                final Vec2 f_rot = rot;
-                final ServerLevel f_dim = dimL;
-                TeleportContainer cont = new TeleportContainer(f_p, f_pos, f_rot, f_dim);
-                TeleportActioner.PerformTeleport(cont);
-            }
-
-            if(!has_home)throw new SQLException("NO HOME");
-            
-            Style sxx = Style.EMPTY.withColor(TextColor.parseColor(ChatColor.DARK_GREEN)).withFont(Style.DEFAULT_FONT);
-            
+            TeleportDestination dest = home.destination;
+            TeleportActioner.ApplyTeleportEffect(p);
+            TeleportContainer cont = new TeleportContainer(p, dest.Position.asMinecraftVector(), dest.Rotation.asMinecraftVector(), dest.getActualDimension());
+            TeleportActioner.PerformTeleport(cont);
 
             ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !dark_green!Home found! Wormhole opening now...")), ctx.getServer());
-            con.endRequest();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
+        }catch(CommandSyntaxException e)
+        {
             e.printStackTrace();
-            if(!e.getMessage().equals("%%"))
-                ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !Dark_Red! Could not go to the home")), ctx.getServer());
-            else
-                ctx.sendFailure(new TextComponent("FAILED SQL: "+ ChatColor.GOLD+ SQL));
-        } catch (InvalidDeserialization e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (CommandSyntaxException e) {
+            return 1;
+        }catch(NoSuchHomeException e)
+        {
+            
+            ChatServerOverride.broadcastTo(ctx.getEntity().getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !dark_red!Home not found. Maybe it does not exist?")), ctx.getServer());
+            return 0;
+        } catch (UserProfileNotYetExistsException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        
 
         return 0;
     }

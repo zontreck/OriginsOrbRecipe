@@ -9,12 +9,17 @@ import java.util.List;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.chat.Clickable;
 import dev.zontreck.libzontreck.chat.HoverTip;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
+import dev.zontreck.otemod.implementation.homes.Home;
+import dev.zontreck.otemod.implementation.homes.Homes;
+import dev.zontreck.otemod.implementation.profiles.Profile;
+import dev.zontreck.otemod.implementation.profiles.UserProfileNotYetExistsException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
@@ -31,33 +36,26 @@ public class HomesCommand {
     private static int getHomes(CommandContext<CommandSourceStack> ctx)
     {
         // Request homes
-        if(!(ctx.getSource().getEntity() instanceof Player))
-        {
-            
-            return 1;
-        }
-        ServerPlayer p = (ServerPlayer)ctx.getSource().getEntity();
-        Connection con = OTEMod.DB.getConnection();
-        try {
-            con.beginRequest();
-            Statement stat = con.createStatement();
-            ResultSet rs = stat.executeQuery("SELECT `home_name` FROM `homes` WHERE `user`=\"" + p.getStringUUID()+"\"");
-            List<String> homes = new ArrayList<String>();
-            while(rs.next()){
-                homes.add(rs.getString("home_name"));
-            }
-            
-            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !Dark_Purple!There are !gold!"+String.valueOf(homes.size())+" !dark_purple!total homes.")), p.server);
-            con.endRequest();
+        try{
+            ServerPlayer player = ctx.getSource().getPlayerOrException();
 
-            for (String string : homes) {
-                Style st = Style.EMPTY.withFont(Style.DEFAULT_FONT).withHoverEvent(HoverTip.get(ChatColor.BOLD+ChatColor.DARK_GREEN+"Click here to go to this home")).withClickEvent(Clickable.command("/home "+string));
+            Profile p = Profile.get_profile_of(player.getStringUUID());
+            Homes homes = p.player_homes;
 
-                ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(ChatColor.BOLD + ChatColor.MINECOIN_GOLD+"["+ChatColor.resetChat()+ChatColor.UNDERLINE+ChatColor.BOLD+ChatColor.DARK_GREEN+"HOME"+ChatColor.resetChat()+ChatColor.BOLD+ChatColor.MINECOIN_GOLD+"] "+ChatColor.resetChat()+ChatColor.YELLOW+string).setStyle(st), ctx.getSource().getServer());
+            ChatServerOverride.broadcastTo(player.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !Dark_Purple!There are !gold!"+String.valueOf(homes.count())+" !dark_purple!total homes.")), player.server);
+
+            
+            for (Home string : homes.getList()) {
+                Style st = Style.EMPTY.withFont(Style.DEFAULT_FONT).withHoverEvent(HoverTip.get(ChatColor.BOLD+ChatColor.DARK_GREEN+"Click here to go to this home")).withClickEvent(Clickable.command("/home "+string.homeName));
+
+                ChatServerOverride.broadcastTo(player.getUUID(), new TextComponent(ChatColor.BOLD + ChatColor.MINECOIN_GOLD+"["+ChatColor.resetChat()+ChatColor.UNDERLINE+ChatColor.BOLD+ChatColor.DARK_GREEN+"HOME"+ChatColor.resetChat()+ChatColor.BOLD+ChatColor.MINECOIN_GOLD+"] "+ChatColor.resetChat()+ChatColor.YELLOW+string).setStyle(st), ctx.getSource().getServer());
                 
             }
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
+        }catch(CommandSyntaxException ex)
+        {
+            ex.printStackTrace();
+
+        } catch (UserProfileNotYetExistsException e) {
             e.printStackTrace();
         }
 

@@ -29,7 +29,7 @@ public class EventHandler {
     @SubscribeEvent(priority = EventPriority.HIGH)
     public static void addOresToBiomes(final BiomeLoadingEvent ev){
         //ShapedAionResources.LOGGER.info("Biome loading event called. Registering aion ores");
-        OTEMod.LOGGER.info("/!\\ Registering OTEMod ores /!\\");
+        //OTEMod.LOGGER.info("/!\\ Registering OTEMod ores /!\\");
         OreGenerator.generateOres(ev);
     }
 
