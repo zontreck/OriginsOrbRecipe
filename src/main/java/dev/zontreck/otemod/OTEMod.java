@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -46,6 +47,7 @@ import dev.zontreck.otemod.enchantments.ModEnchantments;
 import dev.zontreck.otemod.entities.ModEntityTypes;
 import dev.zontreck.otemod.entities.monsters.client.PossumRenderer;
 import dev.zontreck.otemod.events.LoreHandlers;
+import dev.zontreck.otemod.implementation.DelayedExecutorService;
 import dev.zontreck.otemod.implementation.inits.ModMenuTypes;
 import dev.zontreck.otemod.implementation.profiles.Profile;
 import dev.zontreck.otemod.implementation.scrubber.ItemScrubberScreen;
@@ -80,6 +82,11 @@ public class OTEMod
     public static String OTEPrefix = "";
     public static String ONLY_PLAYER = "";
     public static IEventBus bus;
+    public static final DelayedExecutorService delayedExecutor;
+
+    static{
+        delayedExecutor = new DelayedExecutorService();
+    }
 
     public OTEMod()
     {
@@ -107,6 +114,7 @@ public class OTEMod
         MinecraftForge.EVENT_BUS.register(new ChatServerOverride());
         MinecraftForge.EVENT_BUS.register(new CommandRegistry());
         MinecraftForge.EVENT_BUS.register(new VaultWatcher());
+        MinecraftForge.EVENT_BUS.register(delayedExecutor);
         MinecraftForge.EVENT_BUS.register(new dev.zontreck.otemod.zschem.EventHandler());
         ModMenuTypes.CONTAINERS.register(bus);
 
@@ -170,18 +178,15 @@ public class OTEMod
                         //e.printStackTrace();
                     }
 
-                    for(TeleportContainer cont : OTEMod.TeleportRegistry){
-                        if(cont.has_expired())
-                        {
-                            try{
-                                Component expire = new TextComponent(OTEMod.OTEPrefix + ChatColor.DARK_PURPLE+" Teleport request has expired");
-                                ChatServerOverride.broadcastTo(cont.FromPlayer, expire, OTEMod.THE_SERVER);
-                                ChatServerOverride.broadcastTo(cont.ToPlayer, expire, OTEMod.THE_SERVER);
-                                OTEMod.TeleportRegistry.remove(cont);
-                            }catch(Exception e){
-                                break;
-                            }
-                        }
+                    Iterator<TeleportContainer> containers = OTEMod.TeleportRegistry.iterator();
+                    while(containers.hasNext())
+                    {
+                        TeleportContainer cont = containers.next();
+                        Component expire = new TextComponent(OTEMod.OTEPrefix + ChatColor.DARK_PURPLE+" Teleport request has expired");
+                        ChatServerOverride.broadcastTo(cont.FromPlayer, expire, OTEMod.THE_SERVER);
+                        ChatServerOverride.broadcastTo(cont.ToPlayer, expire, OTEMod.THE_SERVER);
+                        
+                        containers.remove();
                     }
                 }
 

@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "otemod:block/vault_steel_ore_block"
+        "all": "otemod:block/nether_vault_steel_ore_block"
     }
 }

@@ -1,6 +1,7 @@
 package dev.zontreck.otemod.implementation.warps;
 
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import dev.zontreck.otemod.database.FileTreeDatastore;
@@ -13,6 +14,14 @@ public class WarpsProvider extends FileTreeDatastore
 
     public static final Warps WARPS_INSTANCE;
     static{
+        if(!BASE.toFile().exists()){
+            try {
+                Files.createDirectory(BASE);
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
         WARPS_INSTANCE = getOrCreate();
     }
 

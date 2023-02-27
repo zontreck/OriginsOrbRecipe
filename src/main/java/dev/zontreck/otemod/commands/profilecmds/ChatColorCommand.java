@@ -19,7 +19,7 @@ public class ChatColorCommand {
     
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
     {
-        dispatcher.register(Commands.literal("ccolor")
+        dispatcher.register(Commands.literal("chat_color")
             .executes(c->setchatcolor(c.getSource(), ColorOptions.White))
             .then(Commands.argument("color", EnumArgument.enumArgument(ChatColor.ColorOptions.class))//StringArgumentType.string())
                 .executes(c -> setchatcolor(c.getSource(), c.getArgument("color", ChatColor.ColorOptions.class)))// EnumArgument.getS(c, "color")))

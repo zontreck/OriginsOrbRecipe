@@ -45,21 +45,10 @@ public class ModBlocks {
 
     public static final RegistryObject<Item> NETHER_VAULT_STEEL_ORE_BLOCK_I = ITEMS.register("nether_vault_steel_ore_block", ()->new BlockItem(NETHER_VAULT_STEEL_ORE_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 
-    //#region TINKERS BLOCKS
 
-    public static final RegistryObject<Block> COBALT_ORE_BLOCK = BLOCKS.register("cobalt_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.NETHER).sound(SoundType.NETHER_ORE).requiresCorrectToolForDrops().strength(10.0F)));
+    public static final RegistryObject<Block> ETERNIUM_BLOCK = BLOCKS.register("eternium_block", ()->new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(8F).explosionResistance(1200).destroyTime(100)));
 
-    public static final RegistryObject<Item> COBALT_ORE_ITEM = ITEMS.register("cobalt_ore", ()->new BlockItem(COBALT_ORE_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-
-    public static final RegistryObject<Block> RAW_COBALT_ORE_BLOCK = BLOCKS.register("raw_cobalt_ore", () -> new Block(BlockBehaviour.Properties.of(Material.STONE, MaterialColor.COLOR_BLUE).sound(SoundType.NETHER_ORE).requiresCorrectToolForDrops().strength(6.0F, 7.0F)));
-
-    public static final RegistryObject<Item> RAW_COBALT_ORE_ITEM = ITEMS.register("raw_cobalt_ore", ()->new BlockItem(RAW_COBALT_ORE_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-
-    public static final RegistryObject<Block> COBALT_BLOCK = BLOCKS.register("cobalt_block", ()-> new Block(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.COLOR_BLUE).requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.METAL)));
-
-    public static final RegistryObject<Item> COBALT_BLOCK_I = ITEMS.register("cobalt_block", ()-> new BlockItem(COBALT_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
-
-    //#endregion
+    public static final RegistryObject<Item> ETERNIUM_BLOCK_I = ITEMS.register("eternium_block", ()->new FoiledBlockItem(ETERNIUM_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_MATERIALS)));
 
 
     public static final RegistryObject<Block> DEEPSLATE_ETERNIUM_ORE_BLOCK = BLOCKS.register("deepslate_eternium_ore_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).explosionResistance(1200).destroyTime(7)));

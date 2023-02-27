@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "otemod:eternium_block"
+    }
+  ],
+  "result": {
+    "item": "otemod:eternium_ingot",
+    "count": 9
+  }
+}

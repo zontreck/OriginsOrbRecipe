@@ -1,6 +1,8 @@
 package dev.zontreck.otemod.commands.teleport;
 
+import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.PlayerFlyCache;
+import dev.zontreck.otemod.implementation.DelayedExecutorService;
 
 public class TeleportRunnable implements Runnable
 {
@@ -12,27 +14,19 @@ public class TeleportRunnable implements Runnable
 
     @Override
     public void run() {
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-        PlayerFlyCache c = PlayerFlyCache.cachePlayer(Action.PlayerInst);
+        final PlayerFlyCache c = PlayerFlyCache.cachePlayer(Action.PlayerInst);
         Action.PlayerInst.teleportTo(Action.Dimension, Action.Position.x, Action.Position.y, Action.Position.z, Action.Rotation.y, Action.Rotation.x);
 
-        
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        c.Assert(Action.PlayerInst);
-
-        Action.PlayerInst.setPos(Action.Position);
-
-        Action.PlayerInst.giveExperiencePoints(1); // Attempt to fix experience point bug
+        OTEMod.delayedExecutor.schedule(new Runnable(){
+            public PlayerFlyCache cached = c;
+            public TeleportContainer container=Action;
+            @Override
+            public void run()
+            {
+                c.Assert(container.PlayerInst);
+                container.PlayerInst.setPos(container.Position);
+                container.PlayerInst.giveExperiencePoints(1);
+            }
+        }, 1);
     }
 }

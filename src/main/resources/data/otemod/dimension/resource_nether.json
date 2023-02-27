@@ -1,9 +1,9 @@
 {
-  "type": "minecraft:the_nether",
+  "type": "otemod:resource_nether",
   "generator": {
     "type": "minecraft:noise",
     "seed": 0,
-    "settings": "minecraft:nether",
+    "settings": "otemod:resource_nether",
     "biome_source": {
       "type": "minecraft:multi_noise",
       "biomes": [

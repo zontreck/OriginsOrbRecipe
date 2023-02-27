@@ -11,6 +11,7 @@
         "otemod:item_scrubber",
         "otemod:magical_scrubber",
 
-        "otemod:vault_steel_ore_block"
+        "otemod:vault_steel_ore_block",
+        "otemod:eternium_block"
     ]
 }

@@ -1,0 +1,12 @@
+{
+    "type": "minecraft:crafting_shapeless",
+    "ingredients": [
+      {
+        "tag": "forge:brimstone"
+      }
+    ],
+    "result": {
+      "item": "mekanism:sulfur_dust",
+      "count": 1
+    }
+  }

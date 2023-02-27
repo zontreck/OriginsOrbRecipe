@@ -13,9 +13,12 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.chat.Clickable;
 import dev.zontreck.libzontreck.exceptions.InvalidSideException;
+import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.commands.teleport.RTPCommand;
+import dev.zontreck.otemod.commands.teleport.RTPContainer;
+import dev.zontreck.otemod.commands.teleport.RandomPositionFactory;
 import dev.zontreck.otemod.commands.teleport.TeleportActioner;
 import dev.zontreck.otemod.commands.teleport.TeleportContainer;
 import dev.zontreck.otemod.database.TeleportDestination;
@@ -29,6 +32,8 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.phys.Vec3;
 
 public class WarpCommand {
     
@@ -57,11 +62,42 @@ public class WarpCommand {
             final int type = warp.RTP ? 1 : 0;
             final ServerLevel f_dim = dimL;
 
+            if(type == 1)
+            {
+                ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix+ ChatColor.doColors(" !Dark_Green!Attempting to locate a safe location. This may take a minute or two")), p.server);
+            }else{
+                
+                ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix+ ChatColor.doColors(" !Dark_Purple!Warping!")), p.server);
+            }
+
             Thread tx = new Thread(new Runnable(){
                 public void run(){
 
                     if(type==1){
-                        dest.Position = RTPCommand.findPosition(source.getLevel(), false);
+                        try {
+                            dest.Position =  Vector3.ZERO;
+                            RTPContainer cont = RandomPositionFactory.beginRTPSearch(p, Vec3.ZERO, Vec2.ZERO, f_dim);
+                            while(!cont.complete)
+                            {
+                                if(!OTEMod.ALIVE)
+                                {
+                                    cont.aborted=true;
+                                    cont.containingThread.interrupt();
+                                    return;
+                                }
+                                if(cont.tries>30)
+                                {
+                                    return;
+                                }
+                            }
+                            dest.Position = cont.container.world_pos.Position;
+                            
+                            //RTPCommand.findPosition(source.getLevel(), false, p.getUUID());
+                            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!Location found, warping!")), p.server);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            return;
+                        }
                     }
     
                     TeleportActioner.ApplyTeleportEffect(p);
