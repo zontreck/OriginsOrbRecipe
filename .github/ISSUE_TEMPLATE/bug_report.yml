@@ -1,7 +1,32 @@
 ---
 name: Bug Report
-about: A bug reporting template
 title: "Bug Report: CHANGEME"
 labels: bug_report
 assignees: zontreck
+body:
+- type: textarea
+  attributes:
+    label: "What I was doing when this happened"
+- type: textarea
+  attributes:
+    label: "What steps will reproduce the bug?"
+- type: checkboxes
+  attributes:
+    label: Affected Areas
+    options:
+      - Command System
+      - Blocks
+      - Items
+      - Mobs
+      - Enchantments
+      - Configuration
+      - Recipes
+      - Dimensions
+      - API
+- type: textarea
+  attributes:
+    label: "What I was expecting to happen"
+- type: textarea
+  attributes:
+    label: "What actually happened"
 ---
