@@ -10,19 +10,6 @@ body:
 - type: textarea
   attributes:
     label: "What steps will reproduce the bug?"
-- type: dropdown
-  attributes:
-    label: Affected Areas
-    options:
-      - "Commands"
-      - "Blocks"
-      - "Items"
-      - "Mobs"
-      - "Enchantments"
-      - "Configuration"
-      - "Recipes"
-      - "Dimensions"
-      - "API"
 - type: textarea
   attributes:
     label: "What I was expecting to happen"
