@@ -1,5 +1,6 @@
 ---
 name: Bug Report
+about: "Bug report template"
 title: "Bug Report: CHANGEME"
 labels: bug_report
 assignees: zontreck
