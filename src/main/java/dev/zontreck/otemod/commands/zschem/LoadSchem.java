@@ -11,10 +11,10 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.libzontreck.vectors.WorldPosition;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.integrations.LuckPermsHelper;
 import dev.zontreck.otemod.permissions.Permissions;
 import dev.zontreck.otemod.zschem.MemoryHolder;
@@ -115,17 +115,17 @@ public class LoadSchem {
                         MemoryHolder.setBlocks(play, blocks);
                         
                     }else {
-                        ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !Dark_Red!No such ZSchem exists!")), source.getServer());
+                        ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !Dark_Red!No such ZSchem exists!")), source.getServer());
                         return 0;
                     }
                     
 
-                    ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!ZSchem loaded from disk!")), OTEMod.THE_SERVER);
+                    ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!ZSchem loaded from disk!")), OTEMod.THE_SERVER);
                     return 0;
                 }
             }
         }
-        ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(ChatColor.doColors("!Dark_Red! You must set the first position")), OTEMod.THE_SERVER);
+        ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(ChatColor.doColors("!Dark_Red! You must set the first position")), OTEMod.THE_SERVER);
 
         return 0;
     }
@@ -136,7 +136,7 @@ public class LoadSchem {
         usage += ChatColor.doColors("!gold! /loadzschem [string:name]");
         ServerPlayer play=(ServerPlayer)source.getEntity();
         if(play==null)return 1;
-        ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(usage), OTEMod.THE_SERVER);
+        ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(usage), OTEMod.THE_SERVER);
         return 0;
     }
 }

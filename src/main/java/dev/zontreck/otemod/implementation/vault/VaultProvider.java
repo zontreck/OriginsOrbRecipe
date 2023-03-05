@@ -6,11 +6,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
+import dev.zontreck.libzontreck.profiles.Profile;
 import dev.zontreck.otemod.configs.OTEServerConfig;
-import dev.zontreck.otemod.database.FileTreeDatastore;
-import dev.zontreck.otemod.implementation.profiles.Profile;
+import dev.zontreck.otemod.database.OTEDatastore;
 
-public class VaultProvider extends FileTreeDatastore 
+public class VaultProvider extends OTEDatastore 
 {
     public enum VaultAccessStrategy
     {

@@ -41,15 +41,12 @@ import dev.zontreck.otemod.blocks.ModBlocks;
 import dev.zontreck.otemod.blocks.entity.ModEntities;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.commands.CommandRegistry;
-import dev.zontreck.otemod.commands.teleport.TeleportContainer;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
 import dev.zontreck.otemod.entities.ModEntityTypes;
 import dev.zontreck.otemod.entities.monsters.client.PossumRenderer;
 import dev.zontreck.otemod.events.LoreHandlers;
-import dev.zontreck.otemod.implementation.DelayedExecutorService;
 import dev.zontreck.otemod.implementation.inits.ModMenuTypes;
-import dev.zontreck.otemod.implementation.profiles.Profile;
 import dev.zontreck.otemod.implementation.scrubber.ItemScrubberScreen;
 import dev.zontreck.otemod.implementation.scrubber.MagicalScrubberScreen;
 import dev.zontreck.otemod.implementation.vault.VaultScreen;
@@ -69,8 +66,8 @@ public class OTEMod
     public static final String MOD_ID = "otemod";
     public static final String MODIFY_BIOMES = "modify_biomes";
     public static final ResourceLocation MODIFY_BIOMES_RL = new ResourceLocation(OTEMod.MOD_ID, MODIFY_BIOMES);
-    public static Map<String,Profile> PROFILES = new HashMap<String,Profile>();
-    public static List<TeleportContainer> TeleportRegistry = new ArrayList<>();
+    
+    //public static List<TeleportContainer> TeleportRegistry = new ArrayList<>();
     public static MinecraftServer THE_SERVER;
     public static boolean ALIVE=false;
     public static boolean HEALER_WAIT=true; // Only on loading finish should this unlock
@@ -82,11 +79,7 @@ public class OTEMod
     public static String OTEPrefix = "";
     public static String ONLY_PLAYER = "";
     public static IEventBus bus;
-    public static final DelayedExecutorService delayedExecutor;
-
-    static{
-        delayedExecutor = new DelayedExecutorService();
-    }
+    
 
     public OTEMod()
     {
@@ -114,7 +107,6 @@ public class OTEMod
         MinecraftForge.EVENT_BUS.register(new ChatServerOverride());
         MinecraftForge.EVENT_BUS.register(new CommandRegistry());
         MinecraftForge.EVENT_BUS.register(new VaultWatcher());
-        MinecraftForge.EVENT_BUS.register(delayedExecutor);
         MinecraftForge.EVENT_BUS.register(new dev.zontreck.otemod.zschem.EventHandler());
         ModMenuTypes.CONTAINERS.register(bus);
 
@@ -178,7 +170,7 @@ public class OTEMod
                         //e.printStackTrace();
                     }
 
-                    Iterator<TeleportContainer> containers = OTEMod.TeleportRegistry.iterator();
+                    /*Iterator<TeleportContainer> containers = OTEMod.TeleportRegistry.iterator();
                     while(containers.hasNext())
                     {
                         TeleportContainer cont = containers.next();
@@ -187,7 +179,7 @@ public class OTEMod
                         ChatServerOverride.broadcastTo(cont.ToPlayer, expire, OTEMod.THE_SERVER);
                         
                         containers.remove();
-                    }
+                    }*/
                 }
 
                 OTEMod.LOGGER.info("Tearing down OTEMod teleport queue - The server is going down");

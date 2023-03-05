@@ -3,13 +3,12 @@ package dev.zontreck.otemod.commands.vaults;
 import com.mojang.brigadier.CommandDispatcher;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.implementation.vault.NoMoreVaultException;
 import dev.zontreck.otemod.implementation.vault.VaultContainer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleMenuProvider;
@@ -36,7 +35,7 @@ public class TrashCommand {
         try {
             container = new VaultContainer(play, -1);
         } catch (NoMoreVaultException e) {
-            ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You cannot open anymore vaults. Craft a new vault!")), play.server);
+            ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You cannot open anymore vaults. Craft a new vault!")), play.server);
             return 0;
         }
         

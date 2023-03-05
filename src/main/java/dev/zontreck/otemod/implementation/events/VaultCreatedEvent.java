@@ -1,9 +1,7 @@
 package dev.zontreck.otemod.implementation.events;
 
-import dev.zontreck.otemod.OTEMod;
+import dev.zontreck.libzontreck.profiles.Profile;
 import dev.zontreck.otemod.configs.OTEServerConfig;
-import dev.zontreck.otemod.implementation.profiles.Profile;
-import dev.zontreck.otemod.implementation.vault.Vault;
 import net.minecraftforge.eventbus.api.Event;
 
 public class VaultCreatedEvent extends Event

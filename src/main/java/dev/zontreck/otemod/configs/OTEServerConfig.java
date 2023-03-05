@@ -2,9 +2,7 @@ package dev.zontreck.otemod.configs;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.ForgeConfigSpec;
@@ -29,6 +27,9 @@ public class OTEServerConfig {
     public static final ForgeConfigSpec.ConfigValue<Integer> MAX_VAULTS;
     public static final ForgeConfigSpec.ConfigValue<List<String>> EXCLUDE_DIMS;
 
+    public static final ForgeConfigSpec.ConfigValue<Double> CHANCE_OF_PLAYER_HEAD;
+    public static final ForgeConfigSpec.ConfigValue<Boolean> ENABLE_PLAYER_HEAD_DROPS;
+
 
     public static final ForgeConfigSpec.BooleanValue USE_CUSTOM_JOINLEAVE;
     public static final ForgeConfigSpec.BooleanValue USE_CUSTOM_CHATREPLACER;
@@ -42,11 +43,18 @@ public class OTEServerConfig {
         
         BUILDER.push("OTE");
         INITIAL_ITEMS_TO_GIVE_ON_FIRST_JOIN = BUILDER.comment("What items, identified by modid:item, to give to a brand new user on the server").define("New Player Gear", defaults);
-        SPAWN_EGG_CHANCE = BUILDER.comment("What is the chance for a spawn egg to drop from a mob when looting 3 is used? Default: 0.25").define("spawn_egg_chance", 0.25);
         MAX_VAULTS = BUILDER.comment("What is the maximum number of vaults a player may have available? (0 is unlimited)").define("max_vaults", 0);
         ITEM_DESPAWN_TIMER = BUILDER.comment("How many times should the item's expire be cancelled. The vanilla expire time is 5 minutes, so this would be ticked down once every 5 minutes.").define("item_extra_lives", 2);
+        
+        BUILDER.push("drops");
+        ENABLE_PLAYER_HEAD_DROPS = BUILDER.comment("Whether to enable dropping of player Heads").define("enable_player_head_drops", true);
+        SPAWN_EGG_CHANCE = BUILDER.comment("What is the chance for a spawn egg to drop from a mob when looting 3 is used? Default: 0.25").define("spawn_egg_chance", 0.25);
+        CHANCE_OF_PLAYER_HEAD = BUILDER.comment("Chance of a player head dropping on death").define("player_death_drops_head", 0.5);
+        
+        BUILDER.pop();
         BUILDER.pop();
         BUILDER.push("COMMANDS");
+
 
         RTP_COOLDOWN = BUILDER.comment("How many seconds between RTP uses? This can be quite laggy on the server due to the potential that new chunks are getting generated").define("rtp.cooldown", 30); // Default of 30 should be enough
 

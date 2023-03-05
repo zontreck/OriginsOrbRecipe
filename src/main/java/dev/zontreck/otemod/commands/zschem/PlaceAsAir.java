@@ -7,6 +7,7 @@ import java.util.List;
 import com.mojang.brigadier.CommandDispatcher;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
@@ -48,7 +49,7 @@ public class PlaceAsAir {
 
         if(!MemoryHolder.hasPlayerCached(play)){
 
-            ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first set the positions!")), OTEMod.THE_SERVER);
+            ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first set the positions!")), OTEMod.THE_SERVER);
 
             return 1;
         }
@@ -73,13 +74,13 @@ public class PlaceAsAir {
             
         }else {
             
-            ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first set the positions!")), OTEMod.THE_SERVER);
+            ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first set the positions!")), OTEMod.THE_SERVER);
 
             return 1;
         }
 
 
-        ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!Enqueued!")), OTEMod.THE_SERVER);
+        ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!Enqueued!")), OTEMod.THE_SERVER);
 
         return 0;
     }

@@ -4,10 +4,10 @@ import com.mojang.brigadier.CommandDispatcher;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.chat.HoverTip;
+import dev.zontreck.libzontreck.profiles.Profile;
+import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
+import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatServerOverride;
-import dev.zontreck.otemod.implementation.profiles.Profile;
-import dev.zontreck.otemod.implementation.profiles.UserProfileNotYetExistsException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.MutableComponent;
@@ -54,7 +54,7 @@ public class ShareItemInChatCommand {
             Style style = Style.EMPTY.withFont(Style.DEFAULT_FONT);
             component = component.withStyle(style.withHoverEvent(HoverTip.getItem(is)));
 
-            ChatServerOverride.broadcast(component, OTEMod.THE_SERVER);
+            ChatHelpers.broadcast(component, OTEMod.THE_SERVER);
 
         }else {
             return 1;

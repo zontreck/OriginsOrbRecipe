@@ -4,20 +4,15 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatServerOverride;
-import dev.zontreck.otemod.implementation.profiles.Profile;
 import dev.zontreck.otemod.implementation.vault.NoMoreVaultException;
-import dev.zontreck.otemod.implementation.vault.Vault;
 import dev.zontreck.otemod.implementation.vault.VaultContainer;
-import dev.zontreck.otemod.implementation.vault.VaultProvider;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleMenuProvider;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.network.NetworkHooks;
 
 public class VaultCommand {
@@ -39,7 +34,7 @@ public class VaultCommand {
         ServerPlayer play = (ServerPlayer)source.getEntity();
         if(i <0)
         {
-            ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(ChatColor.doColors(OTEMod.OTEPrefix+" !Dark_Red!You can only specify a vault number in the positive range")), source.getServer());
+            ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(ChatColor.doColors(OTEMod.OTEPrefix+" !Dark_Red!You can only specify a vault number in the positive range")), source.getServer());
             return 0;
         }
         doOpen(play, i);
@@ -54,7 +49,7 @@ public class VaultCommand {
         try {
             container = new VaultContainer(p, i);
         } catch (NoMoreVaultException e) {
-            ChatServerOverride.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You cannot open anymore vaults. Craft a new vault!")), p.server);
+            ChatHelpers.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You cannot open anymore vaults. Craft a new vault!")), p.server);
             return;
         }
         

@@ -11,11 +11,12 @@ import java.util.UUID;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.libzontreck.profiles.Profile;
+import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
+import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.implementation.events.VaultModifiedEvent;
-import dev.zontreck.otemod.implementation.profiles.Profile;
-import dev.zontreck.otemod.implementation.profiles.UserProfileNotYetExistsException;
 import dev.zontreck.otemod.implementation.vault.VaultProvider.VaultAccessStrategy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -87,7 +88,7 @@ public class VaultContainer
         if(VAULT_NUMBER == -1)return; // We have no need to save the trash
         boolean isEmpty=true;
         CompoundTag saved = myInventory.serializeNBT();
-        ChatServerOverride.broadcastToAbove(owner, new TextComponent(ChatColor.BOLD+ChatColor.DARK_GREEN+"Saving the vault's contents..."), server);
+        ChatHelpers.broadcastToAbove(owner, new TextComponent(ChatColor.BOLD+ChatColor.DARK_GREEN+"Saving the vault's contents..."), server);
 
         Profile profile=null;
         try {

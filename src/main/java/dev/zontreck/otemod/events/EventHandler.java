@@ -1,7 +1,18 @@
 package dev.zontreck.otemod.events;
 
+import java.time.Instant;
+import java.util.Date;
+import java.util.Random;
+
+import dev.zontreck.libzontreck.items.lore.LoreContainer;
+import dev.zontreck.libzontreck.items.lore.LoreEntry;
+import dev.zontreck.libzontreck.profiles.Profile;
+import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
+import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.util.ItemUtils;
+import dev.zontreck.libzontreck.util.heads.HeadUtilities;
 import dev.zontreck.otemod.OTEMod;
+import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.enchantments.MobEggEnchantment;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
 import dev.zontreck.otemod.items.tags.ItemStatType;
@@ -16,6 +27,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -37,6 +49,7 @@ public class EventHandler {
     public void onEntityKilled(LivingDropsEvent ev){
         if(ev.getEntity().level.isClientSide)return;
 
+        Entity killedentity = ev.getEntityLiving();
         Entity ent = ev.getSource().getEntity();
         if(ent instanceof Player)
         {
@@ -66,6 +79,51 @@ public class EventHandler {
             }else{
                 bias += 1;
                 tag.putInt(MobEggEnchantment.TAG_BIAS, bias);
+            }
+        }
+
+        if(killedentity instanceof Player)
+        {
+            if(!OTEServerConfig.ENABLE_PLAYER_HEAD_DROPS.get())
+            {
+                return;
+            }
+            int looting=0;
+            ServerPlayer killedPlayer = (ServerPlayer)ent;
+            if(ent instanceof Player){
+                ServerPlayer pla = (ServerPlayer)ent;
+                looting = ItemUtils.getEnchantmentLevel(Enchantments.MOB_LOOTING, pla.getMainHandItem());
+
+            }
+
+            // Calculate chance
+            double base_chance = OTEServerConfig.CHANCE_OF_PLAYER_HEAD.get();
+            base_chance += looting;
+            base_chance *= 100;
+
+            Random rng = new Random();
+            double num = rng.nextDouble(0,100000);
+            if(num <= base_chance)
+            {
+                Profile profile=null;
+                try {
+                    profile = Profile.get_profile_of(killedPlayer.getStringUUID());
+                } catch (UserProfileNotYetExistsException e) {
+                    e.printStackTrace();
+                }
+
+                ItemStack head = HeadUtilities.get(killedentity.getName().getContents()).setHoverName(ChatHelpers.macro(profile.nickname+"'s Head"));
+                LoreContainer lore = new LoreContainer(head);
+                LoreEntry entry = new LoreEntry();
+                entry.text = ChatHelpers.macroize("!dark_green!Player: " + profile.name_color+profile.username);
+                entry.bold=true;
+                lore.miscData.LoreData.add(entry);
+                entry = new LoreEntry();
+                entry.text = "!Dark_Purple!Date: !Dark_Red!" + Date.from(Instant.now()).toString();
+                lore.miscData.LoreData.add(entry);
+
+
+                ev.getDrops().add(new ItemEntity(killedentity.level, killedentity.getX(), killedentity.getY(), killedentity.getZ(), head));
             }
         }
     }

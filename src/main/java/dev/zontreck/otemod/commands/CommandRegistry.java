@@ -5,29 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.commands.homes.DelHomeCommand;
-import dev.zontreck.otemod.commands.homes.HomeCommand;
-import dev.zontreck.otemod.commands.homes.HomesCommand;
-import dev.zontreck.otemod.commands.homes.SetHomeCommand;
 import dev.zontreck.otemod.commands.items.ShareItemInChatCommand;
 import dev.zontreck.otemod.commands.profilecmds.ChatColorCommand;
 import dev.zontreck.otemod.commands.profilecmds.NameColorCommand;
 import dev.zontreck.otemod.commands.profilecmds.NickCommand;
 import dev.zontreck.otemod.commands.profilecmds.PrefixColorCommand;
 import dev.zontreck.otemod.commands.profilecmds.PrefixCommand;
-import dev.zontreck.otemod.commands.teleport.RTPCommand;
-import dev.zontreck.otemod.commands.teleport.TPACommand;
-import dev.zontreck.otemod.commands.teleport.TPAHereCommand;
-import dev.zontreck.otemod.commands.teleport.TPAcceptCommand;
-import dev.zontreck.otemod.commands.teleport.TPCancelCommand;
-import dev.zontreck.otemod.commands.teleport.TPDenyCommand;
 import dev.zontreck.otemod.commands.vaults.TrashCommand;
 import dev.zontreck.otemod.commands.vaults.VaultCommand;
-import dev.zontreck.otemod.commands.warps.DelWarpCommand;
-import dev.zontreck.otemod.commands.warps.RTPWarpCommand;
-import dev.zontreck.otemod.commands.warps.SetWarpCommand;
-import dev.zontreck.otemod.commands.warps.WarpCommand;
-import dev.zontreck.otemod.commands.warps.WarpsCommand;
 import dev.zontreck.otemod.commands.zschem.LoadSchem;
 import dev.zontreck.otemod.commands.zschem.Place;
 import dev.zontreck.otemod.commands.zschem.PlaceAsAir;
@@ -99,12 +84,6 @@ public class CommandRegistry {
     @SubscribeEvent
     public void onRegisterCommands(final RegisterCommandsEvent ev)
     {
-        HomesCommand.register(ev.getDispatcher());
-        SetHomeCommand.register(ev.getDispatcher());
-        HomeCommand.register(ev.getDispatcher());
-        DelHomeCommand.register(ev.getDispatcher());
-
-        //FlyCommand.register(ev.getDispatcher());
 
         ChatColorCommand.register(ev.getDispatcher());
         NameColorCommand.register(ev.getDispatcher());
@@ -113,22 +92,9 @@ public class CommandRegistry {
         NickCommand.register(ev.getDispatcher());
         
 
-        TPACommand.register(ev.getDispatcher());
-        TPCancelCommand.register(ev.getDispatcher());
-        TPDenyCommand.register(ev.getDispatcher());
-        TPAcceptCommand.register(ev.getDispatcher());
-        TPAHereCommand.register(ev.getDispatcher());
-        RTPCommand.register(ev.getDispatcher());
-
 
         VaultCommand.register(ev.getDispatcher());
         TrashCommand.register(ev.getDispatcher());
-
-        SetWarpCommand.register(ev.getDispatcher());
-        DelWarpCommand.register(ev.getDispatcher());
-        RTPWarpCommand.register(ev.getDispatcher());
-        WarpsCommand.register(ev.getDispatcher());
-        WarpCommand.register(ev.getDispatcher());
 
         SetPos1.register(ev.getDispatcher());
         SetPos2.register(ev.getDispatcher());

@@ -8,13 +8,16 @@ import java.util.UUID;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.chat.HoverTip;
+import dev.zontreck.libzontreck.events.ProfileLoadedEvent;
+import dev.zontreck.libzontreck.events.ProfileUnloadedEvent;
+import dev.zontreck.libzontreck.profiles.Profile;
+import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
+import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.util.ItemUtils;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.configs.PlayerFlyCache;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
-import dev.zontreck.otemod.implementation.profiles.Profile;
-import dev.zontreck.otemod.implementation.profiles.UserProfileNotYetExistsException;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;
@@ -34,12 +37,11 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 public class ChatServerOverride {
 
     @SubscribeEvent
-    public void onJoin(final PlayerEvent.PlayerLoggedInEvent ev)
+    public void onJoin(final ProfileLoadedEvent ev)
     {
         //Player joined, send custom alert
-        if(ev.getEntity().level.isClientSide)return;
-        ServerPlayer play = (ServerPlayer)ev.getEntity();
-        Profile prof = Profile.factory(play);
+        ServerPlayer play = ev.player;
+        Profile prof = ev.profile;
         
 
         if(prof.flying)
@@ -61,23 +63,16 @@ public class ChatServerOverride {
 
         if(!OTEServerConfig.USE_CUSTOM_JOINLEAVE.get()) return;
         
-        ChatServerOverride.broadcast(new TextComponent(ChatColor.doColors("!Dark_Gray![!Dark_Green!+!Dark_Gray!] !Bold!!Dark_Aqua!"+prof.nickname)), ev.getEntity().getServer());
+        ChatHelpers.broadcast(new TextComponent(ChatColor.doColors("!Dark_Gray![!Dark_Green!+!Dark_Gray!] !Bold!!Dark_Aqua!"+prof.nickname)), ev.server);
         
     }
 
     @SubscribeEvent
-    public void onLeave(final PlayerEvent.PlayerLoggedOutEvent ev)
+    public void onLeave(final ProfileUnloadedEvent ev)
     {
-        if(ev.getEntity().level.isClientSide)return;
         // Get player profile, send disconnect alert, then commit profile and remove it from memory
-        Profile px=null;
-        try {
-            px = Profile.get_profile_of(ev.getEntity().getStringUUID());
-        } catch (UserProfileNotYetExistsException e) {
-            e.printStackTrace();
-        }
-        Profile.unload(px);
-        ServerPlayer sp = (ServerPlayer)ev.getEntity();
+        Profile px=ev.oldProfile;
+        // TODO: Create a some extra entries in ProfileUnloadedEvent
 
 
         if(px==null)return;
@@ -135,64 +130,8 @@ public class ChatServerOverride {
         hover=hover.withFont(Style.DEFAULT_FONT).withHoverEvent(HoverTip.get(ChatColor.MINECOIN_GOLD+"User Name: "+XD.username));
         ev.setCanceled(true);
 
-        ChatServerOverride.broadcast(new TextComponent(prefixStr+nameStr+message).setStyle(hover), ev.getPlayer().server);
+        ChatHelpers.broadcast(new TextComponent(prefixStr+nameStr+message).setStyle(hover), ev.getPlayer().server);
     }
 
 
-    public static void broadcastAbove(Component message, MinecraftServer s)
-    {
-        s.execute(new Runnable() {
-            public void run(){
-
-                // This will broadcast to all players
-                for(ServerPlayer play : s.getPlayerList().getPlayers())
-                {
-                    play.displayClientMessage(message, true); // Send the message!
-                }
-                LogToConsole(new TextComponent("[all] ").append(message));
-            }
-        });
-    }
-    public static void LogToConsole(Component Message)
-    {
-        OTEMod.LOGGER.info(Message.getString());
-    }
-    public static void broadcast(Component message, MinecraftServer s)
-    {
-        s.execute(new Runnable() {
-            public void run(){
-
-                // This will broadcast to all players
-                for(ServerPlayer play : s.getPlayerList().getPlayers())
-                {
-                    play.displayClientMessage(message, false); // Send the message!
-                }
-                LogToConsole(new TextComponent("[all] ").append(message));
-            }
-        });
-    }
-    public static void broadcastTo(UUID ID, Component message, MinecraftServer s)
-    {
-        s.execute(new Runnable() {
-            public void run(){
-
-                ServerPlayer play = s.getPlayerList().getPlayer(ID);
-                play.displayClientMessage(message, false); // Send the message!
-                
-                LogToConsole(new TextComponent("[server] -> ["+play.getName().toString()+"] ").append(message));
-            }
-        });
-    }
-    public static void broadcastToAbove(UUID ID, Component message, MinecraftServer s)
-    {
-        s.execute(new Runnable() {
-            public void run(){
-
-                ServerPlayer play = s.getPlayerList().getPlayer(ID);
-                play.displayClientMessage(message, true); // Send the message!
-                
-                LogToConsole(new TextComponent("[server] -> ["+play.getName().toString()+"] ").append(message));
-            }
-        });
-    }
 }

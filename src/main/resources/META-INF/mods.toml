@@ -56,6 +56,6 @@ This mod is a work in progress and is planned to add a procedural adventure syst
 [[dependencies.otemod]]
     modId="libzontreck"
     mandatory=true
-    versionRange="[1.0.4.13,1.0.5.0]"
+    versionRange="[1.0.5,1.0.6.0]"
     ordering="NONE"
     side="BOTH"

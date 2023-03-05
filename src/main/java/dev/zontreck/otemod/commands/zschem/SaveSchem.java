@@ -10,6 +10,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
@@ -107,12 +108,12 @@ public class SaveSchem {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!ZSchem saved to disk!")), OTEMod.THE_SERVER);
+                    ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!ZSchem saved to disk!")), OTEMod.THE_SERVER);
                     return 0;
                 }
             }
         }
-        ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(ChatColor.doColors("!Dark_Red! You must first set the positions")), OTEMod.THE_SERVER);
+        ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(ChatColor.doColors("!Dark_Red! You must first set the positions")), OTEMod.THE_SERVER);
 
         return 0;
     }
@@ -123,7 +124,7 @@ public class SaveSchem {
         usage += ChatColor.doColors("!gold! /savezschem [string:name]");
         ServerPlayer play=(ServerPlayer)source.getEntity();
         if(play==null)return 1;
-        ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(usage), OTEMod.THE_SERVER);
+        ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(usage), OTEMod.THE_SERVER);
         return 0;
     }
 }

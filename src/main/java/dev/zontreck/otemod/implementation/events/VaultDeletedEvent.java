@@ -1,6 +1,6 @@
 package dev.zontreck.otemod.implementation.events;
 
-import dev.zontreck.otemod.implementation.profiles.Profile;
+import dev.zontreck.libzontreck.profiles.Profile;
 
 public class VaultDeletedEvent extends VaultCreatedEvent{
 

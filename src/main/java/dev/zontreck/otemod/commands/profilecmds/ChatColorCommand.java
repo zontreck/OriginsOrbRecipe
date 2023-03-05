@@ -2,11 +2,12 @@ package dev.zontreck.otemod.commands.profilecmds;
 
 import com.mojang.brigadier.CommandDispatcher;
 
+import dev.zontreck.libzontreck.LibZontreck;
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.chat.ChatColor.ColorOptions;
+import dev.zontreck.libzontreck.profiles.Profile;
+import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.implementation.profiles.Profile;
-import dev.zontreck.otemod.implementation.profiles.UserProfileNotYetExistsException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
@@ -51,7 +52,7 @@ public class ChatColorCommand {
         }
         p.chat_color = colorcoded;
         p.commit();
-        OTEMod.PROFILES.put(play.getStringUUID(), p);
+        LibZontreck.PROFILES.put(play.getStringUUID(), p);
 
         source.sendSuccess(new TextComponent(OTEMod.OTEPrefix + " "+ChatColor.DARK_PURPLE + "Your chat color has been updated"), false);
 

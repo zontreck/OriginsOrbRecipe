@@ -10,10 +10,9 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatServerOverride;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
@@ -86,7 +85,7 @@ public class MemoryHolder {
                 if(c.isExpired()){
                     imeuc.remove();
 
-                    ChatServerOverride.broadcastTo(entry.getKey(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!ZSchem Session expired")), c.lvl.getServer());
+                    ChatHelpers.broadcastTo(entry.getKey(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!ZSchem Session expired")), c.lvl.getServer());
                 }
             }
         }finally{

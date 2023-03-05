@@ -3,6 +3,7 @@ package dev.zontreck.otemod.commands.zschem;
 import com.mojang.brigadier.CommandDispatcher;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
@@ -39,7 +40,7 @@ public class SetPos2 {
         MemoryHolder.setPos2(play, new Vector3(source.getPosition()));
         MemoryHolder.setLevel(play, source.getLevel());
 
-        ChatServerOverride.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!Position 2 set!")), OTEMod.THE_SERVER);
+        ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!Position 2 set!")), OTEMod.THE_SERVER);
 
         return 0;
     }

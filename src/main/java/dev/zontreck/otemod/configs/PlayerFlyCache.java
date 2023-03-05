@@ -1,6 +1,7 @@
 package dev.zontreck.otemod.configs;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Abilities;
 
 public class PlayerFlyCache
 {
@@ -17,6 +18,10 @@ public class PlayerFlyCache
     }
 
     public void Assert(ServerPlayer play){
+        Abilities playerAbilities = play.getAbilities();
+        playerAbilities.flying=Flying;
+        playerAbilities.mayfly=FlyEnabled;
 
+        play.onUpdateAbilities();
     }
 }
