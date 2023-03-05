@@ -14,7 +14,7 @@ body:
   attributes:
     label: Affected Areas
     options:
-      - Command System
+      - Commands
       - Blocks
       - Items
       - Mobs
