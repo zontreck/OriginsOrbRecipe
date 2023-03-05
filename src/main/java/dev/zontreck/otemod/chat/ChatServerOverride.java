@@ -1,15 +1,9 @@
 package dev.zontreck.otemod.chat;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.UUID;
-
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.chat.HoverTip;
 import dev.zontreck.libzontreck.events.ProfileLoadedEvent;
-import dev.zontreck.libzontreck.events.ProfileUnloadedEvent;
+import dev.zontreck.libzontreck.events.ProfileUnloadingEvent;
 import dev.zontreck.libzontreck.profiles.Profile;
 import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
 import dev.zontreck.libzontreck.util.ChatHelpers;
@@ -18,10 +12,8 @@ import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.configs.PlayerFlyCache;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.chat.TextComponent;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Abilities;
@@ -63,16 +55,15 @@ public class ChatServerOverride {
 
         if(!OTEServerConfig.USE_CUSTOM_JOINLEAVE.get()) return;
         
-        ChatHelpers.broadcast(new TextComponent(ChatColor.doColors("!Dark_Gray![!Dark_Green!+!Dark_Gray!] !Bold!!Dark_Aqua!"+prof.nickname)), ev.server);
+        ChatHelpers.broadcast(new TextComponent(ChatColor.doColors("!Dark_Gray![!Dark_Green!+!Dark_Gray!] !Bold!!Dark_Aqua!"+prof.nickname)), ev.level.getServer());
         
     }
 
     @SubscribeEvent
-    public void onLeave(final ProfileUnloadedEvent ev)
+    public void onLeave(final ProfileUnloadingEvent ev)
     {
         // Get player profile, send disconnect alert, then commit profile and remove it from memory
-        Profile px=ev.oldProfile;
-        // TODO: Create a some extra entries in ProfileUnloadedEvent
+        Profile px=ev.profile;
 
 
         if(px==null)return;
@@ -80,10 +71,10 @@ public class ChatServerOverride {
         if(!OTEServerConfig.USE_CUSTOM_JOINLEAVE.get()) return;
 
         // Send the alert
-        ChatServerOverride.broadcast(new TextComponent(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "-" + ChatColor.DARK_GRAY + "] "+ChatColor.BOLD + ChatColor.DARK_AQUA + px.nickname), ev.getEntity().getServer());
+        ChatHelpers.broadcast(new TextComponent(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "-" + ChatColor.DARK_GRAY + "] "+ChatColor.BOLD + ChatColor.DARK_AQUA + px.nickname), px.player.server);
 
-        px.flying=sp.getAbilities().flying;
-        px.commit();
+        px.flying=px.player.getAbilities().flying;
+        ev.setCanceled(true);
     }
 
     @SubscribeEvent

@@ -27,11 +27,8 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraftforge.common.ForgeSpawnEggItem;
-import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 
@@ -84,12 +81,21 @@ public class EventHandler {
 
         if(killedentity instanceof Player)
         {
+            Profile profile;
+            try {
+                profile = Profile.get_profile_of(killedentity.getStringUUID());
+            } catch (UserProfileNotYetExistsException e) {
+                e.printStackTrace();
+                return;
+            }
+            profile.deaths++;
+            profile.commit();
             if(!OTEServerConfig.ENABLE_PLAYER_HEAD_DROPS.get())
             {
                 return;
             }
             int looting=0;
-            ServerPlayer killedPlayer = (ServerPlayer)ent;
+            //ServerPlayer killedPlayer = (ServerPlayer)ent;
             if(ent instanceof Player){
                 ServerPlayer pla = (ServerPlayer)ent;
                 looting = ItemUtils.getEnchantmentLevel(Enchantments.MOB_LOOTING, pla.getMainHandItem());
@@ -105,12 +111,6 @@ public class EventHandler {
             double num = rng.nextDouble(0,100000);
             if(num <= base_chance)
             {
-                Profile profile=null;
-                try {
-                    profile = Profile.get_profile_of(killedPlayer.getStringUUID());
-                } catch (UserProfileNotYetExistsException e) {
-                    e.printStackTrace();
-                }
 
                 ItemStack head = HeadUtilities.get(killedentity.getName().getContents()).setHoverName(ChatHelpers.macro(profile.nickname+"'s Head"));
                 LoreContainer lore = new LoreContainer(head);
