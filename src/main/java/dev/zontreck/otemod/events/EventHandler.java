@@ -52,8 +52,60 @@ public class EventHandler {
     public static void playerDied(LivingDeathEvent event)
     {
         if(!(event.getEntity() instanceof Player))return;
+
+        Profile profile;
         try {
-            ChatHelpers.broadcast(new TextComponent(DeathMessages.getRandomDeathMessage(Profile.get_profile_of(event.getEntity().getStringUUID()), event.getSource().getEntity())), event.getEntity().level.getServer());
+            profile = Profile.get_profile_of(event.getEntity().getStringUUID());
+        } catch (UserProfileNotYetExistsException e) {
+            e.printStackTrace();
+            return;
+        }
+        profile.deaths++;
+        profile.commit();
+        if(!OTEServerConfig.ENABLE_PLAYER_HEAD_DROPS.get())
+        {
+            return;
+        }
+        int looting=0;
+        //ServerPlayer killedPlayer = (ServerPlayer)ent;
+        if(event.getEntity() instanceof Player){
+            ServerPlayer pla = profile.player;
+            looting = ItemUtils.getEnchantmentLevel(Enchantments.MOB_LOOTING, pla.getMainHandItem());
+
+        }
+
+        // Calculate chance
+        double base_chance = OTEServerConfig.CHANCE_OF_PLAYER_HEAD.get();
+        base_chance += looting;
+        base_chance *= 100;
+
+        Random rng = new Random();
+        double num = rng.nextDouble(0,100000);
+        if(num <= base_chance)
+        {
+
+            ItemStack head = HeadUtilities.get(profile.username).setHoverName(ChatHelpers.macro(profile.nickname+"'s Head"));
+            LoreContainer lore = new LoreContainer(head);
+            LoreEntry entry = new LoreEntry();
+            entry.text = ChatHelpers.macroize("!dark_green!Player: " + profile.name_color+profile.username);
+            entry.bold=true;
+            lore.miscData.LoreData.add(entry);
+
+            entry = new LoreEntry();
+            entry.text = ChatHelpers.macroize("!Dark_Purple!Date: !Dark_Red![0]", Date.from(Instant.now()).toString());
+            lore.miscData.LoreData.add(entry);
+
+            entry = new LoreEntry();
+            entry.text = ChatHelpers.macroize("!Dark_Purple!Total Deaths: !Dark_Red![0]", String.valueOf(profile.deaths));
+            lore.miscData.LoreData.add(entry);
+            lore.commitLore();
+
+
+            event.getEntity().spawnAtLocation(head);
+        }
+
+        try {
+            ChatHelpers.broadcast(new TextComponent(DeathMessages.getRandomDeathMessage(Profile.get_profile_of(event.getEntity().getStringUUID()), event.getSource())), event.getEntity().level.getServer());
         } catch (UserProfileNotYetExistsException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -97,59 +149,6 @@ public class EventHandler {
             }
         }
 
-        if(killedentity instanceof Player)
-        {
-            Profile profile;
-            try {
-                profile = Profile.get_profile_of(killedentity.getStringUUID());
-            } catch (UserProfileNotYetExistsException e) {
-                e.printStackTrace();
-                return;
-            }
-            profile.deaths++;
-            profile.commit();
-            if(!OTEServerConfig.ENABLE_PLAYER_HEAD_DROPS.get())
-            {
-                return;
-            }
-            int looting=0;
-            //ServerPlayer killedPlayer = (ServerPlayer)ent;
-            if(ent instanceof Player){
-                ServerPlayer pla = (ServerPlayer)ent;
-                looting = ItemUtils.getEnchantmentLevel(Enchantments.MOB_LOOTING, pla.getMainHandItem());
-
-            }
-
-            // Calculate chance
-            double base_chance = OTEServerConfig.CHANCE_OF_PLAYER_HEAD.get();
-            base_chance += looting;
-            base_chance *= 100;
-
-            Random rng = new Random();
-            double num = rng.nextDouble(0,100000);
-            if(num <= base_chance)
-            {
-
-                ItemStack head = HeadUtilities.get(killedentity.getName().getContents()).setHoverName(ChatHelpers.macro(profile.nickname+"'s Head"));
-                LoreContainer lore = new LoreContainer(head);
-                LoreEntry entry = new LoreEntry();
-                entry.text = ChatHelpers.macroize("!dark_green!Player: " + profile.name_color+profile.username);
-                entry.bold=true;
-                lore.miscData.LoreData.add(entry);
-
-                entry = new LoreEntry();
-                entry.text = ChatHelpers.macroize("!Dark_Purple!Date: !Dark_Red![0]", Date.from(Instant.now()).toString());
-                lore.miscData.LoreData.add(entry);
-
-                entry = new LoreEntry();
-                entry.text = ChatHelpers.macroize("!Dark_Purple!Total Deaths: !Dark_Red![0]", String.valueOf(profile.deaths));
-                lore.miscData.LoreData.add(entry);
-                lore.commitLore();
-
-
-                ev.getDrops().add(new ItemEntity(killedentity.level, killedentity.getX(), killedentity.getY(), killedentity.getZ(), head));
-            }
-        }
     }
     
 }
