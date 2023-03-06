@@ -60,7 +60,7 @@ public class ChatServerOverride {
     }
 
     @SubscribeEvent
-    public void onLeave(final ProfileUnloadingEvent ev)
+    public void onLeave(ProfileUnloadingEvent ev)
     {
         // Get player profile, send disconnect alert, then commit profile and remove it from memory
         Profile px=ev.profile;
