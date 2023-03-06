@@ -34,6 +34,8 @@ public class OTEServerConfig {
     public static final ForgeConfigSpec.BooleanValue USE_CUSTOM_JOINLEAVE;
     public static final ForgeConfigSpec.BooleanValue USE_CUSTOM_CHATREPLACER;
 
+    public static final ForgeConfigSpec.ConfigValue<Boolean> ENABLE_DEATH_MESSAGES;
+
 
     static {
         List<ItemStack> defaults = new ArrayList<ItemStack>();
@@ -45,6 +47,7 @@ public class OTEServerConfig {
         INITIAL_ITEMS_TO_GIVE_ON_FIRST_JOIN = BUILDER.comment("What items, identified by modid:item, to give to a brand new user on the server").define("New Player Gear", defaults);
         MAX_VAULTS = BUILDER.comment("What is the maximum number of vaults a player may have available? (0 is unlimited)").define("max_vaults", 0);
         ITEM_DESPAWN_TIMER = BUILDER.comment("How many times should the item's expire be cancelled. The vanilla expire time is 5 minutes, so this would be ticked down once every 5 minutes.").define("item_extra_lives", 2);
+        ENABLE_DEATH_MESSAGES = BUILDER.comment("Whether you want to enable the death messages to be output by OTEMod when a player dies. These can be quite random!").define("enable_ote_death_msgs", true);
         
         BUILDER.push("drops");
         ENABLE_PLAYER_HEAD_DROPS = BUILDER.comment("Whether to enable dropping of player Heads").define("enable_player_head_drops", true);

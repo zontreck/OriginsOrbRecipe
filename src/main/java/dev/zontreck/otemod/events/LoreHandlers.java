@@ -2,11 +2,13 @@ package dev.zontreck.otemod.events;
 
 import dev.zontreck.libzontreck.items.lore.LoreContainer;
 import dev.zontreck.libzontreck.items.lore.LoreEntry;
+import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.items.tags.ItemStatTag;
 import dev.zontreck.otemod.items.tags.ItemStatType;
 import dev.zontreck.otemod.items.tags.ItemStatistics;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -39,15 +41,20 @@ public class LoreHandlers {
 
         ServerPlayer sp = (ServerPlayer)ev.getPlayer();
         ItemStack itemUsed = sp.getItemInHand(InteractionHand.MAIN_HAND);
-        if(itemUsed.getItem() instanceof PickaxeItem)
+        ResourceLocation loc = itemUsed.getItem().getRegistryName();
+        String itemModName = ChatHelpers.macroize("[0]:[1]", loc.getNamespace(), loc.getPath());
+        if(itemModName.contains("pickaxe"))
         {
             updateItem(itemUsed, ItemStatType.PICK);
-        }else if(itemUsed.getItem() instanceof ShovelItem)
+        }else if(itemModName.contains("shovel"))
         {
             updateItem(itemUsed, ItemStatType.SHOVEL);
-        } else if(itemUsed.getItem() instanceof AxeItem)
+        } else if(itemModName.contains("axe"))
         {
             updateItem(itemUsed, ItemStatType.AXE);
+        } else if(itemModName.contains("pickadze"))
+        {
+            updateItem(itemUsed, ItemStatType.PICK);
         }
     }
 
@@ -62,15 +69,17 @@ public class LoreHandlers {
         ServerPlayer sp = (ServerPlayer)ev.getPlayer();
         ItemStack itemUsed = sp.getMainHandItem();
         BlockState bs = ev.getState();
+        ResourceLocation loc = itemUsed.getItem().getRegistryName();
+        String itemModName = ChatHelpers.macroize("[0]:[1]", loc.getNamespace(), loc.getPath());
 
-        if(itemUsed.getItem() instanceof HoeItem)
+        if(itemModName.contains("hoe"))
         {
             if(bs.is(Blocks.DIRT) || bs.is(Blocks.GRASS_BLOCK))
             {
                 OTEMod.LOGGER.info("DIRT!");
                 updateItem(itemUsed, ItemStatType.HOE);
             }
-        } else if(itemUsed.getItem() instanceof ShovelItem)
+        } else if(itemModName.contains("shovel"))
         {
             if(bs.is(Blocks.GRASS_BLOCK))
             {
@@ -94,12 +103,14 @@ public class LoreHandlers {
             ServerPlayer sp = (ServerPlayer)ev.getEntity();
             ItemStack itemUsed = sp.getMainHandItem();
             Entity target = ev.getTarget();
-            if(itemUsed.getItem() instanceof ShearsItem)
+            ResourceLocation loc = itemUsed.getItem().getRegistryName();
+            String itemModName = ChatHelpers.macroize("[0]:[1]", loc.getNamespace(), loc.getPath());
+            ResourceLocation locEnt = itemUsed.getItem().getRegistryName();
+            String entityModName = ChatHelpers.macroize("[0]:[1]", locEnt.getNamespace(), locEnt.getPath());
+            if(itemModName.contains("shears"))
             {
-                OTEMod.LOGGER.info("Shears");
-                if(target instanceof Sheep)
+                if(entityModName.contains("sheep"))
                 {
-                    OTEMod.LOGGER.info("Sheep");
                     updateItem(itemUsed, ItemStatType.SHEARS);
                 }
             }
@@ -126,7 +137,9 @@ public class LoreHandlers {
         if(sp==null)return;
 
         ItemStack weaponUsed = sp.getItemInHand(InteractionHand.MAIN_HAND);
-        if(weaponUsed.getItem() instanceof SwordItem)
+        ResourceLocation loc = weaponUsed.getItem().getRegistryName();
+        String itemModName = ChatHelpers.macroize("[0]:[1]", loc.getNamespace(), loc.getPath());
+        if(itemModName.contains("sword"))
         {
             updateItem(weaponUsed, ItemStatType.SWORD);
             

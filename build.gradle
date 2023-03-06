@@ -139,7 +139,6 @@ dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
 
     implementation fg.deobf("dev.zontreck:libzontreck:${mc_version}-${libz_version}:dev")
-    compileOnly fg.deobf("dev.zontreck:libzontreck:${mc_version}-${libz_version}:dev")
     runtimeOnly fg.deobf("dev.zontreck:libzontreck:${mc_version}-${libz_version}")
 
 
@@ -157,15 +156,23 @@ dependencies {
 
     // Examples using mod jars from ./libs
     // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
-    implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.8'
-    compileOnly 'org.mariadb.jdbc:mariadb-java-client'
-    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+    //implementation 'org.mariadb.jdbc:mariadb-java-client:3.0.8'
+    //compileOnly 'org.mariadb.jdbc:mariadb-java-client'
+    //runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-    api 'curse.maven:mariadb-jdbc-561883:3586357'
+    //api 'curse.maven:mariadb-jdbc-561883:3586357'
 
     runtimeOnly fg.deobf("curse.maven:mekanism-268560:3875976")
+
+    //Add JAOPCA to verify proper recipe handling.
+    //implementation fg.deobf("curse.maven:jaopca-266936:4405973")
+    //runtimeOnly fg.deobf("curse.maven:jaopca-266936:4405973")
+    
+    // Add Tinkers to the runtime dependencies
+    implementation fg.deobf("curse.maven:mantle-74924:4353120")
+    implementation fg.deobf("curse.maven:tinkers-construct-74072:4395997")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
@@ -176,7 +183,7 @@ jar {
                 "Specification-Vendor"    : "Zontreck",
                 "Specification-Version"   : "${my_version}", // We are version 1 of ourselves
                 "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Version"  : "${my_version}",
                 "Implementation-Vendor"   : "Zontreck",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])

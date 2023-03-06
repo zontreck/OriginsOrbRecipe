@@ -4,6 +4,8 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.Random;
 
+import org.antlr.v4.parse.ANTLRParser.id_return;
+
 import dev.zontreck.libzontreck.items.lore.LoreContainer;
 import dev.zontreck.libzontreck.items.lore.LoreEntry;
 import dev.zontreck.libzontreck.profiles.Profile;
@@ -15,12 +17,14 @@ import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.enchantments.MobEggEnchantment;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
+import dev.zontreck.otemod.implementation.DeathMessages;
 import dev.zontreck.otemod.items.tags.ItemStatType;
 import dev.zontreck.otemod.ore.OreGenerator;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -29,7 +33,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 
 @Mod.EventBusSubscriber(modid=OTEMod.MOD_ID)
@@ -40,6 +46,18 @@ public class EventHandler {
         //ShapedAionResources.LOGGER.info("Biome loading event called. Registering aion ores");
         //OTEMod.LOGGER.info("/!\\ Registering OTEMod ores /!\\");
         OreGenerator.generateOres(ev);
+    }
+
+    @SubscribeEvent
+    public static void playerDied(LivingDeathEvent event)
+    {
+        if(!(event.getEntity() instanceof Player))return;
+        try {
+            ChatHelpers.broadcast(new TextComponent(DeathMessages.getRandomDeathMessage(Profile.get_profile_of(event.getEntity().getStringUUID()), event.getSource().getEntity())), event.getEntity().level.getServer());
+        } catch (UserProfileNotYetExistsException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @SubscribeEvent
@@ -118,9 +136,15 @@ public class EventHandler {
                 entry.text = ChatHelpers.macroize("!dark_green!Player: " + profile.name_color+profile.username);
                 entry.bold=true;
                 lore.miscData.LoreData.add(entry);
+
                 entry = new LoreEntry();
-                entry.text = "!Dark_Purple!Date: !Dark_Red!" + Date.from(Instant.now()).toString();
+                entry.text = ChatHelpers.macroize("!Dark_Purple!Date: !Dark_Red![0]", Date.from(Instant.now()).toString());
                 lore.miscData.LoreData.add(entry);
+
+                entry = new LoreEntry();
+                entry.text = ChatHelpers.macroize("!Dark_Purple!Total Deaths: !Dark_Red![0]", String.valueOf(profile.deaths));
+                lore.miscData.LoreData.add(entry);
+                lore.commitLore();
 
 
                 ev.getDrops().add(new ItemEntity(killedentity.level, killedentity.getX(), killedentity.getY(), killedentity.getZ(), head));

@@ -1,0 +1,9 @@
+{
+    "replace": false,
+    "values": [
+        {
+            "id": "otemod:eternium_ingot",
+            "required": false
+        }
+    ]
+}

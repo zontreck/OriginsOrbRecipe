@@ -27,7 +27,7 @@ gamma:1.0
 renderDistance:12
 simulationDistance:12
 entityDistanceScaling:1.0
-guiScale:4
+guiScale:2
 particles:0
 maxFps:120
 difficulty:2
@@ -137,6 +137,8 @@ key_key.jei.previousCategory:key.keyboard.page.up:SHIFT
 key_key.jei.nextCategory:key.keyboard.page.down:SHIFT
 key_key.jei.closeRecipeGui:key.keyboard.escape
 key_key.jei.copy.recipe.id:key.keyboard.unknown
+key_key.tconstruct.helmet_interact:key.keyboard.z
+key_key.tconstruct.leggings_interact:key.keyboard.i
 key_key.mekanism.mode:key.keyboard.n
 key_key.mekanism.head_mode:key.keyboard.v
 key_key.mekanism.chest_mode:key.keyboard.g
@@ -147,7 +149,7 @@ key_key.mekanism.description:key.keyboard.n:SHIFT
 key_key.mekanism.module_tweaker:key.keyboard.backslash
 key_key.mekanism.key_boost:key.keyboard.left.control
 key_key.mekanism.key_hud:key.keyboard.h
-key_key.otemod.open_vault:key.keyboard.v:ALT
+key_key.otemod.open_vault:key.keyboard.left.alt
 soundCategory_master:1.0
 soundCategory_music:0.08862526
 soundCategory_record:1.0
