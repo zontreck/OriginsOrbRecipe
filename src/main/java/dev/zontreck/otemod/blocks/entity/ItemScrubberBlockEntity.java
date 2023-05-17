@@ -1,7 +1,5 @@
 package dev.zontreck.otemod.blocks.entity;
 
-import javax.annotation.Nullable;
-
 import dev.zontreck.otemod.implementation.OutputItemStackHandler;
 import dev.zontreck.otemod.implementation.energy.OTEEnergy;
 import dev.zontreck.otemod.implementation.scrubber.ItemScrubberMenu;
@@ -11,7 +9,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -25,12 +22,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
+
+import javax.annotation.Nullable;
 
 public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
 {
@@ -113,22 +111,22 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
 
     @Override
     public Component getDisplayName() {
-        return new TranslatableComponent("block.otemod.item_scrubber");
+        return Component.translatable("block.otemod.item_scrubber");
     }
 
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side)
     {
-        if(cap == CapabilityEnergy.ENERGY)
+        if(cap == ForgeCapabilities.ENERGY)
         {
             return lazyEnergyHandler.cast();
         }
-        if(side == Direction.DOWN && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if(side == Direction.DOWN && cap == ForgeCapabilities.ITEM_HANDLER)
         {
             // Return the output slot only
             return lazyOutputItems.cast();
         }
-        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+        if(cap == ForgeCapabilities.ITEM_HANDLER)
         {
             return lazyItemHandler.cast();
         }

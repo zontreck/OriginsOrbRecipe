@@ -1,19 +1,10 @@
 package dev.zontreck.otemod.commands.zschem;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
-
-import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.integrations.LuckPermsHelper;
 import dev.zontreck.otemod.permissions.Permissions;
 import dev.zontreck.otemod.zschem.MemoryHolder;
@@ -25,11 +16,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtIo;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.fml.loading.FMLConfig;
 import net.minecraftforge.fml.loading.FMLPaths;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SaveSchem {
     
@@ -108,12 +103,12 @@ public class SaveSchem {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!ZSchem saved to disk!")), OTEMod.THE_SERVER);
+                    ChatHelpers.broadcastTo(play.getUUID(), ChatHelpers.macro(OTEMod.OTEPrefix+" !Dark_Green!ZSchem saved to disk!"), OTEMod.THE_SERVER);
                     return 0;
                 }
             }
         }
-        ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(ChatColor.doColors("!Dark_Red! You must first set the positions")), OTEMod.THE_SERVER);
+        ChatHelpers.broadcastTo(play.getUUID(), ChatHelpers.macro("!Dark_Red! You must first set the positions"), OTEMod.THE_SERVER);
 
         return 0;
     }
@@ -121,10 +116,10 @@ public class SaveSchem {
     private static int saveSchematicUsage(CommandSourceStack source)
     {
         String usage = OTEMod.OTEPrefix;
-        usage += ChatColor.doColors("!gold! /savezschem [string:name]");
+        usage += "!gold! /savezschem [string:name]";
         ServerPlayer play=(ServerPlayer)source.getEntity();
         if(play==null)return 1;
-        ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(usage), OTEMod.THE_SERVER);
+        ChatHelpers.broadcastTo(play.getUUID(), ChatHelpers.macro(usage), OTEMod.THE_SERVER);
         return 0;
     }
 }

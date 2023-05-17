@@ -12,8 +12,8 @@ import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.configs.PlayerFlyCache;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Abilities;
@@ -55,7 +55,7 @@ public class ChatServerOverride {
 
         if(!OTEServerConfig.USE_CUSTOM_JOINLEAVE.get()) return;
         
-        ChatHelpers.broadcast(new TextComponent(ChatColor.doColors("!Dark_Gray![!Dark_Green!+!Dark_Gray!] !Bold!!Dark_Aqua!"+prof.nickname)), ev.level.getServer());
+        ChatHelpers.broadcast(ChatHelpers.macro("!Dark_Gray![!Dark_Green!+!Dark_Gray!] !Bold!!Dark_Aqua![0]",prof.nickname), ev.level.getServer());
         
     }
 
@@ -71,7 +71,8 @@ public class ChatServerOverride {
         if(!OTEServerConfig.USE_CUSTOM_JOINLEAVE.get()) return;
 
         // Send the alert
-        ChatHelpers.broadcast(new TextComponent(ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "-" + ChatColor.DARK_GRAY + "] "+ChatColor.BOLD + ChatColor.DARK_AQUA + px.nickname), px.player.server);
+        ChatHelpers.broadcast(ChatHelpers.macro("!Dark_Gray![!Dark_Red!-!Dark_Gray!] !Bold!!Dark_Aqua![0]", px.nickname), px.player.server);
+
 
         px.flying=px.player.getAbilities().flying;
         ev.setCanceled(true);
@@ -83,7 +84,7 @@ public class ChatServerOverride {
         if(ev.getEntity().level.isClientSide)return;
         // Fix for fly ability not copying to new instance on death or other circumstances
         Player old = ev.getOriginal();
-        Player n = ev.getPlayer();
+        Player n = ev.getEntity();
 
         PlayerFlyCache c = PlayerFlyCache.cachePlayer((ServerPlayer)old);
         c.Assert((ServerPlayer)n);
@@ -112,7 +113,7 @@ public class ChatServerOverride {
             prefixStr = ChatColor.DARK_GRAY + "[" + ChatColor.BOLD + XD.prefix_color + XD.prefix + ChatColor.resetChat() + ChatColor.DARK_GRAY + "] ";
         }
 
-        String msg = ev.getMessage();
+        String msg = ev.getRawText();
         msg= ChatColor.doColors(msg);
 
         String nameStr = ChatColor.resetChat() + "< "+ XD.name_color + XD.nickname + ChatColor.resetChat() + " >";
@@ -121,7 +122,7 @@ public class ChatServerOverride {
         hover=hover.withFont(Style.DEFAULT_FONT).withHoverEvent(HoverTip.get(ChatColor.MINECOIN_GOLD+"User Name: "+XD.username));
         ev.setCanceled(true);
 
-        ChatHelpers.broadcast(new TextComponent(prefixStr+nameStr+message).setStyle(hover), ev.getPlayer().server);
+        ChatHelpers.broadcast(Component.literal(prefixStr + nameStr + message).setStyle(hover), ev.getPlayer().server);
     }
 
 

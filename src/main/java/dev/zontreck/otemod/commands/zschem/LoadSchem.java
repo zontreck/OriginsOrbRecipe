@@ -1,16 +1,7 @@
 package dev.zontreck.otemod.commands.zschem;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
-
-import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.libzontreck.vectors.WorldPosition;
@@ -26,11 +17,17 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.fml.loading.FMLConfig;
 import net.minecraftforge.fml.loading.FMLPaths;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class LoadSchem {
     
@@ -115,17 +112,17 @@ public class LoadSchem {
                         MemoryHolder.setBlocks(play, blocks);
                         
                     }else {
-                        ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !Dark_Red!No such ZSchem exists!")), source.getServer());
+                        ChatHelpers.broadcastTo(play.getUUID(), ChatHelpers.macro(OTEMod.OTEPrefix + " !Dark_Red!No such ZSchem exists!"), source.getServer());
                         return 0;
                     }
                     
 
-                    ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!ZSchem loaded from disk!")), OTEMod.THE_SERVER);
+                    ChatHelpers.broadcastTo(play.getUUID(), ChatHelpers.macro(OTEMod.OTEPrefix+" !Dark_Green!ZSchem loaded from disk!"), OTEMod.THE_SERVER);
                     return 0;
                 }
             }
         }
-        ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(ChatColor.doColors("!Dark_Red! You must set the first position")), OTEMod.THE_SERVER);
+        ChatHelpers.broadcastTo(play.getUUID(), ChatHelpers.macro("!Dark_Red! You must set the first position"), OTEMod.THE_SERVER);
 
         return 0;
     }
@@ -133,10 +130,10 @@ public class LoadSchem {
     private static int loadSchematicUsage(CommandSourceStack source)
     {
         String usage = OTEMod.OTEPrefix;
-        usage += ChatColor.doColors("!gold! /loadzschem [string:name]");
+        usage += "!gold! /loadzschem [string:name]";
         ServerPlayer play=(ServerPlayer)source.getEntity();
         if(play==null)return 1;
-        ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(usage), OTEMod.THE_SERVER);
+        ChatHelpers.broadcastTo(play.getUUID(), ChatHelpers.macro(usage), OTEMod.THE_SERVER);
         return 0;
     }
 }

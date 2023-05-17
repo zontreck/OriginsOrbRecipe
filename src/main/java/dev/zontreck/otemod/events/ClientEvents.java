@@ -15,10 +15,10 @@ public class ClientEvents {
     {
 
         @SubscribeEvent
-        public static void onKeyInput(InputEvent.ClickInputEvent event)
+        public static void onKeyInput(InputEvent.Key event)
         {
             //OTEMod.LOGGER.info("KEY PRESS: "+event.getKey());
-            if(KeyBindings.OPEN_VAULT.consumeClick())
+            if(KeyBindings.OPEN_VAULT.matches(event.getKey(), event.getScanCode()))
             {
                 ModMessages.sendToServer(new OpenVaultC2SPacket(0, false, 0));
             }

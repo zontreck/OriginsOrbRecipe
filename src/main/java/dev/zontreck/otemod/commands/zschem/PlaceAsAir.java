@@ -1,28 +1,23 @@
 package dev.zontreck.otemod.commands.zschem;
 
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
 import com.mojang.brigadier.CommandDispatcher;
-
-import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.integrations.LuckPermsHelper;
 import dev.zontreck.otemod.permissions.Permissions;
 import dev.zontreck.otemod.zschem.MemoryHolder;
+import dev.zontreck.otemod.zschem.MemoryHolder.Container;
 import dev.zontreck.otemod.zschem.StoredBlock;
 import dev.zontreck.otemod.zschem.WorldProp;
-import dev.zontreck.otemod.zschem.MemoryHolder.Container;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.Blocks;
+
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 // This command will place the loaded schematic in world. The schematic will originate from position 1. The positions are relative and are added onto position 1.
 public class PlaceAsAir {
@@ -49,7 +44,7 @@ public class PlaceAsAir {
 
         if(!MemoryHolder.hasPlayerCached(play)){
 
-            ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first set the positions!")), OTEMod.THE_SERVER);
+            ChatHelpers.broadcastTo(play.getUUID(), ChatHelpers.macro(OTEMod.OTEPrefix+" !Dark_Red!You must first set the positions!"), OTEMod.THE_SERVER);
 
             return 1;
         }
@@ -74,13 +69,13 @@ public class PlaceAsAir {
             
         }else {
             
-            ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You must first set the positions!")), OTEMod.THE_SERVER);
+            ChatHelpers.broadcastTo(play.getUUID(), ChatHelpers.macro(OTEMod.OTEPrefix+" !Dark_Red!You must first set the positions!"), OTEMod.THE_SERVER);
 
             return 1;
         }
 
 
-        ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!Enqueued!")), OTEMod.THE_SERVER);
+        ChatHelpers.broadcastTo(play.getUUID(), ChatHelpers.macro(OTEMod.OTEPrefix+" !Dark_Green!Enqueued!"), OTEMod.THE_SERVER);
 
         return 0;
     }

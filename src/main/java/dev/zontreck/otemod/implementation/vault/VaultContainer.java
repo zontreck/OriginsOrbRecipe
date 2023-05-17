@@ -1,37 +1,25 @@
 package dev.zontreck.otemod.implementation.vault;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.profiles.Profile;
 import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.implementation.events.VaultModifiedEvent;
 import dev.zontreck.otemod.implementation.vault.VaultProvider.VaultAccessStrategy;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtIo;
-import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.MenuConstructor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.items.ItemStackHandler;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 public class VaultContainer
 {
@@ -88,7 +76,7 @@ public class VaultContainer
         if(VAULT_NUMBER == -1)return; // We have no need to save the trash
         boolean isEmpty=true;
         CompoundTag saved = myInventory.serializeNBT();
-        ChatHelpers.broadcastToAbove(owner, new TextComponent(ChatColor.BOLD+ChatColor.DARK_GREEN+"Saving the vault's contents..."), server);
+        ChatHelpers.broadcastToAbove(owner, Component.literal(ChatColor.BOLD+ChatColor.DARK_GREEN+"Saving the vault's contents..."), server);
 
         Profile profile=null;
         try {

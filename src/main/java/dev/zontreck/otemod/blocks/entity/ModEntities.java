@@ -10,7 +10,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModEntities {
     
-    public static final DeferredRegister<BlockEntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, OTEMod.MOD_ID);
+    public static final DeferredRegister<BlockEntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, OTEMod.MOD_ID);
 
     public static final RegistryObject <BlockEntityType <ItemScrubberBlockEntity>> ITEM_SCRUBBER = ENTITIES.register("item_scrubber", ()-> BlockEntityType.Builder.of(ItemScrubberBlockEntity::new, ModBlocks.ITEM_SCRUBBER.get()).build(null));
 

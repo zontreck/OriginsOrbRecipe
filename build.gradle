@@ -164,15 +164,15 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
     //api 'curse.maven:mariadb-jdbc-561883:3586357'
 
-    runtimeOnly fg.deobf("curse.maven:mekanism-268560:3875976")
+    runtimeOnly fg.deobf("curse.maven:mekanism-268560:4385637")
 
     //Add JAOPCA to verify proper recipe handling.
     //implementation fg.deobf("curse.maven:jaopca-266936:4405973")
     //runtimeOnly fg.deobf("curse.maven:jaopca-266936:4405973")
     
     // Add Tinkers to the runtime dependencies
-    implementation fg.deobf("curse.maven:mantle-74924:4353120")
-    implementation fg.deobf("curse.maven:tinkers-construct-74072:4395997")
+    //implementation fg.deobf("curse.maven:mantle-74924:4353120")
+    //implementation fg.deobf("curse.maven:tinkers-construct-74072:4395997")
 }
 
 // Example for how to get properties into the manifest for reading at runtime.

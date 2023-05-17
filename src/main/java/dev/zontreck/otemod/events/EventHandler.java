@@ -1,13 +1,7 @@
 package dev.zontreck.otemod.events;
 
-import java.time.Instant;
-import java.util.Date;
-import java.util.Random;
-
-import org.antlr.v4.parse.ANTLRParser.id_return;
-
-import dev.zontreck.libzontreck.items.lore.LoreContainer;
-import dev.zontreck.libzontreck.items.lore.LoreEntry;
+import dev.zontreck.libzontreck.lore.LoreContainer;
+import dev.zontreck.libzontreck.lore.LoreEntry;
 import dev.zontreck.libzontreck.profiles.Profile;
 import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
 import dev.zontreck.libzontreck.util.ChatHelpers;
@@ -19,12 +13,8 @@ import dev.zontreck.otemod.enchantments.MobEggEnchantment;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
 import dev.zontreck.otemod.implementation.DeathMessages;
 import dev.zontreck.otemod.items.tags.ItemStatType;
-import dev.zontreck.otemod.ore.OreGenerator;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -35,18 +25,16 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+
+import java.time.Instant;
+import java.util.Date;
+import java.util.Random;
 
 @Mod.EventBusSubscriber(modid=OTEMod.MOD_ID)
 public class EventHandler {
-    
-    @SubscribeEvent(priority = EventPriority.HIGH)
-    public static void addOresToBiomes(final BiomeLoadingEvent ev){
-        //ShapedAionResources.LOGGER.info("Biome loading event called. Registering aion ores");
-        //OTEMod.LOGGER.info("/!\\ Registering OTEMod ores /!\\");
-        OreGenerator.generateOres(ev);
-    }
+
 
     @SubscribeEvent
     public static void playerDied(LivingDeathEvent event)
@@ -83,7 +71,6 @@ public class EventHandler {
         double num = rng.nextDouble(0,100000);
         if(num <= base_chance)
         {
-
             ItemStack head = HeadUtilities.get(profile.username).setHoverName(ChatHelpers.macro(profile.nickname+"'s Head"));
             LoreContainer lore = new LoreContainer(head);
             LoreEntry entry = new LoreEntry();
@@ -105,7 +92,7 @@ public class EventHandler {
         }
 
         try {
-            ChatHelpers.broadcast(new TextComponent(DeathMessages.getRandomDeathMessage(Profile.get_profile_of(event.getEntity().getStringUUID()), event.getSource())), event.getEntity().level.getServer());
+            ChatHelpers.broadcast(Component.literal(DeathMessages.getRandomDeathMessage(Profile.get_profile_of(event.getEntity().getStringUUID()), event.getSource())), event.getEntity().level.getServer());
         } catch (UserProfileNotYetExistsException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -116,12 +103,12 @@ public class EventHandler {
     public void onEntityKilled(LivingDropsEvent ev){
         if(ev.getEntity().level.isClientSide)return;
 
-        Entity killedentity = ev.getEntityLiving();
+        Entity killedentity = ev.getEntity();
         Entity ent = ev.getSource().getEntity();
         if(ent instanceof Player)
         {
             ServerPlayer play = (ServerPlayer)ent;
-            LivingEntity killed = ev.getEntityLiving();
+            LivingEntity killed = ev.getEntity();
 
             ItemStack stack = play.getMainHandItem();
             int levelOfEgging = ItemUtils.getEnchantmentLevel(ModEnchantments.MOB_EGGING_ENCHANTMENT.get(),stack);

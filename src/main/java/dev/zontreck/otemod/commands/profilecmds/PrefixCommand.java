@@ -2,16 +2,14 @@ package dev.zontreck.otemod.commands.profilecmds;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
-
 import dev.zontreck.libzontreck.LibZontreck;
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.profiles.Profile;
 import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
+import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.otemod.OTEMod;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
@@ -50,7 +48,7 @@ public class PrefixCommand {
         p.commit();
         LibZontreck.PROFILES.put(play.getStringUUID(), p);
 
-        source.sendSuccess(new TextComponent(OTEMod.OTEPrefix+ " "+ChatColor.DARK_PURPLE + "Your prefix has been updated"), false);
+        source.sendSuccess(ChatHelpers.macro(OTEMod.OTEPrefix+ " "+ChatColor.DARK_PURPLE + "Your prefix has been updated"), false);
 
         return 0;
     }

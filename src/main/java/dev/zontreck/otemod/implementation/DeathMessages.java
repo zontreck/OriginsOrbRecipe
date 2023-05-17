@@ -44,7 +44,7 @@ public class DeathMessages {
         {
             if(sourceName.equals(""))
             {
-                sourceName = source.getEntity().getName().getContents();
+                sourceName = source.getEntity().getName().getString();
             }
         } else sourceName = "an imaginary zombie!";
 

@@ -1,13 +1,11 @@
 package dev.zontreck.otemod.implementation.energy.screenrenderer;
 
-import java.util.List;
-
 import com.mojang.blaze3d.vertex.PoseStack;
-
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.energy.IEnergyStorage;
+
+import java.util.List;
 
 /*
  *  BluSunrize
@@ -33,7 +31,7 @@ public class EnergyInfoArea extends InfoArea {
     }
 
     public List<Component> getTooltips() {
-        return List.of(new TextComponent(energy.getEnergyStored()+"/"+energy.getMaxEnergyStored()+" FE"));
+        return List.of(Component.literal(energy.getEnergyStored()+"/"+energy.getMaxEnergyStored()+" FE"));
     }
 
     @Override

@@ -1,7 +1,5 @@
 package dev.zontreck.otemod.blocks;
 
-import javax.annotation.Nullable;
-
 import dev.zontreck.otemod.blocks.entity.ItemScrubberBlockEntity;
 import dev.zontreck.otemod.blocks.entity.ModEntities;
 import dev.zontreck.otemod.networking.ModMessages;
@@ -20,6 +18,8 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraftforge.network.NetworkHooks;
+
+import javax.annotation.Nullable;
 
 public class ItemScrubberBlock extends BaseEntityBlock
 {
@@ -59,7 +59,7 @@ public class ItemScrubberBlock extends BaseEntityBlock
             if(be instanceof ItemScrubberBlockEntity)
             {
                 ItemScrubberBlockEntity entity = (ItemScrubberBlockEntity)be;
-                NetworkHooks.openGui(((ServerPlayer)player), entity, pos);
+                NetworkHooks.openScreen(((ServerPlayer)player), entity, pos);
 
                 ModMessages.sendToPlayer(new EnergySyncS2CPacket(entity.getEnergyStorage().getEnergyStored(), entity.getBlockPos()), (ServerPlayer)player);
 

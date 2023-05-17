@@ -13,7 +13,6 @@ import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.OTEMod;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 
@@ -85,7 +84,7 @@ public class MemoryHolder {
                 if(c.isExpired()){
                     imeuc.remove();
 
-                    ChatHelpers.broadcastTo(entry.getKey(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!ZSchem Session expired")), c.lvl.getServer());
+                    ChatHelpers.broadcastTo(entry.getKey(), ChatHelpers.macro(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!ZSchem Session expired")), c.lvl.getServer());
                 }
             }
         }finally{

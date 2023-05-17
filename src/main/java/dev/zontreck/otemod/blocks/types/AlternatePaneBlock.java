@@ -1,12 +1,12 @@
 package dev.zontreck.otemod.blocks.types;
 
-import java.util.EnumMap;
-
 import net.minecraft.core.Direction;
 import net.minecraft.core.Direction.Plane;
 import net.minecraft.world.level.block.IronBarsBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+
+import java.util.EnumMap;
 
 /** Pane block with sensible culling */
 public class AlternatePaneBlock extends IronBarsBlock {

@@ -1,11 +1,11 @@
 package dev.zontreck.otemod.implementation.vault;
 
-import java.io.File;
-import java.io.IOException;
-
 import dev.zontreck.libzontreck.profiles.Profile;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
+
+import java.io.File;
+import java.io.IOException;
 
 public class Vault {
     public int vaultNum;

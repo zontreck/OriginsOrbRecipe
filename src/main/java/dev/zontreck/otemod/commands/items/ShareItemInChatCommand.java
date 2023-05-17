@@ -1,8 +1,6 @@
 package dev.zontreck.otemod.commands.items;
 
 import com.mojang.brigadier.CommandDispatcher;
-
-import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.chat.HoverTip;
 import dev.zontreck.libzontreck.profiles.Profile;
 import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
@@ -12,7 +10,6 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
@@ -39,7 +36,7 @@ public class ShareItemInChatCommand {
             ItemStack is = play.getItemInHand(InteractionHand.MAIN_HAND);
             if(is.getItem() instanceof AirItem)
             {
-                play.displayClientMessage(new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You cannot share air in the chat.")), false);
+                play.displayClientMessage(ChatHelpers.macro(OTEMod.OTEPrefix+" !Dark_Red!You cannot share air in the chat."), false);
                 return 0;
             }
 
@@ -50,7 +47,7 @@ public class ShareItemInChatCommand {
                 return 1;
             }
 
-            MutableComponent component = new TextComponent(OTEMod.OTEPrefix).append(is.getDisplayName()).append(new TextComponent(ChatColor.doColors(" !White!-!Dark_Purple! Hover here to see the item that "+prof.name_color+prof.nickname+"!Dark_Purple! shared")));
+            MutableComponent component = ChatHelpers.macro(OTEMod.OTEPrefix).append(is.getDisplayName()).append(ChatHelpers.macro(" !White!-!Dark_Purple! Hover here to see the item that "+prof.name_color+prof.nickname+"!Dark_Purple! shared"));
             Style style = Style.EMPTY.withFont(Style.DEFAULT_FONT);
             component = component.withStyle(style.withHoverEvent(HoverTip.getItem(is)));
 

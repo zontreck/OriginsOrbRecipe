@@ -4,8 +4,7 @@ import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.chat.ChatServerOverride;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
+import dev.zontreck.otemod.implementation.Messages;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
@@ -36,6 +35,6 @@ public class LuckPermsHelper {
     }
 
     public static void sendNoPermissionsMessage(ServerPlayer play, String perm, String group) {
-        ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix + ChatColor.doColors(" !Dark_Red!You do not have permission to use that command. You need permission !Gold!"+perm+" !White! or !Gold!"+group)), play.server);
+        ChatHelpers.broadcastTo(play.getUUID(), ChatHelpers.macro(Messages.OTE_PREFIX+" !Dark_Red!You do not have permission to use that command. You need permission !Gold!"+perm+" !White! or !Gold!"+group), play.server);
     }
 }

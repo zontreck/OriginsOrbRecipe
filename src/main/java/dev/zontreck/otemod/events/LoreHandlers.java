@@ -1,7 +1,7 @@
 package dev.zontreck.otemod.events;
 
-import dev.zontreck.libzontreck.items.lore.LoreContainer;
-import dev.zontreck.libzontreck.items.lore.LoreEntry;
+import dev.zontreck.libzontreck.lore.LoreContainer;
+import dev.zontreck.libzontreck.lore.LoreEntry;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.items.tags.ItemStatTag;
@@ -13,23 +13,17 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.AxeItem;
-import net.minecraft.world.item.HoeItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.PickaxeItem;
-import net.minecraft.world.item.ShearsItem;
-import net.minecraft.world.item.ShovelItem;
-import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @EventBusSubscriber(modid=OTEMod.MOD_ID, bus=Mod.EventBusSubscriber.Bus.FORGE)
 public class LoreHandlers {
@@ -37,11 +31,11 @@ public class LoreHandlers {
     @SubscribeEvent
     public void onBlockMined(BlockEvent.BreakEvent ev)
     {
-        if(ev.getWorld().isClientSide())return;
+        if(ev.getLevel().isClientSide())return;
 
         ServerPlayer sp = (ServerPlayer)ev.getPlayer();
         ItemStack itemUsed = sp.getItemInHand(InteractionHand.MAIN_HAND);
-        ResourceLocation loc = itemUsed.getItem().getRegistryName();
+        ResourceLocation loc = ForgeRegistries.ITEMS.getKey(itemUsed.getItem());
         String itemModName = ChatHelpers.macroize("[0]:[1]", loc.getNamespace(), loc.getPath());
         if(itemModName.contains("pickaxe"))
         {
@@ -62,14 +56,14 @@ public class LoreHandlers {
     public void onBlock(BlockEvent.BlockToolModificationEvent ev)
     {
         
-        if(ev.getWorld().isClientSide())return;
+        if(ev.getLevel().isClientSide())return;
     
         // Check the block right clicked, and the item in hand
 
         ServerPlayer sp = (ServerPlayer)ev.getPlayer();
         ItemStack itemUsed = sp.getMainHandItem();
         BlockState bs = ev.getState();
-        ResourceLocation loc = itemUsed.getItem().getRegistryName();
+        ResourceLocation loc = ForgeRegistries.ITEMS.getKey(itemUsed.getItem());
         String itemModName = ChatHelpers.macroize("[0]:[1]", loc.getNamespace(), loc.getPath());
 
         if(itemModName.contains("hoe"))
@@ -94,18 +88,18 @@ public class LoreHandlers {
     public void onShears(PlayerInteractEvent.EntityInteract ev)
     {
         
-        if(ev.getWorld().isClientSide)return;
+        if(ev.getLevel().isClientSide)return;
         if(ev.getCancellationResult() == InteractionResult.PASS)
         {
-            // Check the entity right clicked, and the item in hand
+            // Check the entity right-clicked, and the item in hand
 
             OTEMod.LOGGER.info("Success");
             ServerPlayer sp = (ServerPlayer)ev.getEntity();
             ItemStack itemUsed = sp.getMainHandItem();
             Entity target = ev.getTarget();
-            ResourceLocation loc = itemUsed.getItem().getRegistryName();
+            ResourceLocation loc = ForgeRegistries.ITEMS.getKey(itemUsed.getItem());
             String itemModName = ChatHelpers.macroize("[0]:[1]", loc.getNamespace(), loc.getPath());
-            ResourceLocation locEnt = itemUsed.getItem().getRegistryName();
+            ResourceLocation locEnt = ForgeRegistries.ENTITY_TYPES.getKey(ev.getTarget().getType());
             String entityModName = ChatHelpers.macroize("[0]:[1]", locEnt.getNamespace(), locEnt.getPath());
             if(itemModName.contains("shears"))
             {
@@ -137,7 +131,7 @@ public class LoreHandlers {
         if(sp==null)return;
 
         ItemStack weaponUsed = sp.getItemInHand(InteractionHand.MAIN_HAND);
-        ResourceLocation loc = weaponUsed.getItem().getRegistryName();
+        ResourceLocation loc = ForgeRegistries.ITEMS.getKey(weaponUsed.getItem());
         String itemModName = ChatHelpers.macroize("[0]:[1]", loc.getNamespace(), loc.getPath());
         if(itemModName.contains("sword"))
         {

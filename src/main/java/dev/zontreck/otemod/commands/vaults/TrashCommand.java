@@ -1,15 +1,13 @@
 package dev.zontreck.otemod.commands.vaults;
 
 import com.mojang.brigadier.CommandDispatcher;
-
-import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.implementation.vault.NoMoreVaultException;
 import dev.zontreck.otemod.implementation.vault.VaultContainer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraftforge.network.NetworkHooks;
@@ -35,11 +33,11 @@ public class TrashCommand {
         try {
             container = new VaultContainer(play, -1);
         } catch (NoMoreVaultException e) {
-            ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You cannot open anymore vaults. Craft a new vault!")), play.server);
+            ChatHelpers.broadcastTo(play.getUUID(), ChatHelpers.macro(OTEMod.OTEPrefix+" !Dark_Red!You cannot open anymore vaults. Craft a new vault!"), play.server);
             return 0;
         }
         
-        NetworkHooks.openGui(play, new SimpleMenuProvider(container.serverMenu, new TextComponent("Trash")));
+        NetworkHooks.openScreen(play, new SimpleMenuProvider(container.serverMenu, Component.literal("Trash")));
         
         // Add to the master vault registry
         if(VaultContainer.VAULT_REGISTRY.containsKey(play.getUUID()))VaultContainer.VAULT_REGISTRY.remove(play.getUUID());

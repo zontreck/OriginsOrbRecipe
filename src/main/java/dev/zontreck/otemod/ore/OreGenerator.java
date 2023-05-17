@@ -1,25 +1,8 @@
 package dev.zontreck.otemod.ore;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import dev.zontreck.otemod.blocks.ModBlocks;
-import net.minecraft.core.Holder;
-import net.minecraft.data.worldgen.features.FeatureUtils;
-import net.minecraft.data.worldgen.features.OreFeatures;
-import net.minecraft.data.worldgen.placement.PlacementUtils;
-import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.VerticalAnchor;
-import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.OreFeature;
-import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
-import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraftforge.event.world.BiomeLoadingEvent;
 
 public class OreGenerator {
-
+/*
 
     public static final List<ConfiguredFeature<OreConfiguration, OreFeature>> OVERWORLD_ORES = new ArrayList();
 
@@ -61,5 +44,5 @@ public class OreGenerator {
         base.add(VAULT_STEEL_ORE_PLACED);
         base.add(NETHER_VAULTSTEEL_ORE_PLACED);
         //base.add(DEEPSLATE_AION_ORE_PLACED);
-    }
+    }*/
 }

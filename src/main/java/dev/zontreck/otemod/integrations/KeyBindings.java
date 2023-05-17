@@ -3,6 +3,8 @@ package dev.zontreck.otemod.integrations;
 import com.mojang.blaze3d.platform.InputConstants;
 
 import net.minecraft.client.KeyMapping;
+import net.minecraft.client.multiplayer.ClientRegistryLayer;
+import net.minecraft.core.registries.Registries;
 import net.minecraftforge.client.ClientRegistry;
 
 public class KeyBindings {
@@ -13,6 +15,7 @@ public class KeyBindings {
 
     private static KeyMapping registerKeyMapping(String name, int keycode, String category){
         final KeyMapping key = new KeyMapping(name, keycode, category);
+
         ClientRegistry.registerKeyBinding(key);
         return key;
     }

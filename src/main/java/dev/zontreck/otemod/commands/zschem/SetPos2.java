@@ -1,19 +1,16 @@
 package dev.zontreck.otemod.commands.zschem;
 
 import com.mojang.brigadier.CommandDispatcher;
-
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.integrations.LuckPermsHelper;
 import dev.zontreck.otemod.permissions.Permissions;
 import dev.zontreck.otemod.zschem.MemoryHolder;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
 
 public class SetPos2 {
@@ -40,7 +37,7 @@ public class SetPos2 {
         MemoryHolder.setPos2(play, new Vector3(source.getPosition()));
         MemoryHolder.setLevel(play, source.getLevel());
 
-        ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!Position 2 set!")), OTEMod.THE_SERVER);
+        ChatHelpers.broadcastTo(play.getUUID(), Component.literal(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!Position 2 set!")), OTEMod.THE_SERVER);
 
         return 0;
     }

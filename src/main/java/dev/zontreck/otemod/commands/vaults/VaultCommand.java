@@ -2,15 +2,13 @@ package dev.zontreck.otemod.commands.vaults;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
-
-import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.implementation.vault.NoMoreVaultException;
 import dev.zontreck.otemod.implementation.vault.VaultContainer;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraftforge.network.NetworkHooks;
@@ -34,7 +32,7 @@ public class VaultCommand {
         ServerPlayer play = (ServerPlayer)source.getEntity();
         if(i <0)
         {
-            ChatHelpers.broadcastTo(play.getUUID(), new TextComponent(ChatColor.doColors(OTEMod.OTEPrefix+" !Dark_Red!You can only specify a vault number in the positive range")), source.getServer());
+            ChatHelpers.broadcastTo(play.getUUID(), ChatHelpers.macro(OTEMod.OTEPrefix+" !Dark_Red!You can only specify a vault number in the positive range"), source.getServer());
             return 0;
         }
         doOpen(play, i);
@@ -49,11 +47,11 @@ public class VaultCommand {
         try {
             container = new VaultContainer(p, i);
         } catch (NoMoreVaultException e) {
-            ChatHelpers.broadcastTo(p.getUUID(), new TextComponent(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Red!You cannot open anymore vaults. Craft a new vault!")), p.server);
+            ChatHelpers.broadcastTo(p.getUUID(), ChatHelpers.macro(OTEMod.OTEPrefix+" !Dark_Red!You cannot open anymore vaults. Craft a new vault!"), p.server);
             return;
         }
         
-        NetworkHooks.openGui(p, new SimpleMenuProvider(container.serverMenu, new TextComponent("Vault "+i)));
+        NetworkHooks.openScreen(p, new SimpleMenuProvider(container.serverMenu, Component.literal("Vault " + i)));
         
         // Add to the master vault registry
         if(VaultContainer.VAULT_REGISTRY.containsKey(p.getUUID()))VaultContainer.VAULT_REGISTRY.remove(p.getUUID());
