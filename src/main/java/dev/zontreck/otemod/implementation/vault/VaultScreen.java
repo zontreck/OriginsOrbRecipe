@@ -9,6 +9,7 @@ import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.commands.vaults.VaultCommand;
 import dev.zontreck.otemod.networking.ModMessages;
 import dev.zontreck.otemod.networking.packets.OpenVaultC2SPacket;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Button.OnPress;
 import net.minecraft.client.gui.font.TextFieldHelper;
@@ -45,7 +46,7 @@ public class VaultScreen extends AbstractContainerScreen <VaultMenu>
     }
 
     @Override
-    public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks)
+    public void render(GuiGraphics stack, int mouseX, int mouseY, float partialTicks)
     {
         this.renderBackground(stack);
         super.render(stack, mouseX, mouseY, partialTicks);
@@ -54,19 +55,13 @@ public class VaultScreen extends AbstractContainerScreen <VaultMenu>
     }
 
     @Override
-    protected void renderLabels(PoseStack stack, int mouseX, int mouseY)
-    {
-        this.font.draw(stack, this.title, 63, 12, 0xFFFFFF);
-        this.font.draw(stack, this.playerInventoryTitle, 63, 146, 0xFFFFFF);
-        //this.font.draw(stack, this.title.getString(), this.leftPos + 17, this.topPos + 15, 0xFFFFFF);
-        
-        //this.font.draw(stack, this.playerInventoryTitle.getString(), this.leftPos + 17, this.topPos + 123, 0xFFFFFF);
-    }
-
-    @Override
     protected void init()
     {
         super.init();
+        this.inventoryLabelY = 12;
+        this.inventoryLabelX = 63;
+
+
         // This is where custom controls would be added!
 
         this.addWidget(Button.builder(Component.literal(""), (BTN)->{
@@ -82,13 +77,15 @@ public class VaultScreen extends AbstractContainerScreen <VaultMenu>
 
     }
 
+
     @Override
-    protected void renderBg(PoseStack stack, float mouseX, int mouseY, int partialTicks)
+    protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY)
     {
-        renderBackground(stack);
+        renderBackground(pGuiGraphics);
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor (1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.setShaderTexture(0, TEXTURE);
-        blit(stack, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
+
+        pGuiGraphics.blit(TEXTURE, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
     }
 }

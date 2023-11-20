@@ -118,7 +118,6 @@ public class OTEMod
 
         MinecraftForge.EVENT_BUS.register(new KeyBindings());
 
-        GeckoLib.initialize();
         //MenuInitializer.register(bus);
     }
 

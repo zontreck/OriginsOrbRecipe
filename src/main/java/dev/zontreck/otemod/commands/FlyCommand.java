@@ -36,13 +36,14 @@ public class FlyCommand {
             p.getAbilities().mayfly=false;
             p.getAbilities().flying=false;
             p.onUpdateAbilities();
-            
-            ctx.sendSuccess(Component.literal(OTEMod.OTEPrefix + ChatColor.DARK_PURPLE + " Your ability to fly has been disabled"), false);
+
+
+            ctx.sendSystemMessage(Component.literal(OTEMod.OTEPrefix + ChatColor.DARK_PURPLE + " Your ability to fly has been disabled"));
         }else {
             p.getAbilities().mayfly=true;
             p.onUpdateAbilities();
 
-            ctx.sendSuccess(Component.literal(OTEMod.OTEPrefix + ChatColor.DARK_PURPLE + " You can now fly"), false);
+            ctx.sendSystemMessage(Component.literal(OTEMod.OTEPrefix + ChatColor.DARK_PURPLE + " You can now fly"));
         }
 
         return 0;
