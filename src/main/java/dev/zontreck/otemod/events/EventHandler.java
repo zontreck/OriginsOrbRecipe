@@ -92,7 +92,7 @@ public class EventHandler {
         }
 
         try {
-            ChatHelpers.broadcast(Component.literal(DeathMessages.getRandomDeathMessage(Profile.get_profile_of(event.getEntity().getStringUUID()), event.getSource())), event.getEntity().level.getServer());
+            ChatHelpers.broadcast(Component.literal(DeathMessages.getRandomDeathMessage(Profile.get_profile_of(event.getEntity().getStringUUID()), event.getSource())), event.getEntity().level().getServer());
         } catch (UserProfileNotYetExistsException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -101,7 +101,7 @@ public class EventHandler {
 
     @SubscribeEvent
     public void onEntityKilled(LivingDropsEvent ev){
-        if(ev.getEntity().level.isClientSide)return;
+        if(ev.getEntity().level().isClientSide)return;
 
         Entity killedentity = ev.getEntity();
         Entity ent = ev.getSource().getEntity();
@@ -127,7 +127,7 @@ public class EventHandler {
                 int level = ItemUtils.getEnchantmentLevel (Enchantments.MOB_LOOTING,stack);
                 if(level==3){
                     ItemStack egg = new ItemStack(ForgeSpawnEggItem.fromEntityType(killed.getType()));
-                    ev.getDrops().add(new ItemEntity(killed.level, killed.getX(), killed.getY(), killed.getZ(), egg));
+                    ev.getDrops().add(new ItemEntity(killed.level(), killed.getX(), killed.getY(), killed.getZ(), egg));
                     LoreHandlers.updateItem(stack, ItemStatType.EGGING);
                 }
             }else{

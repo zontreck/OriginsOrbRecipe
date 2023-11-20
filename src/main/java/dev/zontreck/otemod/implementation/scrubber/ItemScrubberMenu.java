@@ -22,7 +22,7 @@ public class ItemScrubberMenu extends AbstractContainerMenu
 
     public ItemScrubberMenu(int id, Inventory inv, FriendlyByteBuf buf)
     {
-        this(id, inv, inv.player.level.getBlockEntity(buf.readBlockPos()), new SimpleContainerData(1));
+        this(id, inv, inv.player.level().getBlockEntity(buf.readBlockPos()), new SimpleContainerData(1));
     }
 
     public ItemScrubberMenu(int id, Inventory inv, BlockEntity entity, ContainerData data){
@@ -31,7 +31,7 @@ public class ItemScrubberMenu extends AbstractContainerMenu
         checkContainerSize(inv, 1);
         this.entity = (ItemScrubberBlockEntity)entity;
         this.data=data;
-        this.level = inv.player.level;
+        this.level = inv.player.level();
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);

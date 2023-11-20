@@ -10,7 +10,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -26,30 +25,30 @@ public class ModBlocks {
         OTEMod.LOGGER.info("Registering all blocks...");
     }
 
-    public static final RegistryObject<Block> ETERNIUM_ORE_BLOCK = BLOCKS.register("eternium_ore_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(7F).explosionResistance(1200).destroyTime(6)));
+    public static final RegistryObject<Block> ETERNIUM_ORE_BLOCK = BLOCKS.register("eternium_ore_block", () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(7F).explosionResistance(1200).destroyTime(6)));
 
     public static final RegistryObject<Item> ETERNIUM_ORE_BLOCK_I = ITEMS.register("eternium_ore_block", () -> new BlockItem(ETERNIUM_ORE_BLOCK.get(), new Item.Properties()));
 
-    public static final RegistryObject<Block> VAULT_STEEL_ORE_BLOCK = BLOCKS.register("vault_steel_ore_block", ()->new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(8F).explosionResistance(1200).destroyTime(100)));
+    public static final RegistryObject<Block> VAULT_STEEL_ORE_BLOCK = BLOCKS.register("vault_steel_ore_block", ()->new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(8F).explosionResistance(1200).destroyTime(100)));
 
     public static final RegistryObject<Item> VAULT_STEEL_ORE_BLOCK_I = ITEMS.register("vault_steel_ore_block", ()->new BlockItem(VAULT_STEEL_ORE_BLOCK.get(), new Item.Properties()));
 
 
-    public static final RegistryObject<Block> NETHER_VAULT_STEEL_ORE_BLOCK = BLOCKS.register("nether_vault_steel_ore_block", ()->new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(8F).explosionResistance(1200).destroyTime(100)));
+    public static final RegistryObject<Block> NETHER_VAULT_STEEL_ORE_BLOCK = BLOCKS.register("nether_vault_steel_ore_block", ()->new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(8F).explosionResistance(1200).destroyTime(100)));
 
     public static final RegistryObject<Item> NETHER_VAULT_STEEL_ORE_BLOCK_I = ITEMS.register("nether_vault_steel_ore_block", ()->new BlockItem(NETHER_VAULT_STEEL_ORE_BLOCK.get(), new Item.Properties()));
 
 
-    public static final RegistryObject<Block> ETERNIUM_BLOCK = BLOCKS.register("eternium_block", ()->new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(8F).explosionResistance(1200).destroyTime(100)));
+    public static final RegistryObject<Block> ETERNIUM_BLOCK = BLOCKS.register("eternium_block", ()->new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(8F).explosionResistance(1200).destroyTime(100)));
 
     public static final RegistryObject<Item> ETERNIUM_BLOCK_I = ITEMS.register("eternium_block", ()->new FoiledBlockItem(ETERNIUM_BLOCK.get(), new Item.Properties()));
 
 
-    public static final RegistryObject<Block> DEEPSLATE_ETERNIUM_ORE_BLOCK = BLOCKS.register("deepslate_eternium_ore_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL).requiresCorrectToolForDrops().strength(5f).explosionResistance(1200).destroyTime(7)));
+    public static final RegistryObject<Block> DEEPSLATE_ETERNIUM_ORE_BLOCK = BLOCKS.register("deepslate_eternium_ore_block", () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5f).explosionResistance(1200).destroyTime(7)));
 
     public static final RegistryObject<Item> DEEPSLATE_ETERNIUM_ORE_BLOCK_I = ITEMS.register("deepslate_eternium_ore_block", () -> new BlockItem(DEEPSLATE_ETERNIUM_ORE_BLOCK.get(), new Item.Properties()));
 
-    public static final RegistryObject<Block> AURORA_BLOCK = BLOCKS.register("aurora_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE).requiresCorrectToolForDrops().strength(9f).explosionResistance(100000f).destroyTime(10).sound(SoundType.NETHERITE_BLOCK)));
+    public static final RegistryObject<Block> AURORA_BLOCK = BLOCKS.register("aurora_block", () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(9f).explosionResistance(100000f).destroyTime(10).sound(SoundType.NETHERITE_BLOCK)));
 
     public static final RegistryObject<Item> AURORA_BLOCK_I = ITEMS.register("aurora_block", () -> new BlockItem(AURORA_BLOCK.get(), new Item.Properties()));
 

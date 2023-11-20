@@ -115,7 +115,7 @@ public class LoreHandlers {
     @SubscribeEvent
     public void onEntityKilled(LivingDeathEvent ev)
     {
-        if(ev.getEntity().level.isClientSide)return;
+        if(ev.getEntity().level().isClientSide)return;
 
         // Handle two things
 

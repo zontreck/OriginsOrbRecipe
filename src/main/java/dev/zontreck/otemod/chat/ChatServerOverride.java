@@ -81,7 +81,7 @@ public class ChatServerOverride {
     @SubscribeEvent
     public void onClone(final PlayerEvent.Clone ev)
     {
-        if(ev.getEntity().level.isClientSide)return;
+        if(ev.getEntity().level().isClientSide)return;
         // Fix for fly ability not copying to new instance on death or other circumstances
         Player old = ev.getOriginal();
         Player n = ev.getEntity();
@@ -92,7 +92,7 @@ public class ChatServerOverride {
 
     @SubscribeEvent
     public void onChat(final ServerChatEvent ev){
-        if(ev.getPlayer().level.isClientSide)return;
+        if(ev.getPlayer().level().isClientSide)return;
         // Player has chatted, apply override
         if(!OTEServerConfig.USE_CUSTOM_CHATREPLACER.get()) return;
 

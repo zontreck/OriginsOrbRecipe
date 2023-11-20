@@ -29,7 +29,7 @@ public class FlightEnchantment extends Enchantment
         {
             if(ev.getEntity() instanceof Player)
             {
-                if(ev.getEntity().level.isClientSide)return;
+                if(ev.getEntity().level().isClientSide)return;
 
 
                 ServerPlayer sp = (ServerPlayer)ev.getEntity();
@@ -68,7 +68,7 @@ public class FlightEnchantment extends Enchantment
         @SubscribeEvent
         public static void onGameModeChange(PlayerEvent.PlayerChangeGameModeEvent ev)
         {
-            if(ev.getEntity().level.isClientSide)return;
+            if(ev.getEntity().level().isClientSide)return;
 
             recheck((ServerPlayer)ev.getEntity());
         }

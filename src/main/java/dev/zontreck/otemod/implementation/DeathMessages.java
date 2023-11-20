@@ -7,6 +7,7 @@ import java.util.Random;
 import dev.zontreck.libzontreck.profiles.Profile;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 
 public class DeathMessages {
@@ -34,7 +35,7 @@ public class DeathMessages {
         {
             sourceName = "A godlike player";
         }
-        if(source.isFall())
+        if(source.is(DamageTypes.FALL))
         {
             msg = rng.nextInt(0,messages_falling.size()-1);
             return ChatHelpers.macroize(messages_falling.get(msg), String.valueOf(playerWhoDied.deaths), playerWhoDied.name_color + playerWhoDied.nickname);

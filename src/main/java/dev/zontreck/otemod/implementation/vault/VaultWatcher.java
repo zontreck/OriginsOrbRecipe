@@ -16,7 +16,7 @@ public class VaultWatcher {
     @SubscribeEvent
     public void onClosedContainer(PlayerContainerEvent.Close ev)
     {
-        if(ev.getEntity().level.isClientSide)return;
+        if(ev.getEntity().level().isClientSide)return;
         //OTEMod.LOGGER.info("Player closed a container");
         // Player closed the container
         // Check if it is a vault Container

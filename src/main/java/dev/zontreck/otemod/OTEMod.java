@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.mojang.logging.LogUtils;
+import dev.zontreck.otemod.integrations.KeyBindings;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.network.chat.Component;
@@ -115,6 +116,8 @@ public class OTEMod
         ModEnchantments.register(bus);
         ModEntityTypes.register(bus);
 
+        MinecraftForge.EVENT_BUS.register(new KeyBindings());
+
         GeckoLib.initialize();
         //MenuInitializer.register(bus);
     }
@@ -192,7 +195,7 @@ public class OTEMod
     @SubscribeEvent
     public void onItemExpire(final ItemExpireEvent ev)
     {
-        if(ev.getEntity().level.isClientSide)return;
+        if(ev.getEntity().level().isClientSide)return;
 
         if(OTEServerConfig.ITEM_DESPAWN_TIMER.get()<=0)return;
 
