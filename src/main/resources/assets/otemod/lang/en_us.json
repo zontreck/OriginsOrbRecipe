@@ -2,6 +2,8 @@
     "key.otemod.open_vault": "Opens Vault 0",
     "key.category.otemod": "Only The Essentials",
 
+    "itemGroup.tabs.otemod": "OTEMod",
+
 
     "item.otemod.eternium_ore": "Raw Eternium Ore",
     "item.otemod.ihan_crystal": "Ihan Crystal",
@@ -12,9 +14,6 @@
     "item.otemod.eternium_fragment": "Fragmented Eternium",
     "item.otemod.eternium_dust": "Eternium Dust",
     "item.otemod.aurora_compound": "Aurora Compound",
-    "item.otemod.raw_cobalt": "Raw Cobalt",
-    "item.otemod.cobalt_nugget": "Cobalt Nugget",
-    "item.otemod.cobalt_ingot": "Cobalt Ingot",
     "item.otemod.melted_nether_star": "Melted Nether Star",
     "item.otemod.eternium_ingot": "Eternium Ingot",
     "item.otemod.eternium_rod": "Eternium Rod",
@@ -41,9 +40,6 @@
     "block.otemod.aurora_block": "Aurora Block",
     "block.otemod.aurora_door": "Aurora Door",
     "block.otemod.clear_glass_block": "Clear Glass Block",
-    "block.otemod.cobalt_ore": "Cobalt Ore",
-    "block.otemod.raw_cobalt_ore": "Raw Cobalt Ore",
-    "block.otemod.cobalt_block": "Cobalt",
     "block.otemod.item_scrubber": "Item Scrubber",
     "block.otemod.magical_scrubber": "Magical Scrubber",
     "block.otemod.stable_singularity": "Stable Singularity",

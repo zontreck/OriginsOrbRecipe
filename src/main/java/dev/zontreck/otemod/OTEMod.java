@@ -13,6 +13,7 @@ import java.util.Set;
 import com.mojang.logging.LogUtils;
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.vectors.Vector3;
+import dev.zontreck.otemod.implementation.CreativeModeTabs;
 import dev.zontreck.otemod.integrations.KeyBindings;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -111,6 +112,7 @@ public class OTEMod
 
         ModBlocks.register(bus);
         ModItems.register(bus);
+        CreativeModeTabs.REGISTER.register(bus);
         ModEntities.register(bus);
         ModEnchantments.register(bus);
         ModEntityTypes.register(bus);
