@@ -17,7 +17,7 @@ public class ModEntityTypes {
 
 
     
-    //public static void register(IEventBus bus){
-    //    ENTITIES.register(bus);
-    //}
+    public static void register(IEventBus bus){
+        //ENTITIES.register(bus);
+    }
 }

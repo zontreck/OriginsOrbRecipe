@@ -55,7 +55,7 @@ public class ModItems {
     public static final RegistryObject<Item> VAULT_RAW_ORE = ITEMS.register("raw_vault_steel_ore", () -> new Item(new Item.Properties().stacksTo(64)));
 
     
-    public static final RegistryObject<Item> POSSUM_SPAWN_EGG = ITEMS.register("possum_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.POSSUM, 0x938686, 0xc68787, new Item.Properties()));
+    //public static final RegistryObject<Item> POSSUM_SPAWN_EGG = ITEMS.register("possum_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.POSSUM, 0x938686, 0xc68787, new Item.Properties()));
 
 
 

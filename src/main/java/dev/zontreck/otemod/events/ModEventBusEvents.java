@@ -15,7 +15,7 @@ public class ModEventBusEvents {
     @SubscribeEvent
     public static void onMobAttributeCreation(EntityAttributeCreationEvent ev)
     {
-        ev.put((EntityType<? extends LivingEntity>) ModEntityTypes.POSSUM.get(), PossumEntity.createAttributes());
+        //ev.put((EntityType<? extends LivingEntity>) ModEntityTypes.POSSUM.get(), PossumEntity.createAttributes());
         OTEMod.LOGGER.info("/!\\ REGISTERING ATTRIBUTES   /!\\");
     }
 }

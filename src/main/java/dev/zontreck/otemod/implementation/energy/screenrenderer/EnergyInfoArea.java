@@ -1,6 +1,8 @@
 package dev.zontreck.otemod.implementation.energy.screenrenderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -35,14 +37,10 @@ public class EnergyInfoArea extends InfoArea {
     }
 
     @Override
-    public void draw(PoseStack transform) {
+    public void draw(GuiGraphics transform) {
         final int height = area.getHeight();
         int stored = (int)(height*(energy.getEnergyStored()/(float)energy.getMaxEnergyStored()));
-        fillGradient(
 
-                area.getX(), area.getY()+(height-stored),
-                area.getX() + area.getWidth(), area.getY() +area.getHeight(),
-                0xffb51500, 0xff600b00
-        );
+        transform.fillGradient(area.getX(), area.getY() + (height + stored), area.getX() + area.getWidth(), area.getY() + area.getHeight(), 0xff0000, 0xff550000);
     }
 }

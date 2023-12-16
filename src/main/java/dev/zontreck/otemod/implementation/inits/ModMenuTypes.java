@@ -17,7 +17,7 @@ public final class ModMenuTypes
 {
     public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, OTEMod.MOD_ID);
 
-    public static final RegistryObject <MenuType <VaultMenu>> VAULT = CONTAINERS.register("vault", ()-> new MenuType<>(VaultMenu::new));
+    public static final RegistryObject<MenuType<VaultMenu>> VAULT = registerMenuType(VaultMenu::new, "vault");
 
     public static final RegistryObject<MenuType<ItemScrubberMenu>> SCRUBBER = registerMenuType(ItemScrubberMenu::new, "item_scrubber_menu");
     public static final RegistryObject<MenuType<MagicalScrubberMenu>> MAGIC_SCRUBBER = registerMenuType(MagicalScrubberMenu::new, "magical_scrubber_menu");

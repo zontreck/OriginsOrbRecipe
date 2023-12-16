@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import dev.zontreck.otemod.implementation.inits.ModMenuTypes;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -23,9 +24,9 @@ public class VaultMenu extends AbstractContainerMenu
     public final Player thePlayer;
     public final int VAULT_NUMBER;
 
-    public VaultMenu (int id, Inventory player)
+    public VaultMenu (int id, Inventory player, FriendlyByteBuf buf)
     {
-        this(id, player, new ItemStackHandler(54), BlockPos.ZERO, player.player, 0);
+        this(id, player, new ItemStackHandler(54), player.player.getOnPos(), player.player, 0);
     }
 
     public VaultMenu (int id, Inventory player, IItemHandler slots, BlockPos pos, Player play, int vaultNum)

@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.Set;
 
 import com.mojang.logging.LogUtils;
+import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.integrations.KeyBindings;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -31,12 +33,9 @@ import net.minecraftforge.event.entity.item.ItemExpireEvent;
 import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import software.bernie.geckolib3.GeckoLib;
 
 import org.slf4j.Logger;
 
-import dev.zontreck.libzontreck.chat.ChatColor;
-import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.blocks.ModBlocks;
 import dev.zontreck.otemod.blocks.entity.ModEntities;
 import dev.zontreck.otemod.chat.ChatServerOverride;
@@ -242,7 +241,7 @@ public class OTEMod
 
             //ItemBlockRenderTypes.setRenderLayer(ModBlocks.AURORA_DOOR.get(), RenderType.translucent());
 
-            EntityRenderers.register(ModEntityTypes.POSSUM.get(), PossumRenderer::new);
+            //EntityRenderers.register(ModEntityTypes.POSSUM.get(), PossumRenderer::new);
         }
 
     }
