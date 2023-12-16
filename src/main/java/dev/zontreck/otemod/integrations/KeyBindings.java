@@ -5,9 +5,12 @@ import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.multiplayer.ClientRegistryLayer;
 import net.minecraft.core.registries.Registries;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
+@OnlyIn(Dist.CLIENT)
 public class KeyBindings {
     public static final String KEY_CATEGORY_OTEMOD = "key.category.otemod";
     public static final String KEY_OPEN_VAULT = "key.otemod.open_vault";

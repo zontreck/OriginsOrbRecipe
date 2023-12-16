@@ -111,13 +111,12 @@ public class OTEMod
         ModMenuTypes.CONTAINERS.register(bus);
 
         ModBlocks.register(bus);
-        ModItems.register(bus);
         CreativeModeTabs.REGISTER.register(bus);
+        ModItems.register(bus);
         ModEntities.register(bus);
         ModEnchantments.register(bus);
         ModEntityTypes.register(bus);
 
-        MinecraftForge.EVENT_BUS.register(new KeyBindings());
 
         //MenuInitializer.register(bus);
     }
@@ -236,6 +235,7 @@ public class OTEMod
             // Some client setup code
             //LOGGER.info("HELLO FROM CLIENT SETUP");
             //LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+            MinecraftForge.EVENT_BUS.register(new KeyBindings());
 
             MenuScreens.register(ModMenuTypes.VAULT.get(), VaultScreen::new);
             MenuScreens.register(ModMenuTypes.SCRUBBER.get(), ItemScrubberScreen::new);
