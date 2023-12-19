@@ -28,6 +28,7 @@ import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.items.ItemStackHandler;
@@ -40,7 +41,7 @@ import java.util.Random;
 public class EventHandler {
 
 
-    @SubscribeEvent
+    @SubscribeEvent (priority = EventPriority.HIGHEST)
     public static void playerDied(LivingDeathEvent event)
     {
         if(!(event.getEntity() instanceof Player))return;
