@@ -126,8 +126,14 @@ public class ThrownPossBall extends ThrowableItemProjectile
                         level().addFreshEntity(xEntity);
                     }
 
-                    tag = new CompoundTag();
-                    item.setTag(tag);
+                    LoreContainer cont = new LoreContainer(item);
+                    cont.miscData.LoreData.clear();
+                    cont.commitLore();
+
+                    if(item.getDamageValue() == 0)
+                    {
+                        item.setTag(new CompoundTag());
+                    }
 
                     ItemEntity x = new ItemEntity(level(), position().x, position().y, position().z, item, 0, 0, 0);
                     level().addFreshEntity(x);
