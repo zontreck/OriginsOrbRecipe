@@ -6,9 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -78,6 +76,34 @@ public class ModBlocks {
 
     public static final RegistryObject<Item> STABLE_SINGULARITY_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("stable_singularity", ()->new BlockItem(STABLE_SINGULARITY.get(), new Item.Properties())));
 
+    public static final RegistryObject<Block> LIMINAL_TILES = BLOCKS.register("liminal_tiles", ()-> new Block(BlockBehaviour.Properties.copy(Blocks.BEDROCK)));
+
+    public static final RegistryObject<Item> LIMINAL_TILES_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("liminal_tiles", ()->new BlockItem(LIMINAL_TILES.get(), new Item.Properties())));
+
+    public static final RegistryObject<Block> BLACK = BLOCKS.register("black", ()->new Block(BlockBehaviour.Properties.copy(Blocks.BEDROCK)));
+
+    public static final RegistryObject<Item> BLOCK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("black", ()->new FoiledBlockItem(BLACK.get(), new Item.Properties().stacksTo(128))));
+
+    public static final RegistryObject<Block> LIMINAL_TILE_STAIRS = BLOCKS.register("liminal_tile_stairs", ()->new StairBlock(LIMINAL_TILES.get()::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.BEDROCK).destroyTime(1000).strength(1000)));
+
+    public static final RegistryObject<Item> LIMINAL_TILE_STAIRS_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("liminal_tile_stairs", ()->new BlockItem(LIMINAL_TILE_STAIRS.get(), new Item.Properties())));
+
+    public static final RegistryObject<Block> LIMINAL_TILE_SLAB = BLOCKS.register("liminal_tile_slab", ()->new SlabBlock(BlockBehaviour.Properties.copy(Blocks.BEDROCK)));
+
+    public static final RegistryObject<Item> LIMINAL_TILE_SLAB_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("liminal_tile_slab", ()->new BlockItem(LIMINAL_TILE_SLAB.get(), new Item.Properties())));
+
+    public static final RegistryObject<Block> LIMINAL_WINDOW = BLOCKS.register("liminal_window", () -> new ParallaxWindow(15));
+
+    public static final RegistryObject<Item> LIMINAL_WINDOW_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("liminal_window", () -> new BlockItem(LIMINAL_WINDOW.get(), new Item.Properties())));
+
+    /*
+
+
+    public static final class_2248 LIMINAL_WINDOW_NOON = (class_2248)createBlock("liminal_window_noon", new LiminalWindowBlock(QuiltBlockSettings.method_9630((class_4970)class_2246.field_31037).method_9626(class_2498.field_11537)), true, (class_1761)ModItems.LIMINAL_POOLS_ITEM_GROUP);
+
+    public static final class_2248 LIMINAL_WINDOW_DUSK = (class_2248)createBlock("liminal_window_dusk", new LiminalWindowBlock(QuiltBlockSettings.method_9630((class_4970)class_2246.field_31037).method_9626(class_2498.field_11537)), true, (class_1761)ModItems.LIMINAL_POOLS_ITEM_GROUP);
+
+    public static final class_2248 LIMINAL_WINDOW_ABYSS = (class_2248)createBlock("liminal_window_abyss", new LiminalWindowBlock(QuiltBlockSettings.method_9630((class_4970)class_2246.field_31037).method_9626(class_2498.field_11537)), true, (class_1761)ModItems.LIMINAL_POOLS_ITEM_GROUP);*/
 
 
     private static boolean never(BlockState p_50806_, BlockGetter p_50807_, BlockPos p_50808_) {

@@ -12,6 +12,7 @@ import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.enchantments.MobEggEnchantment;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
 import dev.zontreck.otemod.implementation.DeathMessages;
+import dev.zontreck.otemod.implementation.InventoryBackup;
 import dev.zontreck.otemod.items.tags.ItemStatType;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -22,11 +23,14 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.GameType;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.items.ItemStackHandler;
 
 import java.time.Instant;
 import java.util.Date;
@@ -136,6 +140,25 @@ public class EventHandler {
             }
         }
 
+    }
+
+    @SubscribeEvent
+    public void onGameModeChanged(PlayerEvent.PlayerChangeGameModeEvent event)
+    {
+        ServerPlayer player = (ServerPlayer) event.getEntity();
+
+        InventoryBackup backup = new InventoryBackup(player, event.getCurrentGameMode());
+        InventoryBackup restore = new InventoryBackup(player, event.getNewGameMode());
+
+        restore.restore();
+        backup.save();
+
+        if(event.getNewGameMode() == GameType.CREATIVE)
+        {
+            player.getInventory().clearContent();
+            return;
+        }
+        restore.apply();
     }
     
 }

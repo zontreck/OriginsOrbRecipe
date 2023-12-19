@@ -33,6 +33,7 @@
     "item.otemod.vault_fragment_right": "Vault Fragment",
     "item.otemod.vault_fragment_center": "Vault Fragment",
     "item.otemod.raw_vault_steel_ore": "Raw Vault Steel",
+    "item.otemod.poss_ball": "Pulse Operated Storage System (WIP)",
 
 
     "block.otemod.eternium_ore_block": "Eternium Ore",
@@ -46,6 +47,10 @@
     "block.otemod.vault_steel_ore_block": "Vault Steel Ore",
     "block.otemod.nether_vault_steel_ore_block": "Nether Vault Steel Ore",
     "block.otemod.eternium_block": "Block of Eternium",
+    "block.otemod.liminal_tiles": "Pool Tiles",
+    "block.otemod.black": "The Void",
+    "block.otemod.liminal_tile_stairs": "Pool Stairs",
+    "block.otemod.liminal_tile_slab": "Pool Slab",
 
 
     "enchantment.otemod.mob_egging": "Mob Egging",

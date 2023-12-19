@@ -1,0 +1,10 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "particle": "otemod:block/liminal_tiles"
+  },
+  "specialmodels": {
+    "otemod:sky_noon": "otemod:block/liminal_window"
+  },
+  "elements": []
+}
