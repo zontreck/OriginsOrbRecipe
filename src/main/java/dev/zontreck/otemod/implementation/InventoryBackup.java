@@ -25,6 +25,10 @@ public class InventoryBackup extends OTEDatastore
     public InventoryBackup(ServerPlayer player, GameType mode)
     {
         this.player = player;
+        if(!FILE_TREE_PATH.toFile().exists())
+        {
+            FILE_TREE_PATH.toFile().mkdir();
+        }
         var temp = FILE_TREE_PATH.resolve(player.getStringUUID());
         if(!temp.toFile().exists()) temp.toFile().mkdir();
 
@@ -34,6 +38,11 @@ public class InventoryBackup extends OTEDatastore
     public void restore()
     {
         try {
+            if(!my_file.exists())
+            {
+                list = new ListTag();
+                return;
+            }
             CompoundTag tag = NbtIo.read(my_file);
             list = tag.getList("inventory", Tag.TAG_COMPOUND);
 
@@ -48,7 +57,7 @@ public class InventoryBackup extends OTEDatastore
     {
         try{
             CompoundTag tag = new CompoundTag();
-            list.clear();
+            list = new ListTag();
             list = player.getInventory().save(list);
             tag.put("inventory", list);
 

@@ -14,15 +14,19 @@ import com.mojang.logging.LogUtils;
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.implementation.CreativeModeTabs;
+import dev.zontreck.otemod.implementation.InventoryBackup;
 import dev.zontreck.otemod.integrations.KeyBindings;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.GameType;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -126,6 +130,24 @@ public class OTEMod
         ModMessages.register();
     }
 
+    @SubscribeEvent
+    public void onGameModeChanged(PlayerEvent.PlayerChangeGameModeEvent event)
+    {
+        ServerPlayer player = (ServerPlayer) event.getEntity();
+
+        InventoryBackup backup = new InventoryBackup(player, event.getCurrentGameMode());
+        InventoryBackup restore = new InventoryBackup(player, event.getNewGameMode());
+
+        restore.restore();
+        backup.save();
+
+        if(event.getNewGameMode() == GameType.CREATIVE)
+        {
+            player.getInventory().clearContent();
+            return;
+        }
+        restore.apply();
+    }
 
     public boolean firstJoin(Player p){
         

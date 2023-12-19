@@ -142,23 +142,5 @@ public class EventHandler {
 
     }
 
-    @SubscribeEvent
-    public void onGameModeChanged(PlayerEvent.PlayerChangeGameModeEvent event)
-    {
-        ServerPlayer player = (ServerPlayer) event.getEntity();
-
-        InventoryBackup backup = new InventoryBackup(player, event.getCurrentGameMode());
-        InventoryBackup restore = new InventoryBackup(player, event.getNewGameMode());
-
-        restore.restore();
-        backup.save();
-
-        if(event.getNewGameMode() == GameType.CREATIVE)
-        {
-            player.getInventory().clearContent();
-            return;
-        }
-        restore.apply();
-    }
     
 }
