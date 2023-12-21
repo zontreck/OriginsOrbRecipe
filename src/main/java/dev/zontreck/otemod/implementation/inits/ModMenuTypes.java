@@ -3,6 +3,7 @@ package dev.zontreck.otemod.implementation.inits;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.implementation.scrubber.ItemScrubberMenu;
 import dev.zontreck.otemod.implementation.scrubber.MagicalScrubberMenu;
+import dev.zontreck.otemod.implementation.vault.StarterMenu;
 import dev.zontreck.otemod.implementation.vault.VaultMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -18,6 +19,8 @@ public final class ModMenuTypes
     public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, OTEMod.MOD_ID);
 
     public static final RegistryObject<MenuType<VaultMenu>> VAULT = registerMenuType(VaultMenu::new, "vault");
+
+    public static final RegistryObject<MenuType<StarterMenu>> STARTER = registerMenuType(StarterMenu::new, "starter");
 
     public static final RegistryObject<MenuType<ItemScrubberMenu>> SCRUBBER = registerMenuType(ItemScrubberMenu::new, "item_scrubber_menu");
     public static final RegistryObject<MenuType<MagicalScrubberMenu>> MAGIC_SCRUBBER = registerMenuType(MagicalScrubberMenu::new, "magical_scrubber_menu");
