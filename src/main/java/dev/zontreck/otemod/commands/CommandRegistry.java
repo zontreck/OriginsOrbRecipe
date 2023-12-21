@@ -11,6 +11,7 @@ import dev.zontreck.otemod.commands.profilecmds.NameColorCommand;
 import dev.zontreck.otemod.commands.profilecmds.NickCommand;
 import dev.zontreck.otemod.commands.profilecmds.PrefixColorCommand;
 import dev.zontreck.otemod.commands.profilecmds.PrefixCommand;
+import dev.zontreck.otemod.commands.vaults.StarterCommand;
 import dev.zontreck.otemod.commands.vaults.TrashCommand;
 import dev.zontreck.otemod.commands.vaults.VaultCommand;
 import dev.zontreck.otemod.commands.zschem.LoadSchem;
@@ -104,5 +105,6 @@ public class CommandRegistry {
         PlaceAsAir.register(ev.getDispatcher());
 
         ShareItemInChatCommand.register(ev.getDispatcher());
+        StarterCommand.register(ev.getDispatcher());
     }
 }

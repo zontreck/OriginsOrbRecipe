@@ -29,6 +29,15 @@ public class VaultWatcher {
                     entry.getValue().commit();
                 }
             }
+        } else if(ev.getContainer() instanceof StarterMenu)
+        {
+            for(Map.Entry<UUID, StarterContainer> entry : StarterContainer.VAULT_REGISTRY.entrySet())
+            {
+                if(entry.getKey() == ev.getEntity().getUUID())
+                {
+                    entry.getValue().commit();
+                }
+            }
         }
     }
 }

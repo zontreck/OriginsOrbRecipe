@@ -53,6 +53,8 @@ public class ChatServerOverride {
         c.FlyEnabled = mayFly;
         c.Assert(play);
 
+        OTEMod.checkFirstJoin(ev.player);
+
         if(!OTEServerConfig.USE_CUSTOM_JOINLEAVE.get()) return;
         
         ChatHelpers.broadcast(ChatHelpers.macro("!Dark_Gray![!Dark_Green!+!Dark_Gray!] !Bold!!Dark_Aqua![0]",prof.nickname), ev.level.getServer());

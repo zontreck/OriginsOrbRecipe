@@ -11,7 +11,6 @@ public class OTEServerConfig {
     public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
     public static final ForgeConfigSpec SPEC;
 
-    public static final ForgeConfigSpec.ConfigValue<List<ItemStack>> INITIAL_ITEMS_TO_GIVE_ON_FIRST_JOIN;
     public static final ForgeConfigSpec.ConfigValue<Double> SPAWN_EGG_CHANCE;
 
     public static final ForgeConfigSpec.ConfigValue<Integer> ITEM_DESPAWN_TIMER;
@@ -36,15 +35,22 @@ public class OTEServerConfig {
 
     public static final ForgeConfigSpec.ConfigValue<Boolean> ENABLE_DEATH_MESSAGES;
 
+    public static final ForgeConfigSpec.ConfigValue<Boolean> GIVE_KIT_EVERY_CHANGE;
+
 
     static {
-        List<ItemStack> defaults = new ArrayList<ItemStack>();
         List<String> defaultExcludeDimensions = new ArrayList<String>();
         defaultExcludeDimensions.add("minecraft:the_nether"); // Excluded to make mining for Ancient Debris easier
         defaultExcludeDimensions.add("minecraft:the_end"); // Excluded due to End Crystals
         
         BUILDER.push("OTE");
-        INITIAL_ITEMS_TO_GIVE_ON_FIRST_JOIN = BUILDER.comment("What items, identified by modid:item, to give to a brand new user on the server").define("New Player Gear", defaults);
+
+        BUILDER.push("STARTERKIT");
+        GIVE_KIT_EVERY_CHANGE = BUILDER.comment("Enable this to give the starter kit every time it is changed, regardless of whether the player has already received that kit on their next join.").define("starter_kit_given_on_change", false);
+
+        BUILDER.pop();
+
+
         MAX_VAULTS = BUILDER.comment("What is the maximum number of vaults a player may have available? (0 is unlimited)").define("max_vaults", 0);
         ITEM_DESPAWN_TIMER = BUILDER.comment("How many times should the item's expire be cancelled. The vanilla expire time is 5 minutes, so this would be ticked down once every 5 minutes.").define("item_extra_lives", 2);
         ENABLE_DEATH_MESSAGES = BUILDER.comment("Whether you want to enable the death messages to be output by OTEMod when a player dies. These can be quite random!").define("enable_ote_death_msgs", true);
@@ -83,6 +89,7 @@ public class OTEServerConfig {
         USE_CUSTOM_CHATREPLACER = BUILDER.comment("Whether to use the custom chat replacer (If disabled the relevant commands will be removed)").define("chatprettifier", true);
 
         BUILDER.pop();
+
         SPEC=BUILDER.build();
     }
 }

@@ -43,7 +43,9 @@ public class PossBallItem extends Item
         if(!pLevel.isClientSide)
         {
             ThrownPossBall TPB = new ThrownPossBall(pLevel, pPlayer);
-            TPB.setItem(stack);
+            if(pPlayer.getAbilities().instabuild) TPB.setItem(stack.copy());
+            else
+                TPB.setItem(stack);
             TPB.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
             pLevel.addFreshEntity(TPB);
         }
@@ -52,6 +54,8 @@ public class PossBallItem extends Item
         if(!pPlayer.getAbilities().instabuild)
         {
             stack.shrink(1);
+        }else {
+
         }
         return super.use(pLevel, pPlayer, pUsedHand);
     }

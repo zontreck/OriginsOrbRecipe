@@ -12,18 +12,26 @@ import java.util.Set;
 
 import com.mojang.logging.LogUtils;
 import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.libzontreck.profiles.Profile;
+import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
+import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.implementation.CreativeModeTabs;
 import dev.zontreck.otemod.implementation.InventoryBackup;
+import dev.zontreck.otemod.implementation.Messages;
+import dev.zontreck.otemod.implementation.PlayerFirstJoinTag;
+import dev.zontreck.otemod.implementation.vault.*;
 import dev.zontreck.otemod.integrations.KeyBindings;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.commands.GiveCommand;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -39,6 +47,7 @@ import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+import net.minecraftforge.items.ItemStackHandler;
 import org.slf4j.Logger;
 
 import dev.zontreck.otemod.blocks.ModBlocks;
@@ -53,8 +62,6 @@ import dev.zontreck.otemod.events.LoreHandlers;
 import dev.zontreck.otemod.implementation.inits.ModMenuTypes;
 import dev.zontreck.otemod.implementation.scrubber.ItemScrubberScreen;
 import dev.zontreck.otemod.implementation.scrubber.MagicalScrubberScreen;
-import dev.zontreck.otemod.implementation.vault.VaultScreen;
-import dev.zontreck.otemod.implementation.vault.VaultWatcher;
 import dev.zontreck.otemod.items.ModItems;
 //import dev.zontreck.otemod.ore.Modifier.ModifierOfBiomes;
 import dev.zontreck.otemod.networking.ModMessages;
@@ -66,7 +73,6 @@ public class OTEMod
     public static final Vector3 ZERO_VECTOR = new Vector3(0,0,0);
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
-    public static final String FIRST_JOIN_TAG = "dev.zontreck.otemod.firstjoin";
     public static final String MOD_ID = "otemod";
     public static final String MODIFY_BIOMES = "modify_biomes";
     public static final ResourceLocation MODIFY_BIOMES_RL = new ResourceLocation(OTEMod.MOD_ID, MODIFY_BIOMES);
@@ -149,18 +155,51 @@ public class OTEMod
         restore.apply();
     }
 
-    public boolean firstJoin(Player p){
-        
-        Set<String> tags = p.getTags();
+    public static void checkFirstJoin(ServerPlayer p){
+        try {
+            Profile prof = Profile.get_profile_of(p.getStringUUID());
 
-        if(tags.contains(OTEMod.FIRST_JOIN_TAG)){
-            return false;
+            PlayerFirstJoinTag tag = PlayerFirstJoinTag.load(prof.NBT);
+            if(tag == null)
+            {
+                tag = PlayerFirstJoinTag.now();
+                tag.save(prof.NBT);
+            }else {
+                Starter data = StarterProvider.getStarter();
+
+                if(data.getLastChanged() > tag.LastGiven && OTEServerConfig.GIVE_KIT_EVERY_CHANGE.get())
+                {
+                    tag = PlayerFirstJoinTag.now();
+                    tag.save(prof.NBT);
+                }else return;
+            }
+
+            prof.commit();
+
+            //p.addTag(OTEMod.FIRST_JOIN_TAG);
+
+            try {
+                ItemStackHandler startKit = StarterProvider.getStarter().getItems();
+                ChatHelpers.broadcastTo(p, ChatHelpers.macro(Messages.STARTER_KIT_GIVEN), p.server);
+
+                for(int i = 0;i<startKit.getSlots();i++)
+                {
+                    if(i>=p.getInventory().getContainerSize())
+                    {
+                        break;
+                    } else {
+                        p.getInventory().add(startKit.getStackInSlot(i));
+                    }
+                }
+            } catch (NoMoreVaultException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (UserProfileNotYetExistsException e) {
+            throw new RuntimeException(e);
+        } catch (NoMoreVaultException e) {
+            throw new RuntimeException(e);
         }
 
-        //p.addTag(ShapedAionResources.FIRST_JOIN_TAG);
-        
-        
-        return true;
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
