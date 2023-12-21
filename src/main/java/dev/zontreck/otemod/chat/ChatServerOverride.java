@@ -12,6 +12,7 @@ import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.configs.PlayerFlyCache;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
+import dev.zontreck.otemod.implementation.vault.StarterProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
@@ -53,7 +54,8 @@ public class ChatServerOverride {
         c.FlyEnabled = mayFly;
         c.Assert(play);
 
-        OTEMod.checkFirstJoin(ev.player);
+        if(StarterProvider.exists())
+            OTEMod.checkFirstJoin(ev.player);
 
         if(!OTEServerConfig.USE_CUSTOM_JOINLEAVE.get()) return;
         

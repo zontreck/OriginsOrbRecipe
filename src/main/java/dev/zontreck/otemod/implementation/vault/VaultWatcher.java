@@ -27,6 +27,7 @@ public class VaultWatcher {
                 if(entry.getKey() == ev.getEntity().getUUID())
                 {
                     entry.getValue().commit();
+                    entry.getValue().invalidate();
                 }
             }
         } else if(ev.getContainer() instanceof StarterMenu)
@@ -36,6 +37,7 @@ public class VaultWatcher {
                 if(entry.getKey() == ev.getEntity().getUUID())
                 {
                     entry.getValue().commit();
+                    entry.getValue().invalidate();
                 }
             }
         }

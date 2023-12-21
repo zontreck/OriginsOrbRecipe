@@ -32,6 +32,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -158,6 +159,18 @@ public class OTEMod
     public static void checkFirstJoin(ServerPlayer p){
         try {
             Profile prof = Profile.get_profile_of(p.getStringUUID());
+            ItemStackHandler startKit = StarterProvider.getStarter().getItems();
+            boolean isEmpty=true;
+            for(int i = 0;i<startKit.getSlots();i++)
+            {
+                ItemStack is = startKit.getStackInSlot(i);
+                if(!is.is(Items.AIR))
+                {
+                    isEmpty=false;
+                }
+            }
+
+            if(isEmpty)return;
 
             PlayerFirstJoinTag tag = PlayerFirstJoinTag.load(prof.NBT);
             if(tag == null)
@@ -178,21 +191,16 @@ public class OTEMod
 
             //p.addTag(OTEMod.FIRST_JOIN_TAG);
 
-            try {
-                ItemStackHandler startKit = StarterProvider.getStarter().getItems();
-                ChatHelpers.broadcastTo(p, ChatHelpers.macro(Messages.STARTER_KIT_GIVEN), p.server);
+            ChatHelpers.broadcastTo(p, ChatHelpers.macro(Messages.STARTER_KIT_GIVEN), p.server);
 
-                for(int i = 0;i<startKit.getSlots();i++)
+            for(int i = 0;i<startKit.getSlots();i++)
+            {
+                if(i>=p.getInventory().getContainerSize())
                 {
-                    if(i>=p.getInventory().getContainerSize())
-                    {
-                        break;
-                    } else {
-                        p.getInventory().add(startKit.getStackInSlot(i));
-                    }
+                    break;
+                } else {
+                    p.getInventory().add(startKit.getStackInSlot(i));
                 }
-            } catch (NoMoreVaultException e) {
-                throw new RuntimeException(e);
             }
         } catch (UserProfileNotYetExistsException e) {
             throw new RuntimeException(e);

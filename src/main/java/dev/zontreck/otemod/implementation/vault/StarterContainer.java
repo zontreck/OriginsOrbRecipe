@@ -6,6 +6,7 @@ import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
+import dev.zontreck.otemod.implementation.StarterKitDoesNotExistException;
 import dev.zontreck.otemod.implementation.events.VaultModifiedEvent;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -32,6 +33,7 @@ public class StarterContainer
     public UUID owner;
     private MinecraftServer server;
     public final UUID VaultID;
+    private boolean invalid = false;
     public Starter main_accessor;
     public StarterContainer(ServerPlayer player) throws NoMoreVaultException {
         myInventory = new ItemStackHandler(54); // Vaults have a fixed size at the same as a double chest
@@ -68,6 +70,7 @@ public class StarterContainer
 
     public void commit()
     {
+        if(invalid)return;
         boolean isEmpty=true;
         CompoundTag saved = myInventory.serializeNBT();
         ChatHelpers.broadcastToAbove(owner, Component.literal(ChatColor.BOLD+ChatColor.DARK_GREEN+"Saving the starter kit's contents..."), server);
@@ -98,8 +101,13 @@ public class StarterContainer
             main_accessor.delete();
 
         
-        VaultModifiedEvent vme = new VaultModifiedEvent(-2, profile, VaultProvider.getInUse(profile), myInventory, startingInventory);
-        OTEMod.bus.post(vme);
+        //VaultModifiedEvent vme = new VaultModifiedEvent(-2, profile, 0, myInventory, startingInventory);
+        //OTEMod.bus.post(vme);
+    }
+
+    public void invalidate()
+    {
+        invalid=true;
     }
 
 }

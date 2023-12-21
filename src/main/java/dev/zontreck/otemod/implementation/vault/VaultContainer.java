@@ -33,6 +33,7 @@ public class VaultContainer
     public final int VAULT_NUMBER;
     public final UUID VaultID;
     public Vault main_accessor;
+    private boolean invalid;
     public VaultContainer(ServerPlayer player, int vaultNum) throws NoMoreVaultException {
         myInventory = new ItemStackHandler(54); // Vaults have a fixed size at the same as a double chest
         startingInventory = new ItemStackHandler(64);
@@ -73,6 +74,7 @@ public class VaultContainer
 
     public void commit()
     {
+        if(invalid)return;
         if(VAULT_NUMBER == -1)return; // We have no need to save the trash
         boolean isEmpty=true;
         CompoundTag saved = myInventory.serializeNBT();
@@ -104,6 +106,11 @@ public class VaultContainer
         
         VaultModifiedEvent vme = new VaultModifiedEvent(VAULT_NUMBER, profile, VaultProvider.getInUse(profile), myInventory, startingInventory);
         OTEMod.bus.post(vme);
+    }
+
+    public void invalidate()
+    {
+        invalid=true;
     }
 
 }

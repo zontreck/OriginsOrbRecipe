@@ -53,4 +53,10 @@ public class StarterProvider extends OTEDatastore
             return v;
         }else return null;
     }
+
+    public static boolean exists()
+    {
+        Path v = FILE_TREE_PATH.resolve("starter.nbt");
+        return v.toFile().exists();
+    }
 }
