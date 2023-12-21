@@ -9,6 +9,10 @@
         "otemod:magical_scrubber",
 
         "otemod:vault_steel_ore_block",
-        "otemod:eternium_block"
+        "otemod:eternium_block",
+
+        "otemod:ilusium_ore_block",
+        "otemod:deepslate_ilusium_ore_block",
+        "otemod:ilusium_block"
     ]
 }

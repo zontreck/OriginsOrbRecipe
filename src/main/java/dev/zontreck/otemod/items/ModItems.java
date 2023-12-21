@@ -55,6 +55,11 @@ public class ModItems {
 
     public static final RegistryObject<Item> POSS_BALL = CreativeModeTabs.addToOTEModTab(ITEMS.register("poss_ball", () -> new PossBallItem(new Item.Properties())));
 
+    public static final RegistryObject<Item> ILUSIUM_ORE = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_ore", () -> new Item(new Item.Properties().fireResistant())));
+    public static final RegistryObject<Item> ILUSIUM_ROD = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_rod", () -> new Item(new Item.Properties().fireResistant())));
+    public static final RegistryObject<Item> ILUSIUM_DUST = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_dust", () -> new Item(new Item.Properties().fireResistant())));
+    public static final RegistryObject<Item> ILUSIUM_INGOT = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_ingot", () -> new Item(new Item.Properties().fireResistant())));
+
     
     //public static final RegistryObject<Item> POSSUM_SPAWN_EGG = ITEMS.register("possum_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.POSSUM, 0x938686, 0xc68787, new Item.Properties())));
 

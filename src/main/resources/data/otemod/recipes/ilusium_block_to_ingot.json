@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "otemod:raw_cobalt_ore"
+      "tag": "forge:storage_blocks/ilusium"
     }
   ],
   "result": {
-    "item": "otemod:raw_cobalt",
+    "item": "otemod:ilusium_ingot",
     "count": 9
   }
 }

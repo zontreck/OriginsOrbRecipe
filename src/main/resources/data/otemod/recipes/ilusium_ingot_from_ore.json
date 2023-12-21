@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": [
+    {
+      "tag": "forge:ores/ilusium"
+    }
+  ],
+  "result": "otemod:ilusium_ingot",
+  "experience": 3,
+  "cookingtime": 600
+}

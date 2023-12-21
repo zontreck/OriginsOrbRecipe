@@ -16,9 +16,12 @@
           "absolute": -63
         },
         "max_inclusive": {
-          "absolute": -50
+          "absolute": -55
         }
       }
+    },
+    {
+      "type": "minecraft:biome"
     }
   ]
 }

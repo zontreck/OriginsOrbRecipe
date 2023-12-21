@@ -34,6 +34,10 @@
     "item.otemod.vault_fragment_center": "Vault Fragment",
     "item.otemod.raw_vault_steel_ore": "Raw Vault Steel",
     "item.otemod.poss_ball": "Pulse Operated Storage System",
+    "item.otemod.ilusium_ingot": "Ilusium Ingot",
+    "item.otemod.ilusium_rod": "Ilusium Rod",
+    "item.otemod.ilusium_dust": "Ilusium Dust",
+    "item.otemod.ilusium_ore": "Raw Ilusium Ore",
 
 
     "block.otemod.eternium_ore_block": "Eternium Ore",
@@ -51,6 +55,9 @@
     "block.otemod.black": "The Void",
     "block.otemod.liminal_tile_stairs": "Pool Stairs",
     "block.otemod.liminal_tile_slab": "Pool Slab",
+    "block.otemod.ilusium_ore_block": "Ilusium Ore Block",
+    "block.otemod.deepslate_ilusium_ore_block": "Deepslate Ilusium Ore Block",
+    "block.otemod.ilusium_block": "Block of Ilusium",
 
 
     "enchantment.otemod.mob_egging": "Mob Egging",

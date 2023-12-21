@@ -1,5 +1,7 @@
 {
     "values": [
-        "otemod:raw_vault_steel_ore"
+        "otemod:raw_vault_steel_ore",
+        "otemod:vault_steel_ore_block",
+        "otemod:nether_vault_steel_ore_block"
     ]
 }

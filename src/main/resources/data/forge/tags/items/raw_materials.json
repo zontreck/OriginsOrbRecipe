@@ -1,6 +1,7 @@
 {
     "values": [
-        "#forge:raw_materials/cobalt",
-        "#forge:raw_materials/eternium"
+        "#forge:raw_materials/eternium",
+        "#forge:raw_materials/ilusium",
+        "#forge:raw_materials/vaultsteel"
     ]
 }

@@ -76,13 +76,34 @@ public class ModBlocks {
 
     public static final RegistryObject<Item> STABLE_SINGULARITY_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("stable_singularity", ()->new BlockItem(STABLE_SINGULARITY.get(), new Item.Properties())));
 
+    public static final RegistryObject<Block> ILUSIUM_ORE_BLOCK = BLOCKS.register("ilusium_ore_block", () -> new Block(BlockBehaviour.Properties.copy(ModBlocks.ETERNIUM_ORE_BLOCK.get()).noOcclusion()));
+
+    public static final RegistryObject<Item> ILUSIUM_ORE_BLOCK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_ore_block", () -> new BlockItem(ILUSIUM_ORE_BLOCK.get(), new Item.Properties())));
+
+    public static final RegistryObject<Block> DEEPSLATE_ILUSIUM_ORE_BLOCK = BLOCKS.register("deepslate_ilusium_ore_block", () -> new Block(BlockBehaviour.Properties.copy(ILUSIUM_ORE_BLOCK.get()).noOcclusion()));
+
+    public static final RegistryObject<Item> DEEPSLATE_ILUSIUM_ORE_BLOCK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("deepslate_ilusium_ore_block", () -> new BlockItem(DEEPSLATE_ILUSIUM_ORE_BLOCK.get(), new Item.Properties())));
+
+
+    public static final RegistryObject<Block> ILUSIUM_BLOCK = BLOCKS.register("ilusium_block", () -> new Block(BlockBehaviour.Properties.copy(ModBlocks.ETERNIUM_BLOCK.get()).noOcclusion().strength(5, 20).requiresCorrectToolForDrops()));
+
+    public static final RegistryObject<Item> ILUSIUM_BLOCK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_block", () -> new BlockItem(ILUSIUM_BLOCK.get(), new Item.Properties())));
+
+
+
+
+
+
+
+
+
     public static final RegistryObject<Block> LIMINAL_TILES = BLOCKS.register("liminal_tiles", ()-> new Block(BlockBehaviour.Properties.copy(Blocks.BEDROCK)));
 
     public static final RegistryObject<Item> LIMINAL_TILES_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("liminal_tiles", ()->new BlockItem(LIMINAL_TILES.get(), new Item.Properties())));
 
     public static final RegistryObject<Block> BLACK = BLOCKS.register("black", ()->new Block(BlockBehaviour.Properties.copy(Blocks.BEDROCK)));
 
-    public static final RegistryObject<Item> BLOCK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("black", ()->new FoiledBlockItem(BLACK.get(), new Item.Properties().stacksTo(128))));
+    public static final RegistryObject<Item> BLACK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("black", ()->new FoiledBlockItem(BLACK.get(), new Item.Properties().stacksTo(128))));
 
     public static final RegistryObject<Block> LIMINAL_TILE_STAIRS = BLOCKS.register("liminal_tile_stairs", ()->new StairBlock(LIMINAL_TILES.get()::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.BEDROCK).destroyTime(1000).strength(1000)));
 

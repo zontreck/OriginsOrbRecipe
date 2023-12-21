@@ -24,10 +24,12 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
 import java.util.Optional;
+import java.util.UUID;
 
 public class ThrownPossBall extends ThrowableItemProjectile
 {
     boolean captured = false;
+    LivingEntity shooter;
     public ThrownPossBall(EntityType<? extends ThrownPossBall> entity, Level level)
     {
         super(entity, level);
@@ -35,6 +37,8 @@ public class ThrownPossBall extends ThrowableItemProjectile
     public ThrownPossBall(Level level, LivingEntity shooter)
     {
         super(EntityType.SNOWBALL, shooter, level);
+
+        this.shooter = shooter;
     }
 
     public ThrownPossBall(Level pLevel, double pX, double pY, double pZ)
@@ -91,7 +95,7 @@ public class ThrownPossBall extends ThrowableItemProjectile
 
                 cont.commitLore();
 
-                le.kill();
+                le.remove(RemovalReason.DISCARDED);
             }
         }
     }
@@ -114,7 +118,11 @@ public class ThrownPossBall extends ThrowableItemProjectile
                 if(captured)
                 {
                     // Spawn poss ball item with the entity NBT
-                    ItemEntity entity = new ItemEntity(level(), position().x, position().y, position().z, item, 0, 0, 0);
+                    ItemEntity entity;
+                    if(shooter != null)
+                        entity = new ItemEntity(level(), shooter.position().x, shooter.position().y, shooter.position().z, item, 0, 0, 0);
+                    else
+                        entity = new ItemEntity(level(), shooter.position().x, shooter.position().y, shooter.position().z, item, 0, 0, 0);
                     level().addFreshEntity(entity);
                 } else {
                     // Spawn the real entity
@@ -122,6 +130,7 @@ public class ThrownPossBall extends ThrowableItemProjectile
                     if(entity.isPresent())
                     {
                         Entity xEntity = entity.get();
+                        xEntity.setUUID(UUID.randomUUID());
                         xEntity.setPos(position());
                         level().addFreshEntity(xEntity);
                     }
@@ -133,9 +142,16 @@ public class ThrownPossBall extends ThrowableItemProjectile
                     if(item.getDamageValue() == 0)
                     {
                         item.setTag(new CompoundTag());
+                    }else {
+                        tag.remove("entity");
                     }
 
-                    ItemEntity x = new ItemEntity(level(), position().x, position().y, position().z, item, 0, 0, 0);
+                    ItemEntity x;
+
+                    if(shooter!=null)
+                        x = new ItemEntity(level(), shooter.position().x, shooter.position().y, shooter.position().z, item, 0, 0, 0);
+                    else
+                        x = new ItemEntity(level(), position().x, position().y, position().z, item, 0, 0, 0);
                     level().addFreshEntity(x);
                 }
             } else {
@@ -144,7 +160,20 @@ public class ThrownPossBall extends ThrowableItemProjectile
                 int damage = item.getDamageValue();
                 damage++;
                 item.setDamageValue(damage);
-                ItemEntity entity = new ItemEntity(level(), position().x, position().y, position().z, item, 0, 0, 0);
+                // Ensure no entity tag!
+                tag.remove("entity");
+
+
+                if(item.getDamageValue() >= item.getMaxDamage())
+                    return;
+
+                ItemEntity entity;
+
+                if(shooter!= null)
+                    entity = new ItemEntity(level(),shooter.position().x, shooter.position().y, shooter.position().z, item, 0, 0, 0);
+                else
+
+                    entity = new ItemEntity(level(), position().x, position().y, position().z, item, 0, 0, 0);
                 level().addFreshEntity(entity);
             }
 
