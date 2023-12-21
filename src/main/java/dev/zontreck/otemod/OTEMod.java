@@ -34,6 +34,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -313,6 +316,14 @@ public class OTEMod
             //ItemBlockRenderTypes.setRenderLayer(ModBlocks.AURORA_DOOR.get(), RenderType.translucent());
 
             //EntityRenderers.register(ModEntityTypes.POSSUM.get(), PossumRenderer::new);
+        }
+
+
+        @OnlyIn(Dist.CLIENT)
+        @SubscribeEvent
+        public static void onRegisterKeybinds(RegisterKeyMappingsEvent ev)
+        {
+            ev.register(KeyBindings.OPEN_VAULT);
         }
 
     }
