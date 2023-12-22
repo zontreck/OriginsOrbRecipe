@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "otemod:block/ilusium_portal_ns"
+    },
+    "axis=z": {
+      "model": "otemod:block/ilusium_portal_ew"
+    }
+  }
+}

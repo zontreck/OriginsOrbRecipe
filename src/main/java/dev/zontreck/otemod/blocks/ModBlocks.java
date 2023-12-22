@@ -4,6 +4,7 @@ import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.implementation.CreativeModeTabs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.FlintAndSteelItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
@@ -116,6 +117,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> LIMINAL_WINDOW = BLOCKS.register("liminal_window", () -> new ParallaxWindow(15));
 
     public static final RegistryObject<Item> LIMINAL_WINDOW_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("liminal_window", () -> new BlockItem(LIMINAL_WINDOW.get(), new Item.Properties())));
+
 
     /*
 

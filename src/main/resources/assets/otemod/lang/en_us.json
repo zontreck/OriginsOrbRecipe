@@ -38,6 +38,7 @@
     "item.otemod.ilusium_rod": "Ilusium Rod",
     "item.otemod.ilusium_dust": "Ilusium Dust",
     "item.otemod.ilusium_ore": "Raw Ilusium Ore",
+    "item.otemod.empty_spawn_egg": "Empty Spawn Egg",
 
 
     "block.otemod.eternium_ore_block": "Eternium Ore",
@@ -51,13 +52,14 @@
     "block.otemod.vault_steel_ore_block": "Vault Steel Ore",
     "block.otemod.nether_vault_steel_ore_block": "Nether Vault Steel Ore",
     "block.otemod.eternium_block": "Block of Eternium",
-    "block.otemod.liminal_tiles": "Pool Tiles",
+    "block.otemod.liminal_tiles": "Liminal Tiles",
     "block.otemod.black": "The Void",
-    "block.otemod.liminal_tile_stairs": "Pool Stairs",
-    "block.otemod.liminal_tile_slab": "Pool Slab",
+    "block.otemod.liminal_tile_stairs": "Liminal Stairs",
+    "block.otemod.liminal_tile_slab": "Liminal Slab",
     "block.otemod.ilusium_ore_block": "Ilusium Ore Block",
     "block.otemod.deepslate_ilusium_ore_block": "Deepslate Ilusium Ore Block",
     "block.otemod.ilusium_block": "Block of Ilusium",
+    "block.otemod.ilusium_portal": "Ilusium Portal",
 
 
     "enchantment.otemod.mob_egging": "Mob Egging",
