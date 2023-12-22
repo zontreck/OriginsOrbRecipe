@@ -62,6 +62,8 @@ public class ModItems {
 
     public static final RegistryObject<Item> ILUSIUM_INGOT = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_ingot", () -> new Item(new Item.Properties().fireResistant())));
 
+    public static final RegistryObject<Item> EMPTY_SPAWN_EGG = CreativeModeTabs.addToOTEModTab(ITEMS.register("empty_spawn_egg", () -> new Item(new Item.Properties())));
+
     
     //public static final RegistryObject<Item> POSSUM_SPAWN_EGG = ITEMS.register("possum_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.POSSUM, 0x938686, 0xc68787, new Item.Properties())));
 
