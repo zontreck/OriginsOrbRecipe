@@ -30,7 +30,7 @@ public class ModItems {
 
 
 
-    public static final RegistryObject<Item> MELTED_NETHER_STAR = CreativeModeTabs.addToOTEModTab(ITEMS.register("melted_nether_star", () -> new SimpleFoiledItem(new Item.Properties().stacksTo(64))));
+    public static final RegistryObject<Item> MELTED_ENDER_PEARL = CreativeModeTabs.addToOTEModTab(ITEMS.register("melted_ender_pearl", () -> new SimpleFoiledItem(new Item.Properties().stacksTo(64))));
     public static final RegistryObject<Item> SINGULARITY = CreativeModeTabs.addToOTEModTab(ITEMS.register("singularity", () -> new Item(new Item.Properties().stacksTo(1))));
     public static final RegistryObject<Item> ETERNIUM_ROD = CreativeModeTabs.addToOTEModTab(ITEMS.register("eternium_rod", () -> new SimpleFoiledItem(new Item.Properties().stacksTo(64))));
     public static final RegistryObject<Item> SCRUBBER_FRAME_PIECE = CreativeModeTabs.addToOTEModTab(ITEMS.register("scrubber_frame_piece", () -> new Item(new Item.Properties().stacksTo(64))));

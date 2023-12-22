@@ -3,7 +3,7 @@
   "pattern": ["ccc", "c c", "ccc"],
   "key": {
     "c": {
-      "item": "otemod:melted_nether_star"
+      "item": "otemod:melted_ender_pearl"
     }
   },
   "result": {
