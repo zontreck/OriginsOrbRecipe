@@ -57,7 +57,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> ILUSIUM_ORE = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_ore", () -> new Item(new Item.Properties().fireResistant())));
     public static final RegistryObject<Item> ILUSIUM_ROD = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_rod", () -> new Item(new Item.Properties().fireResistant())));
-    public static final RegistryObject<Item> ILUSIUM_DUST = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_dust", () -> new Item(new Item.Properties().fireResistant())));
+
+    //public static final RegistryObject<Item> ILUSIUM_DUST = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_dust", () -> new Item(new Item.Properties().fireResistant())));
+
     public static final RegistryObject<Item> ILUSIUM_INGOT = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_ingot", () -> new Item(new Item.Properties().fireResistant())));
 
     
