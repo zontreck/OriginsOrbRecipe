@@ -157,9 +157,10 @@ public class ThrownPossBall extends ThrowableItemProjectile
             } else {
                 // No capture
                 // Decrease the durability
+                /*
                 int damage = item.getDamageValue();
                 damage++;
-                item.setDamageValue(damage);
+                item.setDamageValue(damage);*/
                 // Ensure no entity tag!
                 tag.remove("entity");
 
