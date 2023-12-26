@@ -146,6 +146,7 @@ public class ThrownPossBall extends ThrowableItemProjectile
                         tag.remove("entity");
                     }
 
+                    item = new ItemStack(ModItems.POSS_BALL.get(), 1);
                     ItemEntity x;
 
                     if(shooter!=null)
@@ -161,12 +162,18 @@ public class ThrownPossBall extends ThrowableItemProjectile
                 int damage = item.getDamageValue();
                 damage++;
                 item.setDamageValue(damage);*/
+
+                item = new ItemStack(ModItems.POSS_BALL.get(), 1);
+
+
                 // Ensure no entity tag!
-                tag.remove("entity");
+                //tag.remove("entity");
 
 
+                /*
                 if(item.getDamageValue() >= item.getMaxDamage())
                     return;
+                */
 
                 ItemEntity entity;
 

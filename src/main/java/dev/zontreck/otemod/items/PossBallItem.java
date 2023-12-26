@@ -20,6 +20,7 @@ public class PossBallItem extends Item
     }
     @Override
     public boolean isFoil(ItemStack pStack) {
+        if(!pStack.hasTag()) return false;
         if(pStack.getTag().contains("entity"))
         {
             return true;
