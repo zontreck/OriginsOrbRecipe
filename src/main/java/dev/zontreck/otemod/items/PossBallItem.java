@@ -1,5 +1,6 @@
 package dev.zontreck.otemod.items;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -20,7 +21,10 @@ public class PossBallItem extends Item
     }
     @Override
     public boolean isFoil(ItemStack pStack) {
-        if(!pStack.hasTag()) return false;
+        if(!pStack.hasTag())
+        {
+            pStack.setTag(new CompoundTag());
+        }
         if(pStack.getTag().contains("entity"))
         {
             return true;
@@ -29,12 +33,12 @@ public class PossBallItem extends Item
 
     @Override
     public boolean isDamageable(ItemStack stack) {
-        return false;
+        return true;
     }
 
     @Override
     public int getMaxDamage(ItemStack stack) {
-        return 24;
+        return 2;
     }
 
     @Override

@@ -67,7 +67,7 @@ public class ThrownPossBall extends ThrowableItemProjectile
 
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
-        super.onHitEntity(pResult);
+        //super.onHitEntity(pResult);
         if(getItem().getTag().contains("entity"))
         {
             // Don't capture the entity
@@ -102,7 +102,7 @@ public class ThrownPossBall extends ThrowableItemProjectile
 
     @Override
     protected void onHit(HitResult pResult) {
-        super.onHit(pResult);
+        //super.onHit(pResult);
         if(!this.level().isClientSide)
         {
             // We do two things here
@@ -146,7 +146,6 @@ public class ThrownPossBall extends ThrowableItemProjectile
                         tag.remove("entity");
                     }
 
-                    item = new ItemStack(ModItems.POSS_BALL.get(), 1);
                     ItemEntity x;
 
                     if(shooter!=null)
@@ -158,22 +157,15 @@ public class ThrownPossBall extends ThrowableItemProjectile
             } else {
                 // No capture
                 // Decrease the durability
-                /*
-                int damage = item.getDamageValue();
-                damage++;
-                item.setDamageValue(damage);*/
-
-                item = new ItemStack(ModItems.POSS_BALL.get(), 1);
-
-
+                //int damage = item.getDamageValue();
+                //damage++;
+                //item.setDamageValue(damage);
                 // Ensure no entity tag!
-                //tag.remove("entity");
+                tag.remove("entity");
 
 
-                /*
-                if(item.getDamageValue() >= item.getMaxDamage())
-                    return;
-                */
+                //if(item.getDamageValue() >= item.getMaxDamage())
+                //    return;
 
                 ItemEntity entity;
 
