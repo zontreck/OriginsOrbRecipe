@@ -238,18 +238,23 @@ public class MagicalScrubberBlockEntity extends BlockEntity implements MenuProvi
             if(enchantments.size()>0)
             {
                 Iterator<Map.Entry<Enchantment,Integer>> iEntries = enchantments.entrySet().iterator();
-                Map.Entry<Enchantment,Integer> entry = iEntries.next();
-
-                EnchantmentInstance eInst = new EnchantmentInstance(entry.getKey(), entry.getValue());
-                existing = EnchantedBookItem.createForEnchantment(eInst);
-
-                enchantments.remove(entry.getKey());
-                //iEntries.remove();
-                main = makeOutputItem(main.copy());
-                while(iEntries.hasNext())
+                try{
+                    Map.Entry<Enchantment,Integer> entry = iEntries.next();
+                    EnchantmentInstance eInst = new EnchantmentInstance(entry.getKey(), entry.getValue());
+                    existing = EnchantedBookItem.createForEnchantment(eInst);
+                    iEntries.remove();
+                    main = makeOutputItem(main.copy());
+                    while(iEntries.hasNext())
+                    {
+                        entry = iEntries.next();
+                        main.enchant(entry.getKey(), entry.getValue());
+                    }
+                }catch(Exception E)
                 {
-                    entry = iEntries.next();
-                    main.enchant(entry.getKey(), entry.getValue());
+                    entity.outputItems.setStackInSlot(0, main);
+                    entity.itemsHandler.extractItem(0, 1, false);
+                    entity.resetProgress();
+                    return;
                 }
 
                 if(enchantments.size()==0){
