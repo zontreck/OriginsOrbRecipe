@@ -233,7 +233,7 @@ public class MagicalScrubberBlockEntity extends BlockEntity implements MenuProvi
             ItemStack main = entity.itemsHandler.getStackInSlot(0);
 
             //Map<Enchantment, Integer> enchants = main.getAllEnchantments();
-            Map<Enchantment, Integer> enchantments = ItemUtils.getEnchantments(main);
+            Map<Enchantment, Integer> enchantments = ItemUtils.getEnchantments(main.copy());
 
             if(enchantments.size()>0)
             {
@@ -245,7 +245,7 @@ public class MagicalScrubberBlockEntity extends BlockEntity implements MenuProvi
 
                 enchantments.remove(entry.getKey());
                 //iEntries.remove();
-                main = makeOutputItem(main);
+                main = makeOutputItem(main.copy());
                 while(iEntries.hasNext())
                 {
                     entry = iEntries.next();

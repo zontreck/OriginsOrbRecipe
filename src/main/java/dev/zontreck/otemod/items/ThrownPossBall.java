@@ -67,7 +67,7 @@ public class ThrownPossBall extends ThrowableItemProjectile
 
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
-        //super.onHitEntity(pResult);
+        super.onHitEntity(pResult);
         if(getItem().getTag().contains("entity"))
         {
             // Don't capture the entity
@@ -102,7 +102,7 @@ public class ThrownPossBall extends ThrowableItemProjectile
 
     @Override
     protected void onHit(HitResult pResult) {
-        //super.onHit(pResult);
+        super.onHit(pResult);
         if(!this.level().isClientSide)
         {
             // We do two things here
