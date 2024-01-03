@@ -16,6 +16,8 @@
         "otemod:ilusium_block",
 
         "otemod:stable_singularity",
-        "otemod:compression_chamber"
+        "otemod:compression_chamber",
+        "otemod:compressed_obsidian_block",
+        "otemod:layered_compressed_obsidian_block"
     ]
 }

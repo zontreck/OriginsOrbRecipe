@@ -5,6 +5,8 @@
         "otemod:item_scrubber",
         "otemod:magical_scrubber",
         "otemod:vault_steel_ore_block",
-        "otemod:compression_chamber"
+        "otemod:compression_chamber",
+        "otemod:compressed_obsidian_block",
+        "otemod:layered_compressed_obsidian_block"
     ]
 }
