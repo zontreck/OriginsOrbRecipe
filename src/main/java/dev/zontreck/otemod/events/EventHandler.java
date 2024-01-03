@@ -76,20 +76,16 @@ public class EventHandler {
         double num = rng.nextDouble(0,100000);
         if(num <= base_chance)
         {
-            ItemStack head = HeadUtilities.get(profile.username).setHoverName(ChatHelpers.macro(profile.nickname+"'s Head"));
+            ItemStack head = HeadUtilities.get(profile.username, "").setHoverName(ChatHelpers.macro(profile.nickname+"'s Head"));
             LoreContainer lore = new LoreContainer(head);
-            LoreEntry entry = new LoreEntry();
-            entry.text = ChatHelpers.macroize("!dark_green!Player: " + profile.name_color+profile.username);
-            entry.bold=true;
-            lore.miscData.LoreData.add(entry);
+            LoreEntry entry = new LoreEntry.Builder().bold(true).text(ChatHelpers.macroize("!dark_green!Player: " + profile.name_color+profile.username)).build();
+            lore.miscData.loreData.add(entry);
 
-            entry = new LoreEntry();
-            entry.text = ChatHelpers.macroize("!Dark_Purple!Date: !Dark_Red![0]", Date.from(Instant.now()).toString());
-            lore.miscData.LoreData.add(entry);
+            entry = new LoreEntry.Builder().text(ChatHelpers.macroize("!Dark_Purple!Date: !Dark_Red![0]", Date.from(Instant.now()).toString())).build();
+            lore.miscData.loreData.add(entry);
 
-            entry = new LoreEntry();
-            entry.text = ChatHelpers.macroize("!Dark_Purple!Total Deaths: !Dark_Red![0]", String.valueOf(profile.deaths));
-            lore.miscData.LoreData.add(entry);
+            entry = new LoreEntry.Builder().text(ChatHelpers.macroize("!Dark_Purple!Total Deaths: !Dark_Red![0]", String.valueOf(profile.deaths))).build();
+            lore.miscData.loreData.add(entry);
             lore.commitLore();
 
 

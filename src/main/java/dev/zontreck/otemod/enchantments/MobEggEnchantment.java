@@ -2,6 +2,7 @@ package dev.zontreck.otemod.enchantments;
 
 import java.util.Random;
 
+import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
@@ -67,6 +68,11 @@ public class MobEggEnchantment extends Enchantment
         CHANCE += bias;
 
         double rng = Math.random()*100000;
+
+        if(OTEServerConfig.DEBUG.get())
+        {
+            OTEMod.LOGGER.info("Spawn Egg Chance (" + CHANCE + ") [" + rng + "]");
+        }
         return (rng <= CHANCE);
     }
 }

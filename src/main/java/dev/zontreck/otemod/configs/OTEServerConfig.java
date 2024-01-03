@@ -37,6 +37,7 @@ public class OTEServerConfig {
 
     public static final ForgeConfigSpec.ConfigValue<Boolean> GIVE_KIT_EVERY_CHANGE;
 
+    public static final ForgeConfigSpec.ConfigValue<Boolean> DEBUG;
 
     static {
         List<String> defaultExcludeDimensions = new ArrayList<String>();
@@ -44,6 +45,7 @@ public class OTEServerConfig {
         defaultExcludeDimensions.add("minecraft:the_end"); // Excluded due to End Crystals
         
         BUILDER.push("OTE");
+        DEBUG = BUILDER.comment("Turn on debug messages in the console for all OTE functions? This could be spammy").define("debug_enabled", false);
 
         BUILDER.push("STARTERKIT");
         GIVE_KIT_EVERY_CHANGE = BUILDER.comment("Enable this to give the starter kit every time it is changed, regardless of whether the player has already received that kit on their next join.").define("starter_kit_given_on_change", false);
@@ -79,7 +81,6 @@ public class OTEServerConfig {
         defDims.add("minecraft:the_end");
         defDims.add("minecraft:the_nether");
         defDims.add("otemod:resource");
-        defDims.add("otemod:resource_nether");
         EXCLUDE_DIMS = BUILDER.comment("Dimension names (ex. minecraft:overworld) to exclude from the explosion healing events").define("exclude_dimensions", defDims);
 
         BUILDER.pop();

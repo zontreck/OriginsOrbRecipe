@@ -39,8 +39,12 @@ public class EnergyInfoArea extends InfoArea {
     @Override
     public void draw(GuiGraphics transform) {
         final int height = area.getHeight();
+        final int width = area.getWidth();
         int stored = (int)(height*(energy.getEnergyStored()/(float)energy.getMaxEnergyStored()));
 
-        transform.fillGradient(area.getX(), area.getY() + (height + stored), area.getX() + area.getWidth(), area.getY() + area.getHeight(), 0xff0000, 0xff550000);
+
+        if(area.getHeight() > area.getWidth())
+            transform.fillGradient(area.getX(), area.getY() + (height + stored), area.getX() + area.getWidth(), area.getY() + area.getHeight(), 0xff0000, 0xff550000);
+        else transform.fillGradient(area.getX() + (width + stored), area.getY(),area.getX() + area.getWidth(), area.getY() + area.getHeight(), 0xff0000, 0xff005500);
     }
 }

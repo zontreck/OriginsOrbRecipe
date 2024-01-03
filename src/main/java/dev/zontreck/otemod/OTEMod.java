@@ -20,8 +20,10 @@ import dev.zontreck.otemod.implementation.CreativeModeTabs;
 import dev.zontreck.otemod.implementation.InventoryBackup;
 import dev.zontreck.otemod.implementation.Messages;
 import dev.zontreck.otemod.implementation.PlayerFirstJoinTag;
+import dev.zontreck.otemod.implementation.compressor.CompressionChamberScreen;
 import dev.zontreck.otemod.implementation.vault.*;
 import dev.zontreck.otemod.integrations.KeyBindings;
+import dev.zontreck.otemod.recipe.ModRecipes;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.network.chat.Component;
@@ -130,6 +132,7 @@ public class OTEMod
         ModEntities.register(bus);
         ModEnchantments.register(bus);
         ModEntityTypes.register(bus);
+        ModRecipes.register(bus);
 
 
         //MenuInitializer.register(bus);
@@ -312,6 +315,7 @@ public class OTEMod
             MenuScreens.register(ModMenuTypes.VAULT.get(), VaultScreen::new);
             MenuScreens.register(ModMenuTypes.SCRUBBER.get(), ItemScrubberScreen::new);
             MenuScreens.register(ModMenuTypes.MAGIC_SCRUBBER.get(), MagicalScrubberScreen::new);
+            MenuScreens.register(ModMenuTypes.COMPRESSION_CHAMBER.get(), CompressionChamberScreen::new);
 
             //ItemBlockRenderTypes.setRenderLayer(ModBlocks.AURORA_DOOR.get(), RenderType.translucent());
 

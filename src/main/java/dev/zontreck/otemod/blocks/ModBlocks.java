@@ -90,6 +90,18 @@ public class ModBlocks {
 
     public static final RegistryObject<Item> ILUSIUM_BLOCK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_block", () -> new BlockItem(ILUSIUM_BLOCK.get(), new Item.Properties())));
 
+    public static final RegistryObject<Block> COMPRESSION_CHAMBER_BLOCK = BLOCKS.register("compression_chamber", ()->new CompressionChamberBlock(BlockBehaviour.Properties.copy(ModBlocks.ILUSIUM_BLOCK.get()).noOcclusion().isViewBlocking(ModBlocks::never)));
+
+    public static final RegistryObject<Item> COMPRESSION_CHAMBER_BLOCK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("compression_chamber", ()->new BlockItem(COMPRESSION_CHAMBER_BLOCK.get(), new Item.Properties())));
+
+
+    public static final RegistryObject<Block> COMPRESSED_OBSIDIAN_BLOCK = BLOCKS.register("compressed_obsidian_block", ()->new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)));
+
+    public static final RegistryObject<Item> COMPRESSED_OBSIDIAN_BLOCK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("compressed_obsidian_block", ()->new BlockItem(COMPRESSED_OBSIDIAN_BLOCK.get(), new Item.Properties())));
+    public static final RegistryObject<Block> LAYERED_COMPRESSED_OBSIDIAN_BLOCK = BLOCKS.register("layered_compressed_obsidian_block", ()->new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)));
+
+    public static final RegistryObject<Item> LAYERED_COMPRESSED_OBSIDIAN_BLOCK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("layered_compressed_obsidian_block", ()->new BlockItem(LAYERED_COMPRESSED_OBSIDIAN_BLOCK.get(), new Item.Properties())));
+
 
 
 

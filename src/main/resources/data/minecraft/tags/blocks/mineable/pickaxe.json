@@ -13,6 +13,9 @@
 
         "otemod:ilusium_ore_block",
         "otemod:deepslate_ilusium_ore_block",
-        "otemod:ilusium_block"
+        "otemod:ilusium_block",
+
+        "otemod:stable_singularity",
+        "otemod:compression_chamber"
     ]
 }

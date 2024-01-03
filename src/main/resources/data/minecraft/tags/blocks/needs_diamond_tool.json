@@ -4,6 +4,7 @@
         "otemod:aurora_door",
         "otemod:item_scrubber",
         "otemod:magical_scrubber",
-        "otemod:vault_steel_ore_block"
+        "otemod:vault_steel_ore_block",
+        "otemod:compression_chamber"
     ]
 }

@@ -1,0 +1,9 @@
+{
+  "type": "otemod:compressing",
+  "output": {
+    "item": "otemod:layered_compressed_obsidian_sheet"
+  },
+  "input": {
+    "item": "otemod:compressed_obsidian_block"
+  }
+}

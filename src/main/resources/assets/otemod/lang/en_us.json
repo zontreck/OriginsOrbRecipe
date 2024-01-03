@@ -17,7 +17,7 @@
     "item.otemod.melted_ender_pearl": "Melted Ender Pearl",
     "item.otemod.eternium_ingot": "Eternium Ingot",
     "item.otemod.eternium_rod": "Eternium Rod",
-    "item.otemod.singularity": "Singularity",
+    "item.otemod.singularity": "Unstable Singularity",
     "item.otemod.scrubber_frame_piece": "Scrubber Frame Component",
     "item.otemod.scrubber_frame": "Scrubber Frame",
     "item.otemod.possum_spawn_egg": "Possum Spawn Egg",
@@ -39,6 +39,10 @@
     "item.otemod.ilusium_dust": "Ilusium Dust",
     "item.otemod.ilusium_ore": "Raw Ilusium Ore",
     "item.otemod.empty_spawn_egg": "Empty Spawn Egg",
+    "item.otemod.compressed_obsidian_sheet": "Sheet of Compressed Obsidian",
+    "item.otemod.layered_compressed_obsidian_sheet": "Layered Sheet of Compressed Obsidian",
+    "item.otemod.encased_singularity": "Encased Singualrity",
+    "item.otemod.encased_singularity.desc": "A singularity encased in stone, ready to be further compressed into bedrock",
 
 
     "block.otemod.eternium_ore_block": "Eternium Ore",
@@ -60,6 +64,9 @@
     "block.otemod.deepslate_ilusium_ore_block": "Deepslate Ilusium Ore Block",
     "block.otemod.ilusium_block": "Block of Ilusium",
     "block.otemod.ilusium_portal": "Ilusium Portal",
+    "block.otemod.compression_chamber": "Compression Chamber",
+    "block.otemod.compressed_obsidian_block": "Block of Compressed Obsidian",
+    "block.otemod.layered_compressed_obsidian_block": "Layered Block of Compressed Obsidian",
 
 
     "enchantment.otemod.mob_egging": "Mob Egging",

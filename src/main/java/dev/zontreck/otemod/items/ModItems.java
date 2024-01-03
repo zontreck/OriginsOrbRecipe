@@ -4,10 +4,7 @@ import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.blocks.FoiledBlockItem;
 import dev.zontreck.otemod.entities.ModEntityTypes;
 import dev.zontreck.otemod.implementation.CreativeModeTabs;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.SimpleFoiledItem;
+import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -31,7 +28,13 @@ public class ModItems {
 
 
     public static final RegistryObject<Item> MELTED_ENDER_PEARL = CreativeModeTabs.addToOTEModTab(ITEMS.register("melted_ender_pearl", () -> new SimpleFoiledItem(new Item.Properties().stacksTo(64))));
-    public static final RegistryObject<Item> SINGULARITY = CreativeModeTabs.addToOTEModTab(ITEMS.register("singularity", () -> new Item(new Item.Properties().stacksTo(1))));
+    public static final RegistryObject<Item> SINGULARITY = CreativeModeTabs.addToOTEModTab(ITEMS.register("singularity", () -> new UnstableSingularity(new Item.Properties().stacksTo(1))));
+
+    public static final RegistryObject<Item> COMPRESSED_OBSIDIAN_SHEET = CreativeModeTabs.addToOTEModTab(ITEMS.register("compressed_obsidian_sheet", ()->new Item(new Item.Properties())));
+
+    public static final RegistryObject<Item> LAYERED_COMPRESSED_OBSIDIAN_SHEET = CreativeModeTabs.addToOTEModTab(ITEMS.register("layered_compressed_obsidian_sheet", ()->new SimpleFoiledItem(new Item.Properties())));
+    public static final RegistryObject<Item> ENCASED_SINGULARITY = CreativeModeTabs.addToOTEModTab(ITEMS.register("encased_singularity", ()->new SimpleFoiledItem(new Item.Properties())));
+
     public static final RegistryObject<Item> ETERNIUM_ROD = CreativeModeTabs.addToOTEModTab(ITEMS.register("eternium_rod", () -> new SimpleFoiledItem(new Item.Properties().stacksTo(64))));
     public static final RegistryObject<Item> SCRUBBER_FRAME_PIECE = CreativeModeTabs.addToOTEModTab(ITEMS.register("scrubber_frame_piece", () -> new Item(new Item.Properties().stacksTo(64))));
     public static final RegistryObject<Item> SCRUBBER_FRAME = CreativeModeTabs.addToOTEModTab(ITEMS.register("scrubber_frame", () -> new Item(new Item.Properties().stacksTo(64))));

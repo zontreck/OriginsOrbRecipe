@@ -72,6 +72,12 @@ public class FlightEnchantment extends Enchantment
 
             recheck((ServerPlayer)ev.getEntity());
         }
+
+        @SubscribeEvent
+        public static void onArmorBreak(LivingEquipmentChangeEvent ev)
+        {
+
+        }
     }
 
     public FlightEnchantment(EquipmentSlot... slots)

@@ -1,5 +1,6 @@
 package dev.zontreck.otemod.items;
 
+import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.lore.ExtraLore;
 import dev.zontreck.libzontreck.lore.LoreContainer;
 import dev.zontreck.libzontreck.lore.LoreEntry;
@@ -86,12 +87,9 @@ public class ThrownPossBall extends ThrowableItemProjectile
                 captured=true;
 
                 LoreContainer cont = new LoreContainer(getItem());
-                cont.miscData.LoreData.clear();
-                LoreEntry entry = new LoreEntry();
-                entry.bold = true;
-                entry.text = dev.zontreck.libzontreck.chat.ChatColor.doColors("!Dark_Green!Captured Mob: !Dark_Purple!" + entityName);
-
-                cont.miscData.LoreData.add(entry);
+                cont.miscData.loreData.clear();
+                LoreEntry entry = new LoreEntry.Builder().bold(true).text(ChatColor.doColors("!Dark_Green!Captured Mob: !Dark_Purple!" + entityName)).build();
+                cont.miscData.loreData.add(entry);
 
                 cont.commitLore();
 
@@ -136,7 +134,7 @@ public class ThrownPossBall extends ThrowableItemProjectile
                     }
 
                     LoreContainer cont = new LoreContainer(item);
-                    cont.miscData.LoreData.clear();
+                    cont.miscData.loreData.clear();
                     cont.commitLore();
 
                     if(item.getDamageValue() == 0)

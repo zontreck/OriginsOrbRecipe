@@ -149,13 +149,7 @@ public class LoreHandlers {
         CompoundTag props = weaponUsed.getTag();
         if(props==null)props=new CompoundTag();
         CompoundTag container = props.getCompound(ItemStatTag.STATS_TAG+"_"+type.name().toLowerCase());
-        LoreContainer contain;
-        if(container.isEmpty())
-        {
-            contain = new LoreContainer(weaponUsed);
-        }else {
-            contain = new LoreContainer(container, weaponUsed);
-        }
+        LoreContainer contain = new LoreContainer(weaponUsed);
 
         ItemStatTag isTag;
         try{
@@ -166,26 +160,17 @@ public class LoreHandlers {
         isTag.increment();
         LoreEntry entry;
         
-        if(contain.miscData.LoreData.size()==0)
+        if(contain.miscData.loreData.size()==0)
         {
             // Missing entry
-            entry = new LoreEntry();
-            entry.text = ItemStatistics.makeText(isTag);
-            contain.miscData.LoreData.add(entry);
+            entry = new LoreEntry.Builder().text(ItemStatistics.makeText(isTag)).build();
+            contain.miscData.loreData.add(entry);
         }else {
-            entry = contain.miscData.LoreData.get(0); // Stat is set at 0
+            entry = contain.miscData.loreData.get(0); // Stat is set at 0
             entry.text = ItemStatistics.makeText(isTag);
         }
 
         // Update item
         contain.commitLore();
-
-        // Save the misc data to the item for later
-        // Reinitialize the container as the contain NBT
-        container = new CompoundTag();
-        contain.save(container);
-        isTag.save(container);
-        props.put(ItemStatTag.STATS_TAG+"_"+type.name().toLowerCase(), container);
-        weaponUsed.setTag(props);
     }
 }

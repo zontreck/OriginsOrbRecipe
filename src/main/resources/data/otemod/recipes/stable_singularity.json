@@ -1,16 +1,9 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "pattern": ["ccc", "cbc", "ccc"],
-  "key": {
-    "c": {
-      "item": "minecraft:obsidian"
-    },
-    "b": {
-      "item": "otemod:singularity"
-    }
+  "type": "otemod:compressing",
+  "output": {
+    "item": "otemod:stable_singularity"
   },
-  "result": {
-    "item": "otemod:stable_singularity",
-    "count": 1
+  "input": {
+    "item": "otemod:layered_compressed_obsidian_block"
   }
 }

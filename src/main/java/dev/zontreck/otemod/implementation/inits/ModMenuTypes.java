@@ -1,6 +1,7 @@
 package dev.zontreck.otemod.implementation.inits;
 
 import dev.zontreck.otemod.OTEMod;
+import dev.zontreck.otemod.implementation.compressor.CompressionChamberMenu;
 import dev.zontreck.otemod.implementation.scrubber.ItemScrubberMenu;
 import dev.zontreck.otemod.implementation.scrubber.MagicalScrubberMenu;
 import dev.zontreck.otemod.implementation.vault.StarterMenu;
@@ -24,6 +25,8 @@ public final class ModMenuTypes
 
     public static final RegistryObject<MenuType<ItemScrubberMenu>> SCRUBBER = registerMenuType(ItemScrubberMenu::new, "item_scrubber_menu");
     public static final RegistryObject<MenuType<MagicalScrubberMenu>> MAGIC_SCRUBBER = registerMenuType(MagicalScrubberMenu::new, "magical_scrubber_menu");
+
+    public static final RegistryObject<MenuType<CompressionChamberMenu>> COMPRESSION_CHAMBER = registerMenuType(CompressionChamberMenu::new, "compression_chamber");
 
 
     private static <T extends AbstractContainerMenu> RegistryObject<MenuType<T>> registerMenuType(IContainerFactory<T> factory, String name)
