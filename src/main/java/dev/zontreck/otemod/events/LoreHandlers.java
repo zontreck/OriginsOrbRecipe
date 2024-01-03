@@ -27,7 +27,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 @EventBusSubscriber(modid=OTEMod.MOD_ID, bus=Mod.EventBusSubscriber.Bus.FORGE)
 public class LoreHandlers {
-    
+    /*
     @SubscribeEvent
     public void onBlockMined(BlockEvent.BreakEvent ev)
     {
@@ -172,5 +172,5 @@ public class LoreHandlers {
 
         // Update item
         contain.commitLore();
-    }
+    }*/
 }
