@@ -129,7 +129,7 @@ public class EventHandler {
                 if(level==3){
                     ItemStack egg = new ItemStack(ForgeSpawnEggItem.fromEntityType(killed.getType()));
                     ev.getDrops().add(new ItemEntity(killed.level(), killed.getX(), killed.getY(), killed.getZ(), egg));
-                    LoreHandlers.updateItem(stack, ItemStatType.EGGING);
+                    //LoreHandlers.updateItem(stack, ItemStatType.EGGING);
                 }
             }else{
                 bias += 1;
