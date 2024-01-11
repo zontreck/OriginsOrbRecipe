@@ -65,7 +65,7 @@ public class CompressionChamberMenu extends AbstractContainerMenu
     {
         if(!isCrafting())return 0;
         int progress = this.data.get(0);
-        int max = CompressionChamberBlockEntity.MAXIMUM_PROCESSING_TICKS;
+        int max = CompressionChamberBlockEntity.PROCESSING_TICKS;
 
         int progressArrow = 39;
 
