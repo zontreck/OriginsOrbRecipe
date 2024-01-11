@@ -16,12 +16,14 @@ public class CompressionChamberRecipe implements Recipe<SimpleContainer> {
     private final ResourceLocation id;
     private final ItemStack output;
     private final Ingredient input;
+    private final int seconds;
 
-    public CompressionChamberRecipe(ResourceLocation id, ItemStack output, Ingredient input)
+    public CompressionChamberRecipe(ResourceLocation id, ItemStack output, Ingredient input, int seconds)
     {
         this.id=id;
         this.output=output;
         this.input=input;
+        this.seconds=seconds;
     }
 
     @Override
@@ -61,6 +63,10 @@ public class CompressionChamberRecipe implements Recipe<SimpleContainer> {
         return Type.INSTANCE;
     }
 
+    public int getTime() {
+        return seconds*20;
+    }
+
     public static class Type implements RecipeType<CompressionChamberRecipe> {
         private Type(){}
 
@@ -79,7 +85,9 @@ public class CompressionChamberRecipe implements Recipe<SimpleContainer> {
 
             Ingredient input = Ingredient.fromJson(GsonHelper.getAsJsonObject(jsonObject, "input"));
 
-            return new CompressionChamberRecipe(resourceLocation, output, input);
+            int seconds = GsonHelper.getAsInt(jsonObject, "time");
+
+            return new CompressionChamberRecipe(resourceLocation, output, input, seconds);
         }
 
         @Override
@@ -87,13 +95,16 @@ public class CompressionChamberRecipe implements Recipe<SimpleContainer> {
             ItemStack output = friendlyByteBuf.readItem();
 
             Ingredient input = Ingredient.fromNetwork(friendlyByteBuf);
-            return new CompressionChamberRecipe(resourceLocation, output, input);
+            int seconds = friendlyByteBuf.readInt();
+
+            return new CompressionChamberRecipe(resourceLocation, output, input, seconds);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf friendlyByteBuf, CompressionChamberRecipe compressionChamberRecipe) {
             friendlyByteBuf.writeItem(compressionChamberRecipe.output);
             compressionChamberRecipe.input.toNetwork(friendlyByteBuf);
+            friendlyByteBuf.writeInt(compressionChamberRecipe.seconds);
         }
     }
 }

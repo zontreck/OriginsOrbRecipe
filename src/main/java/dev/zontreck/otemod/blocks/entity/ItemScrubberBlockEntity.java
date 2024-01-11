@@ -60,7 +60,7 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
         
     };
 
-    private static final int ENERGY_REQ = 15000;
+    private static final int ENERGY_REQ = 1500;
     private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
@@ -100,7 +100,7 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
     protected final ContainerData data;
     private int progress = 0;
 
-    public static final int MAXIMUM_PROCESSING_TICKS = 750;
+    public static final int MAXIMUM_PROCESSING_TICKS = 250;
 
 
     @Override

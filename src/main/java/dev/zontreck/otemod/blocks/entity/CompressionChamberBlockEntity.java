@@ -69,7 +69,7 @@ public class CompressionChamberBlockEntity extends BlockEntity implements MenuPr
     protected final ContainerData data;
     protected int progress=0;
 
-    public static final int MAXIMUM_PROCESSING_TICKS = 750;
+    public static int PROCESSING_TICKS = 80;
 
     protected final ItemStackHandler itemsHandler = new ItemStackHandler(1){
         @Override
@@ -99,7 +99,7 @@ public class CompressionChamberBlockEntity extends BlockEntity implements MenuPr
     };
 
 
-    private static final int ENERGY_REQUIREMENT = 7500;
+    private static int ENERGY_REQUIREMENT = 750;
 
     private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
 
@@ -207,7 +207,7 @@ public class CompressionChamberBlockEntity extends BlockEntity implements MenuPr
             setChanged(lvl, pos, state);
             drain(entity);
 
-            if(entity.progress >= CompressionChamberBlockEntity.MAXIMUM_PROCESSING_TICKS)
+            if(entity.progress >= CompressionChamberBlockEntity.PROCESSING_TICKS)
             {
                 craftItem(entity);
             }
@@ -275,7 +275,14 @@ public class CompressionChamberBlockEntity extends BlockEntity implements MenuPr
 
         Optional<CompressionChamberRecipe> recipe = entity.level.getRecipeManager().getRecipeFor(CompressionChamberRecipe.Type.INSTANCE, inventory, entity.level);
 
-        return recipe.isPresent() && canInsertIntoOutput(output, recipe.get().getResultItem(entity.level.registryAccess()));
+        boolean ret = recipe.isPresent() && canInsertIntoOutput(output, recipe.get().getResultItem(entity.level.registryAccess()));
+
+        if(ret)
+        {
+            PROCESSING_TICKS = recipe.get().getTime();
+        }
+
+        return ret;
     }
 
     private static boolean canInsertIntoOutput(SimpleContainer inventory, ItemStack result) {

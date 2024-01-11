@@ -4,6 +4,8 @@
     "item": "minecraft:obsidian"
   },
   "output": {
-    "item": "otemod:compressed_obsidian_sheet"
-  }
+    "item": "otemod:compressed_obsidian_sheet",
+    "count": 2
+  },
+  "time": 10
 }
