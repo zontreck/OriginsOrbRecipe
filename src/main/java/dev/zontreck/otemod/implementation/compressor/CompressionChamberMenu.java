@@ -72,7 +72,7 @@ public class CompressionChamberMenu extends AbstractContainerMenu
 
         if(progress != 0 && max != 0)
         {
-            int percent = progress * progressArrow / max;
+            int percent = progress * max / progressArrow;
             return percent;
         }
 
