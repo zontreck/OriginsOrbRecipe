@@ -73,6 +73,12 @@
     "enchantment.otemod.player_flight": "Flight",
     "enchantment.otemod.mob_egging.desc": "Chance of mob spawn eggs to drop",
     "enchantment.otemod.player_flight.desc": "Allows you to fly!",
+    "enchantment.otemod.borrowed_protection": "Borrowed Protection",
+    "enchantment.otemod.borrowed_protection.desc": "Borrows protection from any nearby player.",
+    "enchantment.otemod.night_vision": "Night Vision",
+
+    "effect.otemod.flight": "Flight",
+
 
     "dev.zontreck.otemod.msgs.only_player": "§cOnly players are allowed to execute this command",
 

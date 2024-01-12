@@ -16,6 +16,7 @@ import dev.zontreck.libzontreck.profiles.Profile;
 import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.vectors.Vector3;
+import dev.zontreck.otemod.effects.ModEffects;
 import dev.zontreck.otemod.implementation.CreativeModeTabs;
 import dev.zontreck.otemod.implementation.InventoryBackup;
 import dev.zontreck.otemod.implementation.Messages;
@@ -133,6 +134,7 @@ public class OTEMod
         ModEnchantments.register(bus);
         ModEntityTypes.register(bus);
         ModRecipes.register(bus);
+        ModEffects.register(bus);
 
 
         //MenuInitializer.register(bus);
