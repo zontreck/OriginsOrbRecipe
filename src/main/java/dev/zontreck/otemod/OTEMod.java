@@ -101,7 +101,7 @@ public class OTEMod
     public OTEMod()
     {
 
-        OTEMod.OTEPrefix = ChatColor.doColors("!dark_gray![!dark_green!!bold!OTEMod!reset!!dark_gray!]!reset!");
+        OTEMod.OTEPrefix = ChatColor.doColors("!dark_gray![!dark_green!!bold!Thresholds!reset!!dark_gray!]!reset!");
         OTEMod.ONLY_PLAYER = ChatColor.doColors("!dark_red!Only a player can execute this command");
 
         bus = FMLJavaModLoadingContext.get().getModEventBus();

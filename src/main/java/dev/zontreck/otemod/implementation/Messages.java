@@ -16,7 +16,7 @@ public class Messages {
 
 
     static{
-        OTE_PREFIX = "!Dark_Gray![!Dark_Purple!OTE!Dark_Gray!] ";
+        OTE_PREFIX = "!Dark_Gray![!Dark_Purple!Thresholds!Dark_Gray!] ";
 
         PREFIX_UPDATED = OTE_PREFIX + " !Dark_Purple!Your prefix has been updated";
         PREFIX_COLOR_UPDATED = OTE_PREFIX + "!Dark_Purple!Your prefix color has been updated";
