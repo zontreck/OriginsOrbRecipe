@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "otemod:block/magical_scrubber"
+    },
+    "facing=east": {
+      "model": "otemod:block/magical_scrubber",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "otemod:block/magical_scrubber",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "otemod:block/magical_scrubber",
+      "y": 270
+    }
+  }
+}

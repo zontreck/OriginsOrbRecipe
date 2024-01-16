@@ -1,0 +1,11 @@
+{
+  "type": "otemod:compressing",
+  "output": {
+    "item": "otemod:layered_compressed_obsidian_sheet",
+    "count": 2
+  },
+  "input": {
+    "item": "otemod:compressed_obsidian_block"
+  },
+  "time": 20
+}

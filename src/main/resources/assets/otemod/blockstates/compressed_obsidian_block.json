@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "otemod:block/compressed_obsidian_block"
+    }
+  }
+}

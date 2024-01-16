@@ -1,10 +1,10 @@
 {
     "values": [
-        "thresholds:eternium_ore_block",
-        "thresholds:deepslate_eternium_ore_block",
-        "thresholds:ilusium_ore_block",
-        "thresholds:deepslate_ilusium_ore_block",
-        "thresholds:ilusium_block",
-        "thresholds:eternium_block"
+        "otemod:eternium_ore_block",
+        "otemod:deepslate_eternium_ore_block",
+        "otemod:ilusium_ore_block",
+        "otemod:deepslate_ilusium_ore_block",
+        "otemod:ilusium_block",
+        "otemod:eternium_block"
     ]
 }

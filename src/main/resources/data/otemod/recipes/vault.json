@@ -1,0 +1,41 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABC",
+    "DEF",
+    "GHZ"
+  ],
+  "key": {
+    "A": {
+      "item": "otemod:vault_fragment_upper_left"
+    },
+    "B": {
+      "item": "otemod:vault_fragment_upper"
+    },
+    "C": {
+      "item": "otemod:vault_fragment_upper_right"
+    },
+    "D": {
+      "item": "otemod:vault_fragment_left"
+    },
+    "E": {
+      "item": "otemod:vault_fragment_center"
+    },
+    "F": {
+      "item": "otemod:vault_fragment_right"
+    },
+    "G": {
+      "item": "otemod:vault_fragment_lower_left"
+    },
+    "H": {
+      "item": "otemod:vault_fragment_lower"
+    },
+    "Z": {
+      "item": "otemod:vault_fragment_lower_right"
+    }
+  },
+  "result": {
+    "item": "otemod:vault",
+    "count": 1
+  }
+}

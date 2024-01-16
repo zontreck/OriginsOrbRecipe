@@ -1,0 +1,10 @@
+{
+  "type": "otemod:compressing",
+  "output": {
+    "item": "minecraft:bedrock"
+  },
+  "input": {
+    "item": "otemod:encased_singularity"
+  },
+  "time": 60
+}

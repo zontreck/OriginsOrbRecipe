@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CCC",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "otemod:ilusium_ingot"
+    }
+  },
+  "result": {
+    "item": "otemod:ilusium_block",
+    "count": 1
+  }
+}

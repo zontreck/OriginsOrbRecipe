@@ -1,6 +1,0 @@
-{
-    "parent": "item/generated",
-    "textures": {
-        "layer0": "thresholds:item/vault_fragment_lower_left"
-    }
-}

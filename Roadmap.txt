@@ -4,4 +4,4 @@ Liquids
 
 
 Super Furnace
-    * Melts materials into liquids. This is how to obtain the Thresholds liquids.
+    * Melts materials into liquids. This is how to obtain the OTEMod liquids.

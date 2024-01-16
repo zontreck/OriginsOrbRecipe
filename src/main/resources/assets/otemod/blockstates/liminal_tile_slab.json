@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "otemod:block/liminal_tile_slab"
+    },
+    "type=double": {
+      "model": "otemod:block/liminal_tiles"
+    },
+    "type=top": {
+      "model": "otemod:block/liminal_tile_slab_top"
+    }
+  }
+}

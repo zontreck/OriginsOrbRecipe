@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": 
+  [
+    "ccc", 
+    "ggg", 
+    "ccc"],
+  "key": {
+    "c": {
+      "item": "minecraft:obsidian"
+    },
+    "g": {
+      "tag": "forge:ingots/eternium"
+    }
+  },
+  "result": {
+    "item": "otemod:eternium_rod",
+    "count": 2
+  }
+}

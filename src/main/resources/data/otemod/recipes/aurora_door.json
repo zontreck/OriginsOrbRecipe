@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CC",
+    "CC",
+    "CC"
+  ],
+  "key": {
+    "C": {
+      "item": "otemod:aurora_block"
+    }
+  },
+  "result": {
+    "item": "otemod:aurora_door",
+    "count": 2
+  }
+}

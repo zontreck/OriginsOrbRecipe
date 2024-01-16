@@ -1,6 +1,0 @@
-{
-    "type": "forge:add_features",
-    "features": ["thresholds:vaultsteel_oregen_overworld"],
-    "biomes": "#is_overworld",
-    "step": "underground_ores"
-}
