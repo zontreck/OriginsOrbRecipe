@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "thresholds:eternium_block"
+    }
+  ],
+  "result": {
+    "item": "thresholds:eternium_ingot",
+    "count": 9
+  }
+}

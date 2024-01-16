@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:ores/vaultsteel"
+  },
+  "result": "thresholds:vault_steel_ingot",
+  "experience": 25,
+  "cookingtime": 600
+}

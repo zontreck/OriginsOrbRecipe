@@ -1,6 +1,6 @@
 {
     "values": [
-        "otemod:vault_steel_ore_block",
-        "otemod:nether_vault_steel_ore_block"
+        "thresholds:vault_steel_ore_block",
+        "thresholds:nether_vault_steel_ore_block"
     ]
 }

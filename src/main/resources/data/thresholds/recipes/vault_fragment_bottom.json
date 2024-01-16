@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "EEE"
+  ],
+  "key": {
+    "#": {
+      "item": "thresholds:vault_steel_ingot"
+    },
+    "E": {
+      "tag": "forge:ingots/eternium"
+    }
+  },
+  "result": {
+    "item": "thresholds:vault_fragment_lower",
+    "count": 1
+  }
+}

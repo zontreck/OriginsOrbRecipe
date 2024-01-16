@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "thresholds:block/ilusium_portal_ns"
+    },
+    "axis=z": {
+      "model": "thresholds:block/ilusium_portal_ew"
+    }
+  }
+}

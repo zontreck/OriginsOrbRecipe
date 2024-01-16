@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "key": {
+        "A": {
+            "item": "thresholds:scrubber_frame"
+        },
+        "B": {
+            "item": "thresholds:item_scrubber"
+        }
+    },
+    "pattern": [
+        "AAA",
+        "ABA",
+        "AAA"
+    ],
+    "result":{
+        "item": "thresholds:magical_scrubber"
+    }
+}

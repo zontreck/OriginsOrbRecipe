@@ -1,0 +1,10 @@
+{
+  "type": "thresholds:compressing",
+  "output": {
+    "item": "minecraft:bedrock"
+  },
+  "input": {
+    "item": "thresholds:encased_singularity"
+  },
+  "time": 60
+}

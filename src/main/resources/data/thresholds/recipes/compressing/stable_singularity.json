@@ -1,0 +1,10 @@
+{
+  "type": "thresholds:compressing",
+  "output": {
+    "item": "thresholds:stable_singularity"
+  },
+  "input": {
+    "item": "thresholds:layered_compressed_obsidian_block"
+  },
+  "time": 60
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "thresholds:block/eternium_ore_block"
+  }
+}

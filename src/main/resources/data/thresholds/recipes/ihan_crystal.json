@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+      " F ",
+      "FGF",
+      " F "
+    ],
+    "key": {
+      "F": {
+        "tag": "forge:ingots/eternium"
+      },
+      "G": {
+        "item": "thresholds:melted_ender_pearl"
+      }
+    },
+    "result": {
+      "item": "thresholds:ihan_crystal",
+      "count": 1
+    }
+}

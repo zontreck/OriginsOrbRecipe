@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": ["cb"],
+  "key": {
+    "c": {
+      "item": "minecraft:feather"
+    },
+    "b": {
+      "item": "thresholds:stable_singularity"
+    }
+  },
+  "result": {
+    "item": "thresholds:singularity",
+    "count": 1
+  }
+}

@@ -5,7 +5,7 @@ First of all, thank you for considering, or for contributing to any of the follo
 ```
 LibZontreck
 Arias-Essentials
-OTEMod
+Thresholds
 ClaimsMod
 WatchMyDurability
 ```
@@ -20,7 +20,7 @@ Code Contributions
 
 Asset contribution
 ----
-2) Contributions are also accepted in the form of artwork or music, or sound, or block models from blockbench. Just simply follow the above steps to create your working base. Then send it to us in a pull request. No coding knowledge is necessary for adding these resources. Someone else can tackle that if you do not know how to code. An example of this is the Possum animal model in OTEMod. This was contributed by PossumTheWarrior via discord.
+2) Contributions are also accepted in the form of artwork or music, or sound, or block models from blockbench. Just simply follow the above steps to create your working base. Then send it to us in a pull request. No coding knowledge is necessary for adding these resources. Someone else can tackle that if you do not know how to code. An example of this is the Possum animal model in Thresholds. This was contributed by PossumTheWarrior via discord.
 
 Bug reporting or feature requests
 ----

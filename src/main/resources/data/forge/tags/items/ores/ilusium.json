@@ -1,7 +1,7 @@
 {
   "values": [
-    "otemod:ilusium_ore",
-    "otemod:ilusium_ore_block",
-    "otemod:deepslate_ilusium_ore_block"
+    "thresholds:ilusium_ore",
+    "thresholds:ilusium_ore_block",
+    "thresholds:deepslate_ilusium_ore_block"
   ]
 }

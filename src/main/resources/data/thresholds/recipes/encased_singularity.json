@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "QQQ",
+    "QZQ",
+    "QQQ"
+  ],
+  "key": {
+    "Q": {
+      "tag": "forge:stone"
+    },
+    "Z": {
+      "item": "thresholds:stable_singularity"
+    }
+  },
+  "result": {
+    "item": "thresholds:encased_singularity",
+    "count": 1
+  }
+}

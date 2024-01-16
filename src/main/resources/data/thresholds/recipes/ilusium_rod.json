@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  C",
+    " C ",
+    "C  "
+  ],
+  "key": {
+    "C": {
+      "item": "thresholds:ilusium_ingot"
+    }
+  },
+  "result": {
+    "item": "thresholds:ilusium_rod",
+    "count": 1
+  }
+}

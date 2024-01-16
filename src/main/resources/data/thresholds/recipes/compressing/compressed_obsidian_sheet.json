@@ -1,0 +1,11 @@
+{
+  "type": "thresholds:compressing",
+  "input": {
+    "item": "minecraft:obsidian"
+  },
+  "output": {
+    "item": "thresholds:compressed_obsidian_sheet",
+    "count": 2
+  },
+  "time": 10
+}

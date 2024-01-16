@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "## ",
+    "## ",
+    "## "
+  ],
+  "key": {
+    "#": {
+      "item": "thresholds:vault_steel_ingot"
+    }
+  },
+  "result": {
+    "item": "thresholds:vault_fragment_right",
+    "count": 1
+  }
+}

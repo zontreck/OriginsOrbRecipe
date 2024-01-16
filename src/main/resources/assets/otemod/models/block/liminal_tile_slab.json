@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "otemod:block/liminal_tiles",
-    "side": "otemod:block/liminal_tiles",
-    "top": "otemod:block/liminal_tiles"
-  }
-}

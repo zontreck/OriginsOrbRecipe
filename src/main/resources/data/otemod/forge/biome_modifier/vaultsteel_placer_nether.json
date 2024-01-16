@@ -1,6 +1,0 @@
-{
-    "type": "forge:add_features",
-    "features": ["otemod:vaultsteel_oregen_nether"],
-    "biomes": "#is_nether",
-    "step": "underground_ores"
-}

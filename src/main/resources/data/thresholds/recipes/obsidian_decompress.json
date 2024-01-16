@@ -1,0 +1,12 @@
+{
+  "type": "mekanism:crushing",
+  "input": {
+    "ingredient": {
+      "item": "thresholds:compressed_obsidian_block"
+    }
+  },
+  "output": {
+    "item": "minecraft:obsidian",
+    "count": 9
+  }
+}

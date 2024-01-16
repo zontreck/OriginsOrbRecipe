@@ -1,0 +1,11 @@
+{
+  "type": "thresholds:threshold",
+  "generator": {
+    "type": "minecraft:noise",
+    "settings": "thresholds:threshold",
+    "biome_source": {
+      "type": "minecraft:multi_noise",
+      "biomes": []
+    }
+  }
+}

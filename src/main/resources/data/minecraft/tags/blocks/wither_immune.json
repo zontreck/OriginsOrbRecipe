@@ -1,11 +1,11 @@
 {
     "values": [
-        "otemod:aurora_block",
-        "otemod:aurora_door",
-        "otemod:eternium_block",
-        "otemod:ilusium_block",
-        "otemod:item_scrubber",
-        "otemod:magical_scrubber",
-        "otemod:layered_compressed_obsidian_block"
+        "thresholds:aurora_block",
+        "thresholds:aurora_door",
+        "thresholds:eternium_block",
+        "thresholds:ilusium_block",
+        "thresholds:item_scrubber",
+        "thresholds:magical_scrubber",
+        "thresholds:layered_compressed_obsidian_block"
     ]
 }

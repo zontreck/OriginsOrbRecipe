@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "thresholds:block/layered_compressed_obsidian_block"
+    }
+  }
+}

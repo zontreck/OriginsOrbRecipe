@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "thresholds:block/clear_glass_block"
+    }
+  }
+}

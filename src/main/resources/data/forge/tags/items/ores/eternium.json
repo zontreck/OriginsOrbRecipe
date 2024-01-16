@@ -1,7 +1,7 @@
 {
     "values": [
-        "otemod:eternium_ore",
-        "otemod:eternium_ore_block",
-        "otemod:deepslate_eternium_ore_block"
+        "thresholds:eternium_ore",
+        "thresholds:eternium_ore_block",
+        "thresholds:deepslate_eternium_ore_block"
     ]
 }

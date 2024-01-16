@@ -1,0 +1,20 @@
+{
+    "type": "tconstruct:modifier",
+    "inputs": [
+        {
+            "tag": "forge:ingots/eternium"
+        }
+    ],
+    "tools": {
+        "tag": "thresholds:modifiable/eternium"
+    },
+    "slots": {
+        "upgrades": 1
+    },
+    "allow_crystal": true,
+    "result": {
+        "name": "thresholds:eggables",
+        "level": 1
+    },
+    "max_level": 6
+}

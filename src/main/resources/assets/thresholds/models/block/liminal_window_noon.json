@@ -1,0 +1,10 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "particle": "thresholds:block/liminal_tiles"
+  },
+  "specialmodels": {
+    "thresholds:sky_noon": "thresholds:block/liminal_window"
+  },
+  "elements": []
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "thresholds:block/liminal_tiles",
+    "side": "thresholds:block/liminal_tiles",
+    "top": "thresholds:block/liminal_tiles"
+  }
+}

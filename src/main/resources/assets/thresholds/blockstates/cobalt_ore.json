@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "": {
+            "model": "thresholds:block/cobalt_ore"
+        }
+    }
+}

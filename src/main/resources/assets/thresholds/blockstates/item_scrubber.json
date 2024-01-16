@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "thresholds:block/item_scrubber"
+    },
+    "facing=east": {
+      "model": "thresholds:block/item_scrubber",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "thresholds:block/item_scrubber",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "thresholds:block/item_scrubber",
+      "y": 270
+    }
+  }
+}
