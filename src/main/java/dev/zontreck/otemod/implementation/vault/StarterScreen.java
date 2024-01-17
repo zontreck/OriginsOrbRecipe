@@ -1,12 +1,8 @@
 package dev.zontreck.otemod.implementation.vault;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.networking.ModMessages;
-import dev.zontreck.otemod.networking.packets.OpenStarterVaultC2SPacket;
-import dev.zontreck.otemod.networking.packets.OpenVaultC2SPacket;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -39,7 +35,7 @@ public class StarterScreen extends AbstractContainerScreen <StarterMenu>
     }
 
     @Override
-    public void render(GuiGraphics stack, int mouseX, int mouseY, float partialTicks)
+    public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks)
     {
         this.renderBackground(stack);
         super.render(stack, mouseX, mouseY, partialTicks);
@@ -58,13 +54,13 @@ public class StarterScreen extends AbstractContainerScreen <StarterMenu>
 
 
     @Override
-    protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY)
+    protected void renderBg(PoseStack pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY)
     {
         renderBackground(pGuiGraphics);
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor (1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.setShaderTexture(0, TEXTURE);
 
-        pGuiGraphics.blit(TEXTURE, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
+        blit(pGuiGraphics, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
     }
 }

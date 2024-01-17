@@ -37,7 +37,7 @@ public class SetPos1 {
         MemoryHolder.setPos1(play, new Vector3(source.getPosition()));
         MemoryHolder.setLevel(play, source.getLevel());
 
-        ChatHelpers.broadcastTo(play.getUUID(), Component.literal(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!Position 1 set!")), OTEMod.THE_SERVER);
+        ChatHelpers.broadcastTo(play.getUUID(), ChatHelpers.macro(OTEMod.OTEPrefix+ChatColor.doColors(" !Dark_Green!Position 1 set!")), OTEMod.THE_SERVER);
 
         return 0;
     }

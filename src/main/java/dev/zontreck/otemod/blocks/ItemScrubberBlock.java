@@ -67,7 +67,7 @@ public class ItemScrubberBlock extends HorizontalDirectionalBlock implements Ent
             if(be instanceof ItemScrubberBlockEntity)
             {
                 ItemScrubberBlockEntity entity = (ItemScrubberBlockEntity)be;
-                NetworkHooks.openScreen(((ServerPlayer)player), entity, pos);
+                NetworkHooks.openGui(((ServerPlayer)player), entity, pos);
 
                 ModMessages.sendToPlayer(new EnergySyncS2CPacket(entity.getEnergyStorage().getEnergyStored(), entity.getBlockPos()), (ServerPlayer)player);
 

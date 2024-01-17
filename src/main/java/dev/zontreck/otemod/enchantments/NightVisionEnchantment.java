@@ -58,7 +58,7 @@ public class NightVisionEnchantment extends Enchantment
     {
         if(event.side == LogicalSide.CLIENT) return;
 
-        if(TICKS.getAndIncrement() >= (2*20))
+        if(TICKS.getAndIncrement() >= (5*20))
         {
             TICKS.set(0);
 

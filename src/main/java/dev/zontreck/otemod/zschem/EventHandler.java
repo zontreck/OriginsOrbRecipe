@@ -6,12 +6,11 @@ import java.util.Map;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.libzontreck.vectors.WorldPosition;
 import dev.zontreck.otemod.configs.OTEServerConfig;
-import net.minecraft.client.telemetry.events.WorldLoadEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.level.ExplosionEvent;
-import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
+import net.minecraftforge.event.world.ExplosionEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class EventHandler {
@@ -19,17 +18,17 @@ public class EventHandler {
     @SubscribeEvent
     public void onDetonate(ExplosionEvent ev)
     {
-        if(ev.getLevel().isClientSide)return;
+        if(ev.getWorld().isClientSide)return;
 
         //Entity explodes = ev.getExplosion().getSourceMob();
         // Register blocks to be healed
-        WorldPosition wpos = new WorldPosition(new Vector3(ev.getExplosion().getPosition()), (ServerLevel) ev.getLevel());
+        WorldPosition wpos = new WorldPosition(new Vector3(ev.getExplosion().getPosition()), (ServerLevel) ev.getWorld());
 
         if(OTEServerConfig.EXCLUDE_DIMS.get().contains(wpos.Dimension)){
             // Dimension is on the exclusion list. Do not process.
             return;
         }
-        WorldProp wp = WorldProp.acquire((ServerLevel)ev.getLevel());
+        WorldProp wp = WorldProp.acquire((ServerLevel)ev.getWorld());
 
         if(wp!=null){
             wp.onDetonate(ev);
@@ -45,21 +44,21 @@ public class EventHandler {
     }
 
     @SubscribeEvent
-    public void onLoadLevel(LevelEvent.Load ev)
+    public void onLoadLevel(WorldEvent.Load ev)
     {
-        if(!ev.getLevel().isClientSide() && ev.getLevel() instanceof ServerLevel)
+        if(!ev.getWorld().isClientSide() && ev.getWorld() instanceof ServerLevel)
         {
-            healers.put((ServerLevel)ev.getLevel(), WorldProp.acquire((ServerLevel)ev.getLevel()));
+            healers.put((ServerLevel)ev.getWorld(), WorldProp.acquire((ServerLevel)ev.getWorld()));
             
         }
     }
 
     @SubscribeEvent
-    public void onUnload(LevelEvent.Unload ev)
+    public void onUnload(WorldEvent.Unload ev)
     {
-        if(!ev.getLevel().isClientSide())
+        if(!ev.getWorld().isClientSide())
         {
-            healers.remove(ev.getLevel());
+            healers.remove(ev.getWorld());
         }
     }
 
@@ -70,16 +69,16 @@ public class EventHandler {
     }
 
     @SubscribeEvent
-    public void onSaving(LevelEvent.Save ev)
+    public void onSaving(WorldEvent.Save ev)
     {
         WorldProp.SaveAll();
     }
 
     @SubscribeEvent
-    public void onLevelTick(TickEvent.LevelTickEvent ev)
+    public void onLevelTick(TickEvent.WorldTickEvent ev)
     {
-        if(!ev.level.isClientSide){
-            WorldProp wp = WorldProp.acquire((ServerLevel)ev.level);
+        if(!ev.world.isClientSide){
+            WorldProp wp = WorldProp.acquire((ServerLevel)ev.world);
             if(wp!=null){
                 wp.onTick();
             }

@@ -78,7 +78,7 @@ public class VaultContainer
         if(VAULT_NUMBER == -1)return; // We have no need to save the trash
         boolean isEmpty=true;
         CompoundTag saved = myInventory.serializeNBT();
-        ChatHelpers.broadcastToAbove(owner, Component.literal(ChatColor.BOLD+ChatColor.DARK_GREEN+"Saving the vault's contents..."), server);
+        ChatHelpers.broadcastToAbove(owner, ChatHelpers.macro(ChatColor.BOLD+ChatColor.DARK_GREEN+"Saving the vault's contents..."), server);
 
         Profile profile=null;
         try {

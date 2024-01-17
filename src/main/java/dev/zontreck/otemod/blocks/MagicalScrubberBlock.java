@@ -65,7 +65,7 @@ public class MagicalScrubberBlock extends HorizontalDirectionalBlock implements 
             if(be instanceof MagicalScrubberBlockEntity)
             {
                 MagicalScrubberBlockEntity entity = (MagicalScrubberBlockEntity)be;
-                NetworkHooks.openScreen(((ServerPlayer)player), entity, pos);
+                NetworkHooks.openGui(((ServerPlayer)player), entity, pos);
 
                 ModMessages.sendToPlayer(new EnergySyncS2CPacket(entity.getEnergyStorage().getEnergyStored(), entity.getBlockPos()), (ServerPlayer)player);
             }else{

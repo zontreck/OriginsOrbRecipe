@@ -61,7 +61,13 @@ public class FlightEffect extends MobEffect {
 
     private static void recheck(ServerPlayer sp)
     {
-        if(sp.gameMode.isCreative())return; // Don't mess with the creative mode attributes
+        if(sp.gameMode.isCreative()){
+            Abilities a = sp.getAbilities();
+            a.mayfly=true;
+
+            sp.onUpdateAbilities();
+            return;
+        } // Don't mess with the creative mode attributes
 
 
         ItemStack feet = sp.getItemBySlot(EquipmentSlot.FEET);
@@ -79,7 +85,7 @@ public class FlightEffect extends MobEffect {
         Abilities playerAbilities = sp.getAbilities();
         if(hasFlight)
         {
-            if(playerAbilities.mayfly == false)
+            if(!playerAbilities.mayfly)
             {
                 playerAbilities.mayfly=true;
                 sp.onUpdateAbilities();

@@ -2,13 +2,12 @@ package dev.zontreck.otemod.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import dev.zontreck.otemod.blocks.ParallaxWindow;
+import com.mojang.math.Matrix4f;
 import dev.zontreck.otemod.blocks.entity.ParallaxWindowEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.core.Direction;
-import org.joml.Matrix4f;
 
 public class ParallaxWindowEntityRenderer implements BlockEntityRenderer<ParallaxWindowEntity>
 {

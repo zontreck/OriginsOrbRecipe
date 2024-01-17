@@ -54,7 +54,7 @@ public class CompressionChamberBlock extends HorizontalDirectionalBlock implemen
             if(be instanceof CompressionChamberBlockEntity)
             {
                 CompressionChamberBlockEntity entity = (CompressionChamberBlockEntity) be;
-                NetworkHooks.openScreen(((ServerPlayer)player), entity, pos);
+                NetworkHooks.openGui(((ServerPlayer)player), entity, pos);
 
                 ModMessages.sendToPlayer(new EnergySyncS2CPacket(entity.getEnergyStorage().getEnergyStored(), entity.getBlockPos()), (ServerPlayer)player);
 

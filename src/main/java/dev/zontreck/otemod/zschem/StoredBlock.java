@@ -4,9 +4,6 @@ import dev.zontreck.libzontreck.exceptions.InvalidDeserialization;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.libzontreck.vectors.WorldPosition;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderGetter;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
@@ -149,11 +146,9 @@ public class StoredBlock
         } catch (InvalidDeserialization e) {
             e.printStackTrace();
         }
-        
-        HolderGetter<Block> hg = position.getActualDimension().holderLookup(Registries.BLOCK);
 
 
-        state = NbtUtils.readBlockState(hg, tag.getCompound("state"));
+        state = NbtUtils.readBlockState(tag.getCompound("state"));
 
         final CompoundTag tmp = tag.getCompound("entity");
         blockEntity = tmp.isEmpty() ? null : tmp;

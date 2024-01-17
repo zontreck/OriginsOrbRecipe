@@ -1,20 +1,12 @@
 package dev.zontreck.otemod;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import com.mojang.logging.LogUtils;
 import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.profiles.Profile;
 import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
 import dev.zontreck.libzontreck.util.ChatHelpers;
+import dev.zontreck.libzontreck.util.ServerUtilities;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.effects.ModEffects;
 import dev.zontreck.otemod.implementation.CreativeModeTabs;
@@ -24,22 +16,16 @@ import dev.zontreck.otemod.implementation.PlayerFirstJoinTag;
 import dev.zontreck.otemod.implementation.compressor.CompressionChamberScreen;
 import dev.zontreck.otemod.implementation.vault.*;
 import dev.zontreck.otemod.integrations.KeyBindings;
+import dev.zontreck.otemod.ore.OreGenerator;
 import dev.zontreck.otemod.recipe.ModRecipes;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.commands.GiveCommand;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -55,6 +41,8 @@ import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
 import dev.zontreck.otemod.blocks.ModBlocks;
@@ -64,13 +52,11 @@ import dev.zontreck.otemod.commands.CommandRegistry;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
 import dev.zontreck.otemod.entities.ModEntityTypes;
-import dev.zontreck.otemod.entities.monsters.client.PossumRenderer;
 import dev.zontreck.otemod.events.LoreHandlers;
 import dev.zontreck.otemod.implementation.inits.ModMenuTypes;
 import dev.zontreck.otemod.implementation.scrubber.ItemScrubberScreen;
 import dev.zontreck.otemod.implementation.scrubber.MagicalScrubberScreen;
 import dev.zontreck.otemod.items.ModItems;
-//import dev.zontreck.otemod.ore.Modifier.ModifierOfBiomes;
 import dev.zontreck.otemod.networking.ModMessages;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -110,13 +96,6 @@ public class OTEMod
 
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, OTEServerConfig.SPEC, "otemod-rss-server.toml");
-        
-        
-        
-        // Register ourselves for server and other game events we are interested in
-        //final DeferredRegister<Codec<? extends BiomeModifier>> serializers = DeferredRegister.create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, OTEMod.MOD_ID);
-        //serializers.register(bus);
-        //serializers.register(MODIFY_BIOMES, ModifierOfBiomes::makeCodec);
 
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -125,10 +104,11 @@ public class OTEMod
         MinecraftForge.EVENT_BUS.register(new CommandRegistry());
         MinecraftForge.EVENT_BUS.register(new VaultWatcher());
         MinecraftForge.EVENT_BUS.register(new dev.zontreck.otemod.zschem.EventHandler());
-        ModMenuTypes.CONTAINERS.register(bus);
+        MinecraftForge.EVENT_BUS.register(OreGenerator.class);
 
+
+        ModMenuTypes.CONTAINERS.register(bus);
         ModBlocks.register(bus);
-        CreativeModeTabs.REGISTER.register(bus);
         ModItems.register(bus);
         ModEntities.register(bus);
         ModEnchantments.register(bus);
@@ -271,7 +251,7 @@ public class OTEMod
     @SubscribeEvent
     public void onItemExpire(final ItemExpireEvent ev)
     {
-        if(ev.getEntity().level().isClientSide)return;
+        if(ServerUtilities.isClient()) return;
 
         if(OTEServerConfig.ITEM_DESPAWN_TIMER.get()<=0)return;
 
@@ -324,13 +304,6 @@ public class OTEMod
             //EntityRenderers.register(ModEntityTypes.POSSUM.get(), PossumRenderer::new);
         }
 
-
-        @OnlyIn(Dist.CLIENT)
-        @SubscribeEvent
-        public static void onRegisterKeybinds(RegisterKeyMappingsEvent ev)
-        {
-            ev.register(KeyBindings.OPEN_VAULT);
-        }
 
     }
 

@@ -5,6 +5,7 @@ import dev.zontreck.libzontreck.lore.ExtraLore;
 import dev.zontreck.libzontreck.lore.LoreContainer;
 import dev.zontreck.libzontreck.lore.LoreEntry;
 import dev.zontreck.libzontreck.util.ChatHelpers;
+import dev.zontreck.libzontreck.util.ServerUtilities;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -61,7 +62,7 @@ public class ThrownPossBall extends ThrowableItemProjectile
 
             for (int i = 0; i < 8; ++i)
             {
-                this.level().addParticle(new ItemParticleOption(ParticleTypes.ITEM, this.getItem()), this.getX(), this.getY(), this.getZ(), ((double)this.random.nextFloat() - 0.5) * 0.08, ((double)this.random.nextFloat() - 0.5) * 0.08, ((double)this.random.nextFloat() - 0.5) * 0.08);
+                this.getLevel().addParticle(new ItemParticleOption(ParticleTypes.ITEM, this.getItem()), this.getX(), this.getY(), this.getZ(), ((double)this.random.nextFloat() - 0.5) * 0.08, ((double)this.random.nextFloat() - 0.5) * 0.08, ((double)this.random.nextFloat() - 0.5) * 0.08);
             }
         }
     }
@@ -73,7 +74,7 @@ public class ThrownPossBall extends ThrowableItemProjectile
         {
             // Don't capture the entity
 
-            pResult.getEntity().hurt(this.damageSources().thrown(this, this.getOwner()), 0.1F);
+            pResult.getEntity().hurt(this.shooter.getLastDamageSource().thrown(this, this.getOwner()), 0.1F);
         } else {
             if(pResult.getEntity() instanceof LivingEntity le && !(le instanceof Player))
             {
@@ -101,7 +102,7 @@ public class ThrownPossBall extends ThrowableItemProjectile
     @Override
     protected void onHit(HitResult pResult) {
         super.onHit(pResult);
-        if(!this.level().isClientSide)
+        if(ServerUtilities.isServer())
         {
             // We do two things here
 
@@ -118,19 +119,19 @@ public class ThrownPossBall extends ThrowableItemProjectile
                     // Spawn poss ball item with the entity NBT
                     ItemEntity entity;
                     if(shooter != null)
-                        entity = new ItemEntity(level(), shooter.position().x, shooter.position().y, shooter.position().z, item, 0, 0, 0);
+                        entity = new ItemEntity(getLevel(), shooter.position().x, shooter.position().y, shooter.position().z, item, 0, 0, 0);
                     else
-                        entity = new ItemEntity(level(), shooter.position().x, shooter.position().y, shooter.position().z, item, 0, 0, 0);
-                    level().addFreshEntity(entity);
+                        entity = new ItemEntity(getLevel(), shooter.position().x, shooter.position().y, shooter.position().z, item, 0, 0, 0);
+                    getLevel().addFreshEntity(entity);
                 } else {
                     // Spawn the real entity
-                    Optional<Entity> entity = EntityType.create(tag.getCompound("entity"), level());
+                    Optional<Entity> entity = EntityType.create(tag.getCompound("entity"), getLevel());
                     if(entity.isPresent())
                     {
                         Entity xEntity = entity.get();
                         xEntity.setUUID(UUID.randomUUID());
                         xEntity.setPos(position());
-                        level().addFreshEntity(xEntity);
+                        getLevel().addFreshEntity(xEntity);
                     }
 
                     LoreContainer cont = new LoreContainer(item);
@@ -147,10 +148,10 @@ public class ThrownPossBall extends ThrowableItemProjectile
                     ItemEntity x;
 
                     if(shooter!=null)
-                        x = new ItemEntity(level(), shooter.position().x, shooter.position().y, shooter.position().z, item, 0, 0, 0);
+                        x = new ItemEntity(getLevel(), shooter.position().x, shooter.position().y, shooter.position().z, item, 0, 0, 0);
                     else
-                        x = new ItemEntity(level(), position().x, position().y, position().z, item, 0, 0, 0);
-                    level().addFreshEntity(x);
+                        x = new ItemEntity(getLevel(), position().x, position().y, position().z, item, 0, 0, 0);
+                    getLevel().addFreshEntity(x);
                 }
             } else {
                 // No capture
@@ -168,14 +169,14 @@ public class ThrownPossBall extends ThrowableItemProjectile
                 ItemEntity entity;
 
                 if(shooter!= null)
-                    entity = new ItemEntity(level(),shooter.position().x, shooter.position().y, shooter.position().z, item, 0, 0, 0);
+                    entity = new ItemEntity(getLevel(),shooter.position().x, shooter.position().y, shooter.position().z, item, 0, 0, 0);
                 else
 
-                    entity = new ItemEntity(level(), position().x, position().y, position().z, item, 0, 0, 0);
-                level().addFreshEntity(entity);
+                    entity = new ItemEntity(getLevel(), position().x, position().y, position().z, item, 0, 0, 0);
+                getLevel().addFreshEntity(entity);
             }
 
-            this.level().broadcastEntityEvent(this, (byte)3);
+            this.getLevel().broadcastEntityEvent(this, (byte)3);
             this.discard();
 
         }

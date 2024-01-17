@@ -19,7 +19,7 @@
           "tag": "minecraft:deepslate_ore_replaceables"
         },
         "state": {
-          "Name": "minecraft:deepslate_ilusium_ore_block"
+          "Name": "otemod:deepslate_ilusium_ore_block"
         }
       }
     ]

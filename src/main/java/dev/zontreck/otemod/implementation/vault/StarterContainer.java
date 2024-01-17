@@ -73,7 +73,7 @@ public class StarterContainer
         if(invalid)return;
         boolean isEmpty=true;
         CompoundTag saved = myInventory.serializeNBT();
-        ChatHelpers.broadcastToAbove(owner, Component.literal(ChatColor.BOLD+ChatColor.DARK_GREEN+"Saving the starter kit's contents..."), server);
+        ChatHelpers.broadcastToAbove(owner, ChatHelpers.macro(ChatColor.BOLD+ChatColor.DARK_GREEN+"Saving the starter kit's contents..."), server);
 
         main_accessor.setLastChanged(Instant.now().getEpochSecond());
 

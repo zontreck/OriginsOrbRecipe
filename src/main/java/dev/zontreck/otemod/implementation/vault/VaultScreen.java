@@ -5,14 +5,11 @@ import java.util.UUID;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
+import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.commands.vaults.VaultCommand;
 import dev.zontreck.otemod.networking.ModMessages;
 import dev.zontreck.otemod.networking.packets.OpenVaultC2SPacket;
-import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.components.Button.OnPress;
-import net.minecraft.client.gui.font.TextFieldHelper;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -46,7 +43,7 @@ public class VaultScreen extends AbstractContainerScreen <VaultMenu>
     }
 
     @Override
-    public void render(GuiGraphics stack, int mouseX, int mouseY, float partialTicks)
+    public void render(PoseStack stack, int mouseX, int mouseY, float partialTicks)
     {
         this.renderBackground(stack);
         super.render(stack, mouseX, mouseY, partialTicks);
@@ -64,28 +61,31 @@ public class VaultScreen extends AbstractContainerScreen <VaultMenu>
 
         // This is where custom controls would be added!
 
-        this.addWidget(Button.builder(Component.literal(""), (BTN)->{
+        this.addWidget(new Button(this.leftPos + 7, this.topPos + 86, 16, 16, ChatHelpers.macro(""), (BTN)->{
+
             thePlayer.closeContainer();
             ModMessages.sendToServer(new OpenVaultC2SPacket(0, true, -1));
-        }).size(16,16).pos(this.leftPos+7, this.topPos+86).build());
+        }));
 
 
-        this.addWidget(Button.builder(Component.literal(""), (BTN)->{
+        this.addWidget(new Button(this.leftPos + 187, this.topPos + 88, 16, 16, ChatHelpers.macro(""), (BTN)->{
+
             thePlayer.closeContainer();
             ModMessages.sendToServer(new OpenVaultC2SPacket(0, true, 1));
-        }).size(16,16).pos(this.leftPos+187, this.topPos+84).build());
+        }));
+
 
     }
 
 
     @Override
-    protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY)
+    protected void renderBg(PoseStack pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY)
     {
         renderBackground(pGuiGraphics);
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor (1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.setShaderTexture(0, TEXTURE);
 
-        pGuiGraphics.blit(TEXTURE, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
+        blit(pGuiGraphics, this.leftPos, this.topPos, 0, 0, this.imageWidth, this.imageHeight);
     }
 }

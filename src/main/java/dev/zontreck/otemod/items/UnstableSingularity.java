@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.event.world.ExplosionEvent;
 
 public class UnstableSingularity extends SimpleFoiledItem
 {
@@ -24,7 +25,7 @@ public class UnstableSingularity extends SimpleFoiledItem
 
         if(block.getBlock().defaultDestroyTime() < 0)
         {
-            pContext.getLevel().explode(pContext.getPlayer(), pContext.getClickedPos().getX(), pContext.getClickedPos().getY(), pContext.getClickedPos().getZ(), 16, true, Level.ExplosionInteraction.TNT);
+            pContext.getLevel().explode(pContext.getPlayer(), pContext.getClickedPos().getX(), pContext.getClickedPos().getY(), pContext.getClickedPos().getZ(), 16, true, Explosion.BlockInteraction.DESTROY);
 
             pContext.getLevel().setBlock(pContext.getClickedPos(), Blocks.AIR.defaultBlockState(), 0, 0);
 

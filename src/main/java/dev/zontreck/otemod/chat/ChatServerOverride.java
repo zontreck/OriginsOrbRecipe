@@ -85,10 +85,10 @@ public class ChatServerOverride {
     @SubscribeEvent
     public void onClone(final PlayerEvent.Clone ev)
     {
-        if(ev.getEntity().level().isClientSide)return;
+        if(ev.getEntity().getLevel().isClientSide)return;
         // Fix for fly ability not copying to new instance on death or other circumstances
         Player old = ev.getOriginal();
-        Player n = ev.getEntity();
+        Player n = ev.getPlayer();
 
         PlayerFlyCache c = PlayerFlyCache.cachePlayer((ServerPlayer)old);
         c.Assert((ServerPlayer)n);
@@ -96,7 +96,7 @@ public class ChatServerOverride {
 
     @SubscribeEvent
     public void onChat(final ServerChatEvent ev){
-        if(ev.getPlayer().level().isClientSide)return;
+        if(ev.getPlayer().getLevel().isClientSide)return;
         // Player has chatted, apply override
         if(!OTEServerConfig.USE_CUSTOM_CHATREPLACER.get()) return;
 
@@ -117,7 +117,7 @@ public class ChatServerOverride {
             prefixStr = ChatColor.DARK_GRAY + "[" + ChatColor.BOLD + XD.prefix_color + XD.prefix + ChatColor.resetChat() + ChatColor.DARK_GRAY + "] ";
         }
 
-        String msg = ev.getRawText();
+        String msg = ev.getMessage();
         msg= ChatColor.doColors(msg);
 
         String nameStr = ChatColor.resetChat() + "< "+ XD.name_color + XD.nickname + ChatColor.resetChat() + " >";
@@ -126,7 +126,7 @@ public class ChatServerOverride {
         hover=hover.withFont(Style.DEFAULT_FONT).withHoverEvent(HoverTip.get(ChatColor.MINECOIN_GOLD+"User Name: "+XD.username));
         ev.setCanceled(true);
 
-        ChatHelpers.broadcast(Component.literal(prefixStr + nameStr + message).setStyle(hover), ev.getPlayer().server);
+        ChatHelpers.broadcast(ChatHelpers.macro(prefixStr + nameStr + message).setStyle(hover), ev.getPlayer().server);
     }
 
 

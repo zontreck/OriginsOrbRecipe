@@ -1,8 +1,7 @@
 package dev.zontreck.otemod.implementation.energy.screenrenderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import dev.zontreck.libzontreck.util.ChatHelpers;
 import net.minecraft.client.renderer.Rect2i;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -33,18 +32,18 @@ public class EnergyInfoArea extends InfoArea {
     }
 
     public List<Component> getTooltips() {
-        return List.of(Component.literal(energy.getEnergyStored()+"/"+energy.getMaxEnergyStored()+" FE"));
+        return List.of(ChatHelpers.macro(energy.getEnergyStored()+"/"+energy.getMaxEnergyStored()+" FE"));
     }
 
     @Override
-    public void draw(GuiGraphics transform) {
+    public void draw(PoseStack transform) {
         final int height = area.getHeight();
         final int width = area.getWidth();
         int stored = (int)(height*(energy.getEnergyStored()/(float)energy.getMaxEnergyStored()));
 
 
         if(area.getHeight() > area.getWidth())
-            transform.fillGradient(area.getX(), area.getY() + (height + stored), area.getX() + area.getWidth(), area.getY() + area.getHeight(), 0xff0000, 0xff550000);
-        else transform.fillGradient(area.getX() + (width + stored), area.getY(),area.getX() + area.getWidth(), area.getY() + area.getHeight(), 0xff0000, 0xff005500);
+            fillGradient(transform, area.getX(), area.getY() + (height + stored), area.getX() + area.getWidth(), area.getY() + area.getHeight(), 0xff0000, 0xff550000);
+        else fillGradient(transform, area.getX() + (width + stored), area.getY(),area.getX() + area.getWidth(), area.getY() + area.getHeight(), 0xff0000, 0xff005500);
     }
 }

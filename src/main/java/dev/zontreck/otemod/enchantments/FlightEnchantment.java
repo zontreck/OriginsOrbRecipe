@@ -80,7 +80,7 @@ public class FlightEnchantment extends Enchantment
     {
         if(event.side == LogicalSide.CLIENT) return;
 
-        if(TICKS.getAndIncrement() >= (5*20))
+        if(TICKS.getAndIncrement() >= (10*20))
         {
             TICKS.set(0);
 
@@ -104,7 +104,7 @@ public class FlightEnchantment extends Enchantment
 
                 if(hasFlight)
                 {
-                    MobEffectInstance inst = new MobEffectInstance(ModEffects.FLIGHT.get(), -1, 0, false, false, true);
+                    MobEffectInstance inst = new MobEffectInstance(ModEffects.FLIGHT.get(), 30*20, 0, false, false, true);
 
                     event.player.addEffect(inst);
                 }

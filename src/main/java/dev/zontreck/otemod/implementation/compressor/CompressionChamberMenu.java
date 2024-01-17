@@ -14,7 +14,7 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class CompressionChamberMenu extends AbstractContainerMenu
@@ -25,7 +25,7 @@ public class CompressionChamberMenu extends AbstractContainerMenu
 
     public CompressionChamberMenu(int id, Inventory inv, FriendlyByteBuf buf)
     {
-        this(id, inv, inv.player.level().getBlockEntity(buf.readBlockPos()), new SimpleContainerData(1));
+        this(id, inv, inv.player.getLevel().getBlockEntity(buf.readBlockPos()), new SimpleContainerData(1));
     }
 
     public CompressionChamberMenu(int id, Inventory inv, BlockEntity entity, ContainerData data)
@@ -42,11 +42,11 @@ public class CompressionChamberMenu extends AbstractContainerMenu
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.entity.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.UP).ifPresent(handler->{
+        this.entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP).ifPresent(handler->{
             addSlot(new SlotItemHandler(handler, 0, 34,34));
         });
 
-        this.entity.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.DOWN).ifPresent(handler->{
+        this.entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.DOWN).ifPresent(handler->{
             addSlot(new SlotItemHandler(handler, 0, 113, 34));
         });
 

@@ -3,12 +3,8 @@ package dev.zontreck.otemod.integrations;
 import com.mojang.blaze3d.platform.InputConstants;
 
 import net.minecraft.client.KeyMapping;
-import net.minecraft.client.multiplayer.ClientRegistryLayer;
-import net.minecraft.core.registries.Registries;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 @OnlyIn(Dist.CLIENT)
 public class KeyBindings {
@@ -22,9 +18,4 @@ public class KeyBindings {
         return key;
     }
 
-    @SubscribeEvent
-    public static void registerKeyMappings(RegisterKeyMappingsEvent event)
-    {
-        event.register(OPEN_VAULT);
-    }
 }

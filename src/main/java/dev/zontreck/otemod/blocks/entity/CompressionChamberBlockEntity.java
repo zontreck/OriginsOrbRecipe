@@ -1,5 +1,6 @@
 package dev.zontreck.otemod.blocks.entity;
 
+import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.otemod.implementation.OutputItemStackHandler;
 import dev.zontreck.otemod.implementation.compressor.CompressionChamberMenu;
 import dev.zontreck.otemod.implementation.energy.OTEEnergy;
@@ -25,10 +26,11 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -109,7 +111,7 @@ public class CompressionChamberBlockEntity extends BlockEntity implements MenuPr
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Compression Chamber");
+        return ChatHelpers.macro("Compression Chamber");
     }
 
     @Override
@@ -122,16 +124,16 @@ public class CompressionChamberBlockEntity extends BlockEntity implements MenuPr
     @Override
     public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side)
     {
-        if(cap == ForgeCapabilities.ENERGY)
+        if(cap == CapabilityEnergy.ENERGY)
         {
             return lazyEnergyHandler.cast();
         }
-        if(side == Direction.DOWN && cap == ForgeCapabilities.ITEM_HANDLER)
+        if(side == Direction.DOWN && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
             // Return the output slot only
             return lazyOutputItems.cast();
         }
-        if(cap == ForgeCapabilities.ITEM_HANDLER)
+        if(cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
         {
             return lazyItemHandler.cast();
         }
@@ -249,9 +251,9 @@ public class CompressionChamberBlockEntity extends BlockEntity implements MenuPr
 
             if(existing.is(Items.AIR))
             {
-                existing = recipe.get().getResultItem(entity.level.registryAccess());
+                existing = recipe.get().getResultItem();
             }else
-                existing.setCount(recipe.get().getResultItem(entity.level.registryAccess()).getCount() + existing.getCount());
+                existing.setCount(recipe.get().getResultItem().getCount() + existing.getCount());
 
             entity.outputItems.setStackInSlot(0, existing);
             entity.itemsHandler.extractItem(0,1,false);
@@ -275,7 +277,7 @@ public class CompressionChamberBlockEntity extends BlockEntity implements MenuPr
 
         Optional<CompressionChamberRecipe> recipe = entity.level.getRecipeManager().getRecipeFor(CompressionChamberRecipe.Type.INSTANCE, inventory, entity.level);
 
-        boolean ret = recipe.isPresent() && canInsertIntoOutput(output, recipe.get().getResultItem(entity.level.registryAccess()));
+        boolean ret = recipe.isPresent() && canInsertIntoOutput(output, recipe.get().getResultItem());
 
         if(ret)
         {

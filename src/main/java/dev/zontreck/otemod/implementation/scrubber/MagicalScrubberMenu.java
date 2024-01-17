@@ -11,7 +11,7 @@ import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class MagicalScrubberMenu extends AbstractContainerMenu
@@ -22,7 +22,7 @@ public class MagicalScrubberMenu extends AbstractContainerMenu
 
     public MagicalScrubberMenu(int id, Inventory inv, FriendlyByteBuf buf)
     {
-        this(id, inv, inv.player.level().getBlockEntity(buf.readBlockPos()), new SimpleContainerData(1));
+        this(id, inv, inv.player.getLevel().getBlockEntity(buf.readBlockPos()), new SimpleContainerData(1));
     }
 
     public MagicalScrubberMenu(int id, Inventory inv, BlockEntity entity, ContainerData data){
@@ -31,15 +31,15 @@ public class MagicalScrubberMenu extends AbstractContainerMenu
         checkContainerSize(inv, 1);
         this.entity = (MagicalScrubberBlockEntity)entity;
         this.data=data;
-        this.level = inv.player.level();
+        this.level = inv.player.getLevel();
 
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.entity.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.UP).ifPresent(handler->{
+        this.entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP).ifPresent(handler->{
             addSlot(new SlotItemHandler(handler, 0, 16, 41));
         });
-        this.entity.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.DOWN).ifPresent(handler->{
+        this.entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.DOWN).ifPresent(handler->{
             addSlot(new SlotItemHandler(handler, 0, 177, 41));
         });
 

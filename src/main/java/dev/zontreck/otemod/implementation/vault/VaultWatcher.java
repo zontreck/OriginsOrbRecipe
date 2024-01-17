@@ -3,6 +3,7 @@ package dev.zontreck.otemod.implementation.vault;
 import java.util.Map;
 import java.util.UUID;
 
+import dev.zontreck.libzontreck.util.ServerUtilities;
 import dev.zontreck.otemod.OTEMod;
 import net.minecraftforge.client.event.ContainerScreenEvent;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
@@ -16,7 +17,7 @@ public class VaultWatcher {
     @SubscribeEvent
     public void onClosedContainer(PlayerContainerEvent.Close ev)
     {
-        if(ev.getEntity().level().isClientSide)return;
+        if(ServerUtilities.isClient()) return;
         //OTEMod.LOGGER.info("Player closed a container");
         // Player closed the container
         // Check if it is a vault Container

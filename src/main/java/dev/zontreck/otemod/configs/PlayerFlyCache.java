@@ -18,6 +18,7 @@ public class PlayerFlyCache
     }
 
     public void Assert(ServerPlayer play){
+        if(play.gameMode.isCreative()) return;
         Abilities playerAbilities = play.getAbilities();
         playerAbilities.flying=Flying;
         playerAbilities.mayfly=FlyEnabled;

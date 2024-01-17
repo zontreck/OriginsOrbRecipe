@@ -3,9 +3,9 @@ package dev.zontreck.otemod.blocks;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.DoubleBlockCombiner;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
 
 public class AuroraDoorBlock extends DoorBlock
 {
@@ -16,7 +16,7 @@ public class AuroraDoorBlock extends DoorBlock
     }
 
     public AuroraDoorBlock() {
-        super(DOOR_PROPS, BlockSetType.IRON);
+        super(DOOR_PROPS);
         
         
     }

@@ -2,6 +2,7 @@ package dev.zontreck.otemod.commands.vaults;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import dev.zontreck.libzontreck.profiles.Profile;
 import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
 import dev.zontreck.libzontreck.util.ChatHelpers;
@@ -55,14 +56,19 @@ public class StarterCommand
 
     public static int openStarterMenu(CommandSourceStack ctx)
     {
-        ServerPlayer player = ctx.getPlayer();
+        ServerPlayer player = null;
+        try {
+            player = ctx.getPlayerOrException();
+        } catch (CommandSyntaxException e) {
+            throw new RuntimeException(e);
+        }
         if(player != null)
         {
             if(player.hasPermissions(ctx.getServer().getOperatorUserPermissionLevel()))
             {
                 try {
                     StarterContainer container = new StarterContainer(player);
-                    NetworkHooks.openScreen(player, new SimpleMenuProvider(container.serverMenu, Component.literal("Starter Gear")));
+                    NetworkHooks.openGui(player, new SimpleMenuProvider(container.serverMenu, ChatHelpers.macro("Starter Gear")));
 
 
                     // Add to the master vault registry
@@ -93,7 +99,7 @@ public class StarterCommand
             return;
         }
 
-        NetworkHooks.openScreen(p, new SimpleMenuProvider(container.serverMenu, Component.literal("Starter Gear")));
+        NetworkHooks.openGui(p, new SimpleMenuProvider(container.serverMenu, ChatHelpers.macro("Starter Gear")));
 
         // Add to the master vault registry
         if(StarterContainer.VAULT_REGISTRY.containsKey(p.getUUID()))VaultContainer.VAULT_REGISTRY.remove(p.getUUID());
