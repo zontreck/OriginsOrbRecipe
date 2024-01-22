@@ -28,7 +28,6 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Mod.EventBusSubscriber(modid = OTEMod.MOD_ID)
 public class FlightEnchantment extends Enchantment
 {
 

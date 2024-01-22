@@ -67,7 +67,7 @@ public class MobEggEnchantment extends Enchantment
         CHANCE *= (level / 0.5);
         CHANCE += bias;
 
-        double rng = Math.random()*100000;
+        double rng = Math.random()*10000;
 
         if(OTEServerConfig.DEBUG.get())
         {
