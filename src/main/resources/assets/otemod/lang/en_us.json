@@ -57,7 +57,7 @@
     "block.otemod.nether_vault_steel_ore_block": "Nether Vault Steel Ore",
     "block.otemod.eternium_block": "Block of Eternium",
     "block.otemod.liminal_tiles": "Liminal Tiles",
-    "block.otemod.black": "The Void",
+    "block.otemod.void": "Void",
     "block.otemod.liminal_tile_stairs": "Liminal Stairs",
     "block.otemod.liminal_tile_slab": "Liminal Slab",
     "block.otemod.ilusium_ore_block": "Ilusium Ore Block",
@@ -67,6 +67,12 @@
     "block.otemod.compression_chamber": "Compression Chamber",
     "block.otemod.compressed_obsidian_block": "Block of Compressed Obsidian",
     "block.otemod.layered_compressed_obsidian_block": "Layered Block of Compressed Obsidian",
+    "block.otemod.whiteout": "White",
+    "block.otemod.blood_red": "Blood Red",
+    "block.otemod.red_tile": "Red Tile",
+    "block.otemod.red_tile_to_wall": "Red Floor To Wall Transition",
+    "block.otemod.red_wall_variant_1": "Red Wall",
+    "block.otemod.red_wall_variant_2": "Red Wall",
 
 
     "enchantment.otemod.mob_egging": "Mob Egging",

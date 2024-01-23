@@ -140,11 +140,11 @@ public class OTEMod
         restore.restore();
         backup.save();
 
-        if(event.getNewGameMode() == GameType.CREATIVE)
+        /*if(event.getNewGameMode() == GameType.CREATIVE)
         {
             player.getInventory().clearContent();
             return;
-        }
+        }*/
         restore.apply();
     }
 

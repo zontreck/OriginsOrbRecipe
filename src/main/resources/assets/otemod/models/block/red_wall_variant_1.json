@@ -1,0 +1,7 @@
+{
+  "parent": "otemod:block/rotatable",
+  "textures": {
+    "front": "otemod:block/thresholds/hallway/wall/red_wall",
+    "side": "otemod:block/thresholds/blood_red"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "otemod:block/black"
+      "model": "otemod:block/void"
     }
   }
 }

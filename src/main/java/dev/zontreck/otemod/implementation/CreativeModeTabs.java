@@ -1,6 +1,7 @@
 package dev.zontreck.otemod.implementation;
 
 import dev.zontreck.otemod.OTEMod;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;

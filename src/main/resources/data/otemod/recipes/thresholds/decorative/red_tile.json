@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    "BAB",
+    "ABA"
+  ],
+  "key": {
+    "A": {
+      "item": "otemod:blood_red"
+    },
+    "B": {
+      "item": "otemod:whiteout"
+    }
+  },
+  "result": {
+    "item": "otemod:red_tile",
+    "count": 2
+  }
+}

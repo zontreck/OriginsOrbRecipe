@@ -48,11 +48,21 @@ public class ChatServerOverride {
         ItemStack feet = play.getItemBySlot(EquipmentSlot.FEET);
         if(ItemUtils.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get(), feet)>0)mayFly = true;
 
-        playerAbilities.mayfly=mayFly;
-        PlayerFlyCache c = PlayerFlyCache.cachePlayer(play);
-        c.Flying=prof.flying;
-        c.FlyEnabled = mayFly;
-        c.Assert(play);
+        if(play.gameMode.isCreative())
+        {
+            // Skip all this!
+            playerAbilities.mayfly=true;
+            playerAbilities.flying=true;
+
+            play.onUpdateAbilities();
+        }else{
+
+            playerAbilities.mayfly=mayFly;
+            PlayerFlyCache c = PlayerFlyCache.cachePlayer(play);
+            c.Flying=prof.flying;
+            c.FlyEnabled = mayFly;
+            c.Assert(play);
+        }
 
         if(StarterProvider.exists())
             OTEMod.checkFirstJoin(ev.player);

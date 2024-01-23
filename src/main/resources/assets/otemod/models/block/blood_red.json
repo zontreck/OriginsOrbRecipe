@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "otemod:block/black"
+    "all": "otemod:block/thresholds/blood_red"
   }
 }
