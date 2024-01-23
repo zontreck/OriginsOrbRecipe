@@ -1,0 +1,15 @@
+{
+    "type": "tconstruct:composable",
+    "level_display": {
+        "type": "tconstruct:unique",
+        "unique_until": 6
+    },
+    "tooltip_display": "always",
+    "modules": [
+        {
+            "type": "tconstruct:harvest_enchantment",
+            "name": "otemod:mob_egging",
+            "level": 1
+        }
+    ]
+}

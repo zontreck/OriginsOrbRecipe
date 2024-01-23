@@ -144,17 +144,38 @@ public class ModBlocks {
 
     public static final RegistryObject<Item> T_RED_TILE_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("red_tile", ()->new BlockItem(T_RED_TILE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
-    public static final RegistryObject<Block> T_RED_TILE_WALL = BLOCKS.register("red_tile_to_wall", ()->new RotatableBlock(BlockBehaviour.Properties.copy(T_RED_TILE.get())));
+    public static final RegistryObject<Block> T_RED_TILE_WALL = BLOCKS.register("red_tile_to_wall", ()->new Block(BlockBehaviour.Properties.copy(T_RED_TILE.get())));
 
     public static final RegistryObject<Item> T_RED_TILE_WALL_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("red_tile_to_wall", ()->new BlockItem(T_RED_TILE_WALL.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
-    public static final RegistryObject<Block> T_RED_WALL = BLOCKS.register("red_wall_variant_1", ()->new RotatableBlock(BlockBehaviour.Properties.copy(T_RED_TILE.get())));
+    public static final RegistryObject<Block> T_RED_WALL = BLOCKS.register("red_wall_variant_1", ()->new Block(BlockBehaviour.Properties.copy(T_RED_TILE.get())));
 
     public static final RegistryObject<Item> T_RED_WALL_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("red_wall_variant_1", ()->new BlockItem(T_RED_WALL.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
-    public static final RegistryObject<Block> T_RED_WALL2 = BLOCKS.register("red_wall_variant_2", ()->new RotatableBlock(BlockBehaviour.Properties.copy(T_RED_TILE.get())));
+    public static final RegistryObject<Block> T_RED_WALL2 = BLOCKS.register("red_wall_variant_2", ()->new Block(BlockBehaviour.Properties.copy(T_RED_TILE.get())));
 
     public static final RegistryObject<Item> T_RED_WALL2_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("red_wall_variant_2", ()->new BlockItem(T_RED_WALL2.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+
+    public static final RegistryObject<Block> T_CYAN = BLOCKS.register("cyan", ()->new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)));
+
+    public static final RegistryObject<Item> T_CYAN_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("cyan", ()-> new BlockItem(T_CYAN.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_CYAN_TILE = BLOCKS.register("cyan_tile", ()->new Block(BlockBehaviour.Properties.copy(T_CYAN.get())));
+
+    public static final RegistryObject<Item> T_CYAN_TILE_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("cyan_tile", ()->new BlockItem(T_CYAN_TILE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_CYAN_TILE_WALL = BLOCKS.register("cyan_tile_to_wall", ()->new Block(BlockBehaviour.Properties.copy(T_CYAN_TILE.get())));
+
+    public static final RegistryObject<Item> T_CYAN_TILE_WALL_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("cyan_tile_to_wall", ()->new BlockItem(T_CYAN_TILE_WALL.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_CYAN_WALL = BLOCKS.register("cyan_wall_variant_1", ()->new Block(BlockBehaviour.Properties.copy(T_CYAN_TILE.get())));
+
+    public static final RegistryObject<Item> T_CYAN_WALL_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("cyan_wall_variant_1", ()->new BlockItem(T_CYAN_WALL.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_CYAN_WALL2 = BLOCKS.register("cyan_wall_variant_2", ()->new Block(BlockBehaviour.Properties.copy(T_CYAN_TILE.get())));
+
+    public static final RegistryObject<Item> T_CYAN_WALL2_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("cyan_wall_variant_2", ()->new BlockItem(T_CYAN_WALL2.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
 
     /*

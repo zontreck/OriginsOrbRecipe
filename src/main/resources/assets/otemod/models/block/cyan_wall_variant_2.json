@@ -1,0 +1,7 @@
+{
+  "parent": "otemod:block/sided",
+  "textures": {
+    "side": "otemod:block/thresholds/hallway/wall/cyan_wall2",
+    "top": "otemod:block/thresholds/cyan"
+  }
+}

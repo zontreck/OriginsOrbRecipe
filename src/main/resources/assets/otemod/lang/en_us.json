@@ -73,6 +73,11 @@
     "block.otemod.red_tile_to_wall": "Red Floor To Wall Transition",
     "block.otemod.red_wall_variant_1": "Red Wall",
     "block.otemod.red_wall_variant_2": "Red Wall",
+    "block.otemod.cyan": "Cyan",
+    "block.otemod.cyan_tile": "Cyan Tile",
+    "block.otemod.cyan_tile_to_wall": "Cyan Floor To Wall Transition",
+    "block.otemod.cyan_wall_variant_1": "Cyan Wall",
+    "block.otemod.cyan_wall_variant_2": "Cyan Wall",
 
 
     "enchantment.otemod.mob_egging": "Mob Egging",
