@@ -137,7 +137,9 @@ public class ConsumptionMending extends Enchantment
                             for(Map.Entry<Enchantment,Integer> entry : enchantments.entrySet())
                             {
                                 Enchantment id = entry.getKey();
-                                if(id.isCurse())
+                                int dice = player.getRandom().nextInt(0,20);
+
+                                if(id.isCurse() && ((dice >= 13) && (dice <= 18)))
                                 {
                                     stack.enchant(id, entry.getValue());
                                     player.getLevel().playSound(null, player.getOnPos(), SoundEvents.ANVIL_USE, SoundSource.NEUTRAL,1, player.getRandom().nextFloat(0,1));
