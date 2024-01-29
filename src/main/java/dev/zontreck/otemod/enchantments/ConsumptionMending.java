@@ -43,6 +43,11 @@ public class ConsumptionMending extends Enchantment
     }
 
     @Override
+    public boolean isCurse() {
+        return true;
+    }
+
+    @Override
     public int getMinCost(int pLevel) {
         return 25 + (pLevel-1);
     }
