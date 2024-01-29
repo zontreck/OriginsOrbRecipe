@@ -32,16 +32,6 @@ public class PossBallItem extends Item
     }
 
     @Override
-    public boolean isDamageable(ItemStack stack) {
-        return true;
-    }
-
-    @Override
-    public int getMaxDamage(ItemStack stack) {
-        return 2;
-    }
-
-    @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
         pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.EGG_THROW, SoundSource.PLAYERS, 0.5F, 0.4F / (pLevel.random.nextFloat() * 0.4f + 0.8f));

@@ -111,7 +111,7 @@ public class ConsumptionMending extends Enchantment
                     int iDamage = stack.getDamageValue();
                     int iMax = stack.getMaxDamage();
 
-                    int iNeeds = iDamage;
+                    int iNeeds = iDamage * 2;
 
                     // The stack we are inspecting:
                     int nDamage = item.getDamageValue();
