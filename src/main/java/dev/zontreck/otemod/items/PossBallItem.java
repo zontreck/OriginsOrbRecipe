@@ -50,7 +50,7 @@ public class PossBallItem extends Item
             ThrownPossBall TPB = new ThrownPossBall(pLevel, pPlayer);
             if(pPlayer.getAbilities().instabuild) TPB.setItem(stack.copy());
             else
-                TPB.setItem(stack);
+                TPB.setItem(stack.copy());
             TPB.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
             pLevel.addFreshEntity(TPB);
         }

@@ -73,43 +73,27 @@ public class FlightEnchantment extends Enchantment
     }
 
 
-    public static AtomicInteger TICKS = new AtomicInteger(0);
-    @SubscribeEvent
-    public static void onEnchantmentTick(TickEvent.PlayerTickEvent event)
+    public static void runEntityTick(ServerPlayer player)
     {
-        if(event.side == LogicalSide.CLIENT) return;
 
-        if(TICKS.getAndIncrement() >= (10*20))
+        if(OTEServerConfig.DEBUG.get())
         {
-            TICKS.set(0);
-
-
-
-            if(OTEServerConfig.DEBUG.get())
-            {
-                OTEMod.LOGGER.info("> Flight Enchantment Tick <");
-            }
-
-            if(event.phase == TickEvent.Phase.END)
-            {
-
-                ServerPlayer sp = (ServerPlayer) event.player;
-
-                ItemStack feet = sp.getItemBySlot(EquipmentSlot.FEET);
-
-                boolean hasFlight = false;
-
-                if(ItemUtils.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get(), feet)>0)hasFlight=true;
-
-                if(hasFlight)
-                {
-                    MobEffectInstance inst = new MobEffectInstance(ModEffects.FLIGHT.get(), 30*20, 0, false, false, true);
-
-                    event.player.addEffect(inst);
-                }
-            }
+            OTEMod.LOGGER.info("> Flight Enchantment Tick <");
         }
 
+
+        ItemStack feet = player.getItemBySlot(EquipmentSlot.FEET);
+
+        boolean hasFlight = false;
+
+        if(ItemUtils.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get(), feet)>0)hasFlight=true;
+
+        if(hasFlight)
+        {
+            MobEffectInstance inst = new MobEffectInstance(ModEffects.FLIGHT.get(), 30*20, 0, false, false, true);
+
+            player.addEffect(inst);
+        }
 
     }
 

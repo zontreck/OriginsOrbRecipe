@@ -87,6 +87,9 @@
     "enchantment.otemod.borrowed_protection": "Borrowed Protection",
     "enchantment.otemod.borrowed_protection.desc": "Borrows protection from any nearby player.",
     "enchantment.otemod.night_vision": "Night Vision",
+    "enchantment.otemod.night_vision.desc": "See in the dark!",
+    "enchantment.otemod.consumption_mending": "Consumption Mending",
+    "enchantment.otemod.consumption_mending.desc": "Consumes items to repair durability. May consume curses.",
 
     "effect.otemod.flight": "Flight",
 

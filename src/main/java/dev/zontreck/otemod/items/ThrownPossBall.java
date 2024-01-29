@@ -85,6 +85,7 @@ public class ThrownPossBall extends ThrowableItemProjectile
                 le.save(tag);
 
                 getItem().getTag().put("entity", tag);
+                getItem().setCount(1);
                 captured=true;
 
                 LoreContainer cont = new LoreContainer(getItem());
