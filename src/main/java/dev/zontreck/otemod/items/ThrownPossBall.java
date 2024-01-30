@@ -113,6 +113,7 @@ public class ThrownPossBall extends ThrowableItemProjectile
 
             ItemStack item = getItem();
             CompoundTag tag = item.getTag();
+            if(tag == null)tag=new CompoundTag();
             if(tag.contains("entity"))
             {
                 if(captured)
