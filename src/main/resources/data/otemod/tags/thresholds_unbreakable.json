@@ -2,6 +2,7 @@
   "values": [
     "#otemod:thresholds/red",
     "#otemod:thresholds/cyan",
-    "#otemod:thresholds/lime"
+    "#otemod:thresholds/lime",
+    "#otemod:thresholds/pool"
   ]
 }

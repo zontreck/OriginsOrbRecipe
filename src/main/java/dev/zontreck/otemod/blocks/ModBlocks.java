@@ -270,6 +270,78 @@ public class ModBlocks {
     public static final RegistryObject<Item> T_LIME_WALL2_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("lime_wall_variant_2", ()->new BlockItem(T_LIME_WALL2.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
 
+    public static final RegistryObject<Block> T_POOL_TILE = BLOCKS.register("pool_tile", ()->new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Item> T_POOL_TILE_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("pool_tile", ()->new BlockItem(T_POOL_TILE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_POOL_TILE_STAIRS = BLOCKS.register("pool_tile_stairs", ()->new StairBlock(T_POOL_TILE.get()::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Item> T_POOL_TILE_STAIRS_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("pool_tile_stairs", ()->new BlockItem(T_POOL_TILE_STAIRS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_POOL_LIGHT = BLOCKS.register("pool_light", ()->new Block(BlockBehaviour.Properties.copy(Blocks.STONE).lightLevel((X)->15).sound(SoundType.GLASS)));
+    public static final RegistryObject<Item> T_POOL_LIGHT_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("pool_light", ()->new BlockItem(T_POOL_LIGHT.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_DIRTY_POOL_TILE = BLOCKS.register("dirty_pool_tile", ()->new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Item> T_DIRTY_POOL_TILE_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("dirty_pool_tile", ()-> new BlockItem(T_DIRTY_POOL_TILE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+
+    public static final RegistryObject<Block> T_DIRTY_POOL_TILE_STAIRS = BLOCKS.register("dirty_pool_tile_stairs", ()->new StairBlock(T_DIRTY_POOL_TILE.get()::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Item> T_DIRTY_POOL_TILE_STAIRS_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("dirty_pool_tile_stairs", ()->new BlockItem(T_DIRTY_POOL_TILE_STAIRS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+
+    public static final RegistryObject<Block> T_DIRTY_POOL_LIGHT = BLOCKS.register("dirty_pool_light", ()->new Block(BlockBehaviour.Properties.copy(Blocks.STONE).lightLevel((X)->15).sound(SoundType.GLASS)));
+    public static final RegistryObject<Item> T_DIRTY_POOL_LIGHT_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("dirty_pool_light", ()->new BlockItem(T_DIRTY_POOL_LIGHT.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+    public static final RegistryObject<Block> T_FILTHY_POOL_LIGHT = BLOCKS.register("filthy_pool_light", ()->new Block(BlockBehaviour.Properties.copy(Blocks.STONE).lightLevel((X)->8).sound(SoundType.GLASS)));
+    public static final RegistryObject<Item> T_FILTHY_POOL_LIGHT_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("filthy_pool_light", ()->new BlockItem(T_FILTHY_POOL_LIGHT.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+
+    public static final RegistryObject<Block> T_DARK_POOL_TILE = BLOCKS.register("dark_pool_tile", ()->new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Item> T_DARK_POOL_TILE_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("dark_pool_tile", ()->new BlockItem(T_DARK_POOL_TILE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_DARK_POOL_LIGHT = BLOCKS.register("dark_pool_light", ()->new Block(BlockBehaviour.Properties.copy(Blocks.STONE).lightLevel((X)->15).sound(SoundType.GLASS)));
+    public static final RegistryObject<Item> T_DARK_POOL_LIGHT_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("dark_pool_light", ()->new BlockItem(T_DARK_POOL_LIGHT.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_DARK_POOL_TILE_STAIRS = BLOCKS.register("dark_pool_tile_stairs", ()->new StairBlock(T_DARK_POOL_TILE.get()::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Item> T_DARK_POOL_TILE_STAIRS_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("dark_pool_tile_stairs", ()->new BlockItem(T_DARK_POOL_TILE_STAIRS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_BLUE_POOL_TILE = BLOCKS.register("blue_pool_tile", ()->new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Item> T_BLUE_POOL_TILE_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("blue_pool_tile", ()->new BlockItem(T_BLUE_POOL_TILE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+    public static final RegistryObject<Block> T_BLUE_POOL_TILE_STAIRS = BLOCKS.register("blue_pool_tile_stairs", ()->new StairBlock(T_BLUE_POOL_TILE.get()::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Item> T_BLUE_POOL_TILE_STAIRS_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("blue_pool_tile_stairs", ()->new BlockItem(T_BLUE_POOL_TILE_STAIRS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_BLUE_POOL_LIGHT = BLOCKS.register("blue_pool_light", ()->new Block(BlockBehaviour.Properties.copy(Blocks.STONE).lightLevel((X)->15).sound(SoundType.GLASS)));
+    public static final RegistryObject<Item> T_BLUE_POOL_LIGHT_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("blue_pool_light", ()->new BlockItem(T_BLUE_POOL_LIGHT.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+
+    public static final RegistryObject<Block> T_RED_POOL_TILE = BLOCKS.register("red_pool_tile", ()->new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Item> T_RED_POOL_TILE_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("red_pool_tile", ()->new BlockItem(T_RED_POOL_TILE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+    public static final RegistryObject<Block> T_RED_POOL_TILE_STAIRS = BLOCKS.register("red_pool_tile_stairs", ()->new StairBlock(T_RED_POOL_TILE.get()::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Item> T_RED_POOL_TILE_STAIRS_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("red_pool_tile_stairs", ()->new BlockItem(T_RED_POOL_TILE_STAIRS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_RED_POOL_LIGHT = BLOCKS.register("red_pool_light", ()->new Block(BlockBehaviour.Properties.copy(Blocks.STONE).lightLevel((X)->15).sound(SoundType.GLASS)));
+    public static final RegistryObject<Item> T_RED_POOL_LIGHT_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("red_pool_light", ()->new BlockItem(T_RED_POOL_LIGHT.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+
+    public static final RegistryObject<Block> T_DIRTY_RED_POOL_TILE = BLOCKS.register("dirty_red_pool_tile", ()->new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Item> T_DIRTY_RED_POOL_TILE_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("dirty_red_pool_tile", ()->new BlockItem(T_DIRTY_RED_POOL_TILE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+    public static final RegistryObject<Block> T_DIRTY_RED_POOL_TILE_STAIRS = BLOCKS.register("dirty_red_pool_tile_stairs", ()->new StairBlock(T_DIRTY_RED_POOL_TILE.get()::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Item> T_DIRTY_RED_POOL_TILE_STAIRS_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("dirty_red_pool_tile_stairs", ()->new BlockItem(T_DIRTY_RED_POOL_TILE_STAIRS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_DIRTY_RED_POOL_LIGHT = BLOCKS.register("dirty_red_pool_light", ()->new Block(BlockBehaviour.Properties.copy(Blocks.STONE).lightLevel((X)->15).sound(SoundType.GLASS)));
+    public static final RegistryObject<Item> T_DIRTY_RED_POOL_LIGHT_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("dirty_red_pool_light", ()->new BlockItem(T_DIRTY_RED_POOL_LIGHT.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+    public static final RegistryObject<Block> T_FILTHY_RED_POOL_LIGHT = BLOCKS.register("filthy_red_pool_light", ()->new Block(BlockBehaviour.Properties.copy(Blocks.STONE).lightLevel((X)->8).sound(SoundType.GLASS)));
+    public static final RegistryObject<Item> T_FILTHY_RED_POOL_LIGHT_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("filthy_red_pool_light", ()->new BlockItem(T_FILTHY_RED_POOL_LIGHT.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+
+    public static final RegistryObject<Block> T_DIRTY_BLUE_POOL_TILE = BLOCKS.register("dirty_blue_pool_tile", ()->new Block(BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Item> T_DIRTY_BLUE_POOL_TILE_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("dirty_blue_pool_tile", ()->new BlockItem(T_DIRTY_BLUE_POOL_TILE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+    public static final RegistryObject<Block> T_DIRTY_BLUE_POOL_TILE_STAIRS = BLOCKS.register("dirty_blue_pool_tile_stairs", ()->new StairBlock(T_DIRTY_BLUE_POOL_TILE.get()::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.COBBLESTONE)));
+    public static final RegistryObject<Item> T_DIRTY_BLUE_POOL_TILE_STAIRS_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("dirty_blue_pool_tile_stairs", ()->new BlockItem(T_DIRTY_BLUE_POOL_TILE_STAIRS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_DIRTY_BLUE_POOL_LIGHT = BLOCKS.register("dirty_blue_pool_light", ()->new Block(BlockBehaviour.Properties.copy(Blocks.STONE).lightLevel((X)->15).sound(SoundType.GLASS)));
+    public static final RegistryObject<Item> T_DIRTY_BLUE_POOL_LIGHT_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("dirty_blue_pool_light", ()->new BlockItem(T_DIRTY_BLUE_POOL_LIGHT.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+    public static final RegistryObject<Block> T_FILTHY_BLUE_POOL_LIGHT = BLOCKS.register("filthy_blue_pool_light", ()->new Block(BlockBehaviour.Properties.copy(Blocks.STONE).lightLevel((X)->8).sound(SoundType.GLASS)));
+    public static final RegistryObject<Item> T_FILTHY_BLUE_POOL_LIGHT_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("filthy_blue_pool_light", ()->new BlockItem(T_FILTHY_BLUE_POOL_LIGHT.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+
     private static boolean never(BlockState p_50806_, BlockGetter p_50807_, BlockPos p_50808_) {
         return false;
     }

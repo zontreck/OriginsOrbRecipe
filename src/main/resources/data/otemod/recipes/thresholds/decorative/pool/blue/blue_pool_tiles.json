@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CAB",
+    "ABC",
+    "BAC"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:white_concrete"
+    },
+    "B": {
+      "item": "minecraft:blue_terracotta"
+    },
+    "C": {
+      "item": "minecraft:cyan_terracotta"
+    }
+  },
+  "result": {
+    "item": "otemod:blue_pool_tiles",
+    "count": 4
+  }
+}

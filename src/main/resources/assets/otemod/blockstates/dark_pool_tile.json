@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "otemod:block/thresholds/pool/tiles/dark_pool_tile"
+    }
+  }
+}
