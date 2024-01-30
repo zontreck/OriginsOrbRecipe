@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/fb/cube",
+  "parent": "otemod:block/fb/cube",
   "textures": {
     "all": "otemod:block/thresholds/white"
   }
