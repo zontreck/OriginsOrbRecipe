@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "AAA",
+    "BAB"
+  ],
+  "key": {
+    "A": {
+      "item": "otemod:lime"
+    },
+    "B": {
+      "item": "otemod:whiteout"
+    }
+  },
+  "result": {
+    "item": "otemod:lime_wall_variant_1",
+    "count": 2
+  }
+}

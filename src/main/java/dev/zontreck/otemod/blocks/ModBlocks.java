@@ -128,7 +128,9 @@ public class ModBlocks {
 
     public static final RegistryObject<Item> LIMINAL_WINDOW_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("liminal_window", () -> new BlockItem(LIMINAL_WINDOW.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
-    public static final RegistryObject<Block> VOID_BLOCK = BLOCKS.register("void", ()->new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)));
+    public static final RegistryObject<Block> VOID_BLOCK = BLOCKS.register("void", ()->new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN).lightLevel((X)->{
+        return 15;
+    }).noCollission()));
 
     public static final RegistryObject<Item> VOID_BLOCK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("void", ()-> new BlockItem(VOID_BLOCK.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
@@ -136,56 +138,136 @@ public class ModBlocks {
 
     public static final RegistryObject<Item> WHITE_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("whiteout", ()->new BlockItem(WHITE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
-    public static final RegistryObject<Block> T_BLOOD_RED = BLOCKS.register("blood_red", ()->new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)));
+    public static final RegistryObject<Block> T_BLOOD_RED = BLOCKS.register("blood_red", ()->new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN).lightLevel((X)->{
+        return 15;
+    })));
 
     public static final RegistryObject<Item> T_BLOOD_RED_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("blood_red", ()-> new BlockItem(T_BLOOD_RED.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
-    public static final RegistryObject<Block> T_RED_TILE = BLOCKS.register("red_tile", ()->new Block(BlockBehaviour.Properties.copy(T_BLOOD_RED.get())));
+    public static final RegistryObject<Block> T_RED_TILE = BLOCKS.register("red_tile", ()->new Block(BlockBehaviour.Properties.copy(T_BLOOD_RED.get()).lightLevel((X)->{
+        return 15;
+    }).noOcclusion()));
 
     public static final RegistryObject<Item> T_RED_TILE_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("red_tile", ()->new BlockItem(T_RED_TILE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_RED_STAIRS = BLOCKS.register("red_stairs", ()->new StairBlock(T_BLOOD_RED.get()::defaultBlockState, BlockBehaviour.Properties.copy(T_BLOOD_RED.get()).lightLevel((X)->{
+        return 15;
+    })));
+
+    public static final RegistryObject<Item> T_RED_STAIRS_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("red_stairs", ()->new BlockItem(T_RED_STAIRS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_RED_TILE_TRANSITON_BR = BLOCKS.register("red_tile_br", ()->new RotatableBlock(BlockBehaviour.Properties.copy(T_BLOOD_RED.get()).lightLevel((X)->{
+        return 15;
+    })));
+
+    public static final RegistryObject<Item> T_RED_TILE_TRANSITION_BR_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("red_tile_br", ()->new BlockItem(T_RED_TILE_TRANSITON_BR.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
     public static final RegistryObject<Block> T_RED_TILE_WALL = BLOCKS.register("red_tile_to_wall", ()->new Block(BlockBehaviour.Properties.copy(T_RED_TILE.get())));
 
     public static final RegistryObject<Item> T_RED_TILE_WALL_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("red_tile_to_wall", ()->new BlockItem(T_RED_TILE_WALL.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
-    public static final RegistryObject<Block> T_RED_WALL = BLOCKS.register("red_wall_variant_1", ()->new Block(BlockBehaviour.Properties.copy(T_RED_TILE.get())));
+    public static final RegistryObject<Block> T_RED_WALL = BLOCKS.register("red_wall_variant_1", ()->new Block(BlockBehaviour.Properties.copy(T_RED_TILE.get()).lightLevel((X)->{
+        return 15;
+    })));
 
     public static final RegistryObject<Item> T_RED_WALL_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("red_wall_variant_1", ()->new BlockItem(T_RED_WALL.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
-    public static final RegistryObject<Block> T_RED_WALL2 = BLOCKS.register("red_wall_variant_2", ()->new Block(BlockBehaviour.Properties.copy(T_RED_TILE.get())));
+    public static final RegistryObject<Block> T_RED_WALL2 = BLOCKS.register("red_wall_variant_2", ()->new Block(BlockBehaviour.Properties.copy(T_RED_TILE.get()).lightLevel((X)->{
+        return 15;
+    })));
 
     public static final RegistryObject<Item> T_RED_WALL2_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("red_wall_variant_2", ()->new BlockItem(T_RED_WALL2.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
 
-    public static final RegistryObject<Block> T_CYAN = BLOCKS.register("cyan", ()->new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)));
+    public static final RegistryObject<Block> T_CYAN = BLOCKS.register("cyan", ()->new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN).lightLevel((X)->{
+        return 15;
+    }).noOcclusion()));
 
     public static final RegistryObject<Item> T_CYAN_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("cyan", ()-> new BlockItem(T_CYAN.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
-    public static final RegistryObject<Block> T_CYAN_TILE = BLOCKS.register("cyan_tile", ()->new Block(BlockBehaviour.Properties.copy(T_CYAN.get())));
+    public static final RegistryObject<Block> T_CYAN_TILE = BLOCKS.register("cyan_tile", ()->new Block(BlockBehaviour.Properties.copy(T_CYAN.get()).lightLevel((X)->{
+        return 15;
+    })));
 
     public static final RegistryObject<Item> T_CYAN_TILE_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("cyan_tile", ()->new BlockItem(T_CYAN_TILE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
-    public static final RegistryObject<Block> T_CYAN_TILE_WALL = BLOCKS.register("cyan_tile_to_wall", ()->new Block(BlockBehaviour.Properties.copy(T_CYAN_TILE.get())));
+
+    public static final RegistryObject<Block> T_CYAN_STAIRS = BLOCKS.register("cyan_stairs", ()->new StairBlock(T_CYAN.get()::defaultBlockState, BlockBehaviour.Properties.copy(T_CYAN.get()).lightLevel((X)->{
+        return 15;
+    })));
+
+    public static final RegistryObject<Item> T_CYAN_STAIRS_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("cyan_stairs", ()->new BlockItem(T_CYAN_STAIRS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_CYAN_TILE_TRANSITON_BR = BLOCKS.register("cyan_tile_br", ()->new RotatableBlock(BlockBehaviour.Properties.copy(T_CYAN.get()).lightLevel((X)->{
+        return 15;
+    })));
+
+    public static final RegistryObject<Item> T_CYAN_TILE_TRANSITION_BR_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("cyan_tile_br", ()->new BlockItem(T_CYAN_TILE_TRANSITON_BR.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+
+    public static final RegistryObject<Block> T_CYAN_TILE_WALL = BLOCKS.register("cyan_tile_to_wall", ()->new Block(BlockBehaviour.Properties.copy(T_CYAN_TILE.get()).lightLevel((X)->{
+        return 15;
+    })));
 
     public static final RegistryObject<Item> T_CYAN_TILE_WALL_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("cyan_tile_to_wall", ()->new BlockItem(T_CYAN_TILE_WALL.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
-    public static final RegistryObject<Block> T_CYAN_WALL = BLOCKS.register("cyan_wall_variant_1", ()->new Block(BlockBehaviour.Properties.copy(T_CYAN_TILE.get())));
+    public static final RegistryObject<Block> T_CYAN_WALL = BLOCKS.register("cyan_wall_variant_1", ()->new Block(BlockBehaviour.Properties.copy(T_CYAN_TILE.get()).lightLevel((X)->{
+        return 15;
+    })));
 
     public static final RegistryObject<Item> T_CYAN_WALL_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("cyan_wall_variant_1", ()->new BlockItem(T_CYAN_WALL.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
-    public static final RegistryObject<Block> T_CYAN_WALL2 = BLOCKS.register("cyan_wall_variant_2", ()->new Block(BlockBehaviour.Properties.copy(T_CYAN_TILE.get())));
+    public static final RegistryObject<Block> T_CYAN_WALL2 = BLOCKS.register("cyan_wall_variant_2", ()->new Block(BlockBehaviour.Properties.copy(T_CYAN_TILE.get()).lightLevel((X)->{
+        return 15;
+    })));
 
     public static final RegistryObject<Item> T_CYAN_WALL2_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("cyan_wall_variant_2", ()->new BlockItem(T_CYAN_WALL2.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
 
-    /*
+
+    public static final RegistryObject<Block> T_LIME = BLOCKS.register("lime", ()->new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN).lightLevel((X)->{
+        return 15;
+    }).noOcclusion()));
+
+    public static final RegistryObject<Item> T_LIME_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("lime", ()-> new BlockItem(T_LIME.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_LIME_TILE = BLOCKS.register("lime_tile", ()->new Block(BlockBehaviour.Properties.copy(T_LIME.get()).lightLevel((X)->{
+        return 15;
+    })));
+
+    public static final RegistryObject<Item> T_LIME_TILE_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("lime_tile", ()->new BlockItem(T_LIME_TILE.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
 
-    public static final class_2248 LIMINAL_WINDOW_NOON = (class_2248)createBlock("liminal_window_noon", new LiminalWindowBlock(QuiltBlockSettings.method_9630((class_4970)class_2246.field_31037).method_9626(class_2498.field_11537)), true, (class_1761)ModItems.LIMINAL_POOLS_ITEM_GROUP);
+    public static final RegistryObject<Block> T_LIME_STAIRS = BLOCKS.register("lime_stairs", ()->new StairBlock(T_LIME.get()::defaultBlockState, BlockBehaviour.Properties.copy(T_LIME.get()).lightLevel((X)->{
+        return 15;
+    })));
 
-    public static final class_2248 LIMINAL_WINDOW_DUSK = (class_2248)createBlock("liminal_window_dusk", new LiminalWindowBlock(QuiltBlockSettings.method_9630((class_4970)class_2246.field_31037).method_9626(class_2498.field_11537)), true, (class_1761)ModItems.LIMINAL_POOLS_ITEM_GROUP);
+    public static final RegistryObject<Item> T_LIME_STAIRS_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("lime_stairs", ()->new BlockItem(T_LIME_STAIRS.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
-    public static final class_2248 LIMINAL_WINDOW_ABYSS = (class_2248)createBlock("liminal_window_abyss", new LiminalWindowBlock(QuiltBlockSettings.method_9630((class_4970)class_2246.field_31037).method_9626(class_2498.field_11537)), true, (class_1761)ModItems.LIMINAL_POOLS_ITEM_GROUP);*/
+    public static final RegistryObject<Block> T_LIME_TILE_TRANSITON_BR = BLOCKS.register("lime_tile_br", ()->new RotatableBlock(BlockBehaviour.Properties.copy(T_LIME.get()).lightLevel((X)->{
+        return 15;
+    })));
+
+    public static final RegistryObject<Item> T_LIME_TILE_TRANSITION_BR_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("lime_tile_br", ()->new BlockItem(T_LIME_TILE_TRANSITON_BR.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+
+    public static final RegistryObject<Block> T_LIME_TILE_WALL = BLOCKS.register("lime_tile_to_wall", ()->new Block(BlockBehaviour.Properties.copy(T_LIME_TILE.get()).lightLevel((X)->{
+        return 15;
+    })));
+
+    public static final RegistryObject<Item> T_LIME_TILE_WALL_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("lime_tile_to_wall", ()->new BlockItem(T_LIME_TILE_WALL.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_LIME_WALL = BLOCKS.register("lime_wall_variant_1", ()->new Block(BlockBehaviour.Properties.copy(T_LIME_TILE.get()).lightLevel((X)->{
+        return 15;
+    })));
+
+    public static final RegistryObject<Item> T_LIME_WALL_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("lime_wall_variant_1", ()->new BlockItem(T_LIME_WALL.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
+
+    public static final RegistryObject<Block> T_LIME_WALL2 = BLOCKS.register("lime_wall_variant_2", ()->new Block(BlockBehaviour.Properties.copy(T_LIME_TILE.get()).lightLevel((X)->{
+        return 15;
+    })));
+
+    public static final RegistryObject<Item> T_LIME_WALL2_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("lime_wall_variant_2", ()->new BlockItem(T_LIME_WALL2.get(), new Item.Properties().tab(CreativeModeTab.TAB_DECORATIONS))));
 
 
     private static boolean never(BlockState p_50806_, BlockGetter p_50807_, BlockPos p_50808_) {

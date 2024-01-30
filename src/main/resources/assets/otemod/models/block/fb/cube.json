@@ -1,0 +1,11 @@
+{
+  "parent": "otemod:block/fb/fullbright",
+  "textures": {
+    "north": "#all",
+    "south": "#all",
+    "west": "#all",
+    "east": "#all",
+    "up": "#all",
+    "down": "#all"
+  }
+}

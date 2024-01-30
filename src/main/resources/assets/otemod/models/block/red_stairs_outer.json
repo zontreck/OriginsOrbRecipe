@@ -1,0 +1,8 @@
+{
+	"parent": "minecraft:block/outer_stairs",
+	"textures": {
+		"bottom": "otemod:block/thresholds/blood_red",
+		"side": "otemod:block/thresholds/blood_red",
+		"top": "otemod:block/thresholds/blood_red"
+	}
+}

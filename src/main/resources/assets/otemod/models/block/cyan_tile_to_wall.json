@@ -1,5 +1,5 @@
 {
-  "parent": "otemod:block/sided",
+  "parent": "otemod:block/fb/sided",
   "textures": {
     "side": "otemod:block/thresholds/hallway/wall/cyan_floor_to_wall",
     "top": "otemod:block/thresholds/cyan"
