@@ -114,6 +114,12 @@ public class ThrownPossBall extends ThrowableItemProjectile
             ItemStack item = getItem();
             CompoundTag tag = item.getTag();
             if(tag == null)tag=new CompoundTag();
+
+            if(tag.contains(ItemStack.TAG_DAMAGE))
+            {
+                tag.remove(ItemStack.TAG_DAMAGE); // Migrate existing poss balls to remove the obsolete damage tag
+            }
+
             if(tag.contains("entity"))
             {
                 if(captured)
