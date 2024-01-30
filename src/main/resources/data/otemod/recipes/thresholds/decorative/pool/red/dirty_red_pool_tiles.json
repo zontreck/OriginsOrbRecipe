@@ -6,14 +6,14 @@
   ],
   "key": {
     "A": {
-      "item": "otemod:red_pool_tiles"
+      "item": "otemod:red_pool_tile"
     },
     "B": {
       "item": "minecraft:slime_ball"
     }
   },
   "result": {
-    "item": "otemod:dirty_red_pool_tiles",
+    "item": "otemod:dirty_red_pool_tile",
     "count": 4
   }
 }

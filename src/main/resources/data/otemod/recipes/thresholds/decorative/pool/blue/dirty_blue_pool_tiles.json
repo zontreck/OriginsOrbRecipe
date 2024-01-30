@@ -5,11 +5,11 @@
       "item": "minecraft:slime_ball"
     },
     {
-      "item": "otemod:blue_pool_tiles"
+      "item": "otemod:blue_pool_tile"
     }
   ],
   "result": {
-    "item": "otemod:dirty_blue_pool_tiles",
+    "item": "otemod:dirty_blue_pool_tile",
     "count": 4
   }
 }
