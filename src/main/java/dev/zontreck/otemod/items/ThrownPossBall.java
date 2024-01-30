@@ -170,6 +170,12 @@ public class ThrownPossBall extends ThrowableItemProjectile
                 // Ensure no entity tag!
                 tag.remove("entity");
 
+                if(tag.size()==0)
+                {
+                    tag=null;
+                    item.setTag(null);
+                }
+
 
                 //if(item.getDamageValue() >= item.getMaxDamage())
                 //    return;
