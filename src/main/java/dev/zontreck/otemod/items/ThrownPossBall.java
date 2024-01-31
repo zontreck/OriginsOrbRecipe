@@ -69,13 +69,10 @@ public class ThrownPossBall extends ThrowableItemProjectile
 
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
-        super.onHitEntity(pResult);
-        if(getItem().getTag().contains("entity"))
+        //super.onHitEntity(pResult);
+        if(getItem().getTag() == null || !getItem().getTag().contains("entity"))
         {
-            // Don't capture the entity
 
-            pResult.getEntity().hurt(this.shooter.getLastDamageSource().thrown(this, this.getOwner()), 0.1F);
-        } else {
             if(pResult.getEntity() instanceof LivingEntity le && !(le instanceof Player))
             {
                 // We don't want to capture players
@@ -97,12 +94,17 @@ public class ThrownPossBall extends ThrowableItemProjectile
 
                 le.remove(RemovalReason.DISCARDED);
             }
+        } else {
+
+            // Don't capture the entity
+
+            pResult.getEntity().hurt(this.shooter.getLastDamageSource().thrown(this, this.getOwner()), 0.1F);
         }
     }
 
     @Override
     protected void onHit(HitResult pResult) {
-        super.onHit(pResult);
+        //super.onHit(pResult);
         if(ServerUtilities.isServer())
         {
             // We do two things here
