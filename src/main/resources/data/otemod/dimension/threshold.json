@@ -2,11 +2,10 @@
   "type": "otemod:threshold",
   "generator": {
     "type": "minecraft:noise",
-    "seed": -1544839021,
     "settings": "otemod:threshold",
     "biome_source": {
-      "type": "minecraft:the_end",
-      "seed": -1544839021
+      "type": "minecraft:multi_noise",
+      "preset": "minecraft:overworld"
     }
   }
 }

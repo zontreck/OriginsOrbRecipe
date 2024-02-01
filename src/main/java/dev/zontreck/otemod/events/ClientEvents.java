@@ -20,7 +20,7 @@ public class ClientEvents {
         static long lastPress;
 
         @SubscribeEvent
-        public static void onKeyInput(InputEvent.KeyInputEvent event)
+        public static void onKeyInput(InputEvent.Key event)
         {
             //OTEMod.LOGGER.info("KEY PRESS: "+event.getKey());
             if(KeyBindings.OPEN_VAULT.matches(event.getKey(), event.getScanCode()) && Minecraft.getInstance().screen == null && lastPress+10 < Instant.now().getEpochSecond())

@@ -147,13 +147,13 @@ public class ConsumptionMending extends Enchantment
                                 if(id.isCurse() && ((dice >= 13) && (dice <= 18)))
                                 {
                                     stack.enchant(id, entry.getValue());
-                                    player.getLevel().playSound(null, player.getOnPos(), SoundEvents.ANVIL_USE, SoundSource.NEUTRAL,1, player.getRandom().nextFloat(0,1));
+                                    player.getLevel().playSound(null, player.getOnPos(), SoundEvents.ANVIL_USE, SoundSource.NEUTRAL,1, player.getRandom().nextFloat());
                                 }
                             }
                         }
 
                         item.shrink(1);
-                        player.getLevel().playSound(null, player.getOnPos(), SoundEvents.PLAYER_BURP, SoundSource.NEUTRAL,1, player.getRandom().nextFloat(0,1));
+                        player.getLevel().playSound(null, player.getOnPos(), SoundEvents.PLAYER_BURP, SoundSource.NEUTRAL,1, player.getRandom().nextFloat());
                     }
                     else item.setDamageValue(nDamage);
 

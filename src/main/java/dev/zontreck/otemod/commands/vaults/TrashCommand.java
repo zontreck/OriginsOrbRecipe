@@ -37,7 +37,7 @@ public class TrashCommand {
             return 0;
         }
         
-        NetworkHooks.openGui(play, new SimpleMenuProvider(container.serverMenu, ChatHelpers.macro("Trash")));
+        NetworkHooks.openScreen(play, new SimpleMenuProvider(container.serverMenu, ChatHelpers.macro("Trash")));
         
         // Add to the master vault registry
         if(VaultContainer.VAULT_REGISTRY.containsKey(play.getUUID()))VaultContainer.VAULT_REGISTRY.remove(play.getUUID());

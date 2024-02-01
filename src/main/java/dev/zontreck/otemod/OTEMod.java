@@ -18,7 +18,6 @@ import dev.zontreck.otemod.implementation.PlayerFirstJoinTag;
 import dev.zontreck.otemod.implementation.compressor.CompressionChamberScreen;
 import dev.zontreck.otemod.implementation.vault.*;
 import dev.zontreck.otemod.integrations.KeyBindings;
-import dev.zontreck.otemod.ore.OreGenerator;
 import dev.zontreck.otemod.recipe.ModRecipes;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.resources.ResourceLocation;
@@ -69,8 +68,6 @@ public class OTEMod
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String MOD_ID = "otemod";
-    public static final String MODIFY_BIOMES = "modify_biomes";
-    public static final ResourceLocation MODIFY_BIOMES_RL = new ResourceLocation(OTEMod.MOD_ID, MODIFY_BIOMES);
     
     //public static List<TeleportContainer> TeleportRegistry = new ArrayList<>();
     public static MinecraftServer THE_SERVER;
@@ -106,7 +103,6 @@ public class OTEMod
         MinecraftForge.EVENT_BUS.register(new CommandRegistry());
         MinecraftForge.EVENT_BUS.register(new VaultWatcher());
         MinecraftForge.EVENT_BUS.register(new dev.zontreck.otemod.zschem.EventHandler());
-        MinecraftForge.EVENT_BUS.register(OreGenerator.class);
         MinecraftForge.EVENT_BUS.register(FlightEnchantment.class);
         MinecraftForge.EVENT_BUS.register(NightVisionEnchantment.class);
 

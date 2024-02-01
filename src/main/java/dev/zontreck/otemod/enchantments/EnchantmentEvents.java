@@ -23,13 +23,13 @@ public class EnchantmentEvents
     }
 
     @SubscribeEvent
-    public static void onTick(LivingEvent.LivingUpdateEvent tick)
+    public static void onTick(LivingEvent.LivingTickEvent tick)
     {
         if(canTick)
         {
             // Process Enchantments
 
-            if(tick.getEntityLiving() instanceof ServerPlayer sp)
+            if(tick.getEntity() instanceof ServerPlayer sp)
             {
                 FlightEnchantment.runEntityTick(sp);
                 ConsumptionMending.onEntityTick(sp);

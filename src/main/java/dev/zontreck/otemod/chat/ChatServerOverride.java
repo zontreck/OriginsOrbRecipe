@@ -98,7 +98,7 @@ public class ChatServerOverride {
         if(ev.getEntity().getLevel().isClientSide)return;
         // Fix for fly ability not copying to new instance on death or other circumstances
         Player old = ev.getOriginal();
-        Player n = ev.getPlayer();
+        Player n = ev.getEntity();
 
         PlayerFlyCache c = PlayerFlyCache.cachePlayer((ServerPlayer)old);
         c.Assert((ServerPlayer)n);
@@ -127,7 +127,7 @@ public class ChatServerOverride {
             prefixStr = ChatColor.DARK_GRAY + "[" + ChatColor.BOLD + XD.prefix_color + XD.prefix + ChatColor.resetChat() + ChatColor.DARK_GRAY + "] ";
         }
 
-        String msg = ev.getMessage();
+        String msg = ev.getRawText();
         msg= ChatColor.doColors(msg);
 
         String nameStr = ChatColor.resetChat() + "< "+ XD.name_color + XD.nickname + ChatColor.resetChat() + " >";

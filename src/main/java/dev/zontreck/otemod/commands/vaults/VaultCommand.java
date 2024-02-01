@@ -51,7 +51,7 @@ public class VaultCommand {
             return;
         }
         
-        NetworkHooks.openGui(p, new SimpleMenuProvider(container.serverMenu, ChatHelpers.macro("Vault " + i)));
+        NetworkHooks.openScreen(p, new SimpleMenuProvider(container.serverMenu, ChatHelpers.macro("Vault " + i)));
         
         // Add to the master vault registry
         if(VaultContainer.VAULT_REGISTRY.containsKey(p.getUUID()))VaultContainer.VAULT_REGISTRY.remove(p.getUUID());

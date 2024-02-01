@@ -17,7 +17,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public final class ModMenuTypes 
 {
-    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, OTEMod.MOD_ID);
+    public static final DeferredRegister<MenuType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.MENU_TYPES, OTEMod.MOD_ID);
 
     public static final RegistryObject<MenuType<VaultMenu>> VAULT = registerMenuType(VaultMenu::new, "vault");
 

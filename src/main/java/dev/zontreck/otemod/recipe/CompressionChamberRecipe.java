@@ -10,7 +10,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistryEntry;
+import net.minecraftforge.registries.ForgeRegistry;
 import org.jetbrains.annotations.Nullable;
 
 public class CompressionChamberRecipe implements Recipe<SimpleContainer> {
@@ -75,7 +75,7 @@ public class CompressionChamberRecipe implements Recipe<SimpleContainer> {
         public static final String ID = "compressing";
     }
 
-    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<CompressionChamberRecipe>
+    public static class Serializer implements RecipeSerializer<CompressionChamberRecipe>
     {
         public static final Serializer INSTANCE = new Serializer();
         public static final ResourceLocation ID = new ResourceLocation(OTEMod.MOD_ID, Type.ID);

@@ -109,7 +109,7 @@ public class EventHandler {
         if(ent instanceof Player)
         {
             ServerPlayer play = (ServerPlayer)ent;
-            LivingEntity killed = ev.getEntityLiving();
+            LivingEntity killed = ev.getEntity();
 
             ItemStack stack = play.getMainHandItem();
             int levelOfEgging = ItemUtils.getEnchantmentLevel(ModEnchantments.MOB_EGGING_ENCHANTMENT.get(),stack);

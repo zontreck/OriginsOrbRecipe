@@ -68,7 +68,7 @@ public class StarterCommand
             {
                 try {
                     StarterContainer container = new StarterContainer(player);
-                    NetworkHooks.openGui(player, new SimpleMenuProvider(container.serverMenu, ChatHelpers.macro("Starter Gear")));
+                    NetworkHooks.openScreen(player, new SimpleMenuProvider(container.serverMenu, ChatHelpers.macro("Starter Gear")));
 
 
                     // Add to the master vault registry
@@ -99,7 +99,7 @@ public class StarterCommand
             return;
         }
 
-        NetworkHooks.openGui(p, new SimpleMenuProvider(container.serverMenu, ChatHelpers.macro("Starter Gear")));
+        NetworkHooks.openScreen(p, new SimpleMenuProvider(container.serverMenu, ChatHelpers.macro("Starter Gear")));
 
         // Add to the master vault registry
         if(StarterContainer.VAULT_REGISTRY.containsKey(p.getUUID()))VaultContainer.VAULT_REGISTRY.remove(p.getUUID());
