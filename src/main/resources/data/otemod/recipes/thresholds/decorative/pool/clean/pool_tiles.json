@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AB",
+    "BA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:white_concrete"
+    },
+    "B": {
+      "item": "minecraft:white_terracotta"
+    }
+  },
+  "result": {
+    "item": "otemod:pool_tile",
+    "count": 4
+  }
+}

@@ -1,6 +1,7 @@
 package dev.zontreck.otemod.enchantments;
 
 import dev.zontreck.libzontreck.util.ItemUtils;
+import dev.zontreck.libzontreck.util.ServerUtilities;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.effects.ModEffects;
@@ -28,7 +29,6 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Mod.EventBusSubscriber(modid = OTEMod.MOD_ID)
 public class FlightEnchantment extends Enchantment
 {
 
@@ -75,10 +75,10 @@ public class FlightEnchantment extends Enchantment
 
 
     public static AtomicInteger TICKS = new AtomicInteger(0);
-    @SubscribeEvent
-    public static void onEnchantmentTick(TickEvent.PlayerTickEvent event)
+
+    public static void runEntityTick(ServerPlayer sp)
     {
-        if(event.side == LogicalSide.CLIENT) return;
+        if(ServerUtilities.isClient()) return;
 
         if(TICKS.getAndIncrement() >= (5*20))
         {
@@ -91,23 +91,17 @@ public class FlightEnchantment extends Enchantment
                 OTEMod.LOGGER.info("> Flight Enchantment Tick <");
             }
 
-            if(event.phase == TickEvent.Phase.END)
+            ItemStack feet = sp.getItemBySlot(EquipmentSlot.FEET);
+
+            boolean hasFlight = false;
+
+            if(ItemUtils.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get(), feet)>0)hasFlight=true;
+
+            if(hasFlight)
             {
+                MobEffectInstance inst = new MobEffectInstance(ModEffects.FLIGHT.get(), -1, 0, false, false, true);
 
-                ServerPlayer sp = (ServerPlayer) event.player;
-
-                ItemStack feet = sp.getItemBySlot(EquipmentSlot.FEET);
-
-                boolean hasFlight = false;
-
-                if(ItemUtils.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get(), feet)>0)hasFlight=true;
-
-                if(hasFlight)
-                {
-                    MobEffectInstance inst = new MobEffectInstance(ModEffects.FLIGHT.get(), -1, 0, false, false, true);
-
-                    event.player.addEffect(inst);
-                }
+                sp.addEffect(inst);
             }
         }
 

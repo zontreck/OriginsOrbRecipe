@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A  ",
+    "AA ",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "otemod:dirty_red_pool_tile"
+    }
+  },
+  "result": {
+    "item": "otemod:dirty_red_pool_tile_stairs",
+    "count": 4
+  }
+}

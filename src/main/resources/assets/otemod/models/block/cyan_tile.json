@@ -1,0 +1,7 @@
+{
+  "parent": "otemod:block/fb/top",
+  "textures": {
+    "top": "otemod:block/thresholds/hallway/floor/tiles/cyan_tile_w_circle",
+    "side": "otemod:block/thresholds/cyan"
+  }
+}

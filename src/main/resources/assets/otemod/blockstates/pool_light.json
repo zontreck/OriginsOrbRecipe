@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "otemod:block/thresholds/pool/light/pool_light"
+    }
+  }
+}

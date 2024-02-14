@@ -1,6 +1,7 @@
 package dev.zontreck.otemod.enchantments;
 
 import dev.zontreck.libzontreck.util.ItemUtils;
+import dev.zontreck.libzontreck.util.ServerUtilities;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.effects.ModEffects;
@@ -19,7 +20,6 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Mod.EventBusSubscriber(modid = OTEMod.MOD_ID)
 public class NightVisionEnchantment extends Enchantment
 {
 
@@ -53,10 +53,10 @@ public class NightVisionEnchantment extends Enchantment
     }
 
     public static AtomicInteger TICKS = new AtomicInteger(0);
-    @SubscribeEvent
-    public static void onEnchantmentTick(TickEvent.PlayerTickEvent event)
+
+    public static void runEntityTick(ServerPlayer sp)
     {
-        if(event.side == LogicalSide.CLIENT) return;
+        if(ServerUtilities.isClient()) return;
 
         if(TICKS.getAndIncrement() >= (2*20))
         {
@@ -69,23 +69,18 @@ public class NightVisionEnchantment extends Enchantment
                 OTEMod.LOGGER.info("> NVision Enchantment Tick <");
             }
 
-            if(event.phase == TickEvent.Phase.END)
+
+            ItemStack feet = sp.getItemBySlot(EquipmentSlot.HEAD);
+
+            boolean hasNV = false;
+
+            if(ItemUtils.getEnchantmentLevel(ModEnchantments.NIGHT_VISION_ENCHANT.get(), feet)>0)hasNV=true;
+
+            if(hasNV)
             {
+                MobEffectInstance inst = new MobEffectInstance(MobEffects.NIGHT_VISION, 60*20, 4, false, false, true);
 
-                ServerPlayer sp = (ServerPlayer) event.player;
-
-                ItemStack feet = sp.getItemBySlot(EquipmentSlot.HEAD);
-
-                boolean hasNV = false;
-
-                if(ItemUtils.getEnchantmentLevel(ModEnchantments.NIGHT_VISION_ENCHANT.get(), feet)>0)hasNV=true;
-
-                if(hasNV)
-                {
-                    MobEffectInstance inst = new MobEffectInstance(MobEffects.NIGHT_VISION, 60*20, 4, false, false, true);
-
-                    event.player.addEffect(inst);
-                }
+                sp.addEffect(inst);
             }
         }
 

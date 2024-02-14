@@ -1,5 +1,6 @@
 package dev.zontreck.otemod.blocks.entity;
 
+import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.otemod.implementation.OutputItemStackHandler;
 import dev.zontreck.otemod.implementation.compressor.CompressionChamberMenu;
 import dev.zontreck.otemod.implementation.energy.OTEEnergy;
@@ -109,7 +110,7 @@ public class CompressionChamberBlockEntity extends BlockEntity implements MenuPr
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Compression Chamber");
+        return ChatHelpers.macro("Compression Chamber");
     }
 
     @Override

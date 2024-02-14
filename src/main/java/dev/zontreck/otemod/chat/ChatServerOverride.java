@@ -48,11 +48,23 @@ public class ChatServerOverride {
         ItemStack feet = play.getItemBySlot(EquipmentSlot.FEET);
         if(ItemUtils.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get(), feet)>0)mayFly = true;
 
-        playerAbilities.mayfly=mayFly;
-        PlayerFlyCache c = PlayerFlyCache.cachePlayer(play);
-        c.Flying=prof.flying;
-        c.FlyEnabled = mayFly;
-        c.Assert(play);
+        if(play.gameMode.isCreative())
+        {
+            // Skip all this!
+            playerAbilities.mayfly=true;
+            playerAbilities.flying=true;
+
+            play.onUpdateAbilities();
+        }else{
+
+            playerAbilities.mayfly=mayFly;
+            PlayerFlyCache c = PlayerFlyCache.cachePlayer(play);
+            c.Flying=prof.flying;
+            c.FlyEnabled = mayFly;
+            c.Assert(play);
+        }
+
+
 
         if(StarterProvider.exists())
             OTEMod.checkFirstJoin(ev.player);
@@ -126,7 +138,7 @@ public class ChatServerOverride {
         hover=hover.withFont(Style.DEFAULT_FONT).withHoverEvent(HoverTip.get(ChatColor.MINECOIN_GOLD+"User Name: "+XD.username));
         ev.setCanceled(true);
 
-        ChatHelpers.broadcast(Component.literal(prefixStr + nameStr + message).setStyle(hover), ev.getPlayer().server);
+        ChatHelpers.broadcast(ChatHelpers.macro(prefixStr + nameStr + message).setStyle(hover), ev.getPlayer().server);
     }
 
 

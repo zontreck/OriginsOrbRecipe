@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A  ",
+    "AA ",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "otemod:blood_red"
+    }
+  },
+  "result": {
+    "item": "otemod:red_stairs",
+    "count": 4
+  }
+}

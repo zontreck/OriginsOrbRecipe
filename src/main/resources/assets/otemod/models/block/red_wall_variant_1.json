@@ -1,0 +1,7 @@
+{
+  "parent": "otemod:block/fb/sided",
+  "textures": {
+    "side": "otemod:block/thresholds/hallway/wall/red_wall",
+    "top": "otemod:block/thresholds/blood_red"
+  }
+}

@@ -21,7 +21,7 @@ public class PossBallItem extends Item
     }
     @Override
     public boolean isFoil(ItemStack pStack) {
-        if(!pStack.hasTag())
+        if(!pStack.hasTag() || pStack.getTag()==null)
         {
             pStack.setTag(new CompoundTag());
         }
@@ -32,25 +32,19 @@ public class PossBallItem extends Item
     }
 
     @Override
-    public boolean isDamageable(ItemStack stack) {
-        return true;
-    }
-
-    @Override
-    public int getMaxDamage(ItemStack stack) {
-        return 2;
-    }
-
-    @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack stack = pPlayer.getItemInHand(pUsedHand);
         pLevel.playSound((Player) null, pPlayer.getX(), pPlayer.getY(), pPlayer.getZ(), SoundEvents.EGG_THROW, SoundSource.PLAYERS, 0.5F, 0.4F / (pLevel.random.nextFloat() * 0.4f + 0.8f));
         if(!pLevel.isClientSide)
         {
-            ThrownPossBall TPB = new ThrownPossBall(pLevel, pPlayer);
-            if(pPlayer.getAbilities().instabuild) TPB.setItem(stack.copy());
-            else
-                TPB.setItem(stack);
+            ItemStack single = stack.copy();
+            single.setCount(1);
+
+            stack.shrink(1);
+
+            ThrownPossBall TPB = new ThrownPossBall(pLevel, pPlayer, single);
+
+
             TPB.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
             pLevel.addFreshEntity(TPB);
         }

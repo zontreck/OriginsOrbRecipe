@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "otemod:block/red_tile_to_wall"
+    }
+  }
+}

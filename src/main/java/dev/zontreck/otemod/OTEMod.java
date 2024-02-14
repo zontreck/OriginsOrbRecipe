@@ -17,6 +17,8 @@ import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.effects.ModEffects;
+import dev.zontreck.otemod.enchantments.FlightEnchantment;
+import dev.zontreck.otemod.enchantments.NightVisionEnchantment;
 import dev.zontreck.otemod.implementation.CreativeModeTabs;
 import dev.zontreck.otemod.implementation.InventoryBackup;
 import dev.zontreck.otemod.implementation.Messages;
@@ -126,6 +128,8 @@ public class OTEMod
         MinecraftForge.EVENT_BUS.register(new VaultWatcher());
         MinecraftForge.EVENT_BUS.register(new dev.zontreck.otemod.zschem.EventHandler());
         ModMenuTypes.CONTAINERS.register(bus);
+        MinecraftForge.EVENT_BUS.register(FlightEnchantment.class);
+        MinecraftForge.EVENT_BUS.register(NightVisionEnchantment.class);
 
         ModBlocks.register(bus);
         CreativeModeTabs.REGISTER.register(bus);

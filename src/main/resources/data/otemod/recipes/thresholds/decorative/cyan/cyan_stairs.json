@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A  ",
+    "AA ",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "otemod:cyan"
+    }
+  },
+  "result": {
+    "item": "otemod:cyan_stairs",
+    "count": 4
+  }
+}

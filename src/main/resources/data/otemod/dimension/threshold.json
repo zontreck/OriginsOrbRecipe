@@ -4,7 +4,8 @@
     "type": "minecraft:noise",
     "settings": "otemod:threshold",
     "biome_source": {
-      "type": "minecraft:the_end"
+      "type": "minecraft:multi_noise",
+      "preset": "minecraft:overworld"
     }
   }
 }

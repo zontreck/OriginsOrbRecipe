@@ -5,6 +5,7 @@ import dev.zontreck.libzontreck.lore.ExtraLore;
 import dev.zontreck.libzontreck.lore.LoreContainer;
 import dev.zontreck.libzontreck.lore.LoreEntry;
 import dev.zontreck.libzontreck.util.ChatHelpers;
+import dev.zontreck.libzontreck.util.ServerUtilities;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -31,26 +32,40 @@ public class ThrownPossBall extends ThrowableItemProjectile
 {
     boolean captured = false;
     LivingEntity shooter;
+    ItemStack self;
+
     public ThrownPossBall(EntityType<? extends ThrownPossBall> entity, Level level)
     {
         super(entity, level);
     }
-    public ThrownPossBall(Level level, LivingEntity shooter)
+    public ThrownPossBall(Level level, LivingEntity shooter, ItemStack item)
     {
         super(EntityType.SNOWBALL, shooter, level);
 
         this.shooter = shooter;
-    }
-
-    public ThrownPossBall(Level pLevel, double pX, double pY, double pZ)
-    {
-        super(EntityType.SNOWBALL, pX, pY, pZ, pLevel);
+        if(item.getTag() == null)
+        {
+            item.setTag(new CompoundTag());
+        }
+        self=item;
     }
 
     @Override
     protected Item getDefaultItem()
     {
         return ModItems.POSS_BALL.get();
+    }
+
+    void returnBall()
+    {
+
+        ItemEntity x;
+
+        if(shooter!=null)
+            x = new ItemEntity(level(), shooter.position().x, shooter.position().y, shooter.position().z, self, 0, 0, 0);
+        else
+            x = new ItemEntity(level(), position().x, position().y, position().z, self, 0, 0, 0);
+        level().addFreshEntity(x);
     }
 
     @Override
@@ -69,31 +84,52 @@ public class ThrownPossBall extends ThrowableItemProjectile
     @Override
     protected void onHitEntity(EntityHitResult pResult) {
         super.onHitEntity(pResult);
-        if(getItem().getTag().contains("entity"))
+        if(ServerUtilities.isServer())
         {
-            // Don't capture the entity
-
-            pResult.getEntity().hurt(this.damageSources().thrown(this, this.getOwner()), 0.1F);
-        } else {
-            if(pResult.getEntity() instanceof LivingEntity le && !(le instanceof Player))
+            CompoundTag tag = self.getTag();
+            if(tag == null)tag = new CompoundTag();
+            if(tag.contains(ItemStack.TAG_DAMAGE))
             {
-                // We don't want to capture players
-                // Store the entity in the entity tag, then kill the entity
-                CompoundTag tag = new CompoundTag();
-                String entityName = le.getName().getString();
-                le.save(tag);
+                tag.remove(ItemStack.TAG_DAMAGE);
+            }
 
-                getItem().getTag().put("entity", tag);
-                captured=true;
 
-                LoreContainer cont = new LoreContainer(getItem());
-                cont.miscData.loreData.clear();
-                LoreEntry entry = new LoreEntry.Builder().bold(true).text(ChatColor.doColors("!Dark_Green!Captured Mob: !Dark_Purple!" + entityName)).build();
-                cont.miscData.loreData.add(entry);
+            if(self.getTag() == null || !self.getTag().contains("entity"))
+            {
+            /*
 
-                cont.commitLore();
+            Ensure the tag is not null
 
-                le.remove(RemovalReason.DISCARDED);
+             */
+
+                if(pResult.getEntity() instanceof LivingEntity le && !(le instanceof Player player))
+                {
+                    // We don't want to capture players
+                    // Store the entity in the entity tag, then kill the entity
+
+
+                    CompoundTag store = new CompoundTag();
+                    String entityName = le.getName().getString();
+                    le.save(store);
+
+                    self.getTag().put("entity", store);
+                    self.setCount(1);
+                    captured=true;
+
+                    LoreContainer cont = new LoreContainer(self);
+                    cont.miscData.loreData.clear();
+                    LoreEntry entry = new LoreEntry.Builder().bold(true).text(ChatColor.doColors("!Dark_Green!Captured Mob: !Dark_Purple!" + entityName)).build();
+                    cont.miscData.loreData.add(entry);
+
+                    cont.commitLore();
+
+                    le.remove(RemovalReason.DISCARDED);
+                }
+            } else {
+
+                // Don't capture the entity
+
+                //pResult.getEntity().hurt(this.shooter.getLastDamageSource().thrown(this, this.getOwner()), 0.1F);
             }
         }
     }
@@ -101,7 +137,8 @@ public class ThrownPossBall extends ThrowableItemProjectile
     @Override
     protected void onHit(HitResult pResult) {
         super.onHit(pResult);
-        if(!this.level().isClientSide)
+
+        if(ServerUtilities.isServer())
         {
             // We do two things here
 
@@ -109,19 +146,22 @@ public class ThrownPossBall extends ThrowableItemProjectile
             // 2. If no entity, and none was captured, decrease the durability a little
             // 3. Drop the PossBall with entity, or without
 
-            ItemStack item = getItem();
+            ItemStack item = self;
             CompoundTag tag = item.getTag();
+
+            if(tag==null)tag=new CompoundTag();
+
+            if(tag.contains(ItemStack.TAG_DAMAGE))
+            {
+                tag.remove(ItemStack.TAG_DAMAGE); // Migrate existing poss balls to remove the obsolete damage tag
+            }
+
             if(tag.contains("entity"))
             {
                 if(captured)
                 {
                     // Spawn poss ball item with the entity NBT
-                    ItemEntity entity;
-                    if(shooter != null)
-                        entity = new ItemEntity(level(), shooter.position().x, shooter.position().y, shooter.position().z, item, 0, 0, 0);
-                    else
-                        entity = new ItemEntity(level(), shooter.position().x, shooter.position().y, shooter.position().z, item, 0, 0, 0);
-                    level().addFreshEntity(entity);
+                    returnBall();
                 } else {
                     // Spawn the real entity
                     Optional<Entity> entity = EntityType.create(tag.getCompound("entity"), level());
@@ -144,13 +184,8 @@ public class ThrownPossBall extends ThrowableItemProjectile
                         tag.remove("entity");
                     }
 
-                    ItemEntity x;
 
-                    if(shooter!=null)
-                        x = new ItemEntity(level(), shooter.position().x, shooter.position().y, shooter.position().z, item, 0, 0, 0);
-                    else
-                        x = new ItemEntity(level(), position().x, position().y, position().z, item, 0, 0, 0);
-                    level().addFreshEntity(x);
+                    returnBall();
                 }
             } else {
                 // No capture
@@ -161,18 +196,18 @@ public class ThrownPossBall extends ThrowableItemProjectile
                 // Ensure no entity tag!
                 tag.remove("entity");
 
+                if(tag.size()==0)
+                {
+                    tag=null;
+                    item.setTag(new CompoundTag());
+                }
+
 
                 //if(item.getDamageValue() >= item.getMaxDamage())
                 //    return;
 
-                ItemEntity entity;
 
-                if(shooter!= null)
-                    entity = new ItemEntity(level(),shooter.position().x, shooter.position().y, shooter.position().z, item, 0, 0, 0);
-                else
-
-                    entity = new ItemEntity(level(), position().x, position().y, position().z, item, 0, 0, 0);
-                level().addFreshEntity(entity);
+                returnBall();
             }
 
             this.level().broadcastEntityEvent(this, (byte)3);

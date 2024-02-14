@@ -20,6 +20,11 @@ public class ModEnchantments {
 
     public static final RegistryObject<Enchantment> BORROWED_PROTECTION = REGISTERS.register("borrowed_protection", ()->new BorrowedProtectionEnchantment(Enchantment.Rarity.UNCOMMON, EnchantmentCategory.ARMOR, ARMOR_SLOTS));
 
+
+    public static final RegistryObject<Enchantment> CONSUMPTION_MENDING = REGISTERS.register("consumption_mending", ()->new ConsumptionMending(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.FEET, EquipmentSlot.LEGS, EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND));
+
+
+
     public static final RegistryObject<Enchantment> NIGHT_VISION_ENCHANT = REGISTERS.register("night_vision", ()->new NightVisionEnchantment(EquipmentSlot.HEAD));
 
     public static void register(IEventBus bus){

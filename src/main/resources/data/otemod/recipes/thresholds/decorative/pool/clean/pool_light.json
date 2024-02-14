@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "ABA",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "otemod:pool_tile"
+    },
+    "B": {
+      "item": "minecraft:glowstone"
+    }
+  },
+  "result": {
+    "item": "otemod:pool_light",
+    "count": 4
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "otemod:block/red_tile_br",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "otemod:block/red_tile_br"
+    },
+    "facing=south": {
+      "model": "otemod:block/red_tile_br",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "otemod:block/red_tile_br",
+      "y": 270
+    }
+  }
+}
