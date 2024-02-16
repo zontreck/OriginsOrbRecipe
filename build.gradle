@@ -166,7 +166,7 @@ dependencies {
     //compileOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge-api:${jei}")
     //runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei}")
 
-    runtimeOnly fg.deobf("curse.maven:mekanism-268560:4866575")
+    //runtimeOnly fg.deobf("curse.maven:mekanism-268560:4866575")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

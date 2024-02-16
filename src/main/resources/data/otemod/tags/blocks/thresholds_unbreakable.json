@@ -1,8 +1,8 @@
 {
   "values": [
-    "#otemod:blocks/thresholds/red",
-    "#otemod:blocks/thresholds/cyan",
-    "#otemod:blocks/thresholds/lime",
-    "#otemod:blocks/thresholds/pool"
+    "#otemod:thresholds/red",
+    "#otemod:thresholds/cyan",
+    "#otemod:thresholds/lime",
+    "#otemod:thresholds/pool"
   ]
 }
