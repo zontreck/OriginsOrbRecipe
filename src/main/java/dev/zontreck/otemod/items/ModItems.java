@@ -16,7 +16,7 @@ public class ModItems {
 
     public static final RegistryObject<Item> ETERNIUM_FRAGMENT = CreativeModeTabs.addToOTEModTab(ITEMS.register("eternium_fragment", () -> new Item(new Item.Properties())));
 
-    public static final RegistryObject<Item> IHAN_CRYSTAL = CreativeModeTabs.addToOTEModTab(ITEMS.register("ihan_crystal", () -> new Item(new Item.Properties())));
+    public static final RegistryObject<Item> IHAN_CRYSTAL = CreativeModeTabs.addToOTEModTab(ITEMS.register("ihan_crystal", () -> new IhanCrystal()));
 
 
 
