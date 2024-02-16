@@ -1,6 +1,5 @@
 {
     "values": [
-        "#forge:storage_blocks/eternium",
-        "#forge:storage_blocks/ilusium"
+        "#forge:storage_blocks/eternium"
     ]
 }

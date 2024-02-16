@@ -2,7 +2,6 @@
     "values": [
         "#forge:ores/cobalt",
         "#forge:ores/eternium",
-        "#forge:ores/vaultsteel",
-        "#forge:ores/ilusium"
+        "#forge:ores/vaultsteel"
     ]
 }

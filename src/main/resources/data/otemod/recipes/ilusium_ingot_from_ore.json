@@ -1,11 +1,12 @@
 {
-  "type": "minecraft:smelting",
-  "ingredient": [
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
     {
-      "tag": "forge:ores/ilusium"
+      "tag": "otemod:deprecated"
     }
   ],
-  "result": "otemod:ilusium_ingot",
-  "experience": 3,
-  "cookingtime": 600
+  "result": {
+    "item": "otemod:deprecated",
+    "count": 1
+  }
 }

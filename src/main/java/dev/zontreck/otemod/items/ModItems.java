@@ -18,7 +18,6 @@ public class ModItems {
 
     public static final RegistryObject<Item> IHAN_CRYSTAL = CreativeModeTabs.addToOTEModTab(ITEMS.register("ihan_crystal", () -> new Item(new Item.Properties())));
 
-    public static final RegistryObject<Item> AURORA_COMPOUND = CreativeModeTabs.addToOTEModTab(ITEMS.register("aurora_compound", () -> new Item(new Item.Properties())));
 
 
     public static final RegistryObject<Item> ETERNIUM_RAW_ORE = CreativeModeTabs.addToOTEModTab(ITEMS.register("eternium_ore", () -> new Item(new Item.Properties())));
@@ -58,14 +57,10 @@ public class ModItems {
 
     public static final RegistryObject<Item> POSS_BALL = CreativeModeTabs.addToOTEModTab(ITEMS.register("poss_ball", () -> new PossBallItem(new Item.Properties())));
 
-    public static final RegistryObject<Item> ILUSIUM_ORE = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_ore", () -> new Item(new Item.Properties().fireResistant())));
-    public static final RegistryObject<Item> ILUSIUM_ROD = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_rod", () -> new Item(new Item.Properties().fireResistant())));
-
-    //public static final RegistryObject<Item> ILUSIUM_DUST = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_dust", () -> new Item(new Item.Properties().fireResistant())));
-
-    public static final RegistryObject<Item> ILUSIUM_INGOT = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_ingot", () -> new Item(new Item.Properties().fireResistant())));
 
     public static final RegistryObject<Item> EMPTY_SPAWN_EGG = CreativeModeTabs.addToOTEModTab(ITEMS.register("empty_spawn_egg", () -> new Item(new Item.Properties())));
+
+    public static final RegistryObject<Item> GENERIC_DEPRECATED_ITEM = CreativeModeTabs.addToOTEModTab(ITEMS.register("deprecated", ()->new DeprecatedItem()));
 
     
     //public static final RegistryObject<Item> POSSUM_SPAWN_EGG = ITEMS.register("possum_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.POSSUM, 0x938686, 0xc68787, new Item.Properties())));

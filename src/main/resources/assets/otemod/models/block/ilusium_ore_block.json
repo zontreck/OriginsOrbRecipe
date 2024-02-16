@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "otemod:block/ilusium_ore_block"
+        "all": "otemod:block/deprecated"
     }
 }

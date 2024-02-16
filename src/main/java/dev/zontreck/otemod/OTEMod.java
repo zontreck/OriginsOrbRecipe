@@ -26,6 +26,7 @@ import dev.zontreck.otemod.implementation.PlayerFirstJoinTag;
 import dev.zontreck.otemod.implementation.compressor.CompressionChamberScreen;
 import dev.zontreck.otemod.implementation.vault.*;
 import dev.zontreck.otemod.integrations.KeyBindings;
+import dev.zontreck.otemod.items.DeprecatedModItems;
 import dev.zontreck.otemod.recipe.ModRecipes;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -134,6 +135,7 @@ public class OTEMod
         ModBlocks.register(bus);
         CreativeModeTabs.REGISTER.register(bus);
         ModItems.register(bus);
+        DeprecatedModItems.register(bus);
         ModEntities.register(bus);
         ModEnchantments.register(bus);
         ModEntityTypes.register(bus);
