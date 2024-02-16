@@ -48,49 +48,26 @@ public class ModBlocks {
 
     public static final RegistryObject<Item> DEEPSLATE_ETERNIUM_ORE_BLOCK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("deepslate_eternium_ore_block", () -> new BlockItem(DEEPSLATE_ETERNIUM_ORE_BLOCK.get(), new Item.Properties())));
 
-    public static final RegistryObject<Block> AURORA_BLOCK = BLOCKS.register("aurora_block", () -> new Block(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(9f).explosionResistance(100000f).destroyTime(10).sound(SoundType.NETHERITE_BLOCK)));
-
-    public static final RegistryObject<Item> AURORA_BLOCK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("aurora_block", () -> new BlockItem(AURORA_BLOCK.get(), new Item.Properties())));
-
-
-
-    public static final RegistryObject<Block> AURORA_DOOR = BLOCKS.register("aurora_door", AuroraDoorBlock::new);
-
-    public static final RegistryObject<Item> AURORA_DOOR_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("aurora_door", () -> new BlockItem(AURORA_DOOR.get(), new Item.Properties())));
-
-
     public static final RegistryObject<Block> CLEAR_GLASS_BLOCK = BLOCKS.register("clear_glass_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.GLASS).strength(1f).destroyTime(6).noOcclusion().isViewBlocking(ModBlocks::never)));
 
     public static final RegistryObject<Item> CLEAR_GLASS_BLOCK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("clear_glass_block", () -> new BlockItem(CLEAR_GLASS_BLOCK.get(), new Item.Properties())));
 
 
-    public static final RegistryObject<Block> ITEM_SCRUBBER = BLOCKS.register("item_scrubber", ()->new ItemScrubberBlock(BlockBehaviour.Properties.copy(ModBlocks.AURORA_BLOCK.get()).noOcclusion().isViewBlocking(ModBlocks::never)));
+    public static final RegistryObject<Block> ITEM_SCRUBBER = BLOCKS.register("item_scrubber", ()->new ItemScrubberBlock(BlockBehaviour.Properties.copy(ModBlocks.ETERNIUM_BLOCK.get()).noOcclusion().isViewBlocking(ModBlocks::never)));
 
     public static final RegistryObject<Item> ITEM_SCRUBBER_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("item_scrubber", ()->new BlockItem(ITEM_SCRUBBER.get(), new Item.Properties())));
 
-    public static final RegistryObject<Block> MAGICAL_SCRUBBER = BLOCKS.register("magical_scrubber", ()->new MagicalScrubberBlock(BlockBehaviour.Properties.copy(ModBlocks.AURORA_BLOCK.get()).noOcclusion().isViewBlocking(ModBlocks::never)));
+    public static final RegistryObject<Block> MAGICAL_SCRUBBER = BLOCKS.register("magical_scrubber", ()->new MagicalScrubberBlock(BlockBehaviour.Properties.copy(ModBlocks.ETERNIUM_BLOCK.get()).noOcclusion().isViewBlocking(ModBlocks::never)));
 
     public static final RegistryObject<Item> MAGICAL_SCRUBBER_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("magical_scrubber", ()->new BlockItem(MAGICAL_SCRUBBER.get(), new Item.Properties())));
     
 
-    public static final RegistryObject<Block> STABLE_SINGULARITY = BLOCKS.register("stable_singularity", ()->new Block(BlockBehaviour.Properties.copy(ModBlocks.AURORA_BLOCK.get()).noOcclusion().isViewBlocking(ModBlocks::never)));
+    public static final RegistryObject<Block> STABLE_SINGULARITY = BLOCKS.register("stable_singularity", ()->new Block(BlockBehaviour.Properties.copy(ModBlocks.ETERNIUM_BLOCK.get()).noOcclusion().isViewBlocking(ModBlocks::never)));
 
     public static final RegistryObject<Item> STABLE_SINGULARITY_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("stable_singularity", ()->new BlockItem(STABLE_SINGULARITY.get(), new Item.Properties())));
 
-    public static final RegistryObject<Block> ILUSIUM_ORE_BLOCK = BLOCKS.register("ilusium_ore_block", () -> new Block(BlockBehaviour.Properties.copy(ModBlocks.ETERNIUM_ORE_BLOCK.get()).noOcclusion()));
 
-    public static final RegistryObject<Item> ILUSIUM_ORE_BLOCK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_ore_block", () -> new BlockItem(ILUSIUM_ORE_BLOCK.get(), new Item.Properties())));
-
-    public static final RegistryObject<Block> DEEPSLATE_ILUSIUM_ORE_BLOCK = BLOCKS.register("deepslate_ilusium_ore_block", () -> new Block(BlockBehaviour.Properties.copy(ILUSIUM_ORE_BLOCK.get()).noOcclusion()));
-
-    public static final RegistryObject<Item> DEEPSLATE_ILUSIUM_ORE_BLOCK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("deepslate_ilusium_ore_block", () -> new BlockItem(DEEPSLATE_ILUSIUM_ORE_BLOCK.get(), new Item.Properties())));
-
-
-    public static final RegistryObject<Block> ILUSIUM_BLOCK = BLOCKS.register("ilusium_block", () -> new Block(BlockBehaviour.Properties.copy(ModBlocks.ETERNIUM_BLOCK.get()).noOcclusion().strength(5, 20).requiresCorrectToolForDrops()));
-
-    public static final RegistryObject<Item> ILUSIUM_BLOCK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("ilusium_block", () -> new BlockItem(ILUSIUM_BLOCK.get(), new Item.Properties())));
-
-    public static final RegistryObject<Block> COMPRESSION_CHAMBER_BLOCK = BLOCKS.register("compression_chamber", ()->new CompressionChamberBlock(BlockBehaviour.Properties.copy(ModBlocks.ILUSIUM_BLOCK.get()).noOcclusion().isViewBlocking(ModBlocks::never)));
+    public static final RegistryObject<Block> COMPRESSION_CHAMBER_BLOCK = BLOCKS.register("compression_chamber", ()->new CompressionChamberBlock(BlockBehaviour.Properties.copy(ModBlocks.ETERNIUM_BLOCK.get()).noOcclusion().isViewBlocking(ModBlocks::never)));
 
     public static final RegistryObject<Item> COMPRESSION_CHAMBER_BLOCK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("compression_chamber", ()->new BlockItem(COMPRESSION_CHAMBER_BLOCK.get(), new Item.Properties())));
 
@@ -101,12 +78,6 @@ public class ModBlocks {
     public static final RegistryObject<Block> LAYERED_COMPRESSED_OBSIDIAN_BLOCK = BLOCKS.register("layered_compressed_obsidian_block", ()->new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)));
 
     public static final RegistryObject<Item> LAYERED_COMPRESSED_OBSIDIAN_BLOCK_I = CreativeModeTabs.addToOTEModTab(ITEMS.register("layered_compressed_obsidian_block", ()->new BlockItem(LAYERED_COMPRESSED_OBSIDIAN_BLOCK.get(), new Item.Properties())));
-
-
-
-
-
-
 
 
 

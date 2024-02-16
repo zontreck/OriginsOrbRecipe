@@ -16,6 +16,7 @@ import dev.zontreck.libzontreck.profiles.Profile;
 import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.vectors.Vector3;
+import dev.zontreck.otemod.blocks.DeprecatedModBlocks;
 import dev.zontreck.otemod.effects.ModEffects;
 import dev.zontreck.otemod.enchantments.FlightEnchantment;
 import dev.zontreck.otemod.enchantments.NightVisionEnchantment;
@@ -133,6 +134,7 @@ public class OTEMod
         MinecraftForge.EVENT_BUS.register(NightVisionEnchantment.class);
 
         ModBlocks.register(bus);
+        DeprecatedModBlocks.register(bus);
         CreativeModeTabs.REGISTER.register(bus);
         ModItems.register(bus);
         DeprecatedModItems.register(bus);
