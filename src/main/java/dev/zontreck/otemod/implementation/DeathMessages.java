@@ -27,7 +27,15 @@ public class DeathMessages {
     public static String getRandomDeathMessage(Profile playerWhoDied, DamageSource source)
     {
         Random rng = new Random();
-        int msg = rng.nextInt(0, messages.size()-1);
+        int msg = 0;
+        try {
+            msg = rng.nextInt(0, messages.size()-1);
+
+        }catch (Exception E)
+        {
+            E.printStackTrace();
+            msg=0;
+        }
         String sourceName="";
         if(source.isCreativePlayer())
         {
@@ -35,7 +43,14 @@ public class DeathMessages {
         }
         if(source.is(DamageTypes.FALL))
         {
-            msg = rng.nextInt(0,messages_falling.size()-1);
+            try {
+                msg = rng.nextInt(0,messages_falling.size()-1);
+
+            }catch(Exception e)
+            {
+                e.printStackTrace();
+                msg=0;
+            }
             return ChatHelpers.macroize(messages_falling.get(msg), String.valueOf(playerWhoDied.deaths), playerWhoDied.name_color + playerWhoDied.nickname);
         }
 
