@@ -92,11 +92,18 @@ public class EventHandler {
             event.getEntity().spawnAtLocation(head);
         }
 
-        try {
-            ChatHelpers.broadcast(Component.literal(DeathMessages.getRandomDeathMessage(Profile.get_profile_of(event.getEntity().getStringUUID()), event.getSource())), event.getEntity().level().getServer());
-        } catch (UserProfileNotYetExistsException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        if(OTEServerConfig.ENABLE_DEATH_MESSAGES.get())
+        {
+
+            try {
+                ChatHelpers.broadcast(Component.literal(DeathMessages.getRandomDeathMessage(Profile.get_profile_of(event.getEntity().getStringUUID()), event.getSource())), event.getEntity().level().getServer());
+            } catch (UserProfileNotYetExistsException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            } catch(Exception e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 
