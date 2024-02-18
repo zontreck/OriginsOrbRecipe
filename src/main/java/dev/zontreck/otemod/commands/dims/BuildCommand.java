@@ -1,6 +1,7 @@
 package dev.zontreck.otemod.commands.dims;
 
 import com.mojang.brigadier.CommandDispatcher;
+import dev.zontreck.libzontreck.events.TeleportEvent;
 import dev.zontreck.libzontreck.exceptions.InvalidDeserialization;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.vectors.Vector3;
@@ -13,6 +14,8 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.commands.ExperienceCommand;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.server.command.EnumArgument;
 
 public class BuildCommand
@@ -33,30 +36,33 @@ public class BuildCommand
     {
         if(stack.isPlayer())
         {
-            boolean playerIsOp = stack.getPlayer().hasPermissions(stack.getServer().getOperatorUserPermissionLevel());
+            ServerPlayer sp = stack.getPlayer();
+            boolean playerIsOp = sp.hasPermissions(stack.getServer().getOperatorUserPermissionLevel());
 
             if(playerIsOp || OTEServerConfig.ALLOW_BUILDER_DIM.get())
             {
 
                 if(direction == Options.enter)
                 {
-                    WorldPosition save = new WorldPosition(stack.getPlayer());
-                    PerPlayerDataRegistry.put(stack.getPlayer().getUUID(), "builder_entered_from", save.serialize());
+                    WorldPosition save = new WorldPosition(sp);
+                    PerPlayerDataRegistry.put(sp.getUUID(), "builder_entered_from", save.serialize());
 
                     WorldPosition pos = new WorldPosition(new Vector3(0, -55, 0), ModDimensions.BUILDER_DIM());
 
-                    stack.getPlayer().teleportTo(pos.getActualDimension(), pos.Position.x, pos.Position.y, pos.Position.z, 0, 0);
+                    if(!MinecraftForge.EVENT_BUS.post(new TeleportEvent(pos, sp)))
+                        stack.getPlayer().teleportTo(pos.getActualDimension(), pos.Position.x, pos.Position.y, pos.Position.z, 0, 0);
 
                     return 0;
                 } else if(direction == Options.leave) {
 
-                    CompoundTag tag = (CompoundTag) PerPlayerDataRegistry.get(stack.getPlayer().getUUID(), "builder_entered_from");
+                    CompoundTag tag = (CompoundTag) PerPlayerDataRegistry.get(sp.getUUID(), "builder_entered_from");
                     if(tag != null)
                     {
                         try {
                             WorldPosition pos = new WorldPosition(tag, false);
 
-                            stack.getPlayer().teleportTo(pos.getActualDimension(), pos.Position.x, pos.Position.y, pos.Position.z, 0,0);
+                            if(!MinecraftForge.EVENT_BUS.post(new TeleportEvent(pos, sp)))
+                                sp.teleportTo(pos.getActualDimension(), pos.Position.x, pos.Position.y, pos.Position.z, 0,0);
                         } catch (InvalidDeserialization e) {
                             throw new RuntimeException(e);
                         }
@@ -67,7 +73,7 @@ public class BuildCommand
                     return 0;
                 } else return 0;
             }else {
-                ChatHelpers.broadcastTo(stack.getPlayer(), ChatHelpers.macro(Messages.BUILDER_DIMENSION_DISALLOWED), stack.getServer());
+                ChatHelpers.broadcastTo(sp, ChatHelpers.macro(Messages.BUILDER_DIMENSION_DISALLOWED), stack.getServer());
 
                 return 0;
             }

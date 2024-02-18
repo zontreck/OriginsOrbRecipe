@@ -1,5 +1,6 @@
 package dev.zontreck.otemod.events;
 
+import dev.zontreck.libzontreck.events.TeleportEvent;
 import dev.zontreck.libzontreck.lore.LoreContainer;
 import dev.zontreck.libzontreck.lore.LoreEntry;
 import dev.zontreck.libzontreck.profiles.Profile;
@@ -34,6 +35,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.GameType;
 import net.minecraftforge.common.ForgeSpawnEggItem;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
@@ -127,7 +129,10 @@ public class EventHandler {
                 // Teleport the player to Thresholds
                 WorldPosition pos = new WorldPosition(new Vector3(), ModDimensions.THRESHOLD_DIM());
                 ServerPlayer sp = (ServerPlayer) ev.getEntity();
-                sp.teleportTo(pos.getActualDimension(), 0, 365, 0, 0,0);
+                if(!MinecraftForge.EVENT_BUS.post(new TeleportEvent(pos, sp)))
+                    sp.teleportTo(pos.getActualDimension(), 0, 365, 0, 0,0);
+
+
             }
 
         }
