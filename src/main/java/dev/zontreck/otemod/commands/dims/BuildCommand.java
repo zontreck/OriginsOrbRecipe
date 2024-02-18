@@ -48,9 +48,9 @@ public class BuildCommand
                     stack.getPlayer().teleportTo(pos.getActualDimension(), pos.Position.x, pos.Position.y, pos.Position.z, 0, 0);
 
                     return 0;
-                } else {
+                } else if(direction == Options.leave) {
 
-                    CompoundTag tag = (CompoundTag) PerPlayerDataRegistry.get(stack.getPlayer().getUUID(), "builder_entereed_from");
+                    CompoundTag tag = (CompoundTag) PerPlayerDataRegistry.get(stack.getPlayer().getUUID(), "builder_entered_from");
                     if(tag != null)
                     {
                         try {
@@ -60,10 +60,12 @@ public class BuildCommand
                         } catch (InvalidDeserialization e) {
                             throw new RuntimeException(e);
                         }
+                    } else {
+                        ChatHelpers.broadcastTo(stack.getPlayer(), ChatHelpers.macro("!Dark_Red!There is not a cached position. did you logout, or the server restart? Use a home or warp command instead."), stack.getServer());
                     }
 
                     return 0;
-                }
+                } else return 0;
             }else {
                 ChatHelpers.broadcastTo(stack.getPlayer(), ChatHelpers.macro(Messages.BUILDER_DIMENSION_DISALLOWED), stack.getServer());
 
