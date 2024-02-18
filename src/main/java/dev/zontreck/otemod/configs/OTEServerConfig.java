@@ -14,6 +14,7 @@ public class OTEServerConfig {
     public static final ForgeConfigSpec.ConfigValue<Double> SPAWN_EGG_CHANCE;
 
     public static final ForgeConfigSpec.ConfigValue<Integer> ITEM_DESPAWN_TIMER;
+    public static final ForgeConfigSpec.BooleanValue ALLOW_BUILDER_DIM;
 
 
     public static final ForgeConfigSpec.ConfigValue<Integer> RTP_COOLDOWN;
@@ -51,6 +52,8 @@ public class OTEServerConfig {
         GIVE_KIT_EVERY_CHANGE = BUILDER.comment("Enable this to give the starter kit every time it is changed, regardless of whether the player has already received that kit on their next join.").define("starter_kit_given_on_change", false);
 
         BUILDER.pop();
+
+        ALLOW_BUILDER_DIM = BUILDER.comment("Allow the builder dimension for non-opped players. This could be dangerous as the builder dimension swaps players into creative").define("allow_non_op_builder", false);
 
 
         MAX_VAULTS = BUILDER.comment("What is the maximum number of vaults a player may have available? (0 is unlimited)").define("max_vaults", 0);

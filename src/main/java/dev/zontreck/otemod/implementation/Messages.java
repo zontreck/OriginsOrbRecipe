@@ -13,6 +13,7 @@ public class Messages {
 
     public static final String FLIGHT_GIVEN;
     public static final String FLIGHT_REMOVED;
+    public static final String BUILDER_DIMENSION_DISALLOWED;
 
 
     static{
@@ -28,5 +29,6 @@ public class Messages {
         STARTER_KIT_GIVEN = OTE_PREFIX + "!Dark_Purple!You have been given a starter kit. Welcome to the server.";
         FLIGHT_GIVEN = OTE_PREFIX + "!Dark_Green!You start to feel lighter than a feather";
         FLIGHT_REMOVED = OTE_PREFIX + "!Dark_Red!You have a sinking feeling you are no longer lighter than a feather.";
+        BUILDER_DIMENSION_DISALLOWED = OTE_PREFIX+"!Dark_Red!The builder dimension is disallowed for regular users. You must be a server operator.";
     }
 }
