@@ -1,12 +1,10 @@
 package dev.zontreck.otemod.commands.vaults;
 
 import com.mojang.brigadier.CommandDispatcher;
-import com.mojang.brigadier.arguments.StringArgumentType;
 import dev.zontreck.libzontreck.profiles.Profile;
 import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.implementation.Messages;
 import dev.zontreck.otemod.implementation.PlayerFirstJoinTag;
 import dev.zontreck.otemod.implementation.vault.NoMoreVaultException;
@@ -19,8 +17,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraftforge.network.NetworkHooks;
-
-import java.time.Instant;
 
 public class StarterCommand
 {
@@ -78,7 +74,7 @@ public class StarterCommand
 
             return 0;
         }
-        ctx.sendFailure(ChatHelpers.macro(Messages.STARTER_FAILURE_CONSOLE));
+        ctx.sendFailure(ChatHelpers.macro(Messages.CONSOLE_ERROR));
         return 1;
     }
 

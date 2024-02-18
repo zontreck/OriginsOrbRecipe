@@ -7,16 +7,21 @@ import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.util.ItemUtils;
 import dev.zontreck.libzontreck.util.heads.HeadUtilities;
+import dev.zontreck.libzontreck.vectors.WorldPosition;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.enchantments.MobEggEnchantment;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
 import dev.zontreck.otemod.implementation.DeathMessages;
 import dev.zontreck.otemod.implementation.InventoryBackup;
+import dev.zontreck.otemod.implementation.Messages;
 import dev.zontreck.otemod.items.tags.ItemStatType;
+import dev.zontreck.otemod.registry.ModDimensions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerPlayerGameMode;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -37,12 +42,11 @@ import java.time.Instant;
 import java.util.Date;
 import java.util.Random;
 
-@Mod.EventBusSubscriber(modid=OTEMod.MOD_ID)
 public class EventHandler {
 
 
     @SubscribeEvent (priority = EventPriority.HIGHEST)
-    public static void playerDied(LivingDeathEvent event)
+    public void playerDied(LivingDeathEvent event)
     {
         if(!(event.getEntity() instanceof Player))return;
 
@@ -146,5 +150,76 @@ public class EventHandler {
 
     }
 
-    
+    private static final ResourceLocation THRESHOLDS_BIMENSION = new ResourceLocation(OTEMod.MOD_ID, "threshold");
+
+    @SubscribeEvent
+    public void onChangeDimension(PlayerEvent.PlayerChangedDimensionEvent ev)
+    {
+        if(ev.getEntity().level().isClientSide) return;
+
+        ServerPlayer player = (ServerPlayer) ev.getEntity();
+
+        if(ev.getTo().location().equals(ModDimensions.BUILDER))
+        {
+            // Store the player's inventory
+            changedGameMode(player, InventoryBackup.GameMode.fromGameType(player.gameMode.getGameModeForPlayer()), InventoryBackup.GameMode.Builder);
+
+
+            player.setGameMode(GameType.CREATIVE);
+        }
+
+        if(ev.getFrom().location().equals(ModDimensions.BUILDER))
+        {
+            // Restore the player's inventory
+            InventoryBackup bkp = new InventoryBackup(player, InventoryBackup.GameMode.Builder);
+            bkp.restore();
+
+            player.setGameMode(bkp.getFormerGameMode().toMinecraft());
+
+            //changedGameMode(player, InventoryBackup.GameMode.Builder, bkp.getFormerGameMode());
+        }
+    }
+
+
+    @SubscribeEvent
+    public void onGameModeChanged(PlayerEvent.PlayerChangeGameModeEvent event)
+    {
+        ServerPlayer player = (ServerPlayer) event.getEntity();
+
+        InventoryBackup.GameMode from = InventoryBackup.GameMode.fromGameType(event.getCurrentGameMode());
+        InventoryBackup.GameMode to = InventoryBackup.GameMode.fromGameType(event.getNewGameMode());
+
+        changedGameMode(player, from, to);
+    }
+
+    private void changedGameMode(ServerPlayer player, InventoryBackup.GameMode from, InventoryBackup.GameMode to) {
+
+        InventoryBackup backup = new InventoryBackup(player, from);
+        InventoryBackup restore = new InventoryBackup(player, to);
+        String dim = WorldPosition.getDim(player.serverLevel());
+
+        if(dim.equalsIgnoreCase(ModDimensions.BUILDER_DIM()))
+        {
+            if(to.equals(InventoryBackup.GameMode.Creative))
+                return; // Don't do a double backup
+        }
+        restore.setFormerGameMode(from);
+
+        restore.restore();
+        backup.save();
+
+        if(to.equals(InventoryBackup.GameMode.Creative))
+        {
+            player.getInventory().clearContent();
+        } else if(to.equals(InventoryBackup.GameMode.Builder))
+        {
+            player.getInventory().clearContent();
+        }
+        restore.apply();
+        restore.save(); // Save the former gamemode for possible restore!
+
+        ChatHelpers.broadcastTo(player, ChatHelpers.macro(Messages.OTE_PREFIX + " !Dark_Green!Your inventory has been saved for [0], and your [1] inventory has been restored", from.getName(), to.getName()), player.server);
+    }
+
+
 }

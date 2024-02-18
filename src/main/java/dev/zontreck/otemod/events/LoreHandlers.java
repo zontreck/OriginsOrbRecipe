@@ -27,7 +27,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 @EventBusSubscriber(modid=OTEMod.MOD_ID, bus=Mod.EventBusSubscriber.Bus.FORGE)
 public class LoreHandlers {
-    /*
+
     @SubscribeEvent
     public void onBlockMined(BlockEvent.BreakEvent ev)
     {
@@ -37,16 +37,19 @@ public class LoreHandlers {
         ItemStack itemUsed = sp.getItemInHand(InteractionHand.MAIN_HAND);
         ResourceLocation loc = ForgeRegistries.ITEMS.getKey(itemUsed.getItem());
         String itemModName = ChatHelpers.macroize("[0]:[1]", loc.getNamespace(), loc.getPath());
-        if(itemModName.contains("pickaxe"))
+
+        String sName = itemModName + "::" + itemUsed.getDisplayName();
+        sName=sName.toLowerCase();
+        if(sName.contains("pickaxe"))
         {
             updateItem(itemUsed, ItemStatType.PICK);
-        }else if(itemModName.contains("shovel"))
+        }else if(sName.contains("shovel"))
         {
             updateItem(itemUsed, ItemStatType.SHOVEL);
-        } else if(itemModName.contains("axe"))
+        } else if(sName.contains("axe"))
         {
             updateItem(itemUsed, ItemStatType.AXE);
-        } else if(itemModName.contains("pickadze"))
+        } else if(sName.contains("pickadze"))
         {
             updateItem(itemUsed, ItemStatType.PICK);
         }
@@ -66,14 +69,16 @@ public class LoreHandlers {
         ResourceLocation loc = ForgeRegistries.ITEMS.getKey(itemUsed.getItem());
         String itemModName = ChatHelpers.macroize("[0]:[1]", loc.getNamespace(), loc.getPath());
 
-        if(itemModName.contains("hoe"))
+        String sName = itemModName + "::" + itemUsed.getDisplayName();
+        sName=sName.toLowerCase();
+        if(sName.contains("hoe"))
         {
             if(bs.is(Blocks.DIRT) || bs.is(Blocks.GRASS_BLOCK))
             {
                 OTEMod.LOGGER.info("DIRT!");
                 updateItem(itemUsed, ItemStatType.HOE);
             }
-        } else if(itemModName.contains("shovel"))
+        } else if(sName.contains("shovel"))
         {
             if(bs.is(Blocks.GRASS_BLOCK))
             {
@@ -101,7 +106,10 @@ public class LoreHandlers {
             String itemModName = ChatHelpers.macroize("[0]:[1]", loc.getNamespace(), loc.getPath());
             ResourceLocation locEnt = ForgeRegistries.ENTITY_TYPES.getKey(ev.getTarget().getType());
             String entityModName = ChatHelpers.macroize("[0]:[1]", locEnt.getNamespace(), locEnt.getPath());
-            if(itemModName.contains("shears"))
+
+            String sName = itemModName + "::" + itemUsed.getDisplayName();
+            sName=sName.toLowerCase();
+            if(sName.contains("shears"))
             {
                 if(entityModName.contains("sheep"))
                 {
@@ -133,7 +141,9 @@ public class LoreHandlers {
         ItemStack weaponUsed = sp.getItemInHand(InteractionHand.MAIN_HAND);
         ResourceLocation loc = ForgeRegistries.ITEMS.getKey(weaponUsed.getItem());
         String itemModName = ChatHelpers.macroize("[0]:[1]", loc.getNamespace(), loc.getPath());
-        if(itemModName.contains("sword"))
+        String sName = itemModName + "::" + weaponUsed.getDisplayName();
+        sName=sName.toLowerCase();
+        if(sName.contains("sword"))
         {
             updateItem(weaponUsed, ItemStatType.SWORD);
             
@@ -144,33 +154,39 @@ public class LoreHandlers {
     // Only valid to be used by OTEMod
     protected static void updateItem(ItemStack weaponUsed, ItemStatType type)
     {
-    
-        // Update the mob kill count
-        CompoundTag props = weaponUsed.getTag();
-        if(props==null)props=new CompoundTag();
-        CompoundTag container = props.getCompound(ItemStatTag.STATS_TAG+"_"+type.name().toLowerCase());
-        LoreContainer contain = new LoreContainer(weaponUsed);
 
-        ItemStatTag isTag;
-        try{
-            isTag = new ItemStatTag(type, container.getInt(ItemStatTag.STATS_TAG+"_"+type.name().toLowerCase()));
-        }catch (Exception e){
-            isTag = new ItemStatTag(type, 0);
-        }
-        isTag.increment();
-        LoreEntry entry;
-        
-        if(contain.miscData.loreData.size()==0)
+        try {
+
+            // Update the mob kill count
+            CompoundTag props = weaponUsed.getTag();
+            if(props==null)props=new CompoundTag();
+            CompoundTag container = props.getCompound(ItemStatTag.STATS_TAG+"_"+type.name().toLowerCase());
+            LoreContainer contain = new LoreContainer(weaponUsed);
+
+            ItemStatTag isTag;
+            try{
+                isTag = new ItemStatTag(type, container.getInt(ItemStatTag.STATS_TAG+"_"+type.name().toLowerCase()));
+            }catch (Exception e){
+                isTag = new ItemStatTag(type, 0);
+            }
+            isTag.increment();
+            LoreEntry entry;
+
+            if(contain.miscData.loreData.size()==0)
+            {
+                // Missing entry
+                entry = new LoreEntry.Builder().text(ItemStatistics.makeText(isTag)).build();
+                contain.miscData.loreData.add(entry);
+            }else {
+                entry = contain.miscData.loreData.get(0); // Stat is set at 0
+                entry.text = ItemStatistics.makeText(isTag);
+            }
+
+            // Update item
+            contain.commitLore();
+        }catch(Exception e)
         {
-            // Missing entry
-            entry = new LoreEntry.Builder().text(ItemStatistics.makeText(isTag)).build();
-            contain.miscData.loreData.add(entry);
-        }else {
-            entry = contain.miscData.loreData.get(0); // Stat is set at 0
-            entry.text = ItemStatistics.makeText(isTag);
+            e.printStackTrace();
         }
-
-        // Update item
-        contain.commitLore();
-    }*/
+    }
 }

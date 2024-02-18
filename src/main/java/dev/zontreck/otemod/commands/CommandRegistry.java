@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import dev.zontreck.otemod.OTEMod;
+import dev.zontreck.otemod.commands.dims.BuildCommand;
 import dev.zontreck.otemod.commands.items.ShareItemInChatCommand;
 import dev.zontreck.otemod.commands.profilecmds.ChatColorCommand;
 import dev.zontreck.otemod.commands.profilecmds.NameColorCommand;
@@ -106,5 +107,7 @@ public class CommandRegistry {
 
         ShareItemInChatCommand.register(ev.getDispatcher());
         StarterCommand.register(ev.getDispatcher());
+
+        BuildCommand.register(ev.getDispatcher());
     }
 }

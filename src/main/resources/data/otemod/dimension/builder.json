@@ -1,0 +1,26 @@
+{
+  "type": "otemod:builder",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "biome": "minecraft:plains",
+      "lakes": false,
+      "features": false,
+      "layers": [
+        {
+          "block": "minecraft:bedrock",
+          "height": 1
+        },
+        {
+          "block": "minecraft:stone",
+          "height": 2
+        },
+        {
+          "block": "minecraft:grass_block",
+          "height": 3
+        }
+      ],
+      "structure_overrides": "minecraft:villages"
+    }
+  }
+}

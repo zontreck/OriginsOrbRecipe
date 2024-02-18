@@ -20,6 +20,7 @@ import dev.zontreck.otemod.blocks.DeprecatedModBlocks;
 import dev.zontreck.otemod.effects.ModEffects;
 import dev.zontreck.otemod.enchantments.FlightEnchantment;
 import dev.zontreck.otemod.enchantments.NightVisionEnchantment;
+import dev.zontreck.otemod.events.EventHandler;
 import dev.zontreck.otemod.implementation.CreativeModeTabs;
 import dev.zontreck.otemod.implementation.InventoryBackup;
 import dev.zontreck.otemod.implementation.Messages;
@@ -132,6 +133,8 @@ public class OTEMod
         ModMenuTypes.CONTAINERS.register(bus);
         MinecraftForge.EVENT_BUS.register(FlightEnchantment.class);
         MinecraftForge.EVENT_BUS.register(NightVisionEnchantment.class);
+        MinecraftForge.EVENT_BUS.register(new EventHandler());
+
 
         ModBlocks.register(bus);
         DeprecatedModBlocks.register(bus);
@@ -153,24 +156,6 @@ public class OTEMod
         ModMessages.register();
     }
 
-    @SubscribeEvent
-    public void onGameModeChanged(PlayerEvent.PlayerChangeGameModeEvent event)
-    {
-        ServerPlayer player = (ServerPlayer) event.getEntity();
-
-        InventoryBackup backup = new InventoryBackup(player, event.getCurrentGameMode());
-        InventoryBackup restore = new InventoryBackup(player, event.getNewGameMode());
-
-        restore.restore();
-        backup.save();
-
-        if(event.getNewGameMode() == GameType.CREATIVE)
-        {
-            player.getInventory().clearContent();
-            return;
-        }
-        restore.apply();
-    }
 
     public static void checkFirstJoin(ServerPlayer p){
         try {
