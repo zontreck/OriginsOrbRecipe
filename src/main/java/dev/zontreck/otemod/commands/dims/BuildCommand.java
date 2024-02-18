@@ -1,23 +1,35 @@
 package dev.zontreck.otemod.commands.dims;
 
 import com.mojang.brigadier.CommandDispatcher;
+import dev.zontreck.libzontreck.exceptions.InvalidDeserialization;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.libzontreck.vectors.WorldPosition;
 import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.implementation.Messages;
 import dev.zontreck.otemod.registry.ModDimensions;
+import dev.zontreck.otemod.registry.PerPlayerDataRegistry;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.commands.ExperienceCommand;
+import net.minecraftforge.server.command.EnumArgument;
 
 public class BuildCommand
 {
+    private enum Options {
+        enter,
+        leave
+    }
     public static void register(CommandDispatcher<CommandSourceStack> dispatcher)
     {
-        dispatcher.register(Commands.literal("builder").executes(c->run(c.getSource())));
+        var cmd = Commands.literal("builder");
+        cmd.then(Commands.literal("enter").executes(c->run(c.getSource(), Options.enter)));
+        cmd.then(Commands.literal("leave").executes(c->run(c.getSource(), Options.leave)));
+        dispatcher.register(cmd);
     }
 
-    public static int run(CommandSourceStack stack)
+    public static int run(CommandSourceStack stack, Options direction)
     {
         if(stack.isPlayer())
         {
@@ -26,11 +38,32 @@ public class BuildCommand
             if(playerIsOp || OTEServerConfig.ALLOW_BUILDER_DIM.get())
             {
 
-                WorldPosition pos = new WorldPosition(new Vector3(0, -55, 0), ModDimensions.BUILDER_DIM());
+                if(direction == Options.enter)
+                {
+                    WorldPosition save = new WorldPosition(stack.getPlayer());
+                    PerPlayerDataRegistry.put(stack.getPlayer().getUUID(), "builder_entered_from", save.serialize());
 
-                stack.getPlayer().teleportTo(pos.getActualDimension(), pos.Position.x, pos.Position.y, pos.Position.z, 0, 0);
+                    WorldPosition pos = new WorldPosition(new Vector3(0, -55, 0), ModDimensions.BUILDER_DIM());
 
-                return 0;
+                    stack.getPlayer().teleportTo(pos.getActualDimension(), pos.Position.x, pos.Position.y, pos.Position.z, 0, 0);
+
+                    return 0;
+                } else {
+
+                    CompoundTag tag = (CompoundTag) PerPlayerDataRegistry.get(stack.getPlayer().getUUID(), "builder_entereed_from");
+                    if(tag != null)
+                    {
+                        try {
+                            WorldPosition pos = new WorldPosition(tag, false);
+
+                            stack.getPlayer().teleportTo(pos.getActualDimension(), pos.Position.x, pos.Position.y, pos.Position.z, 0,0);
+                        } catch (InvalidDeserialization e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+
+                    return 0;
+                }
             }else {
                 ChatHelpers.broadcastTo(stack.getPlayer(), ChatHelpers.macro(Messages.BUILDER_DIMENSION_DISALLOWED), stack.getServer());
 

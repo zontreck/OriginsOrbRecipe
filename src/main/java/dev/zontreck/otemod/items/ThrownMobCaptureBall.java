@@ -1,17 +1,12 @@
 package dev.zontreck.otemod.items;
 
 import dev.zontreck.libzontreck.chat.ChatColor;
-import dev.zontreck.libzontreck.lore.ExtraLore;
 import dev.zontreck.libzontreck.lore.LoreContainer;
 import dev.zontreck.libzontreck.lore.LoreEntry;
-import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.util.ServerUtilities;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtUtils;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,24 +16,23 @@ import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.DropperBlock;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 
 import java.util.Optional;
 import java.util.UUID;
 
-public class ThrownPossBall extends ThrowableItemProjectile
+public class ThrownMobCaptureBall extends ThrowableItemProjectile
 {
     boolean captured = false;
     LivingEntity shooter;
     ItemStack self;
 
-    public ThrownPossBall(EntityType<? extends ThrownPossBall> entity, Level level)
+    public ThrownMobCaptureBall(EntityType<? extends ThrownMobCaptureBall> entity, Level level)
     {
         super(entity, level);
     }
-    public ThrownPossBall(Level level, LivingEntity shooter, ItemStack item)
+    public ThrownMobCaptureBall(Level level, LivingEntity shooter, ItemStack item)
     {
         super(EntityType.SNOWBALL, shooter, level);
 

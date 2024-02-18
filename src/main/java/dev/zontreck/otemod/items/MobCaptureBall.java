@@ -6,18 +6,15 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.monster.Guardian;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.item.EggItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class PossBallItem extends Item
+public class MobCaptureBall extends Item
 {
-    public PossBallItem(Properties pProperties) {
-        super(pProperties);
+    public MobCaptureBall() {
+        super(new Properties());
     }
     @Override
     public boolean isFoil(ItemStack pStack) {
@@ -42,7 +39,7 @@ public class PossBallItem extends Item
 
             stack.shrink(1);
 
-            ThrownPossBall TPB = new ThrownPossBall(pLevel, pPlayer, single);
+            ThrownMobCaptureBall TPB = new ThrownMobCaptureBall(pLevel, pPlayer, single);
 
 
             TPB.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 1.0F);

@@ -1,11 +1,8 @@
 package dev.zontreck.otemod.items;
 
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.blocks.FoiledBlockItem;
-import dev.zontreck.otemod.entities.ModEntityTypes;
 import dev.zontreck.otemod.implementation.CreativeModeTabs;
 import net.minecraft.world.item.*;
-import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -55,7 +52,10 @@ public class ModItems {
     
     public static final RegistryObject<Item> VAULT_RAW_ORE = CreativeModeTabs.addToOTEModTab(ITEMS.register("raw_vault_steel_ore", () -> new Item(new Item.Properties().stacksTo(64))));
 
-    public static final RegistryObject<Item> POSS_BALL = CreativeModeTabs.addToOTEModTab(ITEMS.register("poss_ball", () -> new PossBallItem(new Item.Properties())));
+    @Deprecated
+    public static final RegistryObject<Item> POSS_BALL = CreativeModeTabs.addToOTEModTab(ITEMS.register("poss_ball", () -> new DeprecatedItem()));
+
+    public static final RegistryObject<Item> MIAB = CreativeModeTabs.addToOTEModTab(ITEMS.register("mob_capture_ball", ()->new MobCaptureBall()));
 
 
     public static final RegistryObject<Item> EMPTY_SPAWN_EGG = CreativeModeTabs.addToOTEModTab(ITEMS.register("empty_spawn_egg", () -> new Item(new Item.Properties())));
