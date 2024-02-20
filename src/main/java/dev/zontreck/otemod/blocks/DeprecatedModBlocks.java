@@ -20,11 +20,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
+@Deprecated
 public class DeprecatedModBlocks
 {
 
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, OTEMod.MOD_ID);
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, OTEMod.MOD_ID);
+
 
     private static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return false;
@@ -32,10 +34,6 @@ public class DeprecatedModBlocks
     private static boolean always(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return true;
     }
-
-
-    public static final Map<String, RegistryObject<Block>> REGISTERED_BLOCKS;
-    public static final Map<String, RegistryObject<? extends BlockItem>> REGISTERED_ITEMS;
 
 
     public static void register(IEventBus bus){
@@ -50,15 +48,12 @@ public class DeprecatedModBlocks
      * @param blocky
      * @return
      */
-    public static RegistryObject<Block> registerWithItem(String name, Supplier<Blocky> blocky)
+    public static RegistryObj registerWithItem(String name, Supplier<Blocky> blocky)
     {
         RegistryObject<Block> ret = BLOCKS.register(name, ()->blocky.get().block);
         var item = CreativeModeTabs.addToOTEModTab(ITEMS.register(name, ()->blocky.get().item));
 
-        REGISTERED_BLOCKS.put(name, ret);
-        REGISTERED_ITEMS.put(name, item);
-
-        return ret;
+        return new RegistryObj(ret,item);
     }
 
     /**
@@ -68,26 +63,20 @@ public class DeprecatedModBlocks
      * @param props
      * @return
      */
-    public static RegistryObject<Block> registerWithItem(String name, Block a, Item.Properties props)
+    public static RegistryObj registerWithItem(String name, Block a, Item.Properties props)
     {
         RegistryObject<Block> ret = BLOCKS.register(name, ()->a);
         var item = CreativeModeTabs.addToOTEModTab(ITEMS.register(name, ()->new BlockItem(ret.get(), props)));
 
-        REGISTERED_BLOCKS.put(name, ret);
-        REGISTERED_ITEMS.put(name, item);
-
-        return ret;
+        return new RegistryObj(ret,item);
     }
 
-    public static RegistryObject<Block> registerDeprecated(String name)
+    public static RegistryObj registerDeprecated(String name)
     {
         RegistryObject<Block> ret = BLOCKS.register(name, ()->new DeprecatedBlock());
         var item = CreativeModeTabs.addToOTEModTab(ITEMS.register(name, ()->new DeprecatedBlockItem(ret.get())));
 
-        REGISTERED_BLOCKS.put(name, ret);
-        REGISTERED_ITEMS.put(name, item);
-
-        return ret;
+        return new RegistryObj(ret,item);
     }
     private static class Blocky
     {
@@ -101,28 +90,60 @@ public class DeprecatedModBlocks
         }
     }
 
-
-    static {
-        REGISTERED_ITEMS = new HashMap<>();
-        REGISTERED_BLOCKS=new HashMap<>();
-
-        registerDeprecated("ilusium_ore_block");
-        registerDeprecated("deepslate_ilusium_ore_block");
-        registerDeprecated("ilusium_block");
-        registerDeprecated("clear_glass_block");
-        registerDeprecated("liminal_tiles");
-        registerDeprecated("black");
-        registerDeprecated("liminal_tile_stairs");
-        registerDeprecated("liminal_tile_slab");
-        registerDeprecated("liminal_window");
-
-        registerDeprecated("lime");
-        registerDeprecated("lime_tile");
-        registerDeprecated("lime_stairs");
-        registerDeprecated("lime_tile_br");
-        registerDeprecated("lime_tile_to_wall");
-        registerDeprecated("lime_wall_variant_1");
-        registerDeprecated("lime_wall_variant_2");
-
+    private static BlockBehaviour.Properties standardBehavior()
+    {
+        return BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(7F).destroyTime(6);
     }
+    private static BlockBehaviour.Properties stoneLikeBehavior()
+    {
+        return BlockBehaviour.Properties.copy(Blocks.COBBLESTONE);
+    }
+
+    private static BlockBehaviour.Properties explosionResistance()
+    {
+        return standardBehavior().explosionResistance(1200);
+    }
+
+    private static BlockBehaviour.Properties noViewBlocking()
+    {
+        return standardBehavior().noOcclusion().isViewBlocking(DeprecatedModBlocks::never);
+    }
+
+    private static BlockBehaviour.Properties fullBright()
+    {
+        return standardBehavior().lightLevel((X)->{
+            return 15;
+        }).noOcclusion();
+    }
+
+    private static BlockBehaviour.Properties standard = standardBehavior();
+
+    private static BlockBehaviour.Properties explosionResistance = explosionResistance();
+
+    private static BlockBehaviour.Properties noViewBlocking = noViewBlocking();
+
+    private static BlockBehaviour.Properties stone = stoneLikeBehavior();
+
+    private static BlockBehaviour.Properties poolLightClean = BlockBehaviour.Properties.copy(Blocks.GLASS).lightLevel((X) -> 15);
+    private static BlockBehaviour.Properties poolLightDirty = BlockBehaviour.Properties.copy(Blocks.GLASS).lightLevel((X) -> 12);
+    private static BlockBehaviour.Properties poolLightFilthy = BlockBehaviour.Properties.copy(Blocks.GLASS).lightLevel((X) -> 4);
+
+
+    public static final RegistryObj ILUSIUM_ORE_BLOCK = registerDeprecated("ilusium_ore_block");
+    public static final RegistryObj DEEPSLATE_ILUSIUM_ORE_BLOCK = registerDeprecated("deepslate_ilusium_ore_block");
+    public static final RegistryObj ILUSIUM_BLOCK = registerDeprecated("ilusium_block");
+    public static final RegistryObj CLEAR_GLASS_BLOCK = registerDeprecated("clear_glass_block");
+    public static final RegistryObj LIMINAL_TILES = registerDeprecated("liminal_tiles");
+    public static final RegistryObj BLACK = registerDeprecated("black");
+    public static final RegistryObj LIMINAL_TILE_STAIRS = registerDeprecated("liminal_tile_stairs");
+    public static final RegistryObj LIMINAL_TILE_SLAB = registerDeprecated("liminal_tile_slab");
+    public static final RegistryObj LIMINAL_WINDOW = registerDeprecated("liminal_window");
+    public static final RegistryObj LIME = registerDeprecated("lime");
+    public static final RegistryObj LIME_TILE = registerDeprecated("lime_tile");
+    public static final RegistryObj LIME_STAIRS = registerDeprecated("lime_stairs");
+    public static final RegistryObj LIME_TILE_BR = registerDeprecated("lime_tile_br");
+    public static final RegistryObj LIME_TILE_TO_WALL = registerDeprecated("lime_tile_to_wall");
+    public static final RegistryObj LIME_WALL_V1 = registerDeprecated("lime_wall_variant_1");
+    public static final RegistryObj LIME_WALL_V2 = registerDeprecated("lime_wall_variant_2");
+
 }

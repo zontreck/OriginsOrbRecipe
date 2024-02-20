@@ -124,7 +124,7 @@ public class MagicalScrubberMenu extends AbstractContainerMenu
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, entity.getBlockPos()), player, ModBlocks.MAGICAL_SCRUBBER.get());
+        return stillValid(ContainerLevelAccess.create(level, entity.getBlockPos()), player, ModBlocks.MAGICAL_SCRUBBER.block.get());
     }
 
     private static final int PLAYER_INVENTORY_FIRST_SLOT_HEIGHT = 69;

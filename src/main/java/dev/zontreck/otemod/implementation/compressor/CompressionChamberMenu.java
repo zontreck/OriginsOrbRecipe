@@ -133,7 +133,7 @@ public class CompressionChamberMenu extends AbstractContainerMenu
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, entity.getBlockPos()), player, ModBlocks.COMPRESSION_CHAMBER_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(level, entity.getBlockPos()), player, ModBlocks.COMPRESSION_CHAMBER.block.get());
     }
 
     private static final int PLAYER_INVENTORY_FIRST_SLOT_HEIGHT = 85;

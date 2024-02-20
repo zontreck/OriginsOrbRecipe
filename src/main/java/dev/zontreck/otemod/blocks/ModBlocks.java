@@ -4,10 +4,8 @@ import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.implementation.CreativeModeTabs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.FlintAndSteelItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,8 +14,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Supplier;
 
 public class ModBlocks {
@@ -31,8 +27,6 @@ public class ModBlocks {
         return true;
     }
 
-    public static final Map<String, RegistryObject<Block>> REGISTERED_BLOCKS;
-    public static final Map<String, RegistryObject<? extends BlockItem>> REGISTERED_ITEMS;
 
 
     public static void register(IEventBus bus){
@@ -47,15 +41,12 @@ public class ModBlocks {
      * @param blocky
      * @return
      */
-    public static RegistryObject<Block> registerWithItem(String name, Supplier<Blocky> blocky)
+    public static RegistryObj registerWithItem(String name, Supplier<Blocky> blocky)
     {
         RegistryObject<Block> ret = BLOCKS.register(name, ()->blocky.get().block);
         var item = CreativeModeTabs.addToOTEModTab(ITEMS.register(name, ()->blocky.get().item));
 
-        REGISTERED_BLOCKS.put(name, ret);
-        REGISTERED_ITEMS.put(name, item);
-
-        return ret;
+        return new RegistryObj(ret,item);
     }
 
     /**
@@ -65,26 +56,20 @@ public class ModBlocks {
      * @param props
      * @return
      */
-    public static RegistryObject<Block> registerWithItem(String name, Block a, Item.Properties props)
+    public static RegistryObj registerWithItem(String name, Block a, Item.Properties props)
     {
         RegistryObject<Block> ret = BLOCKS.register(name, ()->a);
         var item = CreativeModeTabs.addToOTEModTab(ITEMS.register(name, ()->new BlockItem(ret.get(), props)));
 
-        REGISTERED_BLOCKS.put(name, ret);
-        REGISTERED_ITEMS.put(name, item);
-
-        return ret;
+        return new RegistryObj(ret,item);
     }
 
-    public static RegistryObject<Block> registerDeprecated(String name)
+    public static RegistryObj registerDeprecated(String name)
     {
         RegistryObject<Block> ret = BLOCKS.register(name, ()->new DeprecatedBlock());
         var item = CreativeModeTabs.addToOTEModTab(ITEMS.register(name, ()->new DeprecatedBlockItem(ret.get())));
 
-        REGISTERED_BLOCKS.put(name, ret);
-        REGISTERED_ITEMS.put(name, item);
-
-        return ret;
+        return new RegistryObj(ret,item);
     }
     private static class Blocky
     {
@@ -96,19 +81,6 @@ public class ModBlocks {
             this.block=block;
             this.item=item;
         }
-    }
-    public static Block getModdedBlock(String name)
-    {
-        if(REGISTERED_BLOCKS.containsKey(name)) return REGISTERED_BLOCKS.get(name).get();
-
-        return null;
-    }
-
-    public static BlockItem getModdedBlockItem(String name)
-    {
-        if(REGISTERED_ITEMS.containsKey(name)) return REGISTERED_ITEMS.get(name).get();
-
-        return null;
     }
 
     private static BlockBehaviour.Properties standardBehavior()
@@ -137,139 +109,120 @@ public class ModBlocks {
         }).noOcclusion();
     }
 
-    static {
-        REGISTERED_BLOCKS = new HashMap<>();
-        REGISTERED_ITEMS = new HashMap<>();
+    private static BlockBehaviour.Properties standard = standardBehavior();
 
-        BlockBehaviour.Properties standard = standardBehavior();
+    private static BlockBehaviour.Properties explosionResistance = explosionResistance();
 
-        BlockBehaviour.Properties explosionResistance = explosionResistance();
+    private static BlockBehaviour.Properties noViewBlocking = noViewBlocking();
 
-        BlockBehaviour.Properties noViewBlocking = noViewBlocking();
+    private static BlockBehaviour.Properties stone = stoneLikeBehavior();
 
-        BlockBehaviour.Properties stone = stoneLikeBehavior();
+    private static BlockBehaviour.Properties poolLightClean = BlockBehaviour.Properties.copy(Blocks.GLASS).lightLevel((X) -> 15);
+    private static BlockBehaviour.Properties poolLightDirty = BlockBehaviour.Properties.copy(Blocks.GLASS).lightLevel((X) -> 12);
+    private static BlockBehaviour.Properties poolLightFilthy = BlockBehaviour.Properties.copy(Blocks.GLASS).lightLevel((X) -> 4);
 
-        BlockBehaviour.Properties poolLightClean = BlockBehaviour.Properties.copy(Blocks.GLASS).lightLevel((X) -> 15);
-        BlockBehaviour.Properties poolLightDirty = BlockBehaviour.Properties.copy(Blocks.GLASS).lightLevel((X) -> 12);
-        BlockBehaviour.Properties poolLightFilthy = BlockBehaviour.Properties.copy(Blocks.GLASS).lightLevel((X) -> 4);
 
+    public static final RegistryObj ETERNIUM_ORE_BLOCK = registerWithItem("eternium_ore_block", new DropExperienceBlock(explosionResistance), new Item.Properties());
 
-        registerWithItem("eternium_ore_block", new Block(explosionResistance), new Item.Properties());
+    public static final RegistryObj VAULT_STEEL_ORE_BLOCK = registerWithItem("vault_steel_ore_block", new DropExperienceBlock(explosionResistance), new Item.Properties());
 
-        registerWithItem("vault_steel_ore_block", new Block(explosionResistance), new Item.Properties());
+    public static final RegistryObj NETHER_VAULT_STEEL_ORE_BLOCK = registerWithItem("nether_vault_steel_ore_block", new DropExperienceBlock(explosionResistance), new Item.Properties());
 
-        registerWithItem("nether_vault_steel_ore_block", new Block(explosionResistance), new Item.Properties());
+    public static final RegistryObj ETERNIUM_BLOCK = registerWithItem("eternium_block", new Block(explosionResistance), new Item.Properties());
+    public static final RegistryObj DEEPSLATE_ETERNIUM_ORE_BLOCK = registerWithItem("deepslate_eternium_ore_block", new DropExperienceBlock(explosionResistance), new Item.Properties());
+    public static final RegistryObj ITEM_SCRUBBER = registerWithItem("item_scrubber", new ItemScrubberBlock(noViewBlocking), new Item.Properties());
+    public static final RegistryObj MAGICAL_SCRUBBER = registerWithItem("magical_scrubber", new MagicalScrubberBlock(noViewBlocking), new Item.Properties());
+    public static final RegistryObj STABLE_SINGULARITY = registerWithItem("stable_singularity", new Block(noViewBlocking), new Item.Properties());
+    public static final RegistryObj COMPRESSION_CHAMBER = registerWithItem("compression_chamber", new CompressionChamberBlock(noViewBlocking), new Item.Properties());
+    public static final RegistryObj COMPRESSED_OBSIDIAN_BLOCK = registerWithItem("compressed_obsidian_block", new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)), new Item.Properties());
+    public static final RegistryObj LAYERED_COMPRESSED_OBSIDIAN_BLOCK = registerWithItem("layered_compressed_obsidian_block", new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)), new Item.Properties());
+    public static final RegistryObj VOID = registerWithItem("void", new Block(fullBright().noCollission()), new Item.Properties());
+    public static final RegistryObj WHITEOUT = registerWithItem("whiteout", new Block(fullBright().noCollission()), new Item.Properties());
+    public static final RegistryObj BLOOD_RED = registerWithItem("blood_red", new Block(fullBright()), new Item.Properties());
+    public static final RegistryObj RED_TILE = registerWithItem("red_tile", new Block(fullBright()), new Item.Properties());
+    public static final RegistryObj RED_STAIRS = registerWithItem("red_stairs", new StairBlock(BLOOD_RED.block.get()::defaultBlockState, fullBright()), new Item.Properties());
+    public static final RegistryObj RED_TILE_BR = registerWithItem("red_tile_br", new RotatableBlock(fullBright()), new Item.Properties());
 
-        registerWithItem("eternium_block", new Block(explosionResistance), new Item.Properties());
+    public static final RegistryObj RED_TILE_TO_WALL = registerWithItem("red_tile_to_wall", new Block(fullBright()), new Item.Properties());
 
-        registerWithItem("deepslate_eternium_ore_block", new Block(explosionResistance), new Item.Properties());
+    public static final RegistryObj RED_WALL_V1 = registerWithItem("red_wall_variant_1", new Block(fullBright()), new Item.Properties());
 
-        registerWithItem("item_scrubber", new ItemScrubberBlock(noViewBlocking), new Item.Properties());
+    public static final RegistryObj RED_WALL_V2 = registerWithItem("red_wall_variant_2", new Block(fullBright()), new Item.Properties());
 
-        registerWithItem("magical_scrubber", new MagicalScrubberBlock(noViewBlocking), new Item.Properties());
+    public static final RegistryObj CYAN = registerWithItem("cyan", new Block(fullBright()), new Item.Properties());
 
-        registerWithItem("stable_singularity", new Block(noViewBlocking), new Item.Properties());
+    public static final RegistryObj CYAN_TILE = registerWithItem("cyan_tile", new Block(fullBright()), new Item.Properties());
 
-        registerWithItem("compression_chamber", new CompressionChamberBlock(noViewBlocking), new Item.Properties());
+    public static final RegistryObj CYAN_STAIRS = registerWithItem("cyan_stairs", new StairBlock(CYAN.block.get()::defaultBlockState, fullBright()), new Item.Properties());
 
-        registerWithItem("compressed_obsidian_block", new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)), new Item.Properties());
+    public static final RegistryObj CYAN_TILE_BR = registerWithItem("cyan_tile_br", new RotatableBlock(fullBright()), new Item.Properties());
 
-        registerWithItem("layered_compressed_obsidian_block", new Block(BlockBehaviour.Properties.copy(Blocks.OBSIDIAN)), new Item.Properties());
+    public static final RegistryObj CYAN_TILE_TO_WALL = registerWithItem("cyan_tile_to_wall", new Block(fullBright()), new Item.Properties());
 
-        registerWithItem("void", new Block(fullBright().noCollission()), new Item.Properties());
+    public static final RegistryObj CYAN_WALL_V1 = registerWithItem("cyan_wall_variant_1", new Block(fullBright()), new Item.Properties());
 
-        registerWithItem("whiteout", new Block(fullBright().noCollission()), new Item.Properties());
+    public static final RegistryObj CYAN_WALL_V2 = registerWithItem("cyan_wall_variant_2", new Block(fullBright()), new Item.Properties());
 
-        registerWithItem("blood_red", new Block(fullBright()), new Item.Properties());
+    public static final RegistryObj POOL_TILE = registerWithItem("pool_tile", new Block(stone), new Item.Properties());
 
-        registerWithItem("red_tile", new Block(fullBright()), new Item.Properties());
+    public static final RegistryObj POOL_TILE_STAIRS = registerWithItem("pool_tile_stairs", new StairBlock(POOL_TILE.block.get()::defaultBlockState, stone), new Item.Properties());
 
-        registerWithItem("red_stairs", new StairBlock(getModdedBlock("blood_red")::defaultBlockState, fullBright()), new Item.Properties());
+    public static final RegistryObj POOL_TILE_SLAB = registerWithItem("pool_tile_slab", new SlabBlock(stone), new Item.Properties());
 
-        registerWithItem("red_tile_br", new RotatableBlock(fullBright()), new Item.Properties());
+    public static final RegistryObj POOL_LIGHT = registerWithItem("pool_light", new Block(poolLightClean), new Item.Properties());
 
-        registerWithItem("red_tile_to_wall", new Block(fullBright()), new Item.Properties());
+    public static final RegistryObj DIRTY_POOL_TILE = registerWithItem("dirty_pool_tile", new Block(stone), new Item.Properties());
 
-        registerWithItem("red_wall_variant_1", new Block(fullBright()), new Item.Properties());
+    public static final RegistryObj DIRTY_POOL_TILE_STAIRS = registerWithItem("dirty_pool_tile_stairs", new StairBlock(DIRTY_POOL_TILE.block.get()::defaultBlockState, stone), new Item.Properties());
 
-        registerWithItem("red_wall_variant_2", new Block(fullBright()), new Item.Properties());
+    public static final RegistryObj DIRTY_POOL_TILE_SLAB = registerWithItem("dirty_pool_tile_slab", new SlabBlock(stone), new Item.Properties());
 
-        registerWithItem("cyan", new Block(fullBright()), new Item.Properties());
+    public static final RegistryObj DIRTY_POOL_LIGHT = registerWithItem("dirty_pool_light", new Block(poolLightDirty), new Item.Properties());
 
-        registerWithItem("cyan_tile", new Block(fullBright()), new Item.Properties());
+    public static final RegistryObj FILTHY_POOL_LIGHT = registerWithItem("filthy_pool_light", new Block(poolLightFilthy), new Item.Properties());
 
-        registerWithItem("cyan_stairs", new StairBlock(getModdedBlock("cyan")::defaultBlockState, fullBright()), new Item.Properties());
+    public static final RegistryObj DARK_POOL_TILE = registerWithItem("dark_pool_tile", new Block(stone), new Item.Properties());
 
-        registerWithItem("cyan_tile_br", new RotatableBlock(fullBright()), new Item.Properties());
+    public static final RegistryObj DARK_POOL_LIGHT = registerWithItem("dark_pool_light", new Block(poolLightClean), new Item.Properties());
 
-        registerWithItem("cyan_tile_to_wall", new Block(fullBright()), new Item.Properties());
+    public static final RegistryObj DARK_POOL_TILE_STAIRS = registerWithItem("dark_pool_tile_stairs", new StairBlock(DARK_POOL_TILE.block.get()::defaultBlockState, stone), new Item.Properties());
 
-        registerWithItem("cyan_wall_variant_1", new Block(fullBright()), new Item.Properties());
+    public static final RegistryObj DARK_POOL_TILE_SLAB = registerWithItem("dark_pool_tile_slab", new SlabBlock(stone), new Item.Properties());
 
-        registerWithItem("cyan_wall_variant_2", new Block(fullBright()), new Item.Properties());
+    public static final RegistryObj BLUE_POOL_TILE = registerWithItem("blue_pool_tile", new Block(stone), new Item.Properties());
 
-        registerWithItem("pool_tile", new Block(stone), new Item.Properties());
+    public static final RegistryObj BLUE_POOL_TILE_STAIRS = registerWithItem("blue_pool_tile_stairs", new StairBlock(BLUE_POOL_TILE.block.get()::defaultBlockState, stone), new Item.Properties());
 
-        registerWithItem("pool_tile_stairs", new StairBlock(getModdedBlock("pool_tile")::defaultBlockState, stone), new Item.Properties());
+    public static final RegistryObj BLUE_POOL_TILE_SLAB = registerWithItem("blue_pool_tile_slab", new SlabBlock(stone), new Item.Properties());
 
-        registerWithItem("pool_tile_slab", new SlabBlock(stone), new Item.Properties());
+    public static final RegistryObj BLUE_POOL_LIGHT = registerWithItem("blue_pool_light", new Block(poolLightClean), new Item.Properties());
 
-        registerWithItem("pool_light", new Block(poolLightClean), new Item.Properties());
+    public static final RegistryObj DIRTY_BLUE_POOL_TILE = registerWithItem("dirty_blue_pool_tile", new Block(stone), new Item.Properties());
 
-        registerWithItem("dirty_pool_tile", new Block(stone), new Item.Properties());
+    public static final RegistryObj DIRTY_BLUE_POOL_TILE_STAIRS = registerWithItem("dirty_blue_pool_tile_stairs", new StairBlock(DIRTY_BLUE_POOL_TILE.block.get()::defaultBlockState, stone), new Item.Properties());
 
-        registerWithItem("dirty_pool_tile_stairs", new StairBlock(getModdedBlock("dirty_pool_tile")::defaultBlockState, stone), new Item.Properties());
+    public static final RegistryObj DIRTY_BLUE_POOL_TILE_SLAB = registerWithItem("dirty_blue_pool_tile_slab", new SlabBlock(stone), new Item.Properties());
 
-        registerWithItem("dirty_pool_tile_slab", new SlabBlock(stone), new Item.Properties());
+    public static final RegistryObj DIRTY_BLUE_POOL_LIGHT = registerWithItem("dirty_blue_pool_light", new Block(poolLightDirty), new Item.Properties());
 
-        registerWithItem("dirty_pool_light", new Block(poolLightDirty), new Item.Properties());
+    public static final RegistryObj FILTHY_BLUE_POOL_LIGHT = registerWithItem("filthy_blue_pool_light", new Block(poolLightFilthy), new Item.Properties());
 
-        registerWithItem("filthy_pool_light", new Block(poolLightFilthy), new Item.Properties());
+    public static final RegistryObj RED_POOL_TILE = registerWithItem("red_pool_tile", new Block(stone), new Item.Properties());
 
-        registerWithItem("dark_pool_tile", new Block(stone), new Item.Properties());
+    public static final RegistryObj RED_POOL_TILE_STAIRS = registerWithItem("red_pool_tile_stairs", new StairBlock(RED_POOL_TILE.block.get()::defaultBlockState, stone), new Item.Properties());
 
-        registerWithItem("dark_pool_light", new Block(poolLightClean), new Item.Properties());
+    public static final RegistryObj RED_POOL_TILE_SLAB = registerWithItem("red_pool_tile_slab", new SlabBlock(stone), new Item.Properties());
 
-        registerWithItem("dark_pool_tile_stairs", new StairBlock(getModdedBlock("dark_pool_tile")::defaultBlockState, stone), new Item.Properties());
+    public static final RegistryObj RED_POOL_LIGHT = registerWithItem("red_pool_light", new Block(poolLightClean), new Item.Properties());
 
-        registerWithItem("dark_pool_tile_slab", new SlabBlock(stone), new Item.Properties());
+    public static final RegistryObj DIRTY_RED_POOL_TILE = registerWithItem("dirty_red_pool_tile", new Block(stone), new Item.Properties());
 
-        registerWithItem("blue_pool_tile", new Block(stone), new Item.Properties());
+    public static final RegistryObj DIRTY_RED_POOL_LIGHT = registerWithItem("dirty_red_pool_light", new Block(poolLightDirty), new Item.Properties());
 
-        registerWithItem("blue_pool_tile_stairs", new StairBlock(getModdedBlock("blue_pool_tile")::defaultBlockState, stone), new Item.Properties());
+    public static final RegistryObj FILTHY_RED_POOL_LIGHT = registerWithItem("filthy_red_pool_light", new Block(poolLightFilthy), new Item.Properties());
 
-        registerWithItem("blue_pool_tile_slab", new SlabBlock(stone), new Item.Properties());
+    public static final RegistryObj DIRTY_RED_POOL_TILE_STAIRS = registerWithItem("dirty_red_pool_tile_stairs", new StairBlock(DIRTY_RED_POOL_TILE.block.get()::defaultBlockState, stone), new Item.Properties());
 
-        registerWithItem("blue_pool_light", new Block(poolLightClean), new Item.Properties());
+    public static final RegistryObj DIRTY_RED_POOL_TILE_SLAB = registerWithItem("dirty_red_pool_tile_slab", new SlabBlock(stone), new Item.Properties());
 
-        registerWithItem("dirty_red_pool_light", new Block(poolLightDirty), new Item.Properties());
-
-        registerWithItem("filthy_red_pool_light", new Block(poolLightFilthy), new Item.Properties());
-
-        registerWithItem("dirty_blue_pool_tile", new Block(stone), new Item.Properties());
-
-        registerWithItem("dirty_blue_pool_tile_stairs", new StairBlock(getModdedBlock("dirty_blue_pool_tile")::defaultBlockState, stone), new Item.Properties());
-
-        registerWithItem("dirty_blue_pool_tile_slab", new SlabBlock(stone), new Item.Properties());
-
-        registerWithItem("dirty_blue_pool_light", new Block(poolLightDirty), new Item.Properties());
-
-        registerWithItem("filthy_blue_pool_light", new Block(poolLightFilthy), new Item.Properties());
-
-
-        registerWithItem("red_pool_tile", new Block(stone), new Item.Properties());
-
-        registerWithItem("red_pool_tile_stairs", new StairBlock(getModdedBlock("red_pool_tile")::defaultBlockState, stone), new Item.Properties());
-
-        registerWithItem("red_pool_tile_slab", new SlabBlock(stone), new Item.Properties());
-
-        registerWithItem("red_pool_light", new Block(poolLightClean), new Item.Properties());
-
-        registerWithItem("dirty_red_pool_tile", new Block(stone), new Item.Properties());
-
-        registerWithItem("dirty_red_pool_tile_stairs", new StairBlock(getModdedBlock("dirty_red_pool_tile")::defaultBlockState, stone), new Item.Properties());
-
-        registerWithItem("dirty_red_pool_tile_slab", new SlabBlock(stone), new Item.Properties());
-
-    }
 }

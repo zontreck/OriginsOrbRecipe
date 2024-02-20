@@ -11,6 +11,7 @@ import net.minecraft.world.level.block.Block;
 
 import java.util.List;
 
+@Deprecated
 public class DeprecatedBlockItem extends BlockItem
 {
     public DeprecatedBlockItem(Block a)
