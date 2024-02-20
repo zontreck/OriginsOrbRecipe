@@ -52,8 +52,6 @@ public class ModItems {
     
     public static final RegistryObject<Item> VAULT_RAW_ORE = CreativeModeTabs.addToOTEModTab(ITEMS.register("raw_vault_steel_ore", () -> new Item(new Item.Properties().stacksTo(64))));
 
-    @Deprecated
-    public static final RegistryObject<Item> POSS_BALL = CreativeModeTabs.addToOTEModTab(ITEMS.register("poss_ball", () -> new DeprecatedItem()));
 
     public static final RegistryObject<Item> MIAB = CreativeModeTabs.addToOTEModTab(ITEMS.register("mob_capture_ball", ()->new MobCaptureBall()));
 

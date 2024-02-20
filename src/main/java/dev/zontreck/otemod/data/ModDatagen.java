@@ -22,5 +22,6 @@ public class ModDatagen
         ExistingFileHelper helper = event.getExistingFileHelper();
 
         gen.addProvider(event.includeClient(), new ModBlockStatesProvider(output, helper));
+        gen.addProvider(event.includeClient(), new ModItemModelsProvider(output,helper));
     }
 }

@@ -47,7 +47,7 @@ public class ThrownMobCaptureBall extends ThrowableItemProjectile
     @Override
     protected Item getDefaultItem()
     {
-        return ModItems.POSS_BALL.get();
+        return ModItems.MIAB.get();
     }
 
     void returnBall()

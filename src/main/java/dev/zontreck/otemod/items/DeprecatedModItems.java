@@ -20,6 +20,8 @@ public class DeprecatedModItems
 
     public static final RegistryObject<Item> AURORA_COMPOUND = CreativeModeTabs.addToOTEModTab(ITEMS.register("aurora_compound", () -> new DeprecatedItem()));
 
+    public static final RegistryObject<Item> POSS_BALL = CreativeModeTabs.addToOTEModTab(ITEMS.register("poss_ball", () -> new DeprecatedItem()));
+
     public static void register(IEventBus bus){
         ITEMS.register(bus);
     }
