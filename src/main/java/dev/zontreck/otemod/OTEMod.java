@@ -86,8 +86,6 @@ public class OTEMod
     // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final String MOD_ID = "otemod";
-    public static final String MODIFY_BIOMES = "modify_biomes";
-    public static final ResourceLocation MODIFY_BIOMES_RL = new ResourceLocation(OTEMod.MOD_ID, MODIFY_BIOMES);
     
     //public static List<TeleportContainer> TeleportRegistry = new ArrayList<>();
     public static MinecraftServer THE_SERVER;
@@ -136,8 +134,8 @@ public class OTEMod
         MinecraftForge.EVENT_BUS.register(new EventHandler());
 
 
-        ModBlocks.register(bus);
         DeprecatedModBlocks.register(bus);
+        ModBlocks.register(bus);
         CreativeModeTabs.REGISTER.register(bus);
         ModItems.register(bus);
         DeprecatedModItems.register(bus);

@@ -42,54 +42,6 @@ public class DeprecatedModBlocks
         OTEMod.LOGGER.info("Registering all blocks...");
     }
 
-    /**
-     * This variant of the method is meant for complex blocks that require a custom block item
-     * @param name
-     * @param blocky
-     * @return
-     */
-    public static RegistryObj registerWithItem(String name, Supplier<Blocky> blocky)
-    {
-        RegistryObject<Block> ret = BLOCKS.register(name, ()->blocky.get().block);
-        var item = CreativeModeTabs.addToOTEModTab(ITEMS.register(name, ()->blocky.get().item));
-
-        return new RegistryObj(ret,item);
-    }
-
-    /**
-     * Simple block registration with a normal block item.
-     * @param name
-     * @param a
-     * @param props
-     * @return
-     */
-    public static RegistryObj registerWithItem(String name, Block a, Item.Properties props)
-    {
-        RegistryObject<Block> ret = BLOCKS.register(name, ()->a);
-        var item = CreativeModeTabs.addToOTEModTab(ITEMS.register(name, ()->new BlockItem(ret.get(), props)));
-
-        return new RegistryObj(ret,item);
-    }
-
-    public static RegistryObj registerDeprecated(String name)
-    {
-        RegistryObject<Block> ret = BLOCKS.register(name, ()->new DeprecatedBlock());
-        var item = CreativeModeTabs.addToOTEModTab(ITEMS.register(name, ()->new DeprecatedBlockItem(ret.get())));
-
-        return new RegistryObj(ret,item);
-    }
-    private static class Blocky
-    {
-        public Block block;
-        public BlockItem item;
-
-        public Blocky(Block block, BlockItem item)
-        {
-            this.block=block;
-            this.item=item;
-        }
-    }
-
     private static BlockBehaviour.Properties standardBehavior()
     {
         return BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(7F).destroyTime(6);
@@ -128,22 +80,30 @@ public class DeprecatedModBlocks
     private static BlockBehaviour.Properties poolLightDirty = BlockBehaviour.Properties.copy(Blocks.GLASS).lightLevel((X) -> 12);
     private static BlockBehaviour.Properties poolLightFilthy = BlockBehaviour.Properties.copy(Blocks.GLASS).lightLevel((X) -> 4);
 
+    public static RegistryObject<Block> registerDeprecated(RegistryObject<Block> blk)
+    {
+        ITEMS.register(blk.getId().getPath(), ()->new DeprecatedBlockItem(blk.get()));
 
-    public static final RegistryObj ILUSIUM_ORE_BLOCK = registerDeprecated("ilusium_ore_block");
-    public static final RegistryObj DEEPSLATE_ILUSIUM_ORE_BLOCK = registerDeprecated("deepslate_ilusium_ore_block");
-    public static final RegistryObj ILUSIUM_BLOCK = registerDeprecated("ilusium_block");
-    public static final RegistryObj CLEAR_GLASS_BLOCK = registerDeprecated("clear_glass_block");
-    public static final RegistryObj LIMINAL_TILES = registerDeprecated("liminal_tiles");
-    public static final RegistryObj BLACK = registerDeprecated("black");
-    public static final RegistryObj LIMINAL_TILE_STAIRS = registerDeprecated("liminal_tile_stairs");
-    public static final RegistryObj LIMINAL_TILE_SLAB = registerDeprecated("liminal_tile_slab");
-    public static final RegistryObj LIMINAL_WINDOW = registerDeprecated("liminal_window");
-    public static final RegistryObj LIME = registerDeprecated("lime");
-    public static final RegistryObj LIME_TILE = registerDeprecated("lime_tile");
-    public static final RegistryObj LIME_STAIRS = registerDeprecated("lime_stairs");
-    public static final RegistryObj LIME_TILE_BR = registerDeprecated("lime_tile_br");
-    public static final RegistryObj LIME_TILE_TO_WALL = registerDeprecated("lime_tile_to_wall");
-    public static final RegistryObj LIME_WALL_V1 = registerDeprecated("lime_wall_variant_1");
-    public static final RegistryObj LIME_WALL_V2 = registerDeprecated("lime_wall_variant_2");
+        return blk;
+    }
+
+
+    public static final RegistryObject<Block> ILUSIUM_ORE_BLOCK = registerDeprecated(BLOCKS.register("ilusium_ore_block", ()-> new DeprecatedBlock()));
+
+    public static final RegistryObject<Block> DEEPSLATE_ILUSIUM_ORE_BLOCK = registerDeprecated(BLOCKS.register("deepslate_ilusium_ore_block", ()->new DeprecatedBlock()));
+    public static final RegistryObject<Block> ILUSIUM_BLOCK = registerDeprecated(BLOCKS.register("ilusium_block", ()->new DeprecatedBlock()));
+    public static final RegistryObject<Block> CLEAR_GLASS_BLOCK = registerDeprecated(BLOCKS.register("clear_glass_block", ()-> new DeprecatedBlock()));
+    public static final RegistryObject<Block> LIMINAL_TILES = registerDeprecated(BLOCKS.register("liminal_tiles", ()->new DeprecatedBlock()));
+    public static final RegistryObject<Block> BLACK = registerDeprecated(BLOCKS.register("black", ()->new DeprecatedBlock()));
+    public static final RegistryObject<Block> LIMINAL_TILE_STAIRS = registerDeprecated(BLOCKS.register("liminal_tile_stairs", ()-> new DeprecatedBlock()));
+    public static final RegistryObject<Block> LIMINAL_TILE_SLAB = registerDeprecated(BLOCKS.register("liminal_tile_slab", ()-> new DeprecatedBlock()));
+    public static final RegistryObject<Block> LIMINAL_WINDOW = registerDeprecated(BLOCKS.register("liminal_window", ()->new DeprecatedBlock()));
+    public static final RegistryObject<Block> LIME = registerDeprecated(BLOCKS.register("lime", ()-> new DeprecatedBlock()));
+    public static final RegistryObject<Block> LIME_TILE = registerDeprecated(BLOCKS.register("lime_tile", ()-> new DeprecatedBlock()));
+    public static final RegistryObject<Block> LIME_STAIRS = registerDeprecated(BLOCKS.register("lime_stairs", ()-> new DeprecatedBlock()));
+    public static final RegistryObject<Block> LIME_TILE_BR = registerDeprecated(BLOCKS.register("lime_tile_br", ()->new DeprecatedBlock()));
+    public static final RegistryObject<Block> LIME_TILE_TO_WALL = registerDeprecated(BLOCKS.register("lime_tile_to_wall", ()-> new DeprecatedBlock()));
+    public static final RegistryObject<Block> LIME_WALL_V1 = registerDeprecated(BLOCKS.register("lime_wall_variant_1", ()->new DeprecatedBlock()));
+    public static final RegistryObject<Block> LIME_WALL_V2 = registerDeprecated(BLOCKS.register("lime_wall_variant_2", ()->new DeprecatedBlock()));
 
 }
