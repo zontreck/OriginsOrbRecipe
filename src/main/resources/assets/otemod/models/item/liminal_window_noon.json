@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "otemod:block/liminal_tiles"
-  }
+  "parent": "otemod:block/deprecated"
 }

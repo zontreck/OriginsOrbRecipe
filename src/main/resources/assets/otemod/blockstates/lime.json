@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "otemod:block/lime"
+      "model": "otemod:block/deprecated"
     }
   }
 }

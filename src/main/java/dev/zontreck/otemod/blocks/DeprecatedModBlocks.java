@@ -82,7 +82,7 @@ public class DeprecatedModBlocks
 
     public static RegistryObject<Block> registerDeprecated(RegistryObject<Block> blk)
     {
-        ITEMS.register(blk.getId().getPath(), ()->new DeprecatedBlockItem(blk.get()));
+        CreativeModeTabs.addToOTEModTab(ITEMS.register(blk.getId().getPath(), ()->new DeprecatedBlockItem(blk.get())));
 
         return blk;
     }

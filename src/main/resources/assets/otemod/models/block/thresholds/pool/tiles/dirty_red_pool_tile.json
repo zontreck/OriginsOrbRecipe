@@ -1,6 +1,0 @@
-{
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "otemod:block/thresholds/hallway/tiles/dirty_red_pool_tile"
-    }
-}

@@ -1,6 +1,0 @@
-{
-  "parent": "otemod:block/fb/cube",
-  "textures": {
-    "all": "otemod:block/thresholds/lime"
-  }
-}

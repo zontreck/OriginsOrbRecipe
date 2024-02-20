@@ -1,7 +1,7 @@
 {
     "variants": {
         "": {
-            "model": "otemod:block/deepslate_ilusium_ore_block"
+            "model": "otemod:block/deprecated"
         }
     }
 }

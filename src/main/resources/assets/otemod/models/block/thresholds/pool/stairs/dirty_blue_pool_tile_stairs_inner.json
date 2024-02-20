@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "side": "otemod:block/thresholds/hallway/tiles/dirty_blue_pool_tile",
-    "top": "otemod:block/thresholds/hallway/tiles/dirty_blue_pool_tile",
-    "bottom": "otemod:block/thresholds/hallway/tiles/dirty_blue_pool_tile"
-  }
-}

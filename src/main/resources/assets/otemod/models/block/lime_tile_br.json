@@ -1,7 +1,0 @@
-{
-  "parent": "otemod:block/fb/sided",
-  "textures": {
-    "top": "otemod:block/thresholds/hallway/floor/tiles/lime_tile_transition",
-    "side": "otemod:block/thresholds/lime"
-  }
-}

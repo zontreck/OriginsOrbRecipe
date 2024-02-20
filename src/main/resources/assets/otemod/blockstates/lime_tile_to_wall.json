@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "otemod:block/lime_tile_to_wall"
+      "model": "otemod:block/deprecated"
     }
   }
 }

@@ -76,7 +76,7 @@ public class ModBlocks {
 
     public static RegistryObject<Block> registerWithItem(RegistryObject<Block> blk, Item.Properties props)
     {
-        ITEMS.register(blk.getId().getPath(), ()->new BlockItem(blk.get(), props));
+        CreativeModeTabs.addToOTEModTab(ITEMS.register(blk.getId().getPath(), ()->new BlockItem(blk.get(), props)));
 
         return blk;
     }

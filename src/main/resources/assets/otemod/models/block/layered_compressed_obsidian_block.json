@@ -1,6 +1,0 @@
-{
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "otemod:block/layered_compressed_obsidian_block"
-    }
-}

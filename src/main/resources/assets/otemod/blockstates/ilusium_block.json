@@ -1,7 +1,7 @@
 {
     "variants": {
         "": {
-            "model": "otemod:block/ilusium_block"
+            "model": "otemod:block/deprecated"
         }
     }
 }
