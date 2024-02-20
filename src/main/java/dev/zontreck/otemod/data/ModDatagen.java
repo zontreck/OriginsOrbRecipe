@@ -2,6 +2,7 @@ package dev.zontreck.otemod.data;
 
 
 import dev.zontreck.otemod.OTEMod;
+import dev.zontreck.otemod.data.loot.ModBlockLootTablesProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -21,7 +22,8 @@ public class ModDatagen
 
         ExistingFileHelper helper = event.getExistingFileHelper();
 
-        gen.addProvider(event.includeClient(), new ModBlockStatesProvider(output, helper));
-        gen.addProvider(event.includeClient(), new ModItemModelsProvider(output,helper));
+        gen.addProvider(true, new ModBlockStatesProvider(output, helper));
+        gen.addProvider(true, new ModItemModelsProvider(output,helper));
+        gen.addProvider(true, ModLootTablesProvider.create(output));
     }
 }

@@ -28,18 +28,17 @@ public class DeprecatedModBlocks
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, OTEMod.MOD_ID);
 
 
+    public static void register(IEventBus bus){
+        BLOCKS.register(bus);
+        ITEMS.register(bus);
+        OTEMod.LOGGER.info("Registering all deprecated blocks...");
+    }
+
     private static boolean never(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return false;
     }
     private static boolean always(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos) {
         return true;
-    }
-
-
-    public static void register(IEventBus bus){
-        BLOCKS.register(bus);
-        ITEMS.register(bus);
-        OTEMod.LOGGER.info("Registering all blocks...");
     }
 
     private static BlockBehaviour.Properties standardBehavior()
