@@ -36,6 +36,7 @@ import net.minecraft.server.commands.GiveCommand;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
@@ -101,6 +102,7 @@ public class OTEMod
     public OTEMod()
     {
 
+
         OTEMod.OTEPrefix = ChatColor.doColors("!dark_gray![!dark_green!!bold!Thresholds!reset!!dark_gray!]!reset!");
         OTEMod.ONLY_PLAYER = ChatColor.doColors("!dark_red!Only a player can execute this command");
 
@@ -108,6 +110,7 @@ public class OTEMod
         // Register the setup method for modloading
         bus.addListener(this::setup);
 
+        ModDyes.InitColors();
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, OTEServerConfig.SPEC, "otemod-rss-server.toml");
         
@@ -149,6 +152,12 @@ public class OTEMod
     private void setup(final FMLCommonSetupEvent event)
     {
         ModMessages.register();
+
+        System.out.println("-----------------------------------------------");
+        for (DyeColor color : DyeColor.values()) {
+            System.out.println(color.toString() + " " + color.getId());
+        }
+        System.out.println("-----------------------------------------------");
 
         event.enqueueWork(()->{
             ModDyes.UpdateBlockEntities();

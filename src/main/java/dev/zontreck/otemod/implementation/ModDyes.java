@@ -1,6 +1,7 @@
 package dev.zontreck.otemod.implementation;
 
 import com.google.common.collect.ImmutableSet;
+import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.blocks.ModBlocks;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.Block;
@@ -16,8 +17,12 @@ public class ModDyes
 
     public static DyeColor DARK_RED;
 
-    static {
+    public static void InitColors() {
         DARK_RED = DyeColor.byName("dark_red", DyeColor.WHITE);
+        if(DARK_RED == DyeColor.WHITE) DARK_RED = DyeColor.byName("DARK_RED", DyeColor.BLACK);
+        if(DARK_RED == DyeColor.BLACK) {
+            OTEMod.LOGGER.error("Dye colors cannot be obtained properly: " + DARK_RED + " -   " + DyeColor.byName("dark_red", DyeColor.WHITE));
+        }
         DYES.add(DARK_RED);
     }
 

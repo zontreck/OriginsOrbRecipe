@@ -20,7 +20,7 @@ public abstract class DyeColorMixin {
     @Final
     @Mutable
     public static DyeColor[] $VALUES;
-    private static final DyeColor DARK_RED = addVariant("DARK_RED", "dark_red", 128000001, MapColor.COLOR_RED, 128000001, 128000001);
+    private static final DyeColor DARK_RED = addVariant("DARK_RED", "dark_red", 128000001, MapColor.COLOR_BLACK, 128000001, 128000001);
 
 
     @Shadow
