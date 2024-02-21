@@ -51,6 +51,11 @@ public class ModItemModelsProvider extends ItemModelProvider
         item(ModItems.MIAB);
         item(ModItems.EMPTY_SPAWN_EGG);
         item(ModItems.GENERIC_DEPRECATED_ITEM);
+        item(ModItems.WHITE_BRICK);
+        item(ModItems.BLUE_BRICK);
+        item(ModItems.LIGHT_BLUE_BRICK);
+        item(ModItems.CYAN_BRICK);
+        item(ModItems.DARK_RED_DYE);
 
 
         /*

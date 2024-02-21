@@ -1,15 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "AB",
-    "BA"
+    "AAA",
+    "AAA",
+    "AAA"
   ],
   "key": {
     "A": {
-      "item": "minecraft:white_concrete"
-    },
-    "B": {
-      "item": "minecraft:white_terracotta"
+      "item": "otemod:white_brick"
     }
   },
   "result": {

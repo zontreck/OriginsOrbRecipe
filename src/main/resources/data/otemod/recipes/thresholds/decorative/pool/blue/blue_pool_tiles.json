@@ -7,13 +7,13 @@
   ],
   "key": {
     "A": {
-      "item": "minecraft:white_concrete"
+      "item": "otemod:blue_brick"
     },
     "B": {
-      "item": "minecraft:blue_terracotta"
+      "item": "otemod:cyan_brick"
     },
     "C": {
-      "item": "minecraft:cyan_terracotta"
+      "item": "otemod:light_blue_brick"
     }
   },
   "result": {

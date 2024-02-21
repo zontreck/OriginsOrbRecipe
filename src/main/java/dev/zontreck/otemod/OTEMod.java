@@ -21,10 +21,7 @@ import dev.zontreck.otemod.effects.ModEffects;
 import dev.zontreck.otemod.enchantments.FlightEnchantment;
 import dev.zontreck.otemod.enchantments.NightVisionEnchantment;
 import dev.zontreck.otemod.events.EventHandler;
-import dev.zontreck.otemod.implementation.CreativeModeTabs;
-import dev.zontreck.otemod.implementation.InventoryBackup;
-import dev.zontreck.otemod.implementation.Messages;
-import dev.zontreck.otemod.implementation.PlayerFirstJoinTag;
+import dev.zontreck.otemod.implementation.*;
 import dev.zontreck.otemod.implementation.compressor.CompressionChamberScreen;
 import dev.zontreck.otemod.implementation.vault.*;
 import dev.zontreck.otemod.integrations.KeyBindings;
@@ -152,6 +149,10 @@ public class OTEMod
     private void setup(final FMLCommonSetupEvent event)
     {
         ModMessages.register();
+
+        event.enqueueWork(()->{
+            ModDyes.UpdateBlockEntities();
+        });
     }
 
 

@@ -39,6 +39,11 @@
     "item.otemod.encased_singularity": "Encased Singualrity",
     "item.otemod.encased_singularity.desc": "A singularity encased in stone, ready to be further compressed into bedrock",
     "item.otemod.deprecated": "Deprecated Item",
+    "item.otemod.white_brick": "White Brick",
+    "item.otemod.blue_brick": "Blue Brick",
+    "item.otemod.light_blue_brick": "Light Blue Brick",
+    "item.otemod.cyan_brick": "Cyan Brick",
+    "item.otemod.dark_red_dye": "Dark Red Dye",
 
 
     "block.otemod.eternium_ore_block": "Eternium Ore",
@@ -102,6 +107,10 @@
     "block.otemod.dirty_red_pool_tile": "Dirty Red Pool Tile",
     "block.otemod.dirty_red_pool_tile_stairs": "Dirty Red Pool Tile Stairs",
     "block.otemod.dirty_red_pool_tile_slab": "Dirty Red Pool Tile Slab",
+    "block.otemod.dark_red_wool": "Dark Red Wool",
+    "block.otemod.dark_red_carpet": "Dark Red Carpet",
+    "block.otemod.dark_red_bed": "Dark Red Bed",
+    "block.otemod.dark_red_shulker_box": "Dark Red Shulker Box",
 
 
     "enchantment.otemod.mob_egging": "Mob Egging",

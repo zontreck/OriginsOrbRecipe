@@ -26,3 +26,7 @@ forge*changelog.txt
 
 .private
 .vscode
+
+src/generated/resources
+run
+run-data
