@@ -2,9 +2,6 @@ package dev.zontreck.otemod.blocks;
 
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.implementation.CreativeModeTabs;
-import dev.zontreck.otemod.implementation.ModDyes;
-import dev.zontreck.otemod.mixins.DyeColorMixin;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
@@ -21,8 +18,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-
-import java.util.function.Supplier;
 
 public class ModBlocks {
 
@@ -221,11 +216,5 @@ public class ModBlocks {
     public static final RegistryObject<Block> DARK_RED_WOOL = registerWithItem(BLOCKS.register("dark_red_wool", ()->new Block(BlockBehaviour.Properties.copy(Blocks.RED_WOOL))), new Item.Properties());
 
     public static final RegistryObject<Block> DARK_RED_CARPET = registerWithItem(BLOCKS.register("dark_red_carpet", ()->new CarpetBlock(BlockBehaviour.Properties.copy(Blocks.RED_CARPET))), new Item.Properties());
-
-    public static final RegistryObject<Block> DARK_RED_BED = registerWithItem(BLOCKS.register("dark_red_bed", ()->new BedBlock(DyeColor.byName("dark_red", DyeColor.RED), BlockBehaviour.Properties.copy(Blocks.RED_BED).mapColor((X)->{
-        return X.getValue(BedBlock.PART) == BedPart.FOOT ? ModDyes.DARK_RED.getMapColor() : MapColor.WOOL;
-    }).noOcclusion())), new Item.Properties().stacksTo(1));
-
-    public static final RegistryObject<Block> DARK_RED_SHULKER_BOX = registerWithItem((BLOCKS.register("dark_red_shulker_box", ()->new ShulkerBoxBlock(ModDyes.DARK_RED, BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_RED).strength(2.0F).dynamicShape().noOcclusion().isSuffocating(shulkerState).isViewBlocking(shulkerState)))), new Item.Properties().stacksTo(1));
 
 }

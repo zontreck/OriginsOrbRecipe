@@ -4,9 +4,6 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "otemod.refmap.json",
   "mixins": [
-    "DyeColorMixin",
-    "ShulkerBoxBlockMixin",
-    "ShulkerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -44,6 +44,9 @@
     "item.otemod.light_blue_brick": "Light Blue Brick",
     "item.otemod.cyan_brick": "Cyan Brick",
     "item.otemod.dark_red_dye": "Dark Red Dye",
+    "item.otemod.red_brick": "Red Brick",
+    "item.otemod.dark_red_brick": "Dark Red Brick",
+
 
 
     "block.otemod.eternium_ore_block": "Eternium Ore",
@@ -109,8 +112,6 @@
     "block.otemod.dirty_red_pool_tile_slab": "Dirty Red Pool Tile Slab",
     "block.otemod.dark_red_wool": "Dark Red Wool",
     "block.otemod.dark_red_carpet": "Dark Red Carpet",
-    "block.otemod.dark_red_bed": "Dark Red Bed",
-    "block.otemod.dark_red_shulker_box": "Dark Red Shulker Box",
 
 
     "enchantment.otemod.mob_egging": "Mob Egging",

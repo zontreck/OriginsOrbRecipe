@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:brick"
+    },
+    {
+      "item": "otemod:dark_red_dye"
+    }
+  ],
+  "result": {
+    "item": "otemod:dark_red_brick",
+    "count": 1
+  }
+}

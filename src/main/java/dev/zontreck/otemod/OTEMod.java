@@ -110,8 +110,6 @@ public class OTEMod
         // Register the setup method for modloading
         bus.addListener(this::setup);
 
-        ModDyes.InitColors();
-
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, OTEServerConfig.SPEC, "otemod-rss-server.toml");
         
         
@@ -152,16 +150,6 @@ public class OTEMod
     private void setup(final FMLCommonSetupEvent event)
     {
         ModMessages.register();
-
-        System.out.println("-----------------------------------------------");
-        for (DyeColor color : DyeColor.values()) {
-            System.out.println(color.toString() + " " + color.getId());
-        }
-        System.out.println("-----------------------------------------------");
-
-        event.enqueueWork(()->{
-            ModDyes.UpdateBlockEntities();
-        });
     }
 
 

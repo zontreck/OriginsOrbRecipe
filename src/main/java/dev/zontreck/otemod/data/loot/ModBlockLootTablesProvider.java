@@ -98,8 +98,6 @@ public class ModBlockLootTablesProvider extends BlockLootSubProvider
         dropSelf(ModBlocks.DIRTY_RED_POOL_TILE_SLAB.get());
         dropSelf(ModBlocks.DARK_RED_WOOL.get());
         dropSelf(ModBlocks.DARK_RED_CARPET.get());
-        dropSelf(ModBlocks.DARK_RED_BED.get());
-        add(ModBlocks.DARK_RED_SHULKER_BOX.get(), createShulkerBoxDrop(ModBlocks.DARK_RED_SHULKER_BOX.get()));
 
 
 
