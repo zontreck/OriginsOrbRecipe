@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "otemod:item/vault_fragment_upper_left"
+  }
+}

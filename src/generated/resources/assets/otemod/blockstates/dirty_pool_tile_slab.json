@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "otemod:block/dirty_pool_tile_slab"
+    },
+    "type=double": {
+      "model": "otemod:block/dirty_pool_tile"
+    },
+    "type=top": {
+      "model": "otemod:block/dirty_pool_tile_slab_top"
+    }
+  }
+}

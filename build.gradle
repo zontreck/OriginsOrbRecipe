@@ -221,7 +221,6 @@ tasks.named('jar', Jar).configure {
 
     // This is the preferred method to reobfuscate your jar file
     finalizedBy 'reobfJar'
-    dependsOn 'runData'
 }
 
 

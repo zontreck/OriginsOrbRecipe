@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "otemod:block/dirty_green_pool_tile",
+    "side": "otemod:block/dirty_green_pool_tile",
+    "top": "otemod:block/dirty_green_pool_tile"
+  }
+}

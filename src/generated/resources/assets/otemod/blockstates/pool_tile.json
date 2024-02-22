@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "otemod:block/pool_tile"
+    }
+  }
+}

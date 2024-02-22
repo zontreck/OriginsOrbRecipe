@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "otemod:filthy_green_pool_light"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "otemod:blocks/filthy_green_pool_light"
+}
