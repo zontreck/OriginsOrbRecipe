@@ -37,7 +37,7 @@ public class MobCaptureBall extends Item
             ItemStack single = stack.copy();
             single.setCount(1);
 
-            stack.shrink(1);
+            //stack.shrink(1);
 
             ThrownMobCaptureBall TPB = new ThrownMobCaptureBall(pLevel, pPlayer, single);
 
