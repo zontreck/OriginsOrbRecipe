@@ -4,6 +4,8 @@ import dev.zontreck.libzontreck.chat.ChatColor;
 import dev.zontreck.libzontreck.lore.LoreContainer;
 import dev.zontreck.libzontreck.lore.LoreEntry;
 import dev.zontreck.libzontreck.util.ServerUtilities;
+import dev.zontreck.otemod.blocks.entity.ModEntities;
+import dev.zontreck.otemod.entities.ModEntityTypes;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -28,13 +30,13 @@ public class ThrownMobCaptureBall extends ThrowableItemProjectile
     LivingEntity shooter;
     ItemStack self;
 
-    public ThrownMobCaptureBall(EntityType<? extends ThrownMobCaptureBall> entity, Level level)
+    public ThrownMobCaptureBall(EntityType entity, Level level)
     {
         super(entity, level);
     }
     public ThrownMobCaptureBall(Level level, LivingEntity shooter, ItemStack item)
     {
-        super(EntityType.SNOWBALL, shooter, level);
+        super(EntityType.EGG, shooter, level);
 
         this.shooter = shooter;
         if(item.getTag() == null)

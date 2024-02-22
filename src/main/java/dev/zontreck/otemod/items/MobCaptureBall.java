@@ -37,7 +37,12 @@ public class MobCaptureBall extends Item
             ItemStack single = stack.copy();
             single.setCount(1);
 
-            //stack.shrink(1);
+            if(!pPlayer.getAbilities().instabuild)
+            {
+                stack.shrink(1);
+            }else {
+
+            }
 
             ThrownMobCaptureBall TPB = new ThrownMobCaptureBall(pLevel, pPlayer, single);
 
@@ -47,12 +52,6 @@ public class MobCaptureBall extends Item
         }
 
         pPlayer.awardStat(Stats.ITEM_USED.get(this));
-        if(!pPlayer.getAbilities().instabuild)
-        {
-            stack.shrink(1);
-        }else {
-
-        }
         return super.use(pLevel, pPlayer, pUsedHand);
     }
 }
