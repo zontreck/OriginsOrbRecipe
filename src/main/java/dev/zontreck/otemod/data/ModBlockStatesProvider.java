@@ -64,6 +64,15 @@ public class ModBlockStatesProvider extends BlockStateProvider
         blockWithItem(ModBlocks.DARK_RED_WOOL);
         carpetBlock(ModBlocks.DARK_RED_CARPET, ModBlocks.DARK_RED_WOOL);
 
+        blockWithItem(ModBlocks.GREEN_POOL_TILE);
+        stairBlock(ModBlocks.GREEN_POOL_TILE_STAIRS, ModBlocks.GREEN_POOL_TILE);
+        slabBlock(ModBlocks.GREEN_POOL_TILE_SLAB, ModBlocks.GREEN_POOL_TILE);
+        blockWithItem(ModBlocks.GREEN_POOL_LIGHT);
+        blockWithItem(ModBlocks.DIRTY_GREEN_POOL_LIGHT);
+        blockWithItem(ModBlocks.FILTHY_GREEN_POOL_LIGHT);
+        blockWithItem(ModBlocks.DIRTY_GREEN_POOL_TILE);
+        stairBlock(ModBlocks.DIRTY_GREEN_POOL_TILE_STAIRS, ModBlocks.DIRTY_GREEN_POOL_TILE);
+        slabBlock(ModBlocks.DIRTY_GREEN_POOL_TILE_SLAB, ModBlocks.DIRTY_GREEN_POOL_TILE);
 
     }
 

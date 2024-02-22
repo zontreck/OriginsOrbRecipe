@@ -58,6 +58,9 @@ public class ModItemModelsProvider extends ItemModelProvider
         item(ModItems.DARK_RED_DYE);
         item(ModItems.RED_BRICK);
         item(ModItems.DARK_RED_BRICK);
+        item(ModItems.LIME_BRICK);
+        item(ModItems.GREEN_BRICK);
+
 
 
         /*

@@ -98,6 +98,15 @@ public class ModBlockLootTablesProvider extends BlockLootSubProvider
         dropSelf(ModBlocks.DIRTY_RED_POOL_TILE_SLAB.get());
         dropSelf(ModBlocks.DARK_RED_WOOL.get());
         dropSelf(ModBlocks.DARK_RED_CARPET.get());
+        dropSelf(ModBlocks.GREEN_POOL_TILE.get());
+        dropSelf(ModBlocks.GREEN_POOL_LIGHT.get());
+        dropSelf(ModBlocks.GREEN_POOL_TILE_SLAB.get());
+        dropSelf(ModBlocks.GREEN_POOL_TILE_STAIRS.get());
+        dropSelf(ModBlocks.DIRTY_GREEN_POOL_TILE.get());
+        dropSelf(ModBlocks.DIRTY_GREEN_POOL_LIGHT.get());
+        dropSelf(ModBlocks.DIRTY_GREEN_POOL_TILE_SLAB.get());
+        dropSelf(ModBlocks.DIRTY_GREEN_POOL_TILE_STAIRS.get());
+        dropSelf(ModBlocks.FILTHY_GREEN_POOL_LIGHT.get());
 
 
 

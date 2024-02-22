@@ -74,6 +74,10 @@ public class ModItems {
 
     public static final RegistryObject<Item> DARK_RED_BRICK = CreativeModeTabs.addToOTEModTab(ITEMS.register("dark_red_brick", ()->new Item(new Item.Properties())));
 
+    public static final RegistryObject<Item> LIME_BRICK = CreativeModeTabs.addToOTEModTab(ITEMS.register("lime_brick", ()->new Item(new Item.Properties())));
+
+    public static final RegistryObject<Item> GREEN_BRICK = CreativeModeTabs.addToOTEModTab(ITEMS.register("green_brick", ()->new Item(new Item.Properties())));
+
     
     //public static final RegistryObject<Item> POSSUM_SPAWN_EGG = ITEMS.register("possum_spawn_egg", () -> new ForgeSpawnEggItem(ModEntityTypes.POSSUM, 0x938686, 0xc68787, new Item.Properties())));
 

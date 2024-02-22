@@ -217,4 +217,24 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> DARK_RED_CARPET = registerWithItem(BLOCKS.register("dark_red_carpet", ()->new CarpetBlock(BlockBehaviour.Properties.copy(Blocks.RED_CARPET))), new Item.Properties());
 
+    public static final RegistryObject<Block> GREEN_POOL_TILE = registerWithItem(BLOCKS.register("green_pool_tile", ()->new Block(stone)), new Item.Properties());
+
+    public static final RegistryObject<Block> GREEN_POOL_TILE_STAIRS = registerWithItem(BLOCKS.register("green_pool_tile_stairs", ()->new StairBlock(GREEN_POOL_TILE.get()::defaultBlockState, stone)), new Item.Properties());
+
+    public static final RegistryObject<Block> GREEN_POOL_TILE_SLAB = registerWithItem(BLOCKS.register("green_pool_tile_slab", ()->new SlabBlock(stone)), new Item.Properties());
+
+    public static final RegistryObject<Block> GREEN_POOL_LIGHT = registerWithItem(BLOCKS.register("green_pool_light", ()->new Block(poolLightClean)), new Item.Properties());
+
+    public static final RegistryObject<Block> DIRTY_GREEN_POOL_TILE = registerWithItem(BLOCKS.register("dirty_green_pool_tile", ()->new Block(stone)), new Item.Properties());
+
+    public static final RegistryObject<Block> DIRTY_GREEN_POOL_LIGHT = registerWithItem(BLOCKS.register("dirty_green_pool_light", ()->new Block(poolLightDirty)), new Item.Properties());
+
+    public static final RegistryObject<Block> FILTHY_GREEN_POOL_LIGHT = registerWithItem(BLOCKS.register("filthy_green_pool_light", ()->new Block(poolLightFilthy)), new Item.Properties());
+
+    public static final RegistryObject<Block> DIRTY_GREEN_POOL_TILE_STAIRS = registerWithItem(BLOCKS.register("dirty_green_pool_tile_stairs", ()->new StairBlock(DIRTY_GREEN_POOL_TILE.get()::defaultBlockState, stone)), new Item.Properties());
+
+    public static final RegistryObject<Block> DIRTY_GREEN_POOL_TILE_SLAB = registerWithItem(BLOCKS.register("dirty_green_pool_tile_slab", ()->new SlabBlock(stone)), new Item.Properties());
+
+
+
 }
