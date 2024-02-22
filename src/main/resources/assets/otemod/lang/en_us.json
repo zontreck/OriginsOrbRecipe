@@ -114,6 +114,13 @@
     "block.otemod.dirty_red_pool_tile_slab": "Dirty Red Pool Tile Slab",
     "block.otemod.dark_red_wool": "Dark Red Wool",
     "block.otemod.dark_red_carpet": "Dark Red Carpet",
+    "block.otemod.green_pool_tile": "Green Pool Tiles",
+    "block.otemod.green_pool_tile_stairs": "Green Pool Tile Stairs",
+    "block.otemod.green_pool_tile_slab": "Green Pool Tile Slab",
+    "block.otemod.green_pool_tile_light": "Green Pool Light",
+    "block.otemod.dirty_green_pool_tile": "Dirty Green Pool Tile",
+    "block.otemod.dirty_green_pool_tile_stairs": "Dirty Green Pool Tile Stairs",
+    "block.otemod.dirty_green_pool_tile_slab": "Dirty Green Pool Tile Slab",
 
 
     "enchantment.otemod.mob_egging": "Mob Egging",
