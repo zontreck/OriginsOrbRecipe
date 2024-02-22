@@ -51,12 +51,12 @@ public class IhanCrystal extends Item{
     public void appendHoverText(ItemStack stack, Level p_41422_, List<Component> tooltip, TooltipFlag p_41424_) {
         assertTag(stack);
 
-        tooltip.add(ChatHelpers.macro("!Dark_Green!Stored XP: !Dark_Red!" + stack.getTag().getInt(TAG_XP) + "!Dark_Green! level" + Pluralize(stack.getTag().getInt(TAG_XP), "level")));
+        tooltip.add(ChatHelpers.macro("!Dark_Green!Stored XP: !Dark_Red!" + stack.getTag().getInt(TAG_XP) + "!Dark_Green! " + Pluralize(stack.getTag().getInt(TAG_XP), "level")));
     }
 
 
     private String Pluralize(int num, String str) {
-        return "" + num + " " + (num > 1 ? str + "s" : str);
+        return (num > 1 ? str + "s" : str);
     }
 
     @Override
