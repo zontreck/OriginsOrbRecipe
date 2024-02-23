@@ -1,0 +1,49 @@
+{
+  "values": [
+
+    "otemod:pool_tile",
+    "otemod:pool_tile_stairs",
+    "otemod:pool_tile_slab",
+    "otemod:pool_light",
+    "otemod:dirty_pool_tile",
+    "otemod:dirty_pool_tile_stairs",
+    "otemod:dirty_pool_tile_slab",
+    "otemod:dirty_pool_light",
+    "otemod:filthy_pool_light",
+
+    "otemod:dark_pool_tile",
+    "otemod:dark_pool_tile_stairs",
+    "otemod:dark_pool_tile_slab",
+    "otemod:dark_pool_light",
+
+    "otemod:green_pool_tile",
+    "otemod:green_pool_tile_stairs",
+    "otemod:green_pool_tile_slab",
+    "otemod:green_pool_light",
+    "otemod:dirty_green_pool_tile",
+    "otemod:dirty_green_pool_tile_stairs",
+    "otemod:dirty_green_pool_tile_slab",
+    "otemod:dirty_green_pool_light",
+    "otemod:filthy_green_pool_light",
+
+    "otemod:blue_pool_tile",
+    "otemod:blue_pool_tile_stairs",
+    "otemod:blue_pool_tile_slab",
+    "otemod:blue_pool_light",
+    "otemod:dirty_blue_pool_tile",
+    "otemod:dirty_blue_pool_tile_stairs",
+    "otemod:dirty_blue_pool_tile_slab",
+    "otemod:dirty_blue_pool_light",
+    "otemod:filthy_blue_pool_light",
+
+    "otemod:red_pool_tile",
+    "otemod:red_pool_tile_stairs",
+    "otemod:red_pool_tile_slab",
+    "otemod:red_pool_light",
+    "otemod:dirty_red_pool_tile",
+    "otemod:dirty_red_pool_tile_stairs",
+    "otemod:dirty_red_pool_tile_slab",
+    "otemod:dirty_red_pool_light",
+    "otemod:filthy_red_pool_light"
+  ]
+}

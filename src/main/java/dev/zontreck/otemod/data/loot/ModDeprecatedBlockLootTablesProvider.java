@@ -37,7 +37,6 @@ public class ModDeprecatedBlockLootTablesProvider extends BlockLootSubProvider
         dropSelf(DeprecatedModBlocks.ILUSIUM_BLOCK.get());
         dropSelf(DeprecatedModBlocks.CLEAR_GLASS_BLOCK.get());
         dropSelf(DeprecatedModBlocks.LIMINAL_TILES.get());
-        dropSelf(DeprecatedModBlocks.BLACK.get());
         dropSelf(DeprecatedModBlocks.LIMINAL_TILE_STAIRS.get());
         dropSelf(DeprecatedModBlocks.LIMINAL_TILE_SLAB.get());
         dropSelf(DeprecatedModBlocks.LIMINAL_WINDOW.get());

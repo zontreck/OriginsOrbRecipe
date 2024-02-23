@@ -93,7 +93,6 @@ public class DeprecatedModBlocks
     public static final RegistryObject<Block> ILUSIUM_BLOCK = registerDeprecated(BLOCKS.register("ilusium_block", ()->new DeprecatedBlock()));
     public static final RegistryObject<Block> CLEAR_GLASS_BLOCK = registerDeprecated(BLOCKS.register("clear_glass_block", ()-> new DeprecatedBlock()));
     public static final RegistryObject<Block> LIMINAL_TILES = registerDeprecated(BLOCKS.register("liminal_tiles", ()->new DeprecatedBlock()));
-    public static final RegistryObject<Block> BLACK = registerDeprecated(BLOCKS.register("black", ()->new DeprecatedBlock()));
     public static final RegistryObject<Block> LIMINAL_TILE_STAIRS = registerDeprecated(BLOCKS.register("liminal_tile_stairs", ()-> new DeprecatedBlock()));
     public static final RegistryObject<Block> LIMINAL_TILE_SLAB = registerDeprecated(BLOCKS.register("liminal_tile_slab", ()-> new DeprecatedBlock()));
     public static final RegistryObject<Block> LIMINAL_WINDOW = registerDeprecated(BLOCKS.register("liminal_window", ()->new DeprecatedBlock()));
