@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "otemod:clinker_brick_slab",
+    "otemod:clinker_brick_stained_slab",
+    "otemod:slag_brick_slab",
+
+    "otemod:pool_tile_slab",
+    "otemod:blue_pool_tile_slab",
+    "otemod:dark_pool_tile_slab",
+    "otemod:green_pool_tile_slab",
+    "otemod:red_pool_tile_slab",
+    "otemod:dirty_pool_tile_slab",
+    "otemod:dirty_blue_pool_tile_slab",
+    "otemod:dirty_green_pool_tile_slab",
+    "otemod:dirty_red_pool_tile_slab"
+
+  ]
+}

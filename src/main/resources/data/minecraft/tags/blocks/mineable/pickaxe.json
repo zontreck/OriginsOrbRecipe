@@ -18,6 +18,10 @@
         "otemod:compressed_obsidian_block",
         "otemod:layered_compressed_obsidian_block",
 
-        "#otemod:pool_tiles"
+        "#otemod:pool_tiles",
+
+        "otemod:uncrafter",
+
+        "#otemod:engineersdecor"
     ]
 }

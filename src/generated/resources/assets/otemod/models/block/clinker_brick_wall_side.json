@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/template_wall_side",
+  "textures": {
+    "wall": "otemod:block/engineersdecor/clinker_brick/clinker_brick_wall0"
+  }
+}

@@ -107,6 +107,26 @@ public class ModBlockLootTablesProvider extends BlockLootSubProvider
         dropSelf(ModBlocks.DIRTY_GREEN_POOL_TILE_SLAB.get());
         dropSelf(ModBlocks.DIRTY_GREEN_POOL_TILE_STAIRS.get());
         dropSelf(ModBlocks.FILTHY_GREEN_POOL_LIGHT.get());
+        dropSelf(ModBlocks.UNCRAFTER.get());
+
+        /*
+        Engineer's Decor Blocks
+         */
+        dropSelf(ModBlocks.CLINKER_BRICK_BLOCK.get());
+        dropSelf(ModBlocks.CLINKER_BRICK_RECESSED.get());
+        dropSelf(ModBlocks.CLINKER_BRICK_VERTICALLY_SLIT.get());
+        dropSelf(ModBlocks.CLINKER_BRICK_SLAB.get());
+        dropSelf(ModBlocks.CLINKER_BRICK_STAIRS.get());
+        dropSelf(ModBlocks.CLINKER_BRICK_STAINED_BLOCK.get());
+        dropSelf(ModBlocks.CLINKER_BRICK_STAINED_SLAB.get());
+        dropSelf(ModBlocks.CLINKER_BRICK_STAINED_STAIRS.get());
+        dropSelf(ModBlocks.CLINKER_BRICK_SASTOR_CORNER_BLOCK.get());
+        dropSelf(ModBlocks.CLINKER_BRICK_WALL.get());
+
+        dropSelf(ModBlocks.SLAG_BRICK_BLOCK.get());
+        dropSelf(ModBlocks.SLAG_BRICK_SLAB.get());
+        dropSelf(ModBlocks.SLAG_BRICK_WALL.get());
+        dropSelf(ModBlocks.SLAG_BRICK_STAIRS.get());
 
 
 

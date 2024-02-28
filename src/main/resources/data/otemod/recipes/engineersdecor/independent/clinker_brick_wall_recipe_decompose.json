@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "otemod:optional",
+          "result": "otemod:clinker_brick_block",
+          "required": [
+            "otemod:clinker_brick_wall"
+          ]
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "WW",
+          "WW"
+        ],
+        "key": {
+          "W": {
+            "item": "otemod:clinker_brick_wall"
+          }
+        },
+        "result": {
+          "item": "otemod:clinker_brick_block",
+          "count": 4
+        }
+      }
+    }
+  ]
+}

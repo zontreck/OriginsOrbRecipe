@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "otemod:clinker_brick_stairs",
+    "otemod:clinker_brick_stained_stairs",
+    "otemod:slag_brick_stairs",
+
+    "otemod:pool_tile_stairs",
+    "otemod:dark_pool_tile_stairs",
+    "otemod:blue_pool_tile_stairs",
+    "otemod:green_pool_tile_stairs",
+    "otemod:red_pool_tile_stairs",
+    "otemod:dirty_pool_tile_stairs",
+    "otemod:dirty_blue_pool_tile_stairs",
+    "otemod:dirty_green_pool_tile_stairs",
+    "otemod:dirty_red_pool_tile_stairs"
+  ]
+}

@@ -1,12 +1,9 @@
 package dev.zontreck.otemod.enchantments;
 
-import java.util.Random;
-
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.configs.OTEServerConfig;
+import dev.zontreck.otemod.configs.snbt.ServerConfig;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
@@ -62,14 +59,14 @@ public class MobEggEnchantment extends Enchantment
 
     public static boolean givesEgg(int level, int bias)
     {
-        double CHANCE = OTEServerConfig.SPAWN_EGG_CHANCE.get() * 100;
+        double CHANCE = ServerConfig.drops.mobEggingChance * 100;
 
         CHANCE *= (level / 0.5);
         CHANCE += bias;
 
         double rng = Math.random()*100000;
 
-        if(OTEServerConfig.DEBUG.get())
+        if(ServerConfig.general.debug)
         {
             OTEMod.LOGGER.info("Spawn Egg Chance (" + CHANCE + ") [" + rng + "]");
         }

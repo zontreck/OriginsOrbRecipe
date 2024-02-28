@@ -1,0 +1,86 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "d": "otemod:block/engineersdecor/clinker_brick/clinker_brick_sastor_corner_down_texture",
+    "n": "otemod:block/engineersdecor/clinker_brick/clinker_brick_sastor_corner_side_texture",
+    "particle": "otemod:block/engineersdecor/clinker_brick/clinker_brick_texture0",
+    "s": "otemod:block/engineersdecor/clinker_brick/clinker_brick_texture0",
+    "u": "otemod:block/engineersdecor/clinker_brick/clinker_brick_sastor_corner_up_texture"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            16,
+            0,
+            0,
+            16
+          ],
+          "texture": "#n",
+          "cullface": "north"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#n",
+          "cullface": "east"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#s",
+          "cullface": "south"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#s",
+          "cullface": "west"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#u",
+          "cullface": "up"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#d",
+          "cullface": "down"
+        }
+      }
+    }
+  ]
+}

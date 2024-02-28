@@ -1,0 +1,17 @@
+{
+  "values": [
+    "otemod:clinker_brick_block",
+    "otemod:clinker_brick_recessed",
+    "otemod:clinker_brick_vertically_slit",
+    "otemod:clinker_brick_slab",
+    "otemod:clinker_brick_stairs",
+
+    "otemod:clinker_brick_stained_block",
+    "otemod:clinker_brick_stained_slab",
+    "otemod:clinker_brick_stained_stairs",
+
+    "otemod:clinker_brick_sastor_corner_block",
+
+    "otemod:slag_brick_block"
+  ]
+}

@@ -7,9 +7,8 @@ import java.util.ListIterator;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import dev.zontreck.libzontreck.exceptions.InvalidSideException;
 import dev.zontreck.libzontreck.vectors.WorldPosition;
-import dev.zontreck.otemod.configs.OTEServerConfig;
+import dev.zontreck.otemod.configs.snbt.ServerConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -34,7 +33,7 @@ public class BlockContainerList {
     public int getNewLongestTick()
     {
         //Random rng = new Random();
-        int newLonger = OTEServerConfig.TIME_BETWEEN_BLOCKS.get();
+        int newLonger = ServerConfig.antigrief.timeBetween;
         int cur = 0;
 
         for (StoredBlock storedBlock : containers) {
@@ -42,7 +41,7 @@ public class BlockContainerList {
                 cur = storedBlock.getTickValue();
             }
         }
-        if(cur == 0)cur = OTEServerConfig.HEALER_TIMER.get();
+        if(cur == 0)cur = ServerConfig.antigrief.healerTimer;
 
         return cur + newLonger;
     }
@@ -78,7 +77,7 @@ public class BlockContainerList {
                     WorldPosition wp = storedBlock.getWorldPosition();
                     BlockState bs = wp.getActualDimension().getBlockState(wp.Position.asBlockPos());
                     
-                    if(bs.is(storedBlock.getState().getBlock()) || storedBlock.getTries() >= OTEServerConfig.MAX_TRIES_HEAL.get())
+                    if(bs.is(storedBlock.getState().getBlock()) || storedBlock.getTries() >= ServerConfig.antigrief.maxTries)
                     {
 
                         //HealRunner.scheduleHeal(storedBlock);

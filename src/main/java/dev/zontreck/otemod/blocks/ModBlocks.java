@@ -1,5 +1,7 @@
 package dev.zontreck.otemod.blocks;
 
+import dev.zontreck.libzontreck.edlibmc.Auxiliaries;
+import dev.zontreck.libzontreck.edlibmc.StandardBlocks;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.implementation.CreativeModeTabs;
 import net.minecraft.core.BlockPos;
@@ -14,6 +16,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BedPart;
 import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -235,6 +238,53 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> DIRTY_GREEN_POOL_TILE_SLAB = registerWithItem(BLOCKS.register("dirty_green_pool_tile_slab", ()->new SlabBlock(stone)), new Item.Properties());
 
+    public static final RegistryObject<Block> UNCRAFTER = registerWithItem(BLOCKS.register("uncrafter", ()->new UncrafterBlock(BlockBehaviour.Properties.of().noOcclusion().requiresCorrectToolForDrops().strength(6))), new Item.Properties());
 
+    public static final RegistryObject<Block> CLINKER_BRICK_BLOCK = registerWithItem(BLOCKS.register("clinker_brick_block", ()->new StandardBlocks.BaseBlock(
+            StandardBlocks.CFG_DEFAULT,
+            BlockBehaviour.Properties.of().strength(0.5f, 7f).sound(SoundType.STONE)
+    )), new Item.Properties());
+
+    public static final RegistryObject<Block> CLINKER_BRICK_RECESSED = registerWithItem(BLOCKS.register("clinker_brick_recessed", ()->new StandardBlocks.HorizontalWaterLoggable(
+            StandardBlocks.CFG_CUTOUT|StandardBlocks.CFG_HORIZIONTAL|StandardBlocks.CFG_LOOK_PLACEMENT,
+            BlockBehaviour.Properties.of().strength(0.5f, 7f).sound(SoundType.STONE),
+            new AABB[] {
+                    Auxiliaries.getPixeledAABB( 3,0, 0, 13,16, 1),
+                    Auxiliaries.getPixeledAABB( 0,0, 1, 16,16,11),
+                    Auxiliaries.getPixeledAABB( 4,0,11, 12,16,13)
+            }
+    )), new Item.Properties());
+
+    public static final RegistryObject<Block> CLINKER_BRICK_VERTICALLY_SLIT = registerWithItem(BLOCKS.register("clinker_brick_vertically_slit", ()->new StandardBlocks.HorizontalWaterLoggable(
+            StandardBlocks.CFG_CUTOUT|StandardBlocks.CFG_HORIZIONTAL|StandardBlocks.CFG_LOOK_PLACEMENT,
+            BlockBehaviour.Properties.of().strength(0.5f, 7f).sound(SoundType.STONE),
+            new AABB[] {
+                    Auxiliaries.getPixeledAABB( 3,0, 0, 13,16, 1),
+                    Auxiliaries.getPixeledAABB( 3,0,15, 13,16,16),
+                    Auxiliaries.getPixeledAABB( 0,0, 1, 16,16,15)
+            }
+    )), new Item.Properties());
+
+    public static final RegistryObject<Block> CLINKER_BRICK_SLAB = registerWithItem(BLOCKS.register("clinker_brick_slab", ()->new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE_SLAB))), new Item.Properties());
+
+    public static final RegistryObject<Block> CLINKER_BRICK_STAIRS = registerWithItem(BLOCKS.register("clinker_brick_stairs", ()->new StairBlock(CLINKER_BRICK_BLOCK.get()::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE_STAIRS))), new Item.Properties());
+
+    public static final RegistryObject<Block> CLINKER_BRICK_WALL = registerWithItem(BLOCKS.register("clinker_brick_wall", ()->new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICK_WALL))), new Item.Properties());
+
+    public static final RegistryObject<Block> CLINKER_BRICK_STAINED_BLOCK = registerWithItem(BLOCKS.register("clinker_brick_stained_block", ()->new Block(BlockBehaviour.Properties.copy(Blocks.STONE))), new Item.Properties());
+
+    public static final RegistryObject<Block> CLINKER_BRICK_STAINED_SLAB = registerWithItem(BLOCKS.register("clinker_brick_stained_slab", ()-> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE))), new Item.Properties());
+
+    public static final RegistryObject<Block> CLINKER_BRICK_STAINED_STAIRS = registerWithItem(BLOCKS.register("clinker_brick_stained_stairs", ()-> new StairBlock(CLINKER_BRICK_STAINED_BLOCK.get()::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE))), new Item.Properties());
+
+    public static final RegistryObject<Block> CLINKER_BRICK_SASTOR_CORNER_BLOCK = registerWithItem(BLOCKS.register("clinker_brick_sastor_corner_block", ()-> new RotatableBlock(BlockBehaviour.Properties.copy(Blocks.STONE))), new Item.Properties());
+
+    public static final RegistryObject<Block> SLAG_BRICK_BLOCK = registerWithItem(BLOCKS.register("slag_brick_block", ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE))), new Item.Properties());
+
+    public static final RegistryObject<Block> SLAG_BRICK_SLAB = registerWithItem(BLOCKS.register("slag_brick_slab", ()-> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE))), new Item.Properties());
+
+    public static final RegistryObject<Block> SLAG_BRICK_STAIRS = registerWithItem(BLOCKS.register("slag_brick_stairs", ()-> new StairBlock(SLAG_BRICK_BLOCK.get()::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE))), new Item.Properties());
+
+    public static final RegistryObject<Block> SLAG_BRICK_WALL = registerWithItem(BLOCKS.register("slag_brick_wall", ()-> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICK_WALL))), new Item.Properties());
 
 }

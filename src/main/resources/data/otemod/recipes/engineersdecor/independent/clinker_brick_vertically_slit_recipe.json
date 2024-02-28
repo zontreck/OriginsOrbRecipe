@@ -1,0 +1,37 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "otemod:optional",
+          "result": "otemod:clinker_brick_vertically_slit",
+          "required": [
+            "otemod:clinker_brick_block",
+            "otemod:clinker_brick_vertical_slab_structured"
+          ]
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "BS",
+          "BS",
+          "BS"
+        ],
+        "key": {
+          "B": {
+            "item": "otemod:clinker_brick_block"
+          },
+          "S": {
+            "item": "otemod:clinker_brick_vertical_slab_structured"
+          }
+        },
+        "result": {
+          "item": "otemod:clinker_brick_vertically_slit",
+          "count": 3
+        }
+      }
+    }
+  ]
+}

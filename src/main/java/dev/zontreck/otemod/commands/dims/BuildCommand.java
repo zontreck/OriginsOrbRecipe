@@ -6,17 +6,15 @@ import dev.zontreck.libzontreck.exceptions.InvalidDeserialization;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.libzontreck.vectors.WorldPosition;
-import dev.zontreck.otemod.configs.OTEServerConfig;
+import dev.zontreck.otemod.configs.snbt.ServerConfig;
 import dev.zontreck.otemod.implementation.Messages;
 import dev.zontreck.otemod.registry.ModDimensions;
 import dev.zontreck.otemod.registry.PerPlayerDataRegistry;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.commands.ExperienceCommand;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.server.command.EnumArgument;
 
 public class BuildCommand
 {
@@ -39,7 +37,7 @@ public class BuildCommand
             ServerPlayer sp = stack.getPlayer();
             boolean playerIsOp = sp.hasPermissions(stack.getServer().getOperatorUserPermissionLevel());
 
-            if(playerIsOp || OTEServerConfig.ALLOW_BUILDER_DIM.get())
+            if(playerIsOp || ServerConfig.general.allowBuilder)
             {
 
                 if(direction == Options.enter)

@@ -3,29 +3,14 @@ package dev.zontreck.otemod.enchantments;
 import dev.zontreck.libzontreck.util.ItemUtils;
 import dev.zontreck.libzontreck.util.ServerUtilities;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.configs.OTEServerConfig;
+import dev.zontreck.otemod.configs.snbt.ServerConfig;
 import dev.zontreck.otemod.effects.ModEffects;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.level.ServerPlayerGameMode;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Abilities;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.item.enchantment.SoulSpeedEnchantment;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.living.LivingEquipmentChangeEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fml.common.Mod;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -86,7 +71,7 @@ public class FlightEnchantment extends Enchantment
 
 
 
-            if(OTEServerConfig.DEBUG.get())
+            if(ServerConfig.general.debug)
             {
                 OTEMod.LOGGER.info("> Flight Enchantment Tick <");
             }

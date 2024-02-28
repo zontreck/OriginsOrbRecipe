@@ -1,7 +1,7 @@
 package dev.zontreck.otemod.implementation.events;
 
 import dev.zontreck.libzontreck.profiles.Profile;
-import dev.zontreck.otemod.configs.OTEServerConfig;
+import dev.zontreck.otemod.configs.snbt.ServerConfig;
 import net.minecraftforge.eventbus.api.Event;
 
 public class VaultCreatedEvent extends Event
@@ -16,7 +16,7 @@ public class VaultCreatedEvent extends Event
     
     public VaultCreatedEvent(int num, Profile user, int vaultsInUse)
     {
-        max=OTEServerConfig.MAX_VAULTS.get();
+        max = ServerConfig.general.maxVaults;
         vault_num = num;
         in_use = vaultsInUse;
         playerMax=user.available_vaults;

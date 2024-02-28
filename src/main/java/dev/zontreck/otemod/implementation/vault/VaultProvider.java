@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 import dev.zontreck.libzontreck.profiles.Profile;
-import dev.zontreck.otemod.configs.OTEServerConfig;
+import dev.zontreck.otemod.configs.snbt.ServerConfig;
 import dev.zontreck.otemod.database.OTEDatastore;
 
 public class VaultProvider extends OTEDatastore 
@@ -67,12 +67,12 @@ public class VaultProvider extends OTEDatastore
 
     public static boolean isAtMaxVaults(Profile prof, int consumed)
     {
-        if(OTEServerConfig.MAX_VAULTS.get()==0){
+        if(ServerConfig.general.maxVaults ==0){
             if(consumed < prof.available_vaults){
                 return false;
             }else return true;
         }
-        if(prof.available_vaults >= OTEServerConfig.MAX_VAULTS.get())
+        if(prof.available_vaults >= ServerConfig.general.maxVaults)
         {
             if(consumed<prof.available_vaults)
             {

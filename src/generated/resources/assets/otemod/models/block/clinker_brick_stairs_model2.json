@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "otemod:block/engineersdecor/clinker_brick/clinker_brick_texture2",
+    "side": "otemod:block/engineersdecor/clinker_brick/clinker_brick_texture2",
+    "top": "otemod:block/engineersdecor/clinker_brick/clinker_brick_texture2"
+  }
+}

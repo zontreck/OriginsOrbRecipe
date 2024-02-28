@@ -1,14 +1,11 @@
 package dev.zontreck.otemod.implementation.vault;
 
-import dev.zontreck.libzontreck.profiles.Profile;
-import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.database.OTEDatastore;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 
 public class StarterProvider extends OTEDatastore
 {

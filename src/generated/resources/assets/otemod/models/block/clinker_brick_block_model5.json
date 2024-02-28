@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "otemod:block/engineersdecor/clinker_brick/clinker_brick_texture5"
+  }
+}

@@ -11,21 +11,17 @@ import dev.zontreck.libzontreck.util.heads.HeadUtilities;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.libzontreck.vectors.WorldPosition;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.configs.OTEServerConfig;
+import dev.zontreck.otemod.configs.snbt.ServerConfig;
 import dev.zontreck.otemod.enchantments.MobEggEnchantment;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
 import dev.zontreck.otemod.implementation.DeathMessages;
 import dev.zontreck.otemod.implementation.InventoryBackup;
 import dev.zontreck.otemod.implementation.Messages;
-import dev.zontreck.otemod.items.tags.ItemStatType;
 import dev.zontreck.otemod.registry.ModDimensions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.server.level.ServerPlayerGameMode;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -42,8 +38,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.items.ItemStackHandler;
 
 import java.time.Instant;
 import java.util.Date;
@@ -66,7 +60,7 @@ public class EventHandler {
         }
         profile.deaths++;
         profile.commit();
-        if(!OTEServerConfig.ENABLE_PLAYER_HEAD_DROPS.get())
+        if(!ServerConfig.drops.enablePlayerHeadChance)
         {
             return;
         }
@@ -79,7 +73,7 @@ public class EventHandler {
         }
 
         // Calculate chance
-        double base_chance = OTEServerConfig.CHANCE_OF_PLAYER_HEAD.get();
+        double base_chance = ServerConfig.drops.playerHeadChance;
         base_chance += looting;
         base_chance *= 100;
 
@@ -103,7 +97,7 @@ public class EventHandler {
             event.getEntity().spawnAtLocation(head);
         }
 
-        if(OTEServerConfig.ENABLE_DEATH_MESSAGES.get())
+        if(ServerConfig.general.enableDeathMessages)
         {
 
             try {

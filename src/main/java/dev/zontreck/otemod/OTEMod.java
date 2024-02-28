@@ -1,22 +1,15 @@
 package dev.zontreck.otemod;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 import com.mojang.logging.LogUtils;
 import dev.zontreck.libzontreck.chat.ChatColor;
+import dev.zontreck.libzontreck.edlibmc.Auxiliaries;
+import dev.zontreck.libzontreck.edlibmc.Registries;
 import dev.zontreck.libzontreck.profiles.Profile;
 import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.vectors.Vector3;
 import dev.zontreck.otemod.blocks.DeprecatedModBlocks;
+import dev.zontreck.otemod.configs.snbt.ServerConfig;
 import dev.zontreck.otemod.effects.ModEffects;
 import dev.zontreck.otemod.enchantments.FlightEnchantment;
 import dev.zontreck.otemod.enchantments.NightVisionEnchantment;
@@ -28,28 +21,18 @@ import dev.zontreck.otemod.integrations.KeyBindings;
 import dev.zontreck.otemod.items.DeprecatedModItems;
 import dev.zontreck.otemod.recipe.ModRecipes;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.renderer.entity.EntityRenderers;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.commands.GiveCommand;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.GameType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.event.entity.item.ItemExpireEvent;
@@ -64,10 +47,8 @@ import dev.zontreck.otemod.blocks.ModBlocks;
 import dev.zontreck.otemod.blocks.entity.ModEntities;
 import dev.zontreck.otemod.chat.ChatServerOverride;
 import dev.zontreck.otemod.commands.CommandRegistry;
-import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
 import dev.zontreck.otemod.entities.ModEntityTypes;
-import dev.zontreck.otemod.entities.monsters.client.PossumRenderer;
 import dev.zontreck.otemod.events.LoreHandlers;
 import dev.zontreck.otemod.implementation.inits.ModMenuTypes;
 import dev.zontreck.otemod.implementation.scrubber.ItemScrubberScreen;
@@ -97,6 +78,7 @@ public class OTEMod
     public static String OTEPrefix = "";
     public static String ONLY_PLAYER = "";
     public static IEventBus bus;
+
     
 
     public OTEMod()
@@ -110,9 +92,10 @@ public class OTEMod
         // Register the setup method for modloading
         bus.addListener(this::setup);
 
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, OTEServerConfig.SPEC, "otemod-rss-server.toml");
-        
-        
+        ServerConfig.load();
+
+        Auxiliaries.init(MOD_ID, LOGGER, null);
+        Registries.init(MOD_ID, null, bus);
         
         // Register ourselves for server and other game events we are interested in
         //final DeferredRegister<Codec<? extends BiomeModifier>> serializers = DeferredRegister.create(ForgeRegistries.Keys.BIOME_MODIFIER_SERIALIZERS, OTEMod.MOD_ID);
@@ -177,7 +160,7 @@ public class OTEMod
             }else {
                 Starter data = StarterProvider.getStarter();
 
-                if(data.getLastChanged() > tag.LastGiven && OTEServerConfig.GIVE_KIT_EVERY_CHANGE.get())
+                if(data.getLastChanged() > tag.LastGiven && ServerConfig.general.givesStarterKitOnChanged)
                 {
                     tag = PlayerFirstJoinTag.now();
                     tag.save(prof.NBT);
@@ -262,7 +245,7 @@ public class OTEMod
     {
         if(ev.getEntity().level().isClientSide)return;
 
-        if(OTEServerConfig.ITEM_DESPAWN_TIMER.get()<=0)return;
+        if(ServerConfig.general.itemDespawnTimer<=0)return;
 
         ItemEntity ite = (ItemEntity)ev.getEntity();
         if(ite.getAge() != (1200  *  5)) {
@@ -274,7 +257,7 @@ public class OTEMod
         //OTEMod.LOGGER.info("Giving extra life to item : "+ev.getEntity().getName().getString() + "; item age [ "+ev.getEntity().getAge()+ " ]");
         // 1200 ticks per minute
         // OTEMod item despawn amplifier is set in 5 minute intervals
-        ev.setExtraLife((1200 * 5)+ ((1200 * 5) * OTEServerConfig.ITEM_DESPAWN_TIMER.get())); // reset the life count
+        ev.setExtraLife((1200 * 5)+ ((1200 * 5) * ServerConfig.general.itemDespawnTimer)); // reset the life count
         //OTEMod.LOGGER.info("Item ["+ev.getEntity().getItem().getDisplayName().getString()+"] was given extra life");
         // Hopefully this works?
         ev.setCanceled(true);

@@ -7,6 +7,7 @@
         "otemod:ilusium_block",
         "otemod:eternium_block",
 
-        "#otemod:pool_tiles"
+        "#otemod:pool_tiles",
+        "#otemod:engineersdecor"
     ]
 }

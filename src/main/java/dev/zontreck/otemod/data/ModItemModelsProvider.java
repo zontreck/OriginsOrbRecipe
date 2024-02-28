@@ -61,6 +61,11 @@ public class ModItemModelsProvider extends ItemModelProvider
         item(ModItems.LIME_BRICK);
         item(ModItems.GREEN_BRICK);
 
+        /*
+        Engineer's Decor Items
+         */
+        item(ModItems.METAL_BAR);
+
 
 
         /*

@@ -3,8 +3,7 @@ package dev.zontreck.otemod.enchantments;
 import dev.zontreck.libzontreck.util.ItemUtils;
 import dev.zontreck.libzontreck.util.ServerUtilities;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.configs.OTEServerConfig;
-import dev.zontreck.otemod.effects.ModEffects;
+import dev.zontreck.otemod.configs.snbt.ServerConfig;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -12,11 +11,6 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fml.common.Mod;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -64,7 +58,7 @@ public class NightVisionEnchantment extends Enchantment
 
 
 
-            if(OTEServerConfig.DEBUG.get())
+            if(ServerConfig.general.debug)
             {
                 OTEMod.LOGGER.info("> NVision Enchantment Tick <");
             }

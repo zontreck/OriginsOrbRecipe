@@ -1,17 +1,15 @@
 package dev.zontreck.otemod.zschem;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import dev.zontreck.otemod.configs.OTEServerConfig;
+import dev.zontreck.libzontreck.util.SNbtIo;
+import dev.zontreck.otemod.configs.snbt.ServerConfig;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
-import net.minecraft.nbt.NbtUtils;
 import net.minecraftforge.fml.loading.FMLConfig;
 import net.minecraftforge.fml.loading.FMLPaths;
 
@@ -33,20 +31,10 @@ public class BlockSaver {
             
             File x = getPath().toFile();
             
-            if(OTEServerConfig.DEBUG_HEALER.get())
+            if(ServerConfig.antigrief.debug)
             {
                 // Save as sNBT
-                String prettyFormat = NbtUtils.structureToSnbt(primary);
-                    
-                BufferedWriter bw;
-                try {
-                    bw = new BufferedWriter(new FileWriter(x));
-                    bw.write(prettyFormat);
-                    bw.close();
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
+                SNbtIo.writeSnbt(x.toPath(), primary);
             }else{
                 try {
                     NbtIo.writeCompressed(primary, x);
@@ -63,7 +51,7 @@ public class BlockSaver {
     
     // Healer Queue's data source is a NBT File in the config folder
     public static final String HealerQueueFile = ".nbt";
-    public static final String HealerQueueDebugFile = ".dev.nbt";
+    public static final String HealerQueueDebugFile = ".dev.snbt";
 
     public static Path getPath()
     {
@@ -76,7 +64,7 @@ public class BlockSaver {
     public static String getExtension()
     {
         
-        if(OTEServerConfig.DEBUG_HEALER.get())
+        if(ServerConfig.antigrief.debug)
         {
             return BlockSaver.HealerQueueDebugFile;
 

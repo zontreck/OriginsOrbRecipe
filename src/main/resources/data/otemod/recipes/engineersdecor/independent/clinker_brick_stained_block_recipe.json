@@ -1,0 +1,30 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "otemod:optional",
+          "result": "otemod:clinker_brick_stained_block",
+          "required": [
+            "otemod:clinker_brick_block"
+          ]
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shapeless",
+        "ingredients": [
+          {
+            "item": "otemod:clinker_brick_block"
+          },
+          {
+            "item": "minecraft:dirt"
+          }
+        ],
+        "result": {
+          "item": "otemod:clinker_brick_stained_block"
+        }
+      }
+    }
+  ]
+}

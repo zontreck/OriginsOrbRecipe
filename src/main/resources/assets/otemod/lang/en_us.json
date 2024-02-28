@@ -48,6 +48,7 @@
     "item.otemod.dark_red_brick": "Dark Red Brick",
     "item.otemod.lime_brick": "Lime Brick",
     "item.otemod.green_brick": "Green Brick",
+    "item.otemod.metal_bar": "Metal Bar",
 
 
 
@@ -122,6 +123,34 @@
     "block.otemod.dirty_green_pool_tile_slab": "Dirty Green Pool Tile Slab",
     "block.otemod.dirty_green_pool_light": "Dirty Green Pool Light",
     "block.otemod.filthy_green_pool_light": "Filthy Green Pool Light",
+    "block.otemod.uncrafter": "Uncrafter",
+    "block.otemod.clinker_brick_block": "Clinker Brick Block",
+    "block.otemod.clinker_brick_block.help": "A brick block with position\n dependent texture variations.\n Looks slightly darker and more\n color intensive than the\n vanilla brick block.",
+    "block.otemod.clinker_brick_wall": "Clinker Brick Wall",
+    "block.otemod.clinker_brick_wall.help": "Simplistic Clinker Brick Wall.",
+    "block.otemod.clinker_brick_recessed": "Recessed Clinker Brick",
+    "block.otemod.clinker_brick_vertically_slit": "Vertically Slit Clinker Bricks",
+    "block.otemod.clinker_brick_slab": "Clinker Brick Slab",
+    "block.otemod.clinker_brick_slab.help": "Slab made from a Clinker Block.\n Looks slightly darker and more\n color intensive than the\n vanilla brick.",
+    "block.otemod.clinker_brick_stairs": "Clinker Brick Stairs",
+    "block.otemod.clinker_brick_stairs.help": "Looks slightly darker and more\n color intensive than the vanilla\n brick block.",
+    "block.otemod.clinker_brick_stained_block": "Stained Clinker Brick Block",
+    "block.otemod.clinker_brick_stained_block.help": "A brick block with position\n dependent texture variations.\n Looks slightly darker and more\n color intensive than the vanilla\n brick block. Has more visible\n traces of grime or stain.",
+    "block.otemod.clinker_brick_stained_slab": "Stained Clinker Brick Slab",
+    "block.otemod.clinker_brick_stained_slab.help": "Slab made from a Stained Clinker Block.",
+    "block.otemod.clinker_brick_stained_stairs": "Stained Clinker Brick Stairs",
+    "block.otemod.clinker_brick_stained_stairs.help": "Looks slightly darker and more\n color intensive than the vanilla\n brick block. Has more visible\n traces of grime or stain.",
+    "block.otemod.clinker_brick_sastor_corner_block": "Sandstone Ornated Clinker Brick",
+    "block.otemod.clinker_brick_sastor_corner_block.help": "Quoin decoration for clinker\n wall accentuation. Place looking\n horizontally to generate a\n building corner ornamentation.\n Place while looking almost\n straight up/down for window\n ornamentation. The style of\n adjacent Sandstone Ornated\n Blocks are copied (preferred) to\n facilitate placements for\n higher buildings.",
+    "block.otemod.slag_brick_block": "Slag Brick Block",
+    "block.otemod.slag_brick_block.help": "A gray-brown brick block with position\n dependent texture variations.",
+    "block.otemod.slag_brick_slab": "Slag Brick Slab",
+    "block.otemod.slag_brick_slab.help": "A gray-brown brick slab.",
+    "block.otemod.slag_brick_stairs": "Slag Brick Stairs",
+    "block.otemod.slag_brick_stairs.help": "Gray-brown brick stairs.",
+    "block.otemod.slag_brick_wall": "Slag Brick Wall",
+    "block.otemod.slag_brick_wall.help": "Simplistic Slag Brick Wall.",
+
 
 
     "enchantment.otemod.mob_egging": "Mob Egging",

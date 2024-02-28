@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "otemod:block/clinker_brick_block_model0"
+      },
+      {
+        "model": "otemod:block/clinker_brick_block_model1"
+      },
+      {
+        "model": "otemod:block/clinker_brick_block_model2"
+      },
+      {
+        "model": "otemod:block/clinker_brick_block_model3"
+      },
+      {
+        "model": "otemod:block/clinker_brick_block_model4"
+      },
+      {
+        "model": "otemod:block/clinker_brick_block_model5"
+      },
+      {
+        "model": "otemod:block/clinker_brick_block_model6"
+      },
+      {
+        "model": "otemod:block/clinker_brick_block_model7"
+      }
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "otemod:block/engineersdecor/clinker_brick/clinker_brick_stained_texture3",
+    "side": "otemod:block/engineersdecor/clinker_brick/clinker_brick_stained_texture3",
+    "top": "otemod:block/engineersdecor/clinker_brick/clinker_brick_stained_texture3"
+  }
+}

@@ -22,6 +22,8 @@ public class ModEntities {
 
     public static final RegistryObject<BlockEntityType<CompressionChamberBlockEntity>> COMPRESSION_CHAMBER = ENTITIES.register("compression_chamber", ()->BlockEntityType.Builder.of(CompressionChamberBlockEntity::new, ModBlocks.COMPRESSION_CHAMBER.get()).build(null));
 
+    public static final RegistryObject<BlockEntityType<UncrafterBlockEntity>> UNCRAFTER = ENTITIES.register("uncrafter", ()-> BlockEntityType.Builder.of(UncrafterBlockEntity::new, ModBlocks.UNCRAFTER.get()).build(null));
+
     //public static final RegistryObject <BlockEntityType <ParallaxWindowEntity>> PARALLAX_WINDOW_ENTITY = ENTITIES.register("parallax_window", ()->BlockEntityType.Builder.of(ParallaxWindowEntity::new, ModBlocks.LIMINAL_WINDOW.get()).build(null));
 
 

@@ -9,11 +9,10 @@ import dev.zontreck.libzontreck.profiles.UserProfileNotYetExistsException;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.libzontreck.util.ItemUtils;
 import dev.zontreck.otemod.OTEMod;
-import dev.zontreck.otemod.configs.OTEServerConfig;
 import dev.zontreck.otemod.configs.PlayerFlyCache;
+import dev.zontreck.otemod.configs.snbt.ServerConfig;
 import dev.zontreck.otemod.enchantments.ModEnchantments;
 import dev.zontreck.otemod.implementation.vault.StarterProvider;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -69,7 +68,7 @@ public class ChatServerOverride {
         if(StarterProvider.exists())
             OTEMod.checkFirstJoin(ev.player);
 
-        if(!OTEServerConfig.USE_CUSTOM_JOINLEAVE.get()) return;
+        if(!ServerConfig.chatOverrides.enableJoinLeave) return;
         
         ChatHelpers.broadcast(ChatHelpers.macro("!Dark_Gray![!Dark_Green!+!Dark_Gray!] !Bold!!Dark_Aqua![0]",prof.nickname), ev.level.getServer());
         
@@ -84,7 +83,7 @@ public class ChatServerOverride {
 
         if(px==null)return;
 
-        if(!OTEServerConfig.USE_CUSTOM_JOINLEAVE.get()) return;
+        if(!ServerConfig.chatOverrides.enableJoinLeave) return;
 
         // Send the alert
         ChatHelpers.broadcast(ChatHelpers.macro("!Dark_Gray![!Dark_Red!-!Dark_Gray!] !Bold!!Dark_Aqua![0]", px.nickname), px.player.server);
@@ -110,7 +109,7 @@ public class ChatServerOverride {
     public void onChat(final ServerChatEvent ev){
         if(ev.getPlayer().level().isClientSide)return;
         // Player has chatted, apply override
-        if(!OTEServerConfig.USE_CUSTOM_CHATREPLACER.get()) return;
+        if(!ServerConfig.chatOverrides.enablePrettifier) return;
 
         
         ServerPlayer sp = ev.getPlayer();
