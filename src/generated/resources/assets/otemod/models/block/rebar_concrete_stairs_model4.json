@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "otemod:block/engineersdecor/concrete/rebar_concrete_texture4",
+    "side": "otemod:block/engineersdecor/concrete/rebar_concrete_texture4",
+    "top": "otemod:block/engineersdecor/concrete/rebar_concrete_texture4"
+  }
+}

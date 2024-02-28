@@ -5,6 +5,7 @@ import dev.zontreck.libzontreck.edlibmc.StandardBlocks;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.implementation.CreativeModeTabs;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -46,6 +47,9 @@ public class ModBlocks {
     }
 
 
+    private static boolean neverSpawn(BlockState blockState, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
+        return false;
+    }
 
     public static void register(IEventBus bus){
         BLOCKS.register(bus);
@@ -286,5 +290,13 @@ public class ModBlocks {
     public static final RegistryObject<Block> SLAG_BRICK_STAIRS = registerWithItem(BLOCKS.register("slag_brick_stairs", ()-> new StairBlock(SLAG_BRICK_BLOCK.get()::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE))), new Item.Properties());
 
     public static final RegistryObject<Block> SLAG_BRICK_WALL = registerWithItem(BLOCKS.register("slag_brick_wall", ()-> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE_BRICK_WALL))), new Item.Properties());
+
+    public static final RegistryObject<Block> REBAR_CONCRETE_BLOCK = registerWithItem(BLOCKS.register("rebar_concrete", ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).isValidSpawn(ModBlocks::neverSpawn).strength(1f, 2000f))), new Item.Properties());
+
+    public static final RegistryObject<Block> REBAR_CONCRETE_SLAB = registerWithItem(BLOCKS.register("rebar_concrete_slab", ()-> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE).strength(1f, 2000f).isValidSpawn(ModBlocks::neverSpawn))), new Item.Properties());
+
+    public static final RegistryObject<Block> REBAR_CONCRETE_STAIRS = registerWithItem(BLOCKS.register("rebar_concrete_stairs", ()-> new StairBlock(ModBlocks.REBAR_CONCRETE_BLOCK.get()::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE).strength(1f, 2000f).isValidSpawn(ModBlocks::neverSpawn))), new Item.Properties());
+
+    public static final RegistryObject<Block> REBAR_CONCRETE_WALL = registerWithItem(BLOCKS.register("rebar_concrete_wall", ()-> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE).strength(1f, 2000f).isValidSpawn(ModBlocks::neverSpawn))), new Item.Properties());
 
 }

@@ -1,0 +1,33 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "otemod:optional",
+          "result": "otemod:rebar_concrete_tile_stairs",
+          "required": [
+            "otemod:rebar_concrete_tile"
+          ]
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "C  ",
+          "CC ",
+          "CCC"
+        ],
+        "key": {
+          "C": {
+            "item": "otemod:rebar_concrete_tile"
+          }
+        },
+        "result": {
+          "item": "otemod:rebar_concrete_tile_stairs",
+          "count": 6
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "otemod:block/engineersdecor/concrete/rebar_concrete_texture0"
+  }
+}

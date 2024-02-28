@@ -150,6 +150,10 @@
     "block.otemod.slag_brick_stairs.help": "Gray-brown brick stairs.",
     "block.otemod.slag_brick_wall": "Slag Brick Wall",
     "block.otemod.slag_brick_wall.help": "Simplistic Slag Brick Wall.",
+    "block.otemod.rebar_concrete": "Rebar Concrete",
+    "block.otemod.rebar_concrete_slab": "Rebar Concrete Slab",
+    "block.otemod.rebar_concrete_stairs": "Rebar Concrete Stairs",
+    "block.otemod.rebar_concrete_wall": "Rebar Concrete Wall",
 
 
 

@@ -107,6 +107,17 @@ public class ModBlockStatesProvider extends BlockStateProvider {
                 new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/slag_brick/slag_brick_texture7")
         };
 
+        ResourceLocation[] rebarConcrete = new ResourceLocation[] {
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/concrete/rebar_concrete_texture0"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/concrete/rebar_concrete_texture1"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/concrete/rebar_concrete_texture2"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/concrete/rebar_concrete_texture3"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/concrete/rebar_concrete_texture4"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/concrete/rebar_concrete_texture5"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/concrete/rebar_concrete_texture6"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/concrete/rebar_concrete_texture7")
+        };
+
         variantCubeBlock(ModBlocks.CLINKER_BRICK_BLOCK, clinkerBlock);
         customSlabBlock(ModBlocks.CLINKER_BRICK_SLAB, clinkerBlock);
         customStairBlock(ModBlocks.CLINKER_BRICK_STAIRS, clinkerBlock);
@@ -120,13 +131,19 @@ public class ModBlockStatesProvider extends BlockStateProvider {
         customSlabBlock(ModBlocks.SLAG_BRICK_SLAB, slagBricks);
         customStairBlock(ModBlocks.SLAG_BRICK_STAIRS, slagBricks);
         wallBlock(ModBlocks.SLAG_BRICK_WALL, new ResourceLocation(OTEMod.MOD_ID, "block/engineersdecor/slag_brick/slag_brick_wall0"));
+
+        variantCubeBlock(ModBlocks.REBAR_CONCRETE_BLOCK, rebarConcrete);
+        customSlabBlock(ModBlocks.REBAR_CONCRETE_SLAB, rebarConcrete);
+        customStairBlock(ModBlocks.REBAR_CONCRETE_STAIRS, rebarConcrete);
+        wallBlock(ModBlocks.REBAR_CONCRETE_WALL, new ResourceLocation(OTEMod.MOD_ID, "block/" + rebarConcrete[0].getPath()));
     }
 
     private void wallBlock(RegistryObject<Block> blk, ResourceLocation texture)
     {
         wallBlock((WallBlock) blk.get(), texture);
+        var wallInv = models().wallInventory(name(blk.get()) + "_inventory", texture);
 
-        simpleBlockItem(blk.get(), models().withExistingParent(name(blk.get()), blk.getId()));
+        simpleBlockItem(blk.get(), wallInv);
     }
 
     private void blockWithItem(RegistryObject<Block> blockRegistryObject) {

@@ -16,6 +16,11 @@
     "otemod:slag_brick_block",
     "otemod:slag_brick_slab",
     "otemod:slag_brick_stairs",
-    "otemod:slag_brick_wall"
+    "otemod:slag_brick_wall",
+
+    "otemod:rebar_concrete",
+    "otemod:rebar_concrete_slab",
+    "otemod:rebar_concrete_stairs",
+    "otemod:rebar_concrete_wall"
   ]
 }

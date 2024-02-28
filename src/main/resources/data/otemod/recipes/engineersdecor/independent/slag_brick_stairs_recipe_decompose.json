@@ -1,0 +1,32 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "otemod:optional",
+          "result": "otemod:slag_brick_block",
+          "required": [
+            "otemod:slag_brick_stairs"
+          ]
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "pattern": [
+          "SS",
+          "SS"
+        ],
+        "key": {
+          "S": {
+            "item": "otemod:slag_brick_stairs"
+          }
+        },
+        "result": {
+          "item": "otemod:slag_brick_block",
+          "count": 4
+        }
+      }
+    }
+  ]
+}

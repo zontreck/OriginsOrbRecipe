@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "otemod:block/engineersdecor/concrete/rebar_concrete_texture3"
+  }
+}

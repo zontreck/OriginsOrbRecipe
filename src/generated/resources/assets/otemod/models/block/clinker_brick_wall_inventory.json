@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "otemod:block/engineersdecor/clinker_brick/clinker_brick_wall0"
+  }
+}
