@@ -4,6 +4,16 @@
         "otemod:ilusium_block",
         "otemod:item_scrubber",
         "otemod:magical_scrubber",
-        "otemod:layered_compressed_obsidian_block"
+        "otemod:layered_compressed_obsidian_block",
+
+        "otemod:panzerglass_block",
+        "otemod:panzerglass_slab",
+        "otemod:rebar_concrete",
+        "otemod:rebar_concrete_slab",
+        "otemod:rebar_concrete_stairs",
+        "otemod:rebar_concrete_wall",
+        "otemod:rebar_concrete_tile",
+        "otemod:rebar_concrete_tile_slab",
+        "otemod:rebar_concrete_tile_stairs"
     ]
 }

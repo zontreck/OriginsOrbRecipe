@@ -306,4 +306,10 @@ public class ModBlocks {
     public static final RegistryObject<Block> REBAR_CONCRETE_TILE_STAIRS = registerWithItem(BLOCKS.register("rebar_concrete_tile_stairs", ()-> new StairBlock(ModBlocks.REBAR_CONCRETE_BLOCK.get()::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE).strength(1f, 2000f).isValidSpawn(ModBlocks::neverSpawn))), new Item.Properties());
 
 
+    public static final RegistryObject<Block> PANZER_GLASS_BLOCK = registerWithItem(BLOCKS.register("panzerglass_block", ()-> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion().strength(0.5f, 2000f).isValidSpawn(ModBlocks::neverSpawn).sound(SoundType.METAL))), new Item.Properties());
+
+    public static final RegistryObject<Block> PANZER_GLASS_SLAB = registerWithItem(BLOCKS.register("panzerglass_slab", ()-> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion().strength(0.5f, 2000f).isValidSpawn(ModBlocks::neverSpawn).sound(SoundType.METAL))), new Item.Properties());
+
+
+
 }

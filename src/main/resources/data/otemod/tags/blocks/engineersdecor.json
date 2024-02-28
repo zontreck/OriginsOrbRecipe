@@ -25,6 +25,9 @@
 
     "otemod:rebar_concrete_tile",
     "otemod:rebar_concrete_tile_slab",
-    "otemod:rebar_concrete_tile_stairs"
+    "otemod:rebar_concrete_tile_stairs",
+
+    "otemod:panzerglass_block",
+    "otemod:panzerglass_slab"
   ]
 }

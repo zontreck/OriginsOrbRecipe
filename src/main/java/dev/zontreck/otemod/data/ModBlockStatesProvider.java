@@ -129,6 +129,13 @@ public class ModBlockStatesProvider extends BlockStateProvider {
                 new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/concrete/rebar_concrete_tile_texture7")
         };
 
+        ResourceLocation[] panzerglass = new ResourceLocation[]{
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/glass/panzerglass_block_texture0"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/glass/panzerglass_block_texture1"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/glass/panzerglass_block_texture2"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/glass/panzerglass_block_texture3")
+        };
+
         variantCubeBlock(ModBlocks.CLINKER_BRICK_BLOCK, clinkerBlock);
         customSlabBlock(ModBlocks.CLINKER_BRICK_SLAB, clinkerBlock);
         customStairBlock(ModBlocks.CLINKER_BRICK_STAIRS, clinkerBlock);
@@ -151,6 +158,9 @@ public class ModBlockStatesProvider extends BlockStateProvider {
         variantCubeBlock(ModBlocks.REBAR_CONCRETE_TILE_BLOCK, rebarConcreteTile);
         customSlabBlock(ModBlocks.REBAR_CONCRETE_TILE_SLAB, rebarConcreteTile);
         customStairBlock(ModBlocks.REBAR_CONCRETE_TILE_STAIRS, rebarConcreteTile);
+
+        variantTransparentCubeBlock(ModBlocks.PANZER_GLASS_BLOCK, new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/glass/panzerglass_block_texture_inventory"), panzerglass);
+        customTransparentSlabBlock(ModBlocks.PANZER_GLASS_SLAB, panzerglass);
     }
 
     private void wallBlock(RegistryObject<Block> blk, ResourceLocation texture)
@@ -307,6 +317,110 @@ public class ModBlockStatesProvider extends BlockStateProvider {
 
         simpleBlockItem(blockId.get(), model0.get());
     }
+    private void customTransparentSlabBlock(RegistryObject<Block> blockId, ResourceLocation... variations) {
+        VariantBlockStateBuilder builder = getVariantBuilder(blockId.get());
+
+
+        AtomicReference<ModelFile> model0 = new AtomicReference<>();
+
+        builder.forAllStates((state)->{
+            ConfiguredModel[] models = new ConfiguredModel[variations.length];
+
+
+            String appendName = "";
+            SlabType type = state.getValue(SlabBlock.TYPE);
+
+            if(type == SlabType.BOTTOM)
+                appendName = "_bottom";
+            else if(type == SlabType.TOP)
+                appendName = "_top";
+            else if(type == SlabType.DOUBLE)
+                appendName = "_double";
+
+            for (int i = 0; i < variations.length; i++) {
+                ResourceLocation texture = variations[i];
+                ResourceLocation rss = new ResourceLocation(texture.getNamespace(), "block/" + texture.getPath());
+                ModelFile model = null;
+                if(type == SlabType.TOP)
+                    model = models().slabTop(name(blockId.get()) + "_model" + i + appendName, rss, rss, rss).renderType(new ResourceLocation("translucent"));
+                else if(type == SlabType.BOTTOM)
+                    model = models().slab(name(blockId.get()) + "_model" + i + appendName, rss, rss, rss).renderType(new ResourceLocation("translucent"));
+                else if(type == SlabType.DOUBLE)
+                    model = models().cubeAll(name(blockId.get()) + "_model" + i + appendName, rss).renderType(new ResourceLocation("translucent"));
+
+
+                ConfiguredModel[] cfgModel = ConfiguredModel.builder().modelFile(model).build();
+
+                if(i==0 && model0.get()==null && type == SlabType.BOTTOM) model0.set(model);
+
+                models[i] = cfgModel[0];
+                //builder.partialState().addModels(cfgModel);
+            }
+            return models;
+        });
+
+
+        simpleBlockItem(blockId.get(), model0.get());
+    }
+
+    private void customTransparentStairBlock(RegistryObject<Block> blockId, ResourceLocation... variations) {
+        VariantBlockStateBuilder builder = getVariantBuilder(blockId.get());
+        ResourceLocation blockDefault = blockTexture(blockId.get());
+
+
+        AtomicReference<ModelFile> model0 = new AtomicReference<>();
+
+        builder.forAllStates((state)->{
+            ConfiguredModel[] models = new ConfiguredModel[variations.length];
+            Direction facing = (Direction)state.getValue(StairBlock.FACING);
+            Half half = (Half)state.getValue(StairBlock.HALF);
+            StairsShape shape = (StairsShape)state.getValue(StairBlock.SHAPE);
+            int yRot = (int)facing.getClockWise().toYRot();
+            if (shape == StairsShape.INNER_LEFT || shape == StairsShape.OUTER_LEFT) {
+                yRot += 270;
+            }
+
+            if (shape != StairsShape.STRAIGHT && half == Half.TOP) {
+                yRot += 90;
+            }
+
+            yRot %= 360;
+            boolean uvlock = yRot != 0 || half == Half.TOP;
+
+            String modelName = (shape == StairsShape.STRAIGHT) ? "" : (shape != StairsShape.INNER_LEFT && shape != StairsShape.INNER_RIGHT) ? "_outer":"_inner";
+            boolean straight = (shape == StairsShape.STRAIGHT);
+            boolean inner = (shape == StairsShape.INNER_LEFT || shape == StairsShape.INNER_RIGHT);
+
+
+            for (int i = 0; i < variations.length; i++) {
+                ResourceLocation texture = variations[i];
+                ResourceLocation rss = new ResourceLocation(texture.getNamespace(), "block/" + texture.getPath());
+                ModelFile cubeModel = null;
+                if(straight)
+                    cubeModel = models().stairs(
+                            blockId.getId().getPath() + "_model"+i + modelName, // Model name
+                            rss, rss, rss // Texture location
+                    ).renderType(new ResourceLocation("translucent"));
+
+                if(inner)
+                    cubeModel = models().stairsInner(blockId.getId().getPath()+"_model"+i + modelName, rss, rss, rss).renderType(new ResourceLocation("translucent"));
+                else if(!inner && !straight)
+                    cubeModel = models().stairsOuter(blockId.getId().getPath() + "_model"+i+modelName, rss, rss, rss).renderType(new ResourceLocation("translucent"));
+
+                ConfiguredModel[] cfgModel = ConfiguredModel.builder().modelFile(cubeModel).rotationX(half == Half.BOTTOM ? 0 : 180).rotationY(yRot).uvLock(uvlock).build();
+
+                if(i==0 && model0.get()==null) model0.set(cubeModel);
+
+                models[i] = cfgModel[0];
+                //builder.partialState().addModels(cfgModel);
+            }
+
+            return models;
+        });
+
+
+        simpleBlockItem(blockId.get(), model0.get());
+    }
 
     public void variantCubeBlock(RegistryObject<Block> blockId, ResourceLocation... variations) {
         VariantBlockStateBuilder builder = getVariantBuilder(blockId.get());
@@ -324,6 +438,32 @@ public class ModBlockStatesProvider extends BlockStateProvider {
             if(i==0)model0 = cubeModel;
             builder.partialState().addModels(cfgModel);
         }
+
+
+
+        simpleBlockItem(blockId.get(), model0);
+    }
+
+    public void variantTransparentCubeBlock(RegistryObject<Block> blockId, ResourceLocation inventory, ResourceLocation... variations) {
+        VariantBlockStateBuilder builder = getVariantBuilder(blockId.get());
+        ResourceLocation blockDefault = blockTexture(blockId.get());
+
+        ModelFile model0 = models().cubeAll(name(blockId.get()) + "_inventory", new ResourceLocation(inventory.getNamespace(), "block/" + inventory.getPath())).renderType(new ResourceLocation("translucent"));
+
+
+        for (int i = 0; i < variations.length; i++) {
+            ResourceLocation texture = variations[i];
+            ResourceLocation rss = new ResourceLocation(texture.getNamespace(), "block/" + texture.getPath());
+
+            ModelFile cubeModel = models().cubeAll(
+                    blockId.getId().getPath() + "_model"+i, // Model name
+                    rss // Texture location
+            ).renderType(new ResourceLocation("translucent"));
+            var cfgModel = ConfiguredModel.builder().modelFile(cubeModel).build();
+            //if(i==0)model0 = cubeModel;
+            builder.partialState().addModels(cfgModel);
+        }
+
 
 
 

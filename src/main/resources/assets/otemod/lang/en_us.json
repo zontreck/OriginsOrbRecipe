@@ -164,6 +164,10 @@
     "block.otemod.rebar_concrete_tile_stairs.help": "Steel reinforced concrete tile stairs.\n Expensive but Creeper-proof.",
     "block.otemod.rebar_concrete_wall": "Rebar Concrete Wall",
     "block.otemod.rebar_concrete_wall.help": "Steel reinforced concrete wall.\n Expensive but Creeper-proof.",
+    "block.otemod.panzerglass_block": "Panzer Glass Block",
+    "block.otemod.panzerglass_block.help": "Reinforced glass block.\n Expensive, explosion-proof.\n Dark gray tint, faint structural\n lines visible, multi texture for\n seamless look.",
+    "block.otemod.panzerglass_slab": "Panzer Glass Slab",
+    "block.otemod.panzerglass_slab.help": "Reinforced glass slab.\n Expensive, explosion-proof.\n Dark gray tint, faint structural\n lines visible.",
 
 
 
