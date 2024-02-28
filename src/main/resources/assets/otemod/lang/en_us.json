@@ -150,10 +150,20 @@
     "block.otemod.slag_brick_stairs.help": "Gray-brown brick stairs.",
     "block.otemod.slag_brick_wall": "Slag Brick Wall",
     "block.otemod.slag_brick_wall.help": "Simplistic Slag Brick Wall.",
-    "block.otemod.rebar_concrete": "Rebar Concrete",
+    "block.otemod.rebar_concrete": "Rebar Concrete Block",
+    "block.otemod.rebar_concrete.help": "Steel reinforced concrete block.\n Expensive but Creeper/Wither-proof.",
     "block.otemod.rebar_concrete_slab": "Rebar Concrete Slab",
+    "block.otemod.rebar_concrete_slab.help": "Steel reinforced concrete slab.\n Expensive but Creeper/Wither-proof.",
     "block.otemod.rebar_concrete_stairs": "Rebar Concrete Stairs",
+    "block.otemod.rebar_concrete_stairs.help": "Steel reinforced concrete stairs.\n Expensive but Creeper/Wither-proof.",
+    "block.otemod.rebar_concrete_tile": "Rebar Concrete Tile",
+    "block.otemod.rebar_concrete_tile.help": "Steel reinforced concrete tile.\n Expensive but Creeper-proof.",
+    "block.otemod.rebar_concrete_tile_slab": "Rebar Concrete Tile Slab",
+    "block.otemod.rebar_concrete_tile_slab.help": "Steel reinforced concrete tile slab.\n Expensive but Creeper-proof.",
+    "block.otemod.rebar_concrete_tile_stairs": "Rebar Concrete Tile Stairs",
+    "block.otemod.rebar_concrete_tile_stairs.help": "Steel reinforced concrete tile stairs.\n Expensive but Creeper-proof.",
     "block.otemod.rebar_concrete_wall": "Rebar Concrete Wall",
+    "block.otemod.rebar_concrete_wall.help": "Steel reinforced concrete wall.\n Expensive but Creeper-proof.",
 
 
 

@@ -133,6 +133,10 @@ public class ModBlockLootTablesProvider extends BlockLootSubProvider
         dropSelf(ModBlocks.REBAR_CONCRETE_STAIRS.get());
         dropSelf(ModBlocks.REBAR_CONCRETE_WALL.get());
 
+        dropSelf(ModBlocks.REBAR_CONCRETE_TILE_BLOCK.get());
+        dropSelf(ModBlocks.REBAR_CONCRETE_TILE_SLAB.get());
+        dropSelf(ModBlocks.REBAR_CONCRETE_TILE_STAIRS.get());
+
 
 
     }

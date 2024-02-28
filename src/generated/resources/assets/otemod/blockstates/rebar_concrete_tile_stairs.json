@@ -1,0 +1,3444 @@
+{
+  "variants": {
+    "facing=east,half=bottom,shape=inner_left,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "y": 270
+      }
+    ],
+    "facing=east,half=bottom,shape=inner_left,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "y": 270
+      }
+    ],
+    "facing=east,half=bottom,shape=inner_right,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner"
+      }
+    ],
+    "facing=east,half=bottom,shape=inner_right,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner"
+      }
+    ],
+    "facing=east,half=bottom,shape=outer_left,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "y": 270
+      }
+    ],
+    "facing=east,half=bottom,shape=outer_left,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "y": 270
+      }
+    ],
+    "facing=east,half=bottom,shape=outer_right,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer"
+      }
+    ],
+    "facing=east,half=bottom,shape=outer_right,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer"
+      }
+    ],
+    "facing=east,half=bottom,shape=straight,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7"
+      }
+    ],
+    "facing=east,half=bottom,shape=straight,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7"
+      }
+    ],
+    "facing=east,half=top,shape=inner_left,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "x": 180
+      }
+    ],
+    "facing=east,half=top,shape=inner_left,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "x": 180
+      }
+    ],
+    "facing=east,half=top,shape=inner_right,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      }
+    ],
+    "facing=east,half=top,shape=inner_right,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      }
+    ],
+    "facing=east,half=top,shape=outer_left,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "x": 180
+      }
+    ],
+    "facing=east,half=top,shape=outer_left,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "x": 180
+      }
+    ],
+    "facing=east,half=top,shape=outer_right,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      }
+    ],
+    "facing=east,half=top,shape=outer_right,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      }
+    ],
+    "facing=east,half=top,shape=straight,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7",
+        "uvlock": true,
+        "x": 180
+      }
+    ],
+    "facing=east,half=top,shape=straight,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7",
+        "uvlock": true,
+        "x": 180
+      }
+    ],
+    "facing=north,half=bottom,shape=inner_left,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "y": 180
+      }
+    ],
+    "facing=north,half=bottom,shape=inner_left,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "y": 180
+      }
+    ],
+    "facing=north,half=bottom,shape=inner_right,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "y": 270
+      }
+    ],
+    "facing=north,half=bottom,shape=inner_right,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "y": 270
+      }
+    ],
+    "facing=north,half=bottom,shape=outer_left,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "y": 180
+      }
+    ],
+    "facing=north,half=bottom,shape=outer_left,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "y": 180
+      }
+    ],
+    "facing=north,half=bottom,shape=outer_right,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "y": 270
+      }
+    ],
+    "facing=north,half=bottom,shape=outer_right,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "y": 270
+      }
+    ],
+    "facing=north,half=bottom,shape=straight,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7",
+        "uvlock": true,
+        "y": 270
+      }
+    ],
+    "facing=north,half=bottom,shape=straight,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6",
+        "uvlock": true,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7",
+        "uvlock": true,
+        "y": 270
+      }
+    ],
+    "facing=north,half=top,shape=inner_left,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      }
+    ],
+    "facing=north,half=top,shape=inner_left,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      }
+    ],
+    "facing=north,half=top,shape=inner_right,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "x": 180
+      }
+    ],
+    "facing=north,half=top,shape=inner_right,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "x": 180
+      }
+    ],
+    "facing=north,half=top,shape=outer_left,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      }
+    ],
+    "facing=north,half=top,shape=outer_left,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      }
+    ],
+    "facing=north,half=top,shape=outer_right,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "x": 180
+      }
+    ],
+    "facing=north,half=top,shape=outer_right,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "x": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "x": 180
+      }
+    ],
+    "facing=north,half=top,shape=straight,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      }
+    ],
+    "facing=north,half=top,shape=straight,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      }
+    ],
+    "facing=south,half=bottom,shape=inner_left,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner"
+      }
+    ],
+    "facing=south,half=bottom,shape=inner_left,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner"
+      }
+    ],
+    "facing=south,half=bottom,shape=inner_right,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "y": 90
+      }
+    ],
+    "facing=south,half=bottom,shape=inner_right,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "y": 90
+      }
+    ],
+    "facing=south,half=bottom,shape=outer_left,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer"
+      }
+    ],
+    "facing=south,half=bottom,shape=outer_left,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer"
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer"
+      }
+    ],
+    "facing=south,half=bottom,shape=outer_right,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "y": 90
+      }
+    ],
+    "facing=south,half=bottom,shape=outer_right,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "y": 90
+      }
+    ],
+    "facing=south,half=bottom,shape=straight,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7",
+        "uvlock": true,
+        "y": 90
+      }
+    ],
+    "facing=south,half=bottom,shape=straight,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7",
+        "uvlock": true,
+        "y": 90
+      }
+    ],
+    "facing=south,half=top,shape=inner_left,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      }
+    ],
+    "facing=south,half=top,shape=inner_left,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      }
+    ],
+    "facing=south,half=top,shape=inner_right,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      }
+    ],
+    "facing=south,half=top,shape=inner_right,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      }
+    ],
+    "facing=south,half=top,shape=outer_left,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      }
+    ],
+    "facing=south,half=top,shape=outer_left,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      }
+    ],
+    "facing=south,half=top,shape=outer_right,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      }
+    ],
+    "facing=south,half=top,shape=outer_right,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      }
+    ],
+    "facing=south,half=top,shape=straight,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      }
+    ],
+    "facing=south,half=top,shape=straight,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7",
+        "uvlock": true,
+        "x": 180,
+        "y": 90
+      }
+    ],
+    "facing=west,half=bottom,shape=inner_left,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "y": 90
+      }
+    ],
+    "facing=west,half=bottom,shape=inner_left,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "y": 90
+      }
+    ],
+    "facing=west,half=bottom,shape=inner_right,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "y": 180
+      }
+    ],
+    "facing=west,half=bottom,shape=inner_right,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "y": 180
+      }
+    ],
+    "facing=west,half=bottom,shape=outer_left,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "y": 90
+      }
+    ],
+    "facing=west,half=bottom,shape=outer_left,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "y": 90
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "y": 90
+      }
+    ],
+    "facing=west,half=bottom,shape=outer_right,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "y": 180
+      }
+    ],
+    "facing=west,half=bottom,shape=outer_right,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "y": 180
+      }
+    ],
+    "facing=west,half=bottom,shape=straight,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7",
+        "uvlock": true,
+        "y": 180
+      }
+    ],
+    "facing=west,half=bottom,shape=straight,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6",
+        "uvlock": true,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7",
+        "uvlock": true,
+        "y": 180
+      }
+    ],
+    "facing=west,half=top,shape=inner_left,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      }
+    ],
+    "facing=west,half=top,shape=inner_left,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      }
+    ],
+    "facing=west,half=top,shape=inner_right,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      }
+    ],
+    "facing=west,half=top,shape=inner_right,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_inner",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      }
+    ],
+    "facing=west,half=top,shape=outer_left,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      }
+    ],
+    "facing=west,half=top,shape=outer_left,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      }
+    ],
+    "facing=west,half=top,shape=outer_right,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      }
+    ],
+    "facing=west,half=top,shape=outer_right,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7_outer",
+        "uvlock": true,
+        "x": 180,
+        "y": 270
+      }
+    ],
+    "facing=west,half=top,shape=straight,waterlogged=false": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      }
+    ],
+    "facing=west,half=top,shape=straight,waterlogged=true": [
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model0",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model1",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model2",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model3",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model4",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model5",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model6",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      },
+      {
+        "model": "otemod:block/rebar_concrete_tile_stairs_model7",
+        "uvlock": true,
+        "x": 180,
+        "y": 180
+      }
+    ]
+  }
+}

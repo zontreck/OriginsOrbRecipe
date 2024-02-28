@@ -299,4 +299,11 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> REBAR_CONCRETE_WALL = registerWithItem(BLOCKS.register("rebar_concrete_wall", ()-> new WallBlock(BlockBehaviour.Properties.copy(Blocks.STONE).strength(1f, 2000f).isValidSpawn(ModBlocks::neverSpawn))), new Item.Properties());
 
+    public static final RegistryObject<Block> REBAR_CONCRETE_TILE_BLOCK = registerWithItem(BLOCKS.register("rebar_concrete_tile", ()-> new Block(BlockBehaviour.Properties.copy(Blocks.STONE).isValidSpawn(ModBlocks::neverSpawn).strength(1f, 2000f))), new Item.Properties());
+
+    public static final RegistryObject<Block> REBAR_CONCRETE_TILE_SLAB = registerWithItem(BLOCKS.register("rebar_concrete_tile_slab", ()-> new SlabBlock(BlockBehaviour.Properties.copy(Blocks.STONE).strength(1f, 2000f).isValidSpawn(ModBlocks::neverSpawn))), new Item.Properties());
+
+    public static final RegistryObject<Block> REBAR_CONCRETE_TILE_STAIRS = registerWithItem(BLOCKS.register("rebar_concrete_tile_stairs", ()-> new StairBlock(ModBlocks.REBAR_CONCRETE_BLOCK.get()::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.STONE).strength(1f, 2000f).isValidSpawn(ModBlocks::neverSpawn))), new Item.Properties());
+
+
 }

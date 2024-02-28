@@ -118,6 +118,17 @@ public class ModBlockStatesProvider extends BlockStateProvider {
                 new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/concrete/rebar_concrete_texture7")
         };
 
+        ResourceLocation[] rebarConcreteTile = new ResourceLocation[] {
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/concrete/rebar_concrete_tile_texture0"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/concrete/rebar_concrete_tile_texture1"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/concrete/rebar_concrete_tile_texture2"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/concrete/rebar_concrete_tile_texture3"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/concrete/rebar_concrete_tile_texture4"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/concrete/rebar_concrete_tile_texture5"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/concrete/rebar_concrete_tile_texture6"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/concrete/rebar_concrete_tile_texture7")
+        };
+
         variantCubeBlock(ModBlocks.CLINKER_BRICK_BLOCK, clinkerBlock);
         customSlabBlock(ModBlocks.CLINKER_BRICK_SLAB, clinkerBlock);
         customStairBlock(ModBlocks.CLINKER_BRICK_STAIRS, clinkerBlock);
@@ -136,6 +147,10 @@ public class ModBlockStatesProvider extends BlockStateProvider {
         customSlabBlock(ModBlocks.REBAR_CONCRETE_SLAB, rebarConcrete);
         customStairBlock(ModBlocks.REBAR_CONCRETE_STAIRS, rebarConcrete);
         wallBlock(ModBlocks.REBAR_CONCRETE_WALL, new ResourceLocation(OTEMod.MOD_ID, "block/" + rebarConcrete[0].getPath()));
+
+        variantCubeBlock(ModBlocks.REBAR_CONCRETE_TILE_BLOCK, rebarConcreteTile);
+        customSlabBlock(ModBlocks.REBAR_CONCRETE_TILE_SLAB, rebarConcreteTile);
+        customStairBlock(ModBlocks.REBAR_CONCRETE_TILE_STAIRS, rebarConcreteTile);
     }
 
     private void wallBlock(RegistryObject<Block> blk, ResourceLocation texture)
