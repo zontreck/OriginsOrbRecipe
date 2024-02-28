@@ -64,7 +64,6 @@ public class ModItemModelsProvider extends ItemModelProvider
         /*
         Engineer's Decor Items
          */
-        item(ModItems.METAL_BAR);
 
 
 
