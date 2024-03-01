@@ -5,11 +5,11 @@
   ],
   "key": {
     "A": {
-      "item": "otemod:pool_tile"
+      "item": "otemod:green_pool_tile"
     }
   },
   "result": {
-    "item": "otemod:pool_tile_slab",
+    "item": "otemod:green_pool_tile_slab",
     "count": 6
   }
 }

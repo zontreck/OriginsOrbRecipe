@@ -7,11 +7,11 @@
   ],
   "key": {
     "A": {
-      "item": "otemod:dirty_pool_tile"
+      "item": "otemod:dirty_green_pool_tile"
     }
   },
   "result": {
-    "item": "otemod:dirty_pool_tile_stairs",
+    "item": "otemod:dirty_green_pool_tile_stairs",
     "count": 4
   }
 }

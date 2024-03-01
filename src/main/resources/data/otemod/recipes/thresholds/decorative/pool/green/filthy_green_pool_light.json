@@ -2,14 +2,14 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "otemod:dirty_pool_light"
+      "item": "otemod:dirty_green_pool_light"
     },
     {
       "item": "minecraft:slime_block"
     }
   ],
   "result": {
-    "item": "otemod:filthy_pool_light",
+    "item": "otemod:filthy_green_pool_light",
     "count": 1
   }
 }

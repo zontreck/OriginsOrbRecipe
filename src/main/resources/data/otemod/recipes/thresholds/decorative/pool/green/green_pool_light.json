@@ -7,14 +7,14 @@
   ],
   "key": {
     "A": {
-      "item": "otemod:pool_tile"
+      "item": "otemod:green_pool_tile"
     },
     "B": {
       "item": "minecraft:glowstone"
     }
   },
   "result": {
-    "item": "otemod:pool_light",
+    "item": "otemod:green_pool_light",
     "count": 4
   }
 }
