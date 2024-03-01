@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "otemod:block/engineersdecor/slag_brick/slag_brick_texture4"
-  }
-}

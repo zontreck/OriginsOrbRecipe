@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/template_wall_side",
-  "textures": {
-    "wall": "otemod:block/engineersdecor/slag_brick/slag_brick_wall0"
-  }
-}

@@ -1,8 +1,5 @@
 {
   "replace": false,
   "values": [
-    "otemod:clinker_brick_wall",
-    "otemod:slag_brick_wall",
-    "otemod:rebar_concrete_wall"
   ]
 }

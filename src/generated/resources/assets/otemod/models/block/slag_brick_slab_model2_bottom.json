@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab",
-  "textures": {
-    "bottom": "otemod:block/engineersdecor/slag_brick/slag_brick_texture2",
-    "side": "otemod:block/engineersdecor/slag_brick/slag_brick_texture2",
-    "top": "otemod:block/engineersdecor/slag_brick/slag_brick_texture2"
-  }
-}

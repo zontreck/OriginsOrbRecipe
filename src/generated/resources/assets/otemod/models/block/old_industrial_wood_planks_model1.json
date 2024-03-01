@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "otemod:block/engineersdecor/material/industrial_planks_texture1"
-  }
-}

@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/door_top_right",
-  "render_type": "minecraft:translucent",
-  "textures": {
-    "bottom": "otemod:block/engineersdecor/door/old_industrial_door_texture_top",
-    "top": "otemod:block/engineersdecor/door/old_industrial_door_texture_bottom"
-  }
-}

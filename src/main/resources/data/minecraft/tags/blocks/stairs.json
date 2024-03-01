@@ -1,10 +1,6 @@
 {
   "replace": false,
   "values": [
-    "otemod:clinker_brick_stairs",
-    "otemod:clinker_brick_stained_stairs",
-    "otemod:slag_brick_stairs",
-    "otemod:rebar_concrete_stairs",
 
     "otemod:pool_tile_stairs",
     "otemod:dark_pool_tile_stairs",

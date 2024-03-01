@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "otemod:block/engineersdecor/slag_brick/slag_brick_texture7",
-    "side": "otemod:block/engineersdecor/slag_brick/slag_brick_texture7",
-    "top": "otemod:block/engineersdecor/slag_brick/slag_brick_texture7"
-  }
-}

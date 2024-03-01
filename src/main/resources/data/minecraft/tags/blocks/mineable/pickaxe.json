@@ -20,8 +20,6 @@
 
         "#otemod:pool_tiles",
 
-        "otemod:uncrafter",
-
-        "#otemod:engineersdecor"
+        "otemod:uncrafter"
     ]
 }

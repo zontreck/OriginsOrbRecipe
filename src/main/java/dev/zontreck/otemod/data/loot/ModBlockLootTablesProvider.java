@@ -100,56 +100,6 @@ public class ModBlockLootTablesProvider extends BlockLootSubProvider
         dropSelf(ModBlocks.FILTHY_GREEN_POOL_LIGHT.get());
         dropSelf(ModBlocks.UNCRAFTER.get());
 
-        /*
-        Engineer's Decor Blocks
-         */
-        dropSelf(ModBlocks.CLINKER_BRICK_BLOCK.get());
-        dropSelf(ModBlocks.CLINKER_BRICK_RECESSED.get());
-        dropSelf(ModBlocks.CLINKER_BRICK_VERTICALLY_SLIT.get());
-        createSlabItemTable(ModBlocks.CLINKER_BRICK_SLAB);
-        dropSelf(ModBlocks.CLINKER_BRICK_STAIRS.get());
-        dropSelf(ModBlocks.CLINKER_BRICK_STAINED_BLOCK.get());
-        createSlabItemTable(ModBlocks.CLINKER_BRICK_STAINED_SLAB);
-        dropSelf(ModBlocks.CLINKER_BRICK_STAINED_STAIRS.get());
-        dropSelf(ModBlocks.CLINKER_BRICK_SASTOR_CORNER_BLOCK.get());
-        dropSelf(ModBlocks.CLINKER_BRICK_WALL.get());
-
-        dropSelf(ModBlocks.SLAG_BRICK_BLOCK.get());
-        createSlabItemTable(ModBlocks.SLAG_BRICK_SLAB);
-        dropSelf(ModBlocks.SLAG_BRICK_WALL.get());
-        dropSelf(ModBlocks.SLAG_BRICK_STAIRS.get());
-
-        dropSelf(ModBlocks.REBAR_CONCRETE_BLOCK.get());
-        createSlabItemTable(ModBlocks.REBAR_CONCRETE_SLAB);
-        dropSelf(ModBlocks.REBAR_CONCRETE_STAIRS.get());
-        dropSelf(ModBlocks.REBAR_CONCRETE_WALL.get());
-
-        dropSelf(ModBlocks.REBAR_CONCRETE_TILE_BLOCK.get());
-        createSlabItemTable(ModBlocks.REBAR_CONCRETE_TILE_SLAB);
-        dropSelf(ModBlocks.REBAR_CONCRETE_TILE_STAIRS.get());
-
-        dropSelf(ModBlocks.PANZER_GLASS_BLOCK.get());
-        createSlabItemTable(ModBlocks.PANZER_GLASS_SLAB);
-
-        dropSelf(ModBlocks.OLD_INDUSTRIAL_WOOD_PLANKS.get());
-        createSlabItemTable(ModBlocks.OLD_INDUSTRIAL_WOOD_SLAB);
-        dropSelf(ModBlocks.OLD_INDUSTRIAL_WOOD_STAIRS.get());
-        createDoorTable(ModBlocks.OLD_INDUSTRIAL_WOOD_DOOR);
-
-        dropSelf(ModBlocks.STEEL_TABLE.get());
-        dropSelf(ModBlocks.STEEL_CATWALK.get());
-        dropSelf(ModBlocks.STEEL_RAILING.get());
-        dropSelf(ModBlocks.STEEL_CATWALK_STAIRS.get());
-        dropSelf(ModBlocks.STEEL_CATWALK_STAIRS_LR.get());
-        dropSelf(ModBlocks.STEEL_CATWALK_STAIRS_RR.get());
-        dropSelf(ModBlocks.STEEL_CATWALK_STAIRS_DR.get());
-        dropSelf(ModBlocks.STEEL_GRATING.get());
-
-        dropSelf(ModBlocks.STEEL_GRATING_TOP.get());
-        dropSelf(ModBlocks.STEEL_CATWALK_TOP.get());
-
-
-
     }
 
     private void createDoorTable(RegistryObject<Block> blk)

@@ -1,9 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "render_type": "minecraft:translucent",
-  "textures": {
-    "bottom": "otemod:block/engineersdecor/glass/panzerglass_block_texture0",
-    "side": "otemod:block/engineersdecor/glass/panzerglass_block_texture0",
-    "top": "otemod:block/engineersdecor/glass/panzerglass_block_texture0"
-  }
-}

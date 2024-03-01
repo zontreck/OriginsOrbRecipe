@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "otemod:block/engineersdecor/material/industrial_planks_texture1",
-    "side": "otemod:block/engineersdecor/material/industrial_planks_texture1",
-    "top": "otemod:block/engineersdecor/material/industrial_planks_texture1"
-  }
-}

@@ -143,49 +143,6 @@ public class ModBlockStatesProvider extends BlockStateProvider {
                 new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/material/industrial_planks_texture3"),
         };
 
-        variantCubeBlock(ModBlocks.CLINKER_BRICK_BLOCK, clinkerBlock);
-        customSlabBlock(ModBlocks.CLINKER_BRICK_SLAB, clinkerBlock);
-        customStairBlock(ModBlocks.CLINKER_BRICK_STAIRS, clinkerBlock);
-        variantCubeBlock(ModBlocks.CLINKER_BRICK_STAINED_BLOCK, clinkerStainedBlock);
-        customSlabBlock(ModBlocks.CLINKER_BRICK_STAINED_SLAB, clinkerStainedBlock);
-        customStairBlock(ModBlocks.CLINKER_BRICK_STAINED_STAIRS, clinkerStainedBlock);
-
-        wallBlock(ModBlocks.CLINKER_BRICK_WALL, new ResourceLocation(OTEMod.MOD_ID, "block/engineersdecor/clinker_brick/clinker_brick_wall0"));
-
-        variantCubeBlock(ModBlocks.SLAG_BRICK_BLOCK, slagBricks);
-        customSlabBlock(ModBlocks.SLAG_BRICK_SLAB, slagBricks);
-        customStairBlock(ModBlocks.SLAG_BRICK_STAIRS, slagBricks);
-        wallBlock(ModBlocks.SLAG_BRICK_WALL, new ResourceLocation(OTEMod.MOD_ID, "block/engineersdecor/slag_brick/slag_brick_wall0"));
-
-        variantCubeBlock(ModBlocks.REBAR_CONCRETE_BLOCK, rebarConcrete);
-        customSlabBlock(ModBlocks.REBAR_CONCRETE_SLAB, rebarConcrete);
-        customStairBlock(ModBlocks.REBAR_CONCRETE_STAIRS, rebarConcrete);
-        wallBlock(ModBlocks.REBAR_CONCRETE_WALL, new ResourceLocation(OTEMod.MOD_ID, "block/" + rebarConcrete[0].getPath()));
-
-        variantCubeBlock(ModBlocks.REBAR_CONCRETE_TILE_BLOCK, rebarConcreteTile);
-        customSlabBlock(ModBlocks.REBAR_CONCRETE_TILE_SLAB, rebarConcreteTile);
-        customStairBlock(ModBlocks.REBAR_CONCRETE_TILE_STAIRS, rebarConcreteTile);
-
-        variantTransparentCubeBlock(ModBlocks.PANZER_GLASS_BLOCK, new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/glass/panzerglass_block_texture_inventory"), panzerglass);
-        customTransparentSlabBlock(ModBlocks.PANZER_GLASS_SLAB, panzerglass);
-
-        variantCubeBlock(ModBlocks.OLD_INDUSTRIAL_WOOD_PLANKS, oldIndustrialWood);
-        customSlabBlock(ModBlocks.OLD_INDUSTRIAL_WOOD_SLAB, oldIndustrialWood);
-        customStairBlock(ModBlocks.OLD_INDUSTRIAL_WOOD_STAIRS, oldIndustrialWood);
-        doorBlock(ModBlocks.OLD_INDUSTRIAL_WOOD_DOOR, new ResourceLocation(OTEMod.MOD_ID, "block/engineersdecor/door/old_industrial_door_texture_bottom"), new ResourceLocation(OTEMod.MOD_ID, "block/engineersdecor/door/old_industrial_door_texture_top"));
-
-        blockWithExistingModel(ModBlocks.STEEL_GRATING, "block/engineersdecor/furniture/steel_floor_grating", false);
-        blockWithExistingModel(ModBlocks.STEEL_GRATING_TOP, "block/engineersdecor/furniture/steel_floor_grating_top", false);
-        blockWithExistingModel(ModBlocks.STEEL_TABLE, "block/engineersdecor/furniture/steel_table", false);
-        blockWithExistingModel(ModBlocks.STEEL_CATWALK, "block/engineersdecor/furniture/steel_catwalk", false);
-        blockWithExistingModel(ModBlocks.STEEL_CATWALK_TOP, "block/engineersdecor/furniture/steel_catwalk_top", false);
-        blockWithExistingModel(ModBlocks.STEEL_RAILING, "block/engineersdecor/furniture/steel_railing", true);
-        blockWithExistingModel(ModBlocks.STEEL_CATWALK_STAIRS, "block/engineersdecor/furniture/steel_catwalk_stairs", true);
-        blockWithExistingModel(ModBlocks.STEEL_CATWALK_STAIRS_LR, "block/engineersdecor/furniture/steel_catwalk_stairs_lr", true);
-        blockWithExistingModel(ModBlocks.STEEL_CATWALK_STAIRS_RR, "block/engineersdecor/furniture/steel_catwalk_stairs_rr", true);
-        blockWithExistingModel(ModBlocks.STEEL_CATWALK_STAIRS_DR, "block/engineersdecor/furniture/steel_catwalk_stairs_dr", true);
-
-
     }
 
     private void blockWithExistingModel(RegistryObject<Block> blk, String model, boolean rotatable)

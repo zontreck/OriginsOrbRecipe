@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/slab_top",
-  "textures": {
-    "bottom": "otemod:block/engineersdecor/concrete/rebar_concrete_texture2",
-    "side": "otemod:block/engineersdecor/concrete/rebar_concrete_texture2",
-    "top": "otemod:block/engineersdecor/concrete/rebar_concrete_texture2"
-  }
-}
