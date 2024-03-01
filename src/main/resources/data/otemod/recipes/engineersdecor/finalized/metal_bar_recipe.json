@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  S",
+    " S ",
+    "S  "
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "otemod:metal_bar",
+    "count": 12
+  }
+}

@@ -2,29 +2,20 @@ package dev.zontreck.otemod.data.loot;
 
 import dev.zontreck.otemod.blocks.*;
 import dev.zontreck.otemod.items.ModItems;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.BlockLootSubProvider;
-import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
-import java.util.List;
 import java.util.Set;
-
-import static dev.zontreck.otemod.blocks.ModBlocks.BLOCKS;
 
 public class ModBlockLootTablesProvider extends BlockLootSubProvider
 {
@@ -67,44 +58,44 @@ public class ModBlockLootTablesProvider extends BlockLootSubProvider
         dropSelf(ModBlocks.CYAN_WALL_V2.get());
         dropSelf(ModBlocks.POOL_TILE.get());
         dropSelf(ModBlocks.POOL_TILE_STAIRS.get());
-        dropSelf(ModBlocks.POOL_TILE_SLAB.get());
+        createSlabItemTable(ModBlocks.POOL_TILE_SLAB);
         dropSelf(ModBlocks.POOL_LIGHT.get());
         dropSelf(ModBlocks.DIRTY_POOL_TILE.get());
         dropSelf(ModBlocks.DIRTY_POOL_TILE_STAIRS.get());
-        dropSelf(ModBlocks.DIRTY_POOL_TILE_SLAB.get());
+        createSlabItemTable(ModBlocks.DIRTY_POOL_TILE_SLAB);
         dropSelf(ModBlocks.DIRTY_POOL_LIGHT.get());
         dropSelf(ModBlocks.FILTHY_POOL_LIGHT.get());
         dropSelf(ModBlocks.DARK_POOL_TILE.get());
         dropSelf(ModBlocks.DARK_POOL_LIGHT.get());
         dropSelf(ModBlocks.DARK_POOL_TILE_STAIRS.get());
-        dropSelf(ModBlocks.DARK_POOL_TILE_SLAB.get());
+        createSlabItemTable(ModBlocks.DARK_POOL_TILE_SLAB);
         dropSelf(ModBlocks.BLUE_POOL_TILE.get());
         dropSelf(ModBlocks.BLUE_POOL_TILE_STAIRS.get());
-        dropSelf(ModBlocks.BLUE_POOL_TILE_SLAB.get());
+        createSlabItemTable(ModBlocks.BLUE_POOL_TILE_SLAB);
         dropSelf(ModBlocks.BLUE_POOL_LIGHT.get());
         dropSelf(ModBlocks.DIRTY_BLUE_POOL_TILE.get());
         dropSelf(ModBlocks.DIRTY_BLUE_POOL_TILE_STAIRS.get());
-        dropSelf(ModBlocks.DIRTY_BLUE_POOL_TILE_SLAB.get());
+        createSlabItemTable(ModBlocks.DIRTY_BLUE_POOL_TILE_SLAB);
         dropSelf(ModBlocks.DIRTY_BLUE_POOL_LIGHT.get());
         dropSelf(ModBlocks.FILTHY_BLUE_POOL_LIGHT.get());
         dropSelf(ModBlocks.RED_POOL_TILE.get());
         dropSelf(ModBlocks.RED_POOL_TILE_STAIRS.get());
-        dropSelf(ModBlocks.RED_POOL_TILE_SLAB.get());
+        createSlabItemTable(ModBlocks.RED_POOL_TILE_SLAB);
         dropSelf(ModBlocks.RED_POOL_LIGHT.get());
         dropSelf(ModBlocks.DIRTY_RED_POOL_TILE.get());
         dropSelf(ModBlocks.DIRTY_RED_POOL_LIGHT.get());
         dropSelf(ModBlocks.FILTHY_RED_POOL_LIGHT.get());
         dropSelf(ModBlocks.DIRTY_RED_POOL_TILE_STAIRS.get());
-        dropSelf(ModBlocks.DIRTY_RED_POOL_TILE_SLAB.get());
+        createSlabItemTable(ModBlocks.DIRTY_RED_POOL_TILE_SLAB);
         dropSelf(ModBlocks.DARK_RED_WOOL.get());
         dropSelf(ModBlocks.DARK_RED_CARPET.get());
         dropSelf(ModBlocks.GREEN_POOL_TILE.get());
         dropSelf(ModBlocks.GREEN_POOL_LIGHT.get());
-        dropSelf(ModBlocks.GREEN_POOL_TILE_SLAB.get());
+        createSlabItemTable(ModBlocks.GREEN_POOL_TILE_SLAB);
         dropSelf(ModBlocks.GREEN_POOL_TILE_STAIRS.get());
         dropSelf(ModBlocks.DIRTY_GREEN_POOL_TILE.get());
         dropSelf(ModBlocks.DIRTY_GREEN_POOL_LIGHT.get());
-        dropSelf(ModBlocks.DIRTY_GREEN_POOL_TILE_SLAB.get());
+        createSlabItemTable(ModBlocks.DIRTY_GREEN_POOL_TILE_SLAB);
         dropSelf(ModBlocks.DIRTY_GREEN_POOL_TILE_STAIRS.get());
         dropSelf(ModBlocks.FILTHY_GREEN_POOL_LIGHT.get());
         dropSelf(ModBlocks.UNCRAFTER.get());
@@ -115,33 +106,63 @@ public class ModBlockLootTablesProvider extends BlockLootSubProvider
         dropSelf(ModBlocks.CLINKER_BRICK_BLOCK.get());
         dropSelf(ModBlocks.CLINKER_BRICK_RECESSED.get());
         dropSelf(ModBlocks.CLINKER_BRICK_VERTICALLY_SLIT.get());
-        dropSelf(ModBlocks.CLINKER_BRICK_SLAB.get());
+        createSlabItemTable(ModBlocks.CLINKER_BRICK_SLAB);
         dropSelf(ModBlocks.CLINKER_BRICK_STAIRS.get());
         dropSelf(ModBlocks.CLINKER_BRICK_STAINED_BLOCK.get());
-        dropSelf(ModBlocks.CLINKER_BRICK_STAINED_SLAB.get());
+        createSlabItemTable(ModBlocks.CLINKER_BRICK_STAINED_SLAB);
         dropSelf(ModBlocks.CLINKER_BRICK_STAINED_STAIRS.get());
         dropSelf(ModBlocks.CLINKER_BRICK_SASTOR_CORNER_BLOCK.get());
         dropSelf(ModBlocks.CLINKER_BRICK_WALL.get());
 
         dropSelf(ModBlocks.SLAG_BRICK_BLOCK.get());
-        dropSelf(ModBlocks.SLAG_BRICK_SLAB.get());
+        createSlabItemTable(ModBlocks.SLAG_BRICK_SLAB);
         dropSelf(ModBlocks.SLAG_BRICK_WALL.get());
         dropSelf(ModBlocks.SLAG_BRICK_STAIRS.get());
 
         dropSelf(ModBlocks.REBAR_CONCRETE_BLOCK.get());
-        dropSelf(ModBlocks.REBAR_CONCRETE_SLAB.get());
+        createSlabItemTable(ModBlocks.REBAR_CONCRETE_SLAB);
         dropSelf(ModBlocks.REBAR_CONCRETE_STAIRS.get());
         dropSelf(ModBlocks.REBAR_CONCRETE_WALL.get());
 
         dropSelf(ModBlocks.REBAR_CONCRETE_TILE_BLOCK.get());
-        dropSelf(ModBlocks.REBAR_CONCRETE_TILE_SLAB.get());
+        createSlabItemTable(ModBlocks.REBAR_CONCRETE_TILE_SLAB);
         dropSelf(ModBlocks.REBAR_CONCRETE_TILE_STAIRS.get());
 
         dropSelf(ModBlocks.PANZER_GLASS_BLOCK.get());
-        dropSelf(ModBlocks.PANZER_GLASS_SLAB.get());
+        createSlabItemTable(ModBlocks.PANZER_GLASS_SLAB);
+
+        dropSelf(ModBlocks.OLD_INDUSTRIAL_WOOD_PLANKS.get());
+        createSlabItemTable(ModBlocks.OLD_INDUSTRIAL_WOOD_SLAB);
+        dropSelf(ModBlocks.OLD_INDUSTRIAL_WOOD_STAIRS.get());
+        createDoorTable(ModBlocks.OLD_INDUSTRIAL_WOOD_DOOR);
+
+        dropSelf(ModBlocks.STEEL_TABLE.get());
+        dropSelf(ModBlocks.STEEL_CATWALK.get());
+        dropSelf(ModBlocks.STEEL_RAILING.get());
+        dropSelf(ModBlocks.STEEL_CATWALK_STAIRS.get());
+        dropSelf(ModBlocks.STEEL_CATWALK_STAIRS_LR.get());
+        dropSelf(ModBlocks.STEEL_CATWALK_STAIRS_RR.get());
+        dropSelf(ModBlocks.STEEL_CATWALK_STAIRS_DR.get());
+        dropSelf(ModBlocks.STEEL_GRATING.get());
+
+        dropSelf(ModBlocks.STEEL_GRATING_TOP.get());
+        dropSelf(ModBlocks.STEEL_CATWALK_TOP.get());
 
 
 
+    }
+
+    private void createDoorTable(RegistryObject<Block> blk)
+    {
+        var loot = createDoorTable(blk.get());
+
+        add(blk.get(), loot);
+    }
+
+    private void createSlabItemTable(RegistryObject<Block> slab)
+    {
+        var loot = createSlabItemTable(slab.get());
+        add(slab.get(), loot);
     }
 
     @Override

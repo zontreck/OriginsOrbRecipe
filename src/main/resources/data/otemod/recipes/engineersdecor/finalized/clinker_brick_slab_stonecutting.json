@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "otemod:clinker_brick_block"
+  },
+  "result": "otemod:clinker_brick_slab",
+  "count": 2
+}

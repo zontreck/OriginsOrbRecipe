@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SGS",
+    "GSG",
+    "SGS"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "S": {
+      "item": "otemod:metal_bar"
+    }
+  },
+  "result": {
+    "item": "otemod:panzerglass_block",
+    "count": 8
+  }
+}

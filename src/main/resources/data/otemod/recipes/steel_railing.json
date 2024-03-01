@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "W W"
+  ],
+  "key": {
+    "W": {
+      "item": "otemod:metal_bar"
+    }
+  },
+  "result": {
+    "item": "otemod:steel_railing",
+    "count": 1
+  }
+}

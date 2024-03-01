@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BAB",
+    "ANA",
+    "BAB"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:brick"
+    },
+    "A": {
+      "tag": "otemod:brick_ingots"
+    },
+    "N": {
+      "item": "minecraft:bricks"
+    }
+  },
+  "result": {
+    "item": "otemod:clinker_brick_block",
+    "count": 8
+  }
+}

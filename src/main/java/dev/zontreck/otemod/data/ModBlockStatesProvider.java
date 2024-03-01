@@ -136,6 +136,13 @@ public class ModBlockStatesProvider extends BlockStateProvider {
                 new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/glass/panzerglass_block_texture3")
         };
 
+        ResourceLocation[] oldIndustrialWood = new ResourceLocation[]{
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/material/industrial_planks_texture0"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/material/industrial_planks_texture1"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/material/industrial_planks_texture2"),
+                new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/material/industrial_planks_texture3"),
+        };
+
         variantCubeBlock(ModBlocks.CLINKER_BRICK_BLOCK, clinkerBlock);
         customSlabBlock(ModBlocks.CLINKER_BRICK_SLAB, clinkerBlock);
         customStairBlock(ModBlocks.CLINKER_BRICK_STAIRS, clinkerBlock);
@@ -161,6 +168,43 @@ public class ModBlockStatesProvider extends BlockStateProvider {
 
         variantTransparentCubeBlock(ModBlocks.PANZER_GLASS_BLOCK, new ResourceLocation(OTEMod.MOD_ID, "engineersdecor/glass/panzerglass_block_texture_inventory"), panzerglass);
         customTransparentSlabBlock(ModBlocks.PANZER_GLASS_SLAB, panzerglass);
+
+        variantCubeBlock(ModBlocks.OLD_INDUSTRIAL_WOOD_PLANKS, oldIndustrialWood);
+        customSlabBlock(ModBlocks.OLD_INDUSTRIAL_WOOD_SLAB, oldIndustrialWood);
+        customStairBlock(ModBlocks.OLD_INDUSTRIAL_WOOD_STAIRS, oldIndustrialWood);
+        doorBlock(ModBlocks.OLD_INDUSTRIAL_WOOD_DOOR, new ResourceLocation(OTEMod.MOD_ID, "block/engineersdecor/door/old_industrial_door_texture_bottom"), new ResourceLocation(OTEMod.MOD_ID, "block/engineersdecor/door/old_industrial_door_texture_top"));
+
+        blockWithExistingModel(ModBlocks.STEEL_GRATING, "block/engineersdecor/furniture/steel_floor_grating", false);
+        blockWithExistingModel(ModBlocks.STEEL_GRATING_TOP, "block/engineersdecor/furniture/steel_floor_grating_top", false);
+        blockWithExistingModel(ModBlocks.STEEL_TABLE, "block/engineersdecor/furniture/steel_table", false);
+        blockWithExistingModel(ModBlocks.STEEL_CATWALK, "block/engineersdecor/furniture/steel_catwalk", false);
+        blockWithExistingModel(ModBlocks.STEEL_CATWALK_TOP, "block/engineersdecor/furniture/steel_catwalk_top", false);
+        blockWithExistingModel(ModBlocks.STEEL_RAILING, "block/engineersdecor/furniture/steel_railing", true);
+        blockWithExistingModel(ModBlocks.STEEL_CATWALK_STAIRS, "block/engineersdecor/furniture/steel_catwalk_stairs", true);
+        blockWithExistingModel(ModBlocks.STEEL_CATWALK_STAIRS_LR, "block/engineersdecor/furniture/steel_catwalk_stairs_lr", true);
+        blockWithExistingModel(ModBlocks.STEEL_CATWALK_STAIRS_RR, "block/engineersdecor/furniture/steel_catwalk_stairs_rr", true);
+        blockWithExistingModel(ModBlocks.STEEL_CATWALK_STAIRS_DR, "block/engineersdecor/furniture/steel_catwalk_stairs_dr", true);
+
+
+    }
+
+    private void blockWithExistingModel(RegistryObject<Block> blk, String model, boolean rotatable)
+    {
+        ResourceLocation modelLoc = new ResourceLocation(OTEMod.MOD_ID, model);
+        ModelFile mFile = models().withExistingParent(name(blk.get()), modelLoc);
+
+        if(!rotatable)
+            simpleBlock(blk.get(), mFile);
+        else horizontalBlock(blk.get(), mFile);
+
+        simpleBlockItem(blk.get(), mFile);
+    }
+
+    private void doorBlock(RegistryObject<Block> blk, ResourceLocation textureTop, ResourceLocation textureBottom)
+    {
+        doorBlockWithRenderType((DoorBlock) blk.get(), textureBottom, textureTop, new ResourceLocation("translucent"));
+
+        simpleBlockItem(blk.get(), models().doorBottomLeft(name(blk.get()), textureBottom, textureTop));
     }
 
     private void wallBlock(RegistryObject<Block> blk, ResourceLocation texture)

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "otemod:block/steel_catwalk_stairs_rr",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "otemod:block/steel_catwalk_stairs_rr"
+    },
+    "facing=south": {
+      "model": "otemod:block/steel_catwalk_stairs_rr",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "otemod:block/steel_catwalk_stairs_rr",
+      "y": 270
+    }
+  }
+}

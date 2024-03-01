@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BBB",
+    "BSB",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "tag": "otemod:brick_ingots"
+    },
+    "S": {
+      "item": "immersiveengineering:slag"
+    }
+  },
+  "result": {
+    "item": "otemod:slag_brick_block",
+    "count": 8
+  }
+}

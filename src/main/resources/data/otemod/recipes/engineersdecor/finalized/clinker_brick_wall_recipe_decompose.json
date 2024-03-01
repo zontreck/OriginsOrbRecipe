@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WW",
+    "WW"
+  ],
+  "key": {
+    "W": {
+      "item": "otemod:clinker_brick_wall"
+    }
+  },
+  "result": {
+    "item": "otemod:clinker_brick_block",
+    "count": 4
+  }
+}

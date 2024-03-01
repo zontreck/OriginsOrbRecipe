@@ -28,6 +28,17 @@
     "otemod:rebar_concrete_tile_stairs",
 
     "otemod:panzerglass_block",
-    "otemod:panzerglass_slab"
+    "otemod:panzerglass_slab",
+
+    "otemod:steel_catwalk",
+    "otemod:steel_catwalk_top",
+    "otemod:steel_floor_grating",
+    "otemod:steel_floor_grating_top",
+    "otemod:steel_catwalk_stairs",
+    "otemod:steel_railing",
+    "otemod:steel_catwalk_stairs_lr",
+    "otemod:steel_catwalk_stairs_rr",
+    "otemod:steel_catwalk_stairs_dr",
+    "otemod:steel_table"
   ]
 }

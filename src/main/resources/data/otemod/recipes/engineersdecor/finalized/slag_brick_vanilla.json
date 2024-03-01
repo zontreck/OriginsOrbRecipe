@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "BAB",
+    "ASA",
+    "BAB"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:brick"
+    },
+    "A": {
+      "tag": "otemod:brick_ingots"
+    },
+    "S": {
+      "item": "minecraft:nether_bricks"
+    }
+  },
+  "result": {
+    "item": "otemod:slag_brick_block",
+    "count": 8
+  }
+}

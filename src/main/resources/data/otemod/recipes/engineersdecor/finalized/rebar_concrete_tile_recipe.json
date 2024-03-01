@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CC",
+    "CC"
+  ],
+  "key": {
+    "C": {
+      "item": "otemod:rebar_concrete"
+    }
+  },
+  "result": {
+    "item": "otemod:rebar_concrete_tile",
+    "count": 4
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "C  ",
+    "CC ",
+    "CCC"
+  ],
+  "key": {
+    "C": {
+      "item": "otemod:old_industrial_wood_planks"
+    }
+  },
+  "result": {
+    "item": "otemod:old_industrial_wood_stairs",
+    "count": 6
+  }
+}

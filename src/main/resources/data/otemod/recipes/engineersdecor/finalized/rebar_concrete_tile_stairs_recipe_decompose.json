@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "key": {
+    "S": {
+      "item": "otemod:rebar_concrete_tile_stairs"
+    }
+  },
+  "result": {
+    "item": "otemod:rebar_concrete_tile",
+    "count": 4
+  }
+}

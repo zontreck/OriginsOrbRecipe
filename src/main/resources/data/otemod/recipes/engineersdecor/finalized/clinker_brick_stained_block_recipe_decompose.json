@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "otemod:clinker_brick_stained_block"
+    }
+  ],
+  "result": {
+    "item": "otemod:clinker_brick_block"
+  }
+}
