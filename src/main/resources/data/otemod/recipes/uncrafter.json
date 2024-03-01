@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "DCD",
+    "DDD"
+  ],
+  "key": {
+    "A": {
+      "tag": "forge:ingots/copper"
+    },
+    "C": {
+      "tag": "otemod:uncrafting_tables"
+    },
+    "D": {
+      "item": "otemod:compressed_obsidian_block"
+    }
+  },
+  "result": {
+    "item": "otemod:uncrafter",
+    "count": 1
+  }
+}
