@@ -3,6 +3,7 @@ package dev.zontreck.otemod.blocks.entity;
 import dev.zontreck.otemod.implementation.OutputItemStackHandler;
 import dev.zontreck.otemod.implementation.energy.OTEEnergy;
 import dev.zontreck.otemod.implementation.uncrafting.UncrafterMenu;
+import dev.zontreck.otemod.items.PartialItem;
 import dev.zontreck.otemod.networking.ModMessages;
 import dev.zontreck.otemod.networking.packets.EnergySyncS2CPacket;
 import net.minecraft.core.BlockPos;
@@ -16,8 +17,13 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -29,6 +35,10 @@ import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class UncrafterBlockEntity extends BlockEntity implements MenuProvider
 {
@@ -216,10 +226,40 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider
         return (entity.ENERGY_STORAGE.getEnergyStored() >= ENERGY_REQUIREMENT);
     }
 
+
+    private ItemStack[] getIngredients(Recipe<?> recipe) {
+        ItemStack[] stacks = new ItemStack[recipe.getIngredients().size()];
+
+        for (int i = 0; i < recipe.getIngredients().size(); i++) {
+            ItemStack[] matchingStacks = Arrays.stream(recipe.getIngredients().get(i).getItems()).toArray(ItemStack[]::new);
+
+            stacks[i] = matchingStacks.length > 0 ? matchingStacks[Math.floorMod(this.ingredientsInCycle, matchingStacks.length)] : ItemStack.EMPTY;
+        }
+
+
+        return stacks;
+    }
+
+    private int ingredientsInCycle=0;
+
+
+    private static CraftingRecipe[] getRecipesFor(CraftingContainer matrix, Level world) {
+        return world.getRecipeManager().getRecipesFor(RecipeType.CRAFTING, matrix, world).toArray(new CraftingRecipe[0]);
+    }
+
     private static void uncraftItem(UncrafterBlockEntity entity) {
         if(hasRecipe(entity))
         {
             ItemStack existing = entity.outputItems.getStackInSlot(0);
+            List<Item> INGREDIENTS = new ArrayList<>();
+            if(existing.getItem() instanceof PartialItem pi)
+            {
+                INGREDIENTS = PartialItem.getRemainingIngredients(existing);
+
+            } else {
+                // Reverse recipe
+
+            }
             existing.setCount(existing.getCount()+1);
             if(existing.is(Items.AIR))
             {
