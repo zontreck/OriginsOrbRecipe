@@ -1,11 +1,11 @@
 {
   "variants": {
-    "facing=north": {
-      "model": "otemod:block/uncrafter"
-    },
     "facing=east": {
       "model": "otemod:block/uncrafter",
       "y": 90
+    },
+    "facing=north": {
+      "model": "otemod:block/uncrafter"
     },
     "facing=south": {
       "model": "otemod:block/uncrafter",

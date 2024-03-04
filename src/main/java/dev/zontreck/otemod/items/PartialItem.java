@@ -12,15 +12,24 @@ import java.util.List;
 
 public class PartialItem extends Item
 {
-    int uncraftSteps = 0;
+    private static final String TAG_UNCRAFT_REMAIN = "remaining";
 
     public PartialItem() {
         super (new Properties().fireResistant());
     }
 
     @Override
-    public void appendHoverText(ItemStack p_41421_, @Nullable Level p_41422_, List<Component> tooltip, TooltipFlag p_41424_) {
+    public void appendHoverText(ItemStack stack, @Nullable Level p_41422_, List<Component> tooltip, TooltipFlag p_41424_) {
         tooltip.add(ChatHelpers.macro("!Yellow!This is a partially deconstructed item."));
-        tooltip.add(ChatHelpers.macro("!Dark_Red!Steps remaining to uncraft: [0]", "!Yellow!" + uncraftSteps));
+
+        if(stack.getTag()!= null)
+        {
+            if(stack.getTag().contains(TAG_UNCRAFT_REMAIN))
+            {
+                tooltip.add(ChatHelpers.macro("!Dark_Red!Number of uncraft steps remaining: [0]", "!Yellow!" + stack.getTag().getInt(TAG_UNCRAFT_REMAIN)));
+            }
+        } else {
+            tooltip.add(ChatHelpers.macro("!Dark_Red!This partial item appears to be invalid, and contains no item fragments."));
+        }
     }
 }

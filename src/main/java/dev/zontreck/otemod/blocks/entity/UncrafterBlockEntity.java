@@ -82,7 +82,7 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider
         }
     };
 
-    protected final ItemStackHandler outputItems = new ItemStackHandler((3*9)){
+    protected final ItemStackHandler outputItems = new ItemStackHandler(1){
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
@@ -107,7 +107,7 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Uncrafter");
+        return Component.literal("Uncrafting Factory");
     }
 
     @Nullable
