@@ -42,11 +42,11 @@ public class UncrafterMenu extends AbstractContainerMenu
         addPlayerHotbar(inv);
 
         this.entity.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.UP).ifPresent(handler->{
-            addSlot(new SlotItemHandler(handler, 0, 39,39));
+            addSlot(new SlotItemHandler(handler, 0, 40,40));
         });
 
         this.entity.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.DOWN).ifPresent(handler->{
-            addSlot(new SlotItemHandler(handler, 0, 151, 39));
+            addSlot(new SlotItemHandler(handler, 0, 152, 40));
         });
 
 
@@ -130,12 +130,12 @@ public class UncrafterMenu extends AbstractContainerMenu
 
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(level, entity.getBlockPos()), player, ModBlocks.COMPRESSION_CHAMBER.get());
+        return stillValid(ContainerLevelAccess.create(level, entity.getBlockPos()), player, ModBlocks.UNCRAFTER.get());
     }
 
-    private static final int PLAYER_INVENTORY_FIRST_SLOT_HEIGHT = 71;
-    private static final int PLAYER_INVENTORY_FIRST_SLOT_LEFT = 29;
-    private static final int PLAYER_HOTBAR_FIRST_SLOT = 138;
+    private static final int PLAYER_INVENTORY_FIRST_SLOT_HEIGHT = 80;
+    private static final int PLAYER_INVENTORY_FIRST_SLOT_LEFT = 22;
+    private static final int PLAYER_HOTBAR_FIRST_SLOT = 139;
 
     private void addPlayerInventory(Inventory inv)
     {
