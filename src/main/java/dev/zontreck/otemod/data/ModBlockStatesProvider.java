@@ -75,6 +75,7 @@ public class ModBlockStatesProvider extends BlockStateProvider {
         stairBlock(ModBlocks.DIRTY_GREEN_POOL_TILE_STAIRS, ModBlocks.DIRTY_GREEN_POOL_TILE);
         slabBlock(ModBlocks.DIRTY_GREEN_POOL_TILE_SLAB, ModBlocks.DIRTY_GREEN_POOL_TILE);
 
+        blockWithExistingModel(ModBlocks.UNCRAFTER, "block/custommodels/uncrafter", true);
 
     }
 
