@@ -1,8 +1,5 @@
 {
   "values": [
-    "otemod:ilusium_ore",
-    "otemod:ilusium_ingot",
-    "otemod:ilusium_rod",
-    "otemod:aurora_compound"
+    "#otemod:deprecated"
   ]
 }

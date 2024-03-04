@@ -2,6 +2,11 @@
   "values": [
     "otemod:ilusium_ore_block",
     "otemod:deepslate_ilusium_ore_block",
-    "otemod:ilusium_block"
+    "otemod:ilusium_block",
+
+    "otemod:ilusium_ore",
+    "otemod:ilusium_ingot",
+    "otemod:ilusium_rod",
+    "otemod:aurora_compound"
   ]
 }
