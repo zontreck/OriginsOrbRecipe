@@ -7,15 +7,18 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.implementation.MouseHelpers;
+import dev.zontreck.otemod.implementation.energy.IThresholdsEnergyContainer;
 import dev.zontreck.otemod.implementation.energy.screenrenderer.EnergyInfoArea;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
-public class ItemScrubberScreen extends AbstractContainerScreen<ItemScrubberMenu>
+public class ItemScrubberScreen extends AbstractContainerScreen<ItemScrubberMenu> implements IThresholdsEnergyContainer
 {
     private static final ResourceLocation TEXTURE = new ResourceLocation(OTEMod.MOD_ID, "textures/gui/item_scrubber_gui.png");
 
@@ -96,5 +99,14 @@ public class ItemScrubberScreen extends AbstractContainerScreen<ItemScrubberMenu
     {
         return MouseHelpers.isMouseOver(mouseX, mouseY, x+offsetX, y+offsetY, width, height);
     }
-    
+
+    @Override
+    public BlockPos getPosition() {
+        return menu.getPosition();
+    }
+
+    @Override
+    public BlockEntity getEntity() {
+        return menu.getEntity();
+    }
 }

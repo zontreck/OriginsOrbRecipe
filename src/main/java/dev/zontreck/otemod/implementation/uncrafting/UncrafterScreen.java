@@ -4,17 +4,20 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.implementation.MouseHelpers;
 import dev.zontreck.otemod.implementation.compressor.CompressionChamberMenu;
+import dev.zontreck.otemod.implementation.energy.IThresholdsEnergyContainer;
 import dev.zontreck.otemod.implementation.energy.screenrenderer.EnergyInfoArea;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 import java.util.Optional;
 
-public class UncrafterScreen extends AbstractContainerScreen<UncrafterMenu>
+public class UncrafterScreen extends AbstractContainerScreen<UncrafterMenu> implements IThresholdsEnergyContainer
 {
     private static final ResourceLocation TEXTURE = new ResourceLocation(OTEMod.MOD_ID, "textures/gui/uncrafter.png");
 
@@ -94,5 +97,15 @@ public class UncrafterScreen extends AbstractContainerScreen<UncrafterMenu>
     private boolean isMouseAbove(int mouseX, int mouseY, int x, int y, int offsetX, int offsetY, int width, int height)
     {
         return MouseHelpers.isMouseOver(mouseX, mouseY, x+offsetX, y+offsetY, width, height);
+    }
+
+    @Override
+    public BlockPos getPosition() {
+        return menu.getPosition();
+    }
+
+    @Override
+    public BlockEntity getEntity() {
+        return menu.getEntity();
     }
 }

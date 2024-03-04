@@ -241,6 +241,4 @@ public class EventHandler {
 
         ChatHelpers.broadcastTo(player, ChatHelpers.macro(Messages.OTE_PREFIX + " !Dark_Green!Your inventory has been saved for [0], and your [1] inventory has been restored", from.getName(), to.getName()), player.server);
     }
-
-
 }

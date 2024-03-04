@@ -38,5 +38,10 @@ public abstract class OTEEnergy extends EnergyStorage
     }
 
     public abstract void onChanged();
+
+    public int getEnergy()
+    {
+        return energy;
+    }
     
 }

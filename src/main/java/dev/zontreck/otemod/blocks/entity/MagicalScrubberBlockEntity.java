@@ -2,6 +2,7 @@ package dev.zontreck.otemod.blocks.entity;
 
 import dev.zontreck.libzontreck.util.ItemUtils;
 import dev.zontreck.otemod.implementation.OutputItemStackHandler;
+import dev.zontreck.otemod.implementation.energy.IThresholdsEnergy;
 import dev.zontreck.otemod.implementation.energy.OTEEnergy;
 import dev.zontreck.otemod.implementation.scrubber.MagicalScrubberMenu;
 import dev.zontreck.otemod.networking.ModMessages;
@@ -36,8 +37,16 @@ import javax.annotation.Nullable;
 import java.util.Iterator;
 import java.util.Map;
 
-public class MagicalScrubberBlockEntity extends BlockEntity implements MenuProvider
+public class MagicalScrubberBlockEntity extends BlockEntity implements MenuProvider, IThresholdsEnergy
 {
+
+
+    private boolean EnergyDirty=true;
+    private int TickCount=0;
+    @Override
+    public int getEnergy() {
+        return ENERGY_STORAGE.getEnergy();
+    }
 
     protected final ItemStackHandler itemsHandler = new ItemStackHandler(1){
         @Override
@@ -60,8 +69,7 @@ public class MagicalScrubberBlockEntity extends BlockEntity implements MenuProvi
         @Override
         public void onChanged() {
             setChanged();
-
-            ModMessages.sendToAll(new EnergySyncS2CPacket(energy, getBlockPos()));
+            EnergyDirty=true;
         }
         
     };
@@ -199,6 +207,16 @@ public class MagicalScrubberBlockEntity extends BlockEntity implements MenuProvi
     {
         if(lvl.isClientSide())return;
 
+
+        if(entity.EnergyDirty)
+        {
+            if(entity.TickCount >= (2 * 20))
+            {
+                ModMessages.sendToAll(new EnergySyncS2CPacket(entity.getEnergy(), pos));
+                entity.EnergyDirty=false;
+            } else entity.TickCount++;
+        }
+
         if(hasRecipe(entity))
         {
             if(!hasEnergy(entity))return; // Halt until sufficient energy has been received
@@ -326,6 +344,7 @@ public class MagicalScrubberBlockEntity extends BlockEntity implements MenuProvi
         return ENERGY_STORAGE;
     }
 
+    @Override
     public void setEnergy(int energy) {
         ENERGY_STORAGE.setEnergy(energy);
     }

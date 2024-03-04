@@ -1,7 +1,10 @@
 package dev.zontreck.otemod.blocks.entity;
 
+import dev.zontreck.libzontreck.util.ItemUtils;
 import dev.zontreck.otemod.implementation.OutputItemStackHandler;
+import dev.zontreck.otemod.implementation.energy.IThresholdsEnergy;
 import dev.zontreck.otemod.implementation.energy.OTEEnergy;
+import dev.zontreck.otemod.implementation.scrubber.MagicalScrubberMenu;
 import dev.zontreck.otemod.implementation.uncrafting.UncrafterMenu;
 import dev.zontreck.otemod.items.PartialItem;
 import dev.zontreck.otemod.networking.ModMessages;
@@ -18,12 +21,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.inventory.CraftingContainer;
+import net.minecraft.world.item.EnchantedBookItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -34,37 +40,72 @@ import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import javax.annotation.Nullable;
+import java.util.*;
 
-public class UncrafterBlockEntity extends BlockEntity implements MenuProvider
+public class UncrafterBlockEntity extends BlockEntity implements MenuProvider, IThresholdsEnergy
 {
-    public UncrafterBlockEntity(BlockPos position, BlockState state) {
-        super(ModEntities.UNCRAFTER.get(), position, state);
 
-        outputSlots = new OutputItemStackHandler(outputItems);
+    private boolean EnergyDirty=true;
+    private int TickCount=0;
+
+    @Override
+    public int getEnergy() {
+        return ENERGY_STORAGE.getEnergy();
+    }
+
+    protected final ItemStackHandler itemsHandler = new ItemStackHandler(1){
+        @Override
+        protected void onContentsChanged(int slot)
+        {
+            setChanged();
+        }
+    };
+    protected final ItemStackHandler outputItems = new ItemStackHandler(1){
+        @Override
+        protected void onContentsChanged(int slot)
+        {
+            setChanged();
+        }
+    };
+    private ItemStackHandler outputSlot;
+
+    private final OTEEnergy ENERGY_STORAGE = new OTEEnergy(ENERGY_REQ*3, ENERGY_REQ+512) {
+
+        @Override
+        public void onChanged() {
+            setChanged();
+            EnergyDirty=true;
+        }
+
+    };
+
+    private static final int ENERGY_REQ = 250;
+    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
+
+    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
+    private LazyOptional<IItemHandler> lazyOutputItems = LazyOptional.empty();
+
+    public UncrafterBlockEntity(BlockPos pos, BlockState state) {
+        super(ModEntities.UNCRAFTER.get(), pos, state);
+        outputSlot = new OutputItemStackHandler(outputItems);
+
         this.data = new ContainerData() {
+
             @Override
-            public int get(int i) {
-                switch (i)
-                {
-                    case 0: {
-                        return UncrafterBlockEntity.this.progress;
-                    }
-                    default: return 0;
-                }
+            public int get(int p_39284_) {
+                return switch(p_39284_){
+                    case 0 -> UncrafterBlockEntity.this.progress;
+                    default -> 0;
+                };
             }
 
             @Override
-            public void set(int i, int i1) {
-                switch (i)
+            public void set(int p_39285_, int p_39286_) {
+                switch(p_39285_)
                 {
-                    case 0: {
-                        UncrafterBlockEntity.this.progress = i1;
-                    }
+                    case 0 -> UncrafterBlockEntity.this.progress = p_39286_;
                 }
 
             }
@@ -73,55 +114,45 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider
             public int getCount() {
                 return 1;
             }
+
         };
     }
 
     protected final ContainerData data;
-    protected int progress = 0;
+    private int progress = 0;
 
-    private static final int ENERGY_REQUIREMENT = 250;
+    public static final int MAXIMUM_PROCESSING_TICKS = (3*20); // 3 seconds
 
-    public static int PROCESSING_TICKS = (3 * 20); // 3 seconds to uncraft
 
-    protected final ItemStackHandler itemHandler = new ItemStackHandler(1) {
-        @Override
-        protected void onContentsChanged(int slot) {
-            setChanged();
-        }
-    };
-
-    protected final ItemStackHandler outputItems = new ItemStackHandler(1){
-        @Override
-        protected void onContentsChanged(int slot) {
-            setChanged();
-        }
-    };
-
-    private ItemStackHandler outputSlots;
-    private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
-
-    private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
-    private LazyOptional<IItemHandler> lazyOutputItems = LazyOptional.empty();
-
-    private final OTEEnergy ENERGY_STORAGE = new OTEEnergy(ENERGY_REQUIREMENT * 10, ENERGY_REQUIREMENT*2) {
-        @Override
-        public void onChanged() {
-
-            setChanged();
-
-            ModMessages.sendToAll(new EnergySyncS2CPacket(energy, getBlockPos()));
-        }
-    };
+    @Override
+    @Nullable
+    public AbstractContainerMenu createMenu(int id, Inventory inv, Player player) {
+        return new UncrafterMenu(id, inv, this, this.data);
+    }
 
     @Override
     public Component getDisplayName() {
-        return Component.literal("Uncrafting Factory");
+        return Component.translatable("block.otemod.uncrafter");
     }
 
-    @Nullable
     @Override
-    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player) {
-        return new UncrafterMenu(i, inventory, this, data);
+    public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side)
+    {
+        if(cap == ForgeCapabilities.ENERGY)
+        {
+            return lazyEnergyHandler.cast();
+        }
+        if(side == Direction.DOWN && cap == ForgeCapabilities.ITEM_HANDLER)
+        {
+            // Return the output slot only
+            return lazyOutputItems.cast();
+        }
+        if(cap == ForgeCapabilities.ITEM_HANDLER)
+        {
+            return lazyItemHandler.cast();
+        }
+
+        return super.getCapability(cap,side);
     }
 
 
@@ -129,8 +160,8 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider
     public void onLoad()
     {
         super.onLoad();
-        lazyItemHandler = LazyOptional.of(()->itemHandler);
-        lazyOutputItems = LazyOptional.of(()->outputSlots);
+        lazyItemHandler = LazyOptional.of(()->itemsHandler);
+        lazyOutputItems = LazyOptional.of(()->outputSlot);
         lazyEnergyHandler = LazyOptional.of(()->ENERGY_STORAGE);
     }
 
@@ -147,7 +178,7 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider
     @Override
     protected void saveAdditional(CompoundTag nbt)
     {
-        nbt.put("inventory", itemHandler.serializeNBT());
+        nbt.put("inventory", itemsHandler.serializeNBT());
         nbt.put("output", outputItems.serializeNBT());
         nbt.putInt("prog", progress);
         nbt.putInt("energy", ENERGY_STORAGE.getEnergyStored());
@@ -159,32 +190,17 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider
     public void load(CompoundTag nbt){
         super.load(nbt);
 
-        itemHandler.deserializeNBT(nbt.getCompound("inventory"));
+        itemsHandler.deserializeNBT(nbt.getCompound("inventory"));
         outputItems.deserializeNBT(nbt.getCompound("output"));
         progress = nbt.getInt("prog");
         ENERGY_STORAGE.setEnergy(nbt.getInt("energy"));
     }
 
-    @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if(cap == ForgeCapabilities.ENERGY) // all sides accept power
-        {
-            return lazyEnergyHandler.cast();
-        }
-        if(cap == ForgeCapabilities.FLUID_HANDLER)
-        {
-            //return lazyFluidHandler.cast(); // TODO: Implement a fluid storage, and add a spot for it on the GUI
-        }
-        if(cap == ForgeCapabilities.ITEM_HANDLER && side == Direction.DOWN)
-        {
-            return lazyOutputItems.cast();
-        }else return lazyItemHandler.cast(); // all sides except bottom of block
-    }
     public void doDrop()
     {
-        SimpleContainer cont = new SimpleContainer(itemHandler.getSlots());
-        for (int i = 0; i < itemHandler.getSlots(); i++) {
-            cont.setItem(i, itemHandler.getStackInSlot(i));
+        SimpleContainer cont = new SimpleContainer(itemsHandler.getSlots());
+        for (int i = 0; i < itemsHandler.getSlots(); i++) {
+            cont.setItem(i, itemsHandler.getStackInSlot(i));
         }
         cont = new SimpleContainer(outputItems.getSlots());
         for (int i = 0; i < outputItems.getSlots(); i++) {
@@ -198,6 +214,14 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider
     {
         if(lvl.isClientSide())return;
 
+        if(entity.EnergyDirty)
+        {
+            if(entity.TickCount >= (2 * 20))
+            {
+                ModMessages.sendToAll(new EnergySyncS2CPacket(entity.getEnergy(), pos));
+                entity.EnergyDirty=false;
+            } else entity.TickCount++;
+        }
 
         if(hasRecipe(entity))
         {
@@ -206,9 +230,9 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider
             setChanged(lvl, pos, state);
             drain(entity);
 
-            if(entity.progress >= UncrafterBlockEntity.PROCESSING_TICKS)
+            if(entity.progress >= UncrafterBlockEntity.MAXIMUM_PROCESSING_TICKS)
             {
-                uncraftItem(entity);
+                craftItem(entity);
             }
         }else {
             if(entity.progress>0){
@@ -219,83 +243,25 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider
     }
 
     private static void drain(UncrafterBlockEntity entity) {
-        entity.ENERGY_STORAGE.extractEnergy(ENERGY_REQUIREMENT, false);
+        entity.ENERGY_STORAGE.extractEnergy(ENERGY_REQ, false);
     }
 
     private static boolean hasEnergy(UncrafterBlockEntity entity) {
-        return (entity.ENERGY_STORAGE.getEnergyStored() >= ENERGY_REQUIREMENT);
+        return (entity.ENERGY_STORAGE.getEnergyStored() >= ENERGY_REQ);
     }
 
+    private static void craftItem(UncrafterBlockEntity entity) {
 
-    private ItemStack[] getIngredients(Recipe<?> recipe) {
-        ItemStack[] stacks = new ItemStack[recipe.getIngredients().size()];
-
-        for (int i = 0; i < recipe.getIngredients().size(); i++) {
-            ItemStack[] matchingStacks = Arrays.stream(recipe.getIngredients().get(i).getItems()).toArray(ItemStack[]::new);
-
-            stacks[i] = matchingStacks.length > 0 ? matchingStacks[Math.floorMod(this.ingredientsInCycle, matchingStacks.length)] : ItemStack.EMPTY;
-        }
-
-
-        return stacks;
-    }
-
-    private int ingredientsInCycle=0;
-
-
-    private static CraftingRecipe[] getRecipesFor(CraftingContainer matrix, Level world) {
-        return world.getRecipeManager().getRecipesFor(RecipeType.CRAFTING, matrix, world).toArray(new CraftingRecipe[0]);
-    }
-
-    private static void uncraftItem(UncrafterBlockEntity entity) {
         if(hasRecipe(entity))
         {
-            ItemStack existing = entity.outputItems.getStackInSlot(0);
-            List<Item> INGREDIENTS = new ArrayList<>();
-            if(existing.getItem() instanceof PartialItem pi)
-            {
-                INGREDIENTS = PartialItem.getRemainingIngredients(existing);
-
-            } else {
-                // Reverse recipe
-
-            }
-            existing.setCount(existing.getCount()+1);
-            if(existing.is(Items.AIR))
-            {
-                existing = makeOutputItems(entity.itemHandler.getStackInSlot(0));
-            }
-            entity.itemHandler.extractItem(0, 1, false);
-            entity.outputItems.setStackInSlot(0, existing);
-
-            entity.resetProgress();
         }
-    }
-
-    protected static ItemStack makeOutputItems(ItemStack original)
-    {
-        ItemStack newItem = new ItemStack(original.getItem(),1);
-        return newItem;
-    }
-
-    private void resetProgress() {
-        progress=0;
-
-    }
-
-    public IEnergyStorage getEnergyStorage() {
-        return ENERGY_STORAGE;
-    }
-
-    public void setEnergy(int energy) {
-        ENERGY_STORAGE.setEnergy(energy);
     }
 
     private static boolean hasRecipe(UncrafterBlockEntity entity) {
-        SimpleContainer inventory = new SimpleContainer(entity.itemHandler.getSlots());
-        for(int i=0;i<entity.itemHandler.getSlots();i++)
+        SimpleContainer inventory = new SimpleContainer(entity.itemsHandler.getSlots());
+        for(int i=0;i<entity.itemsHandler.getSlots();i++)
         {
-            inventory.setItem(i, entity.itemHandler.getStackInSlot(i));
+            inventory.setItem(i, entity.itemsHandler.getStackInSlot(i));
         }
         SimpleContainer output = new SimpleContainer(entity.outputItems.getSlots());
         for(int i=0;i<entity.outputItems.getSlots();i++)
@@ -304,12 +270,12 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider
         }
 
 
-        boolean hasAnItem = !entity.itemHandler.getStackInSlot(0).isEmpty();
+        boolean hasAnItem = !entity.itemsHandler.getStackInSlot(0).isEmpty();
 
         ItemStack result = null;
         if(hasAnItem)
         {
-            result = makeOutputItems(entity.itemHandler.getStackInSlot(0));
+            result = makeOutputItem(entity.itemsHandler.getStackInSlot(0));
 
         }
         return hasAnItem && canInsertIntoOutput(output, result);
@@ -323,5 +289,25 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider
 
         if(outputEmpty)return true;
         return (stackCompat && sameType);
+    }
+
+    private void resetProgress() {
+        progress=0;
+
+    }
+
+    protected static ItemStack makeOutputItem(ItemStack original)
+    {
+        ItemStack newItem = new ItemStack(original.getItem(),1);
+        return newItem;
+    }
+
+    public IEnergyStorage getEnergyStorage() {
+        return ENERGY_STORAGE;
+    }
+
+    @Override
+    public void setEnergy(int energy) {
+        ENERGY_STORAGE.setEnergy(energy);
     }
 }

@@ -2,7 +2,9 @@ package dev.zontreck.otemod.implementation.scrubber;
 
 import dev.zontreck.otemod.blocks.ModBlocks;
 import dev.zontreck.otemod.blocks.entity.ItemScrubberBlockEntity;
+import dev.zontreck.otemod.implementation.energy.IThresholdsEnergyContainer;
 import dev.zontreck.otemod.implementation.inits.ModMenuTypes;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -14,7 +16,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class ItemScrubberMenu extends AbstractContainerMenu
+public class ItemScrubberMenu extends AbstractContainerMenu implements IThresholdsEnergyContainer
 {
     public final ItemScrubberBlockEntity entity;
     private final Level level;
@@ -146,5 +148,14 @@ public class ItemScrubberMenu extends AbstractContainerMenu
             this.addSlot(new Slot(inv, index, PLAYER_INVENTORY_FIRST_SLOT_LEFT+index*18, PLAYER_HOTBAR_FIRST_SLOT));
         }
     }
-    
+
+    @Override
+    public BlockPos getPosition() {
+        return entity.getBlockPos();
+    }
+
+    @Override
+    public BlockEntity getEntity() {
+        return entity;
+    }
 }

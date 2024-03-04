@@ -3,7 +3,9 @@ package dev.zontreck.otemod.implementation.uncrafting;
 import dev.zontreck.otemod.blocks.ModBlocks;
 import dev.zontreck.otemod.blocks.entity.CompressionChamberBlockEntity;
 import dev.zontreck.otemod.blocks.entity.UncrafterBlockEntity;
+import dev.zontreck.otemod.implementation.energy.IThresholdsEnergyContainer;
 import dev.zontreck.otemod.implementation.inits.ModMenuTypes;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -15,7 +17,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class UncrafterMenu extends AbstractContainerMenu
+public class UncrafterMenu extends AbstractContainerMenu implements IThresholdsEnergyContainer
 {
 
     public final UncrafterBlockEntity entity;
@@ -62,7 +64,7 @@ public class UncrafterMenu extends AbstractContainerMenu
     {
         if(!isCrafting())return 0;
         int progress = this.data.get(0);
-        int max = UncrafterBlockEntity.PROCESSING_TICKS;
+        int max = UncrafterBlockEntity.MAXIMUM_PROCESSING_TICKS;
 
         int progressArrow = 69;
 
@@ -151,5 +153,15 @@ public class UncrafterMenu extends AbstractContainerMenu
         for (int index = 0; index < 9; index++) {
             this.addSlot(new Slot(inv, index, PLAYER_INVENTORY_FIRST_SLOT_LEFT+index*18, PLAYER_HOTBAR_FIRST_SLOT));
         }
+    }
+
+    @Override
+    public BlockPos getPosition() {
+        return entity.getBlockPos();
+    }
+
+    @Override
+    public BlockEntity getEntity() {
+        return entity;
     }
 }

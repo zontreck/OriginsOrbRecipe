@@ -1,6 +1,7 @@
 package dev.zontreck.otemod.networking;
 
 import dev.zontreck.otemod.OTEMod;
+import dev.zontreck.otemod.networking.packets.EnergyRequestC2SPacket;
 import dev.zontreck.otemod.networking.packets.EnergySyncS2CPacket;
 import dev.zontreck.otemod.networking.packets.OpenVaultC2SPacket;
 import net.minecraft.resources.ResourceLocation;
@@ -40,6 +41,12 @@ public class ModMessages {
             .encoder(EnergySyncS2CPacket::toBytes)
             .consumerMainThread(EnergySyncS2CPacket::handle)
             .add();
+
+        net.messageBuilder(EnergyRequestC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(EnergyRequestC2SPacket::new)
+                .encoder(EnergyRequestC2SPacket::toBytes)
+                .consumerMainThread(EnergyRequestC2SPacket::handle)
+                .add();
     }
 
     public static <MSG> void sendToServer(MSG message){

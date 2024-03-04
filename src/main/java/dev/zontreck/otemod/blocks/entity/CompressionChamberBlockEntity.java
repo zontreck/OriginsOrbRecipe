@@ -3,6 +3,7 @@ package dev.zontreck.otemod.blocks.entity;
 import dev.zontreck.libzontreck.util.ChatHelpers;
 import dev.zontreck.otemod.implementation.OutputItemStackHandler;
 import dev.zontreck.otemod.implementation.compressor.CompressionChamberMenu;
+import dev.zontreck.otemod.implementation.energy.IThresholdsEnergy;
 import dev.zontreck.otemod.implementation.energy.OTEEnergy;
 import dev.zontreck.otemod.networking.ModMessages;
 import dev.zontreck.otemod.networking.packets.EnergySyncS2CPacket;
@@ -36,8 +37,11 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class CompressionChamberBlockEntity extends BlockEntity implements MenuProvider
+public class CompressionChamberBlockEntity extends BlockEntity implements MenuProvider, IThresholdsEnergy
 {
+
+    private boolean EnergyDirty=true;
+    private int TickCount=0;
 
     public CompressionChamberBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModEntities.COMPRESSION_CHAMBER.get(), pPos, pBlockState);
@@ -93,8 +97,7 @@ public class CompressionChamberBlockEntity extends BlockEntity implements MenuPr
         @Override
         public void onChanged() {
             setChanged();
-
-            ModMessages.sendToAll(new EnergySyncS2CPacket(energy, getBlockPos()));
+            EnergyDirty=true;
 
         }
     };
@@ -201,6 +204,17 @@ public class CompressionChamberBlockEntity extends BlockEntity implements MenuPr
         if(lvl.isClientSide())return;
 
 
+
+        if(entity.EnergyDirty)
+        {
+            if(entity.TickCount >= (2 * 20))
+            {
+                ModMessages.sendToAll(new EnergySyncS2CPacket(entity.getEnergy(), pos));
+                entity.EnergyDirty=false;
+            } else entity.TickCount++;
+        }
+
+
         if(hasRecipe(entity))
         {
             if(!hasEnergy(entity))return; // Halt until sufficient energy has been received
@@ -305,9 +319,14 @@ public class CompressionChamberBlockEntity extends BlockEntity implements MenuPr
         return ENERGY_STORAGE;
     }
 
+    @Override
     public void setEnergy(int energy) {
         ENERGY_STORAGE.setEnergy(energy);
     }
 
 
+    @Override
+    public int getEnergy() {
+        return ENERGY_STORAGE.getEnergy();
+    }
 }

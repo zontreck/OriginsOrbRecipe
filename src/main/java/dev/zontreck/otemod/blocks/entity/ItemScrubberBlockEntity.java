@@ -1,6 +1,7 @@
 package dev.zontreck.otemod.blocks.entity;
 
 import dev.zontreck.otemod.implementation.OutputItemStackHandler;
+import dev.zontreck.otemod.implementation.energy.IThresholdsEnergy;
 import dev.zontreck.otemod.implementation.energy.OTEEnergy;
 import dev.zontreck.otemod.implementation.scrubber.ItemScrubberMenu;
 import dev.zontreck.otemod.networking.ModMessages;
@@ -30,8 +31,17 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 
-public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
+public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider, IThresholdsEnergy
 {
+
+    private boolean EnergyDirty=true;
+    private int TickCount=0;
+
+
+    @Override
+    public int getEnergy() {
+        return ENERGY_STORAGE.getEnergy();
+    }
 
     protected final ItemStackHandler itemsHandler = new ItemStackHandler(1){
         @Override
@@ -54,13 +64,12 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
         @Override
         public void onChanged() {
             setChanged();
-
-            ModMessages.sendToAll(new EnergySyncS2CPacket(energy, getBlockPos()));
+            EnergyDirty=true;
         }
         
     };
 
-    private static final int ENERGY_REQ = 1500;
+    private static final int ENERGY_REQ = 512;
     private LazyOptional<IEnergyStorage> lazyEnergyHandler = LazyOptional.empty();
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
@@ -194,6 +203,16 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
         if(lvl.isClientSide())return;
 
 
+
+        if(entity.EnergyDirty)
+        {
+            if(entity.TickCount >= (2 * 20))
+            {
+                ModMessages.sendToAll(new EnergySyncS2CPacket(entity.getEnergy(), pos));
+                entity.EnergyDirty=false;
+            } else entity.TickCount++;
+        }
+
         if(hasRecipe(entity))
         {
             if(!hasEnergy(entity))return; // Halt until sufficient energy has been received
@@ -286,6 +305,7 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
         return ENERGY_STORAGE;
     }
 
+    @Override
     public void setEnergy(int energy) {
         ENERGY_STORAGE.setEnergy(energy);
     }

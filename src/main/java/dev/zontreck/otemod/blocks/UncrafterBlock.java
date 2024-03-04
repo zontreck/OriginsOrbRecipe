@@ -1,11 +1,14 @@
 package dev.zontreck.otemod.blocks;
 
+import dev.zontreck.otemod.blocks.entity.CompressionChamberBlockEntity;
 import dev.zontreck.otemod.blocks.entity.ModEntities;
 import dev.zontreck.otemod.blocks.entity.UncrafterBlockEntity;
 import dev.zontreck.otemod.networking.ModMessages;
 import dev.zontreck.otemod.networking.packets.EnergySyncS2CPacket;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -26,8 +29,15 @@ import org.jetbrains.annotations.Nullable;
 
 public class UncrafterBlock extends HorizontalDirectionalBlock implements EntityBlock
 {
-    public UncrafterBlock(Properties p_49795_) {
-        super(p_49795_);
+
+    public UncrafterBlock(Properties pProperties) {
+        super(pProperties);
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+        super.createBlockStateDefinition(pBuilder);
+        pBuilder.add(FACING);
     }
 
     @Nullable
@@ -37,13 +47,7 @@ public class UncrafterBlock extends HorizontalDirectionalBlock implements Entity
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_49915_) {
-        super.createBlockStateDefinition(p_49915_);
-        p_49915_.add(FACING);
-    }
-
-    @Override
-    public RenderShape getRenderShape(BlockState p_60550_) {
+    public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
     }
 

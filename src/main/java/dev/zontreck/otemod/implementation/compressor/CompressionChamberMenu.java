@@ -4,6 +4,7 @@ import dev.zontreck.otemod.blocks.ModBlocks;
 import dev.zontreck.otemod.blocks.entity.CompressionChamberBlockEntity;
 import dev.zontreck.otemod.blocks.entity.ItemScrubberBlockEntity;
 import dev.zontreck.otemod.blocks.entity.ModEntities;
+import dev.zontreck.otemod.implementation.energy.IThresholdsEnergyContainer;
 import dev.zontreck.otemod.implementation.inits.ModMenuTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -17,7 +18,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class CompressionChamberMenu extends AbstractContainerMenu
+public class CompressionChamberMenu extends AbstractContainerMenu implements IThresholdsEnergyContainer
 {
     public final CompressionChamberBlockEntity entity;
     public final Level level;
@@ -154,5 +155,15 @@ public class CompressionChamberMenu extends AbstractContainerMenu
         for (int index = 0; index < 9; index++) {
             this.addSlot(new Slot(inv, index, PLAYER_INVENTORY_FIRST_SLOT_LEFT+index*18, PLAYER_HOTBAR_FIRST_SLOT));
         }
+    }
+
+    @Override
+    public BlockPos getPosition() {
+        return entity.getBlockPos();
+    }
+
+    @Override
+    public BlockEntity getEntity() {
+        return entity;
     }
 }

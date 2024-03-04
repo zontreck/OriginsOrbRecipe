@@ -6,6 +6,7 @@ import dev.zontreck.otemod.blocks.entity.CompressionChamberBlockEntity;
 import dev.zontreck.otemod.blocks.entity.ItemScrubberBlockEntity;
 import dev.zontreck.otemod.blocks.entity.MagicalScrubberBlockEntity;
 import dev.zontreck.otemod.blocks.entity.UncrafterBlockEntity;
+import dev.zontreck.otemod.implementation.energy.IThresholdsEnergy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -40,16 +41,7 @@ public class EnergySyncS2CPacket {
         context.enqueueWork(()->
         {
             // WE ARE NOW ON THE CLIENT
-            if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof ItemScrubberBlockEntity entity)
-            {
-                entity.setEnergy(energy);
-            } else if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof MagicalScrubberBlockEntity entity)
-            {
-                entity.setEnergy(energy);
-            } else if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof CompressionChamberBlockEntity entity)
-            {
-                entity.setEnergy(energy);
-            } else if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof UncrafterBlockEntity entity)
+            if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof IThresholdsEnergy entity)
             {
                 entity.setEnergy(energy);
             }

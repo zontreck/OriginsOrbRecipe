@@ -18,8 +18,6 @@ public class ModEnchantments {
 
     public static final RegistryObject<Enchantment> FLIGHT_ENCHANTMENT = REGISTERS.register("player_flight", ()->new FlightEnchantment(EquipmentSlot.FEET));
 
-    public static final RegistryObject<Enchantment> BORROWED_PROTECTION = REGISTERS.register("borrowed_protection", ()->new BorrowedProtectionEnchantment(Enchantment.Rarity.UNCOMMON, EnchantmentCategory.ARMOR, ARMOR_SLOTS));
-
 
     public static final RegistryObject<Enchantment> CONSUMPTION_MENDING = REGISTERS.register("consumption_mending", ()->new ConsumptionMending(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.FEET, EquipmentSlot.LEGS, EquipmentSlot.MAINHAND, EquipmentSlot.OFFHAND));
 
