@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import dev.zontreck.otemod.blocks.entity.CompressionChamberBlockEntity;
 import dev.zontreck.otemod.blocks.entity.ItemScrubberBlockEntity;
 import dev.zontreck.otemod.blocks.entity.MagicalScrubberBlockEntity;
+import dev.zontreck.otemod.blocks.entity.UncrafterBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
@@ -46,6 +47,9 @@ public class EnergySyncS2CPacket {
             {
                 entity.setEnergy(energy);
             } else if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof CompressionChamberBlockEntity entity)
+            {
+                entity.setEnergy(energy);
+            } else if(Minecraft.getInstance().level.getBlockEntity(pos) instanceof UncrafterBlockEntity entity)
             {
                 entity.setEnergy(energy);
             }

@@ -27,7 +27,7 @@ public class UncrafterScreen extends AbstractContainerScreen<UncrafterMenu>
         this.leftPos=0;
 
         this.imageWidth=198;
-        this.imageHeight=204;
+        this.imageHeight=167;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class UncrafterScreen extends AbstractContainerScreen<UncrafterMenu>
         int x = (width - imageWidth )/2;
         int y = (height - imageHeight)/2;
 
-        EIA = new EnergyInfoArea(x+182, y+126, menu.entity.getEnergyStorage(), 5, 63);
+        EIA = new EnergyInfoArea(x+186, y+143, menu.entity.getEnergyStorage(), 5, 63);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class UncrafterScreen extends AbstractContainerScreen<UncrafterMenu>
     }
 
     private void renderEnergy(GuiGraphics stack, int mouseX, int mouseY, int x, int y) {
-        if(isMouseAbove(mouseX, mouseY, x, y, 182, 126, 5, 63)){
+        if(isMouseAbove(mouseX, mouseY, x, y, leftPos + 182, topPos + 126, 5, 63)){
             stack.renderTooltip(font, EIA.getTooltips(), Optional.empty(), mouseX-x, mouseY-y);
         }
     }
@@ -79,7 +79,7 @@ public class UncrafterScreen extends AbstractContainerScreen<UncrafterMenu>
     {
         if(menu.isCrafting())
         {
-            stack.blit(TEXTURE, leftPos+116, topPos+44, 179, 11, menu.getScaledProgress(),7);
+            stack.blit(TEXTURE, leftPos+68, topPos+52, 2, 210, menu.getScaledProgress(),9);
         }
     }
 

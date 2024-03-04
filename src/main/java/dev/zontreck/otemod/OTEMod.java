@@ -16,6 +16,7 @@ import dev.zontreck.otemod.enchantments.NightVisionEnchantment;
 import dev.zontreck.otemod.events.EventHandler;
 import dev.zontreck.otemod.implementation.*;
 import dev.zontreck.otemod.implementation.compressor.CompressionChamberScreen;
+import dev.zontreck.otemod.implementation.uncrafting.UncrafterScreen;
 import dev.zontreck.otemod.implementation.vault.*;
 import dev.zontreck.otemod.integrations.KeyBindings;
 import dev.zontreck.otemod.items.DeprecatedModItems;
@@ -290,6 +291,7 @@ public class OTEMod
             MenuScreens.register(ModMenuTypes.SCRUBBER.get(), ItemScrubberScreen::new);
             MenuScreens.register(ModMenuTypes.MAGIC_SCRUBBER.get(), MagicalScrubberScreen::new);
             MenuScreens.register(ModMenuTypes.COMPRESSION_CHAMBER.get(), CompressionChamberScreen::new);
+            MenuScreens.register(ModMenuTypes.UNCRAFTER.get(), UncrafterScreen::new);
 
             //ItemBlockRenderTypes.setRenderLayer(ModBlocks.AURORA_DOOR.get(), RenderType.translucent());
 

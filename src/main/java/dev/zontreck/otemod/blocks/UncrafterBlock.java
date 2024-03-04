@@ -1,6 +1,5 @@
 package dev.zontreck.otemod.blocks;
 
-import dev.zontreck.otemod.blocks.entity.CompressionChamberBlockEntity;
 import dev.zontreck.otemod.blocks.entity.ModEntities;
 import dev.zontreck.otemod.blocks.entity.UncrafterBlockEntity;
 import dev.zontreck.otemod.networking.ModMessages;

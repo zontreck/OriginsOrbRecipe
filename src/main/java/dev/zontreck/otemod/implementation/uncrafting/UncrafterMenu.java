@@ -42,18 +42,11 @@ public class UncrafterMenu extends AbstractContainerMenu
         addPlayerHotbar(inv);
 
         this.entity.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.UP).ifPresent(handler->{
-            addSlot(new SlotItemHandler(handler, 0, 87,39));
+            addSlot(new SlotItemHandler(handler, 0, 39,39));
         });
 
         this.entity.getCapability(ForgeCapabilities.ITEM_HANDLER, Direction.DOWN).ifPresent(handler->{
-            for(int Y = 0; Y < 2; Y ++)
-            {
-                for(int X = 0; X < 9; X++)
-                {
-                    addSlot(new SlotItemHandler(handler, X + Y * 9 + 9, UNCRAFTER_STORAGE_LEFT * X * 18, UNCRAFTER_STORAGE_HEIGHT*Y*18));
-                }
-
-            }
+            addSlot(new SlotItemHandler(handler, 0, 151, 39));
         });
 
 
@@ -82,9 +75,6 @@ public class UncrafterMenu extends AbstractContainerMenu
 
         return 0;
     }
-
-    private static final int UNCRAFTER_STORAGE_LEFT = 15;
-    private  static final int UNCRAFTER_STORAGE_HEIGHT = 63;
 
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
@@ -143,9 +133,9 @@ public class UncrafterMenu extends AbstractContainerMenu
         return stillValid(ContainerLevelAccess.create(level, entity.getBlockPos()), player, ModBlocks.COMPRESSION_CHAMBER.get());
     }
 
-    private static final int PLAYER_INVENTORY_FIRST_SLOT_HEIGHT = 107;
-    private static final int PLAYER_INVENTORY_FIRST_SLOT_LEFT = 15;
-    private static final int PLAYER_HOTBAR_FIRST_SLOT = 164;
+    private static final int PLAYER_INVENTORY_FIRST_SLOT_HEIGHT = 71;
+    private static final int PLAYER_INVENTORY_FIRST_SLOT_LEFT = 29;
+    private static final int PLAYER_HOTBAR_FIRST_SLOT = 138;
 
     private void addPlayerInventory(Inventory inv)
     {
