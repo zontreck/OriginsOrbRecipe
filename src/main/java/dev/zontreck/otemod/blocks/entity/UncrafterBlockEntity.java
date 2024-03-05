@@ -254,6 +254,8 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider, I
 
         if(hasRecipe(entity))
         {
+            entity.outputItems.setStackInSlot(0, entity.itemsHandler.extractItem(0, 1, false));
+            entity.resetProgress();
         }
     }
 

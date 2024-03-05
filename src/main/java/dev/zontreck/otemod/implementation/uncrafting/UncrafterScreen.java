@@ -82,7 +82,7 @@ public class UncrafterScreen extends AbstractContainerScreen<UncrafterMenu> impl
     {
         if(menu.isCrafting())
         {
-            stack.blit(TEXTURE, leftPos+68, topPos+52, 2, 210, menu.getScaledProgress(),9);
+            stack.blit(TEXTURE, leftPos+69, topPos+45, 2, 210, menu.getScaledProgress(),7);
         }
     }
 
