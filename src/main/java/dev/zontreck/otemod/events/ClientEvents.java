@@ -60,7 +60,7 @@ public class ClientEvents {
                     lvl = entity.getLevel();
                     ResourceLocation location = lvl.dimension().location();
 
-                    ModMessages.sendToServer(new EnergyRequestC2SPacket(new WorldPosition(new Vector3(pos.getX(), pos.getY(), pos.getZ()), location.getNamespace() + ":" + location.getPath()), Minecraft.getInstance().player));
+                    ModMessages.sendToServer(new EnergyRequestC2SPacket(pos, lvl, Minecraft.getInstance().player));
                 }
             }
         }
