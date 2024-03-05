@@ -12,7 +12,7 @@ public class ModRecipes {
 
     public static final RegistryObject<RecipeSerializer<CompressionChamberRecipe>> COMPRESSING_SERIALIZER = SERIALIZERS.register("compressing", ()->CompressionChamberRecipe.Serializer.INSTANCE);
 
-    public static final RegistryObject<RecipeSerializer<UncraftingRecipe>> UNCRAFTING_SERIALIZER = SERIALIZERS.register("uncrafting", UncraftingRecipe.Serializer::new);
+    //public static final RegistryObject<RecipeSerializer<UncraftingRecipe>> UNCRAFTING_SERIALIZER = SERIALIZERS.register("uncrafting", UncraftingRecipe.Serializer::new);
 
     public static void register(IEventBus bus)
     {

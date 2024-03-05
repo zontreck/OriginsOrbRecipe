@@ -23,7 +23,9 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 
-
+public class UncraftingRecipe {
+}
+/*
 public record UncraftingRecipe(ResourceLocation recipeID, int width, int height, Ingredient input, int count, NonNullList<Ingredient> resultItems) implements CraftingRecipe, IShapedRecipe<CraftingContainer> {
 
     @Override //This method is never used, but it has to be implemented
@@ -95,6 +97,7 @@ public record UncraftingRecipe(ResourceLocation recipeID, int width, int height,
          * "key" and "pattern", which work just like vanilla except this is output and not input, since we're uncrafting.
          * Width and height get assigned automatically.
          */
+/*
         @Override
         public UncraftingRecipe fromJson(ResourceLocation id, JsonObject json) {
             JsonObject input = GsonHelper.getAsJsonObject(json, "input");
@@ -235,4 +238,4 @@ public record UncraftingRecipe(ResourceLocation recipeID, int width, int height,
         public static final UncraftingRecipe.Type INSTANCE = new UncraftingRecipe.Type();
         public static final String ID = "uncrafting";
     }
-}
+}*/
