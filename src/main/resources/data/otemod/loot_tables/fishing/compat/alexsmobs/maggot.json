@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:fishing",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "alexsmobs:maggot"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:weather_check",
+          "raining": true,
+          "thundering": true
+        }
+      ]
+    }
+  ],
+  "random_sequence": "otemod:loot_table/fishing/compat/alexsmobs/maggot"
+}
