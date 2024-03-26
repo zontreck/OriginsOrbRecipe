@@ -115,10 +115,11 @@ public class EventHandler {
     @SubscribeEvent
     public void onPlayerFallOutOfWorld(LivingHurtEvent ev)
     {
-        if(ev.getEntity() instanceof Player)
+        if(ev.getEntity() instanceof Player player)
         {
+            ResourceLocation loc = player.level().dimension().location();
 
-            if(ev.getSource().is(DamageTypes.FELL_OUT_OF_WORLD))
+            if(ev.getSource().is(DamageTypes.FELL_OUT_OF_WORLD) && (loc.getNamespace().equals(OTEMod.MOD_ID) || loc.getNamespace().equals("minecraft")))
             {
                 // Teleport the player to Thresholds
                 WorldPosition pos = new WorldPosition(new Vector3(), ModDimensions.THRESHOLD_DIM());
