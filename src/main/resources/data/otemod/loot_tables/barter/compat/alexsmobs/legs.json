@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:archaeology",
+  "type": "minecraft:barter",
   "pools": [
     {
       "rolls": 1,
@@ -12,5 +12,5 @@
       ]
     }
   ],
-  "random_sequence": "otemod:archaeology/compat/alexsmobs/legs"
+  "random_sequence": "otemod:barter/compat/alexsmobs/legs"
 }

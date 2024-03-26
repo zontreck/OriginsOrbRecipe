@@ -12,8 +12,7 @@
       "conditions": [
         {
           "condition": "minecraft:weather_check",
-          "raining": true,
-          "thundering": true
+          "raining": true
         }
       ]
     }
