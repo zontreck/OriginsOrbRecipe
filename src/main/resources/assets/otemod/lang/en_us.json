@@ -1,8 +1,8 @@
 {
     "key.otemod.open_vault": "Opens Vault 0",
-    "key.category.otemod": "Only The Essentials",
+    "key.category.otemod": "Thresholds",
 
-    "itemGroup.tabs.otemod": "OTEMod",
+    "itemGroup.tabs.otemod": "Thresholds",
 
     "item.minecraft.splash_potion.effect.flight": "Splash Potion of Flight",
     "item.minecraft.lingering_potion.effect.flight": "Lingering Potion of Flight",

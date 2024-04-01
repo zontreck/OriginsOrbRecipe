@@ -9,5 +9,6 @@ public enum ItemStatType {
     SHOVELPATH,
     HOE,
     SHEARS,
-    EGGING
+    EGGING,
+    EGG_CHANCE
 }

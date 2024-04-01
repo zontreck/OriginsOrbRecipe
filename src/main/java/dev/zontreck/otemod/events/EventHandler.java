@@ -17,6 +17,7 @@ import dev.zontreck.otemod.enchantments.ModEnchantments;
 import dev.zontreck.otemod.implementation.DeathMessages;
 import dev.zontreck.otemod.implementation.InventoryBackup;
 import dev.zontreck.otemod.implementation.Messages;
+import dev.zontreck.otemod.items.tags.ItemStatType;
 import dev.zontreck.otemod.registry.ModDimensions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -28,6 +29,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SpawnEggItem;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.GameType;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -73,12 +75,11 @@ public class EventHandler {
         }
 
         // Calculate chance
-        double base_chance = ServerConfig.drops.playerHeadChance;
+        double base_chance = (ServerConfig.drops.playerHeadChance * 100);
         base_chance += looting;
-        base_chance *= 100;
 
         Random rng = new Random();
-        double num = rng.nextDouble(0,100000);
+        int num = rng.nextInt(100) + 1;
         if(num <= base_chance)
         {
             ItemStack head = HeadUtilities.get(profile.username, "").setHoverName(ChatHelpers.macro(profile.nickname+"'s Head"));
@@ -160,9 +161,13 @@ public class EventHandler {
                 // Check enchantment level for looting
                 int level = ItemUtils.getEnchantmentLevel (Enchantments.MOB_LOOTING,stack);
                 if(level==3){
-                    ItemStack egg = new ItemStack(ForgeSpawnEggItem.fromEntityType(killed.getType()));
+                    ItemStack egg = new ItemStack(
+                            ForgeSpawnEggItem.fromEntityType(killed.getType())
+                    );
+
+
                     ev.getDrops().add(new ItemEntity(killed.level(), killed.getX(), killed.getY(), killed.getZ(), egg));
-                    //LoreHandlers.updateItem(stack, ItemStatType.EGGING);
+                    LoreHandlers.updateItem(stack, ItemStatType.EGGING);
                 }
             }else{
                 bias += 1;

@@ -1,12 +1,10 @@
 package dev.zontreck.otemod.blocks.entity;
 
-import dev.zontreck.libzontreck.util.ItemUtils;
-import dev.zontreck.otemod.implementation.OutputItemStackHandler;
+import dev.zontreck.libzontreck.items.InputItemStackHandler;
+import dev.zontreck.libzontreck.items.OutputItemStackHandler;
 import dev.zontreck.otemod.implementation.energy.IThresholdsEnergy;
 import dev.zontreck.otemod.implementation.energy.OTEEnergy;
-import dev.zontreck.otemod.implementation.scrubber.MagicalScrubberMenu;
 import dev.zontreck.otemod.implementation.uncrafting.UncrafterMenu;
-import dev.zontreck.otemod.items.PartialItem;
 import dev.zontreck.otemod.networking.ModMessages;
 import dev.zontreck.otemod.networking.packets.EnergySyncS2CPacket;
 import net.minecraft.core.BlockPos;
@@ -20,16 +18,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.CraftingContainer;
-import net.minecraft.world.item.EnchantedBookItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.CraftingRecipe;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentInstance;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -39,7 +28,6 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.*;
@@ -70,6 +58,7 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider, I
         }
     };
     private ItemStackHandler outputSlot;
+    private ItemStackHandler inputSlot;
 
     private final OTEEnergy ENERGY_STORAGE = new OTEEnergy(ENERGY_REQ*3, ENERGY_REQ+512) {
 
@@ -90,6 +79,7 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider, I
     public UncrafterBlockEntity(BlockPos pos, BlockState state) {
         super(ModEntities.UNCRAFTER.get(), pos, state);
         outputSlot = new OutputItemStackHandler(outputItems);
+        inputSlot = new InputItemStackHandler(itemsHandler);
 
         this.data = new ContainerData() {
 
@@ -160,7 +150,7 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider, I
     public void onLoad()
     {
         super.onLoad();
-        lazyItemHandler = LazyOptional.of(()->itemsHandler);
+        lazyItemHandler = LazyOptional.of(()->inputSlot);
         lazyOutputItems = LazyOptional.of(()->outputSlot);
         lazyEnergyHandler = LazyOptional.of(()->ENERGY_STORAGE);
     }

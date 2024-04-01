@@ -11,6 +11,7 @@ public class ItemStatistics {
     public static String makeText(ItemStatType type, int val)
     {
         String lore = ChatColor.doColors("!White!");
+        String sAppend = "";
         switch(type)
         {
             case SWORD -> {
@@ -38,10 +39,14 @@ public class ItemStatistics {
                 lore += "Sheep Shaved: ";
             }
             case EGGING -> {
-                lore += "Mobs Egged: ";
+                lore += "Spawn Eggs Dropped: ";
+            }
+            case EGG_CHANCE -> {
+                lore += "Spawn Egg Chance: ";
+                sAppend = "!White!%";
             }
         }
-        lore += ChatColor.doColors("!Green!"+val);
+        lore += ChatColor.doColors("!Green!"+val + sAppend);
         return lore;
     }
 }

@@ -168,6 +168,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:mekanism-268560:5125665")
     runtimeOnly fg.deobf("curse.maven:worldedit-225608:4586218")
     runtimeOnly fg.deobf("curse.maven:jei-238222:5101366")
+    runtimeOnly fg.deobf("curse.maven:nbtedit-reborn-678133:5082493")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

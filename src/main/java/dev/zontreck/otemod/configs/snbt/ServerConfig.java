@@ -83,6 +83,7 @@ public class ServerConfig
         tag.put(Cooldowns.TAG_NAME, cooldowns.save());
         tag.put(AntiGrief.TAG_NAME, antigrief.save());
         tag.put(ChatOverrides.TAG_NAME, chatOverrides.save());
+        tag.put(Drops.TAG_NAME, drops.save());
 
 
         return tag;

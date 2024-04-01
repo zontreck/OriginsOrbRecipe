@@ -1,7 +1,8 @@
 package dev.zontreck.otemod.blocks.entity;
 
+import dev.zontreck.libzontreck.items.InputItemStackHandler;
+import dev.zontreck.libzontreck.items.OutputItemStackHandler;
 import dev.zontreck.libzontreck.util.ChatHelpers;
-import dev.zontreck.otemod.implementation.OutputItemStackHandler;
 import dev.zontreck.otemod.implementation.compressor.CompressionChamberMenu;
 import dev.zontreck.otemod.implementation.energy.IThresholdsEnergy;
 import dev.zontreck.otemod.implementation.energy.OTEEnergy;
@@ -19,17 +20,14 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.inventory.SimpleContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.energy.EnergyStorage;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
@@ -47,6 +45,8 @@ public class CompressionChamberBlockEntity extends BlockEntity implements MenuPr
         super(ModEntities.COMPRESSION_CHAMBER.get(), pPos, pBlockState);
 
         outputSlot = new OutputItemStackHandler(outputItems);
+        inputSlot = new InputItemStackHandler(itemsHandler);
+
         data = new ContainerData() {
             @Override
             public int get(int i) {
@@ -91,6 +91,7 @@ public class CompressionChamberBlockEntity extends BlockEntity implements MenuPr
         }
     };
     private ItemStackHandler outputSlot;
+    private ItemStackHandler inputSlot;
 
     private final OTEEnergy ENERGY_STORAGE = new OTEEnergy(ENERGY_REQUIREMENT*3, ENERGY_REQUIREMENT*512) {
 
@@ -148,7 +149,7 @@ public class CompressionChamberBlockEntity extends BlockEntity implements MenuPr
     public void onLoad()
     {
         super.onLoad();
-        lazyItemHandler = LazyOptional.of(()->itemsHandler);
+        lazyItemHandler = LazyOptional.of(()->inputSlot);
         lazyOutputItems = LazyOptional.of(()->outputSlot);
         lazyEnergyHandler = LazyOptional.of(()->ENERGY_STORAGE);
     }

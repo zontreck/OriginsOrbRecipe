@@ -1,6 +1,7 @@
 package dev.zontreck.otemod.blocks.entity;
 
-import dev.zontreck.otemod.implementation.OutputItemStackHandler;
+import dev.zontreck.libzontreck.items.InputItemStackHandler;
+import dev.zontreck.libzontreck.items.OutputItemStackHandler;
 import dev.zontreck.otemod.implementation.energy.IThresholdsEnergy;
 import dev.zontreck.otemod.implementation.energy.OTEEnergy;
 import dev.zontreck.otemod.implementation.scrubber.ItemScrubberMenu;
@@ -58,6 +59,8 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
         }
     };
     private ItemStackHandler outputSlot;
+    private ItemStackHandler inputSlot;
+
 
     private final OTEEnergy ENERGY_STORAGE = new OTEEnergy(ENERGY_REQ*3, ENERGY_REQ+512) {
 
@@ -78,6 +81,7 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
     public ItemScrubberBlockEntity(BlockPos pos, BlockState state) {
         super(ModEntities.ITEM_SCRUBBER.get(), pos, state);
         outputSlot = new OutputItemStackHandler(outputItems);
+        inputSlot = new InputItemStackHandler(itemsHandler);
 
         this.data = new ContainerData() {
 
@@ -148,7 +152,7 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
     public void onLoad()
     {
         super.onLoad();
-        lazyItemHandler = LazyOptional.of(()->itemsHandler);
+        lazyItemHandler = LazyOptional.of(()->inputSlot);
         lazyOutputItems = LazyOptional.of(()->outputSlot);
         lazyEnergyHandler = LazyOptional.of(()->ENERGY_STORAGE);
     }

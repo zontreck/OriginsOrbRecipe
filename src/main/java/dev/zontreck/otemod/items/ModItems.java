@@ -16,13 +16,9 @@ public class ModItems {
 
     public static final RegistryObject<Item> IHAN_CRYSTAL = CreativeModeTabs.addToOTEModTab(ITEMS.register("ihan_crystal", () -> new IhanCrystal()));
 
-
-
     public static final RegistryObject<Item> ETERNIUM_RAW_ORE = CreativeModeTabs.addToOTEModTab(ITEMS.register("eternium_ore", () -> new Item(new Item.Properties())));
 
     public static final RegistryObject<Item> ETERNIUM_INGOT = CreativeModeTabs.addToOTEModTab(ITEMS.register("eternium_ingot", ()-> new SimpleFoiledItem(new Item.Properties())));
-
-
 
     public static final RegistryObject<Item> MELTED_ENDER_PEARL = CreativeModeTabs.addToOTEModTab(ITEMS.register("melted_ender_pearl", () -> new SimpleFoiledItem(new Item.Properties().stacksTo(64))));
     public static final RegistryObject<Item> SINGULARITY = CreativeModeTabs.addToOTEModTab(ITEMS.register("singularity", () -> new UnstableSingularity(new Item.Properties().stacksTo(1))));

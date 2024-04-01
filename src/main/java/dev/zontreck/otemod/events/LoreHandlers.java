@@ -3,7 +3,11 @@ package dev.zontreck.otemod.events;
 import dev.zontreck.libzontreck.lore.LoreContainer;
 import dev.zontreck.libzontreck.lore.LoreEntry;
 import dev.zontreck.libzontreck.util.ChatHelpers;
+import dev.zontreck.libzontreck.util.ItemUtils;
 import dev.zontreck.otemod.OTEMod;
+import dev.zontreck.otemod.configs.snbt.ServerConfig;
+import dev.zontreck.otemod.enchantments.MobEggEnchantment;
+import dev.zontreck.otemod.enchantments.ModEnchantments;
 import dev.zontreck.otemod.items.tags.ItemStatTag;
 import dev.zontreck.otemod.items.tags.ItemStatType;
 import dev.zontreck.otemod.items.tags.ItemStatistics;
@@ -75,7 +79,7 @@ public class LoreHandlers {
         {
             if(bs.is(Blocks.DIRT) || bs.is(Blocks.GRASS_BLOCK))
             {
-                OTEMod.LOGGER.info("DIRT!");
+                //OTEMod.LOGGER.info("DIRT!");
                 updateItem(itemUsed, ItemStatType.HOE);
             }
         } else if(sName.contains("shovel"))
@@ -98,7 +102,7 @@ public class LoreHandlers {
         {
             // Check the entity right-clicked, and the item in hand
 
-            OTEMod.LOGGER.info("Success");
+            //OTEMod.LOGGER.info("Success");
             ServerPlayer sp = (ServerPlayer)ev.getEntity();
             ItemStack itemUsed = sp.getMainHandItem();
             Entity target = ev.getTarget();
@@ -149,6 +153,10 @@ public class LoreHandlers {
             
         }
 
+        if(ItemUtils.getEnchantmentLevel(ModEnchantments.MOB_EGGING_ENCHANTMENT.get(), weaponUsed) > 0) {
+            updateItem(weaponUsed, ItemStatType.EGG_CHANCE);
+        }
+
     }
 
     // Only valid to be used by OTEMod
@@ -159,18 +167,36 @@ public class LoreHandlers {
 
             // Update the mob kill count
             CompoundTag props = weaponUsed.getTag();
-            if(props==null)props=new CompoundTag();
-            CompoundTag container = props.getCompound(ItemStatTag.STATS_TAG+"_"+type.name().toLowerCase());
+            if(props==null){
+                props=new CompoundTag();
+                weaponUsed.setTag(props);
+            }
+            String tagName = ItemStatTag.STATS_TAG + "_" + type.name().toLowerCase();
+            CompoundTag container = new CompoundTag();
+            if(!props.contains(tagName))
+            {
+                props.put(tagName, container);
+            }else container = props.getCompound(ItemStatTag.STATS_TAG+"_"+type.name().toLowerCase());
             LoreContainer contain = new LoreContainer(weaponUsed);
 
             ItemStatTag isTag;
             try{
-                isTag = new ItemStatTag(type, container.getInt(ItemStatTag.STATS_TAG+"_"+type.name().toLowerCase()));
+                isTag = new ItemStatTag(type, (container.contains("pos") ? container.getInt("pos") : contain.miscData.loreData.size()), container.getInt("value"));
             }catch (Exception e){
-                isTag = new ItemStatTag(type, 0);
+                isTag = new ItemStatTag(type, contain.miscData.loreData.size(), 0);
             }
-            isTag.increment();
+            if(type == ItemStatType.EGG_CHANCE)
+            {
+                int bias = weaponUsed.getTag().getInt(MobEggEnchantment.TAG_BIAS);
+                int level = ItemUtils.getEnchantmentLevel(ModEnchantments.MOB_EGGING_ENCHANTMENT.get(), weaponUsed);
+
+                double percent = ((ServerConfig.drops.mobEggingChance) + (level  +  bias));
+
+                isTag.setValue((int)percent);
+            }else isTag.increment();
             LoreEntry entry;
+
+
 
             if(contain.miscData.loreData.size()==0)
             {
@@ -178,12 +204,22 @@ public class LoreHandlers {
                 entry = new LoreEntry.Builder().text(ItemStatistics.makeText(isTag)).build();
                 contain.miscData.loreData.add(entry);
             }else {
-                entry = contain.miscData.loreData.get(0); // Stat is set at 0
-                entry.text = ItemStatistics.makeText(isTag);
+                if(contain.miscData.loreData.size() == isTag.tagPosition)
+                {
+                    entry = new LoreEntry.Builder().text(ItemStatistics.makeText(isTag)).build();
+                    contain.miscData.loreData.add(entry);
+                }else {
+                    entry = contain.miscData.loreData.get(isTag.tagPosition); // Stat is set at 0
+                    entry.text = ItemStatistics.makeText(isTag);
+
+                }
             }
 
             // Update item
             contain.commitLore();
+            container.putInt("pos", isTag.tagPosition);
+            container.putInt("value", isTag.value);
+            weaponUsed.setTag(props);
         }catch(Exception e)
         {
             e.printStackTrace();
