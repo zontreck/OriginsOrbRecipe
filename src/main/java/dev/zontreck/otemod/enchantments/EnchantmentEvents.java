@@ -15,10 +15,10 @@ public class EnchantmentEvents
     @SubscribeEvent
     public static void onServerTick(TickEvent.ServerTickEvent event)
     {
-        if(event.phase == TickEvent.Phase.START)
+        if(event.phase == TickEvent.Phase.END)
         {
             MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
-            canTick = server!=null && server.getTickCount()%20==0;
+            canTick = server!=null;
         }
     }
 
@@ -33,6 +33,7 @@ public class EnchantmentEvents
             {
                 FlightEnchantment.runEntityTick(sp);
                 ConsumptionMending.onEntityTick(sp);
+                NightVisionEnchantment.runEntityTick(sp);
             }
         }
     }

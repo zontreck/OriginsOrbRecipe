@@ -2,100 +2,72 @@ package dev.zontreck.otemod.effects;
 
 import dev.zontreck.libzontreck.LibZontreck;
 import dev.zontreck.libzontreck.util.ChatHelpers;
-import dev.zontreck.libzontreck.util.ItemUtils;
 import dev.zontreck.libzontreck.util.ServerUtilities;
-import dev.zontreck.otemod.enchantments.ModEnchantments;
+import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.implementation.Messages;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.ai.attributes.AttributeMap;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.player.Abilities;
+import net.minecraft.world.entity.ai.attributes.*;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.LogicalSide;
-import org.jetbrains.annotations.Nullable;
+
+import java.util.UUID;
 
 public class FlightEffect extends MobEffect {
+    int lastDuration = -1;
     protected FlightEffect(MobEffectCategory pCategory, int pColor) {
         super(pCategory, pColor);
     }
 
     @Override
-    public void applyEffectTick(LivingEntity pLivingEntity, int pAmplifier) {
-        super.applyEffectTick(pLivingEntity, pAmplifier);
-
-        if(LibZontreck.CURRENT_SIDE == LogicalSide.CLIENT) return;
-        if(pLivingEntity instanceof Player)
-        {
-            if(LibZontreck.CURRENT_SIDE == LogicalSide.SERVER)
-            {
-                ServerPlayer player = ServerUtilities.getPlayerByID(pLivingEntity.getStringUUID());
-
-                recheck(player);
-            }
-        }
-    }
-
-    @Override
     public boolean isDurationEffectTick(int pDuration, int pAmplifier) {
-        return true;
+        lastDuration=pDuration;
+        //OTEMod.LOGGER.info("Effect duration: "  + lastDuration);
+        return pDuration > 0;
     }
 
     @Override
-    public void applyInstantenousEffect(@Nullable Entity pSource, @Nullable Entity pIndirectSource, LivingEntity pLivingEntity, int pAmplifier, double pHealth) {
+    public void addAttributeModifiers(LivingEntity entity, AttributeMap map, int i) {
+        super.addAttributeModifiers(entity, map, i);
 
-        if(LibZontreck.CURRENT_SIDE == LogicalSide.CLIENT) return;
-        if(pLivingEntity instanceof Player)
+        if(entity instanceof ServerPlayer player)
         {
-            ServerPlayer player = ServerUtilities.getPlayerByID(pLivingEntity.getStringUUID());
+            if(player.getAbilities().mayfly==false)
+            {
+                player.getAbilities().mayfly=true;
+                player.onUpdateAbilities();
 
-            recheck(player);
+                ChatHelpers.broadcastTo(player, ChatHelpers.macro(Messages.FLIGHT_GIVEN), player.server);
+            }
         }
-        super.applyInstantenousEffect(pSource, pIndirectSource, pLivingEntity, pAmplifier, pHealth);
     }
 
-    private static void recheck(ServerPlayer sp)
+    private void removeFlightModifier(LivingEntity entity)
     {
-        if(sp.gameMode.isCreative())return; // Don't mess with the creative mode attributes
-
-
-        ItemStack feet = sp.getItemBySlot(EquipmentSlot.FEET);
-
-        boolean hasFlight = false;
-
-        if(ItemUtils.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get(), feet)>0)hasFlight=true;
-
-        if(!hasFlight)
+        if(lastDuration == -1)
         {
-            sp.removeEffect(ModEffects.FLIGHT.get());
+            return;
         }
-
-
-        Abilities playerAbilities = sp.getAbilities();
-        if(hasFlight)
+        if ( entity instanceof Player player )
         {
-            if(playerAbilities.mayfly == false)
+            if(ServerUtilities.isServer() && lastDuration < (5*20))
             {
-                playerAbilities.mayfly=true;
-                sp.onUpdateAbilities();
+                ServerPlayer serverPlayer = (ServerPlayer) player;
+                serverPlayer.getAbilities().mayfly = false;
+                serverPlayer.getAbilities().flying = false;
 
-                ChatHelpers.broadcastTo(sp, ChatHelpers.macro(Messages.FLIGHT_GIVEN), sp.server);
-            }
-        }else {
-            if(playerAbilities.mayfly)
-            {
+                serverPlayer.onUpdateAbilities();
 
-                playerAbilities.mayfly=false;
-                playerAbilities.flying=false;
-                sp.onUpdateAbilities();
-
-                ChatHelpers.broadcastTo(sp, ChatHelpers.macro(Messages.FLIGHT_REMOVED), sp.server);
+                ChatHelpers.broadcastTo(serverPlayer, ChatHelpers.macro(Messages.FLIGHT_REMOVED), serverPlayer.server);
             }
         }
+    }
+
+    @Override
+    public void removeAttributeModifiers(LivingEntity entity, AttributeMap p_19470_, int p_19471_) {
+        super.removeAttributeModifiers(entity, p_19470_, p_19471_);
+        removeFlightModifier(entity);
     }
 }

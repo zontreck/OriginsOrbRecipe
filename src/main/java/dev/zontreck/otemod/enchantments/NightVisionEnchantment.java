@@ -74,6 +74,16 @@ public class NightVisionEnchantment extends Enchantment
             {
                 MobEffectInstance inst = new MobEffectInstance(MobEffects.NIGHT_VISION, 60*20, 4, false, false, true);
 
+                MobEffectInstance existing = sp.getEffect(MobEffects.NIGHT_VISION);
+                if(existing != null)
+                {
+                    if(existing.getDuration() <= (30*20))
+                    {
+                        sp.addEffect(inst);
+                        return;
+                    }else return;
+                }
+
                 sp.addEffect(inst);
             }
         }
