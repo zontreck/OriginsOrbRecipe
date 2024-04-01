@@ -4,6 +4,18 @@
 
     "itemGroup.tabs.otemod": "OTEMod",
 
+    "item.minecraft.splash_potion.effect.flight": "Splash Potion of Flight",
+    "item.minecraft.lingering_potion.effect.flight": "Lingering Potion of Flight",
+    "item.minecraft.potion.effect.flight": "Potion of Flight",
+
+    "item.minecraft.splash_potion.effect.flight_awkward": "Awkward Splash Potion of Flight",
+    "item.minecraft.lingering_potion.effect.flight_awkward": "Awkward Lingering Potion of Flight",
+    "item.minecraft.potion.effect.flight_awkward": "Awkward Potion of Flight",
+
+    "item.minecraft.splash_potion.effect.flight_basic": "Thick Splash Potion of Flight",
+    "item.minecraft.lingering_potion.effect.flight_basic": "Thick Lingering Potion of Flight",
+    "item.minecraft.potion.effect.flight_basic": "Thick Potion of Flight",
+
 
     "item.otemod.eternium_ore": "Raw Eternium Ore",
     "item.otemod.ihan_crystal": "Ihan Crystal",

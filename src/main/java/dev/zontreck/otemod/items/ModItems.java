@@ -3,6 +3,7 @@ package dev.zontreck.otemod.items;
 import dev.zontreck.otemod.OTEMod;
 import dev.zontreck.otemod.implementation.CreativeModeTabs;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

@@ -12,6 +12,7 @@ import dev.zontreck.libzontreck.vectors.WorldPosition;
 import dev.zontreck.otemod.blocks.DeprecatedModBlocks;
 import dev.zontreck.otemod.configs.snbt.ServerConfig;
 import dev.zontreck.otemod.effects.ModEffects;
+import dev.zontreck.otemod.effects.ModPotions;
 import dev.zontreck.otemod.enchantments.FlightEnchantment;
 import dev.zontreck.otemod.enchantments.NightVisionEnchantment;
 import dev.zontreck.otemod.events.EventHandler;
@@ -136,6 +137,7 @@ public class OTEMod
         ModEntityTypes.register(bus);
         ModRecipes.register(bus);
         ModEffects.register(bus);
+        ModPotions.register(bus);
 
 
         //MenuInitializer.register(bus);
