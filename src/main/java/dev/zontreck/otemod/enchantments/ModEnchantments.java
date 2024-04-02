@@ -24,6 +24,7 @@ public class ModEnchantments {
 
 
     public static final RegistryObject<Enchantment> NIGHT_VISION_ENCHANT = REGISTERS.register("night_vision", ()->new NightVisionEnchantment(EquipmentSlot.HEAD));
+    public static final RegistryObject<Enchantment> WATER_BREATHING_ENCHANT = REGISTERS.register("water_breathing", ()->new NightVisionEnchantment(EquipmentSlot.HEAD));
 
     public static void register(IEventBus bus){
         REGISTERS.register(bus);

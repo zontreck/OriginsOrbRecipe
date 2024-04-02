@@ -27,6 +27,7 @@ public class EnchantmentEvents
                 FlightEnchantment.runEntityTick(sp);
                 ConsumptionMending.onEntityTick(sp);
                 NightVisionEnchantment.runEntityTick(sp);
+                WaterBreathingEnchantment.runEntityTick(sp);
             }
 
             TICKS=0;
