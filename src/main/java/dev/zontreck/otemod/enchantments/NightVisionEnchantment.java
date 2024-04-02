@@ -46,46 +46,38 @@ public class NightVisionEnchantment extends Enchantment
         return false;
     }
 
-    public static AtomicInteger TICKS = new AtomicInteger(0);
-
     public static void runEntityTick(ServerPlayer sp)
     {
         if(ServerUtilities.isClient()) return;
 
-        if(TICKS.getAndIncrement() >= (2*20))
+
+        if(ServerConfig.general.debug)
         {
-            TICKS.set(0);
+            OTEMod.LOGGER.info("> NVision Enchantment Tick <");
+        }
 
 
+        ItemStack feet = sp.getItemBySlot(EquipmentSlot.HEAD);
 
-            if(ServerConfig.general.debug)
+        boolean hasNV = false;
+
+        if(ItemUtils.getEnchantmentLevel(ModEnchantments.NIGHT_VISION_ENCHANT.get(), feet)>0)hasNV=true;
+
+        if(hasNV)
+        {
+            MobEffectInstance inst = new MobEffectInstance(MobEffects.NIGHT_VISION, 60*20, 4, false, false, true);
+
+            MobEffectInstance existing = sp.getEffect(MobEffects.NIGHT_VISION);
+            if(existing != null)
             {
-                OTEMod.LOGGER.info("> NVision Enchantment Tick <");
-            }
-
-
-            ItemStack feet = sp.getItemBySlot(EquipmentSlot.HEAD);
-
-            boolean hasNV = false;
-
-            if(ItemUtils.getEnchantmentLevel(ModEnchantments.NIGHT_VISION_ENCHANT.get(), feet)>0)hasNV=true;
-
-            if(hasNV)
-            {
-                MobEffectInstance inst = new MobEffectInstance(MobEffects.NIGHT_VISION, 60*20, 4, false, false, true);
-
-                MobEffectInstance existing = sp.getEffect(MobEffects.NIGHT_VISION);
-                if(existing != null)
+                if(existing.getDuration() <= (30*20))
                 {
-                    if(existing.getDuration() <= (30*20))
-                    {
-                        sp.addEffect(inst);
-                        return;
-                    }else return;
-                }
-
-                sp.addEffect(inst);
+                    sp.addEffect(inst);
+                    return;
+                }else return;
             }
+
+            sp.addEffect(inst);
         }
 
 
