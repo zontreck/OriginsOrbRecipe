@@ -1,5 +1,6 @@
 package dev.zontreck.otemod.enchantments;
 
+import dev.zontreck.libzontreck.util.ServerUtilities;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.TickEvent;
@@ -11,30 +12,25 @@ import net.minecraftforge.server.ServerLifecycleHooks;
 @Mod.EventBusSubscriber
 public class EnchantmentEvents
 {
-    private static boolean canTick = false;
+    private static int TICKS = 0;
     @SubscribeEvent
     public static void onServerTick(TickEvent.ServerTickEvent event)
     {
-        if(event.phase == TickEvent.Phase.END)
-        {
-            MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
-            canTick = server!=null;
-        }
-    }
+        MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
+        if(server.getPlayerCount() == 0) return;
 
-    @SubscribeEvent
-    public static void onTick(LivingEvent.LivingTickEvent tick)
-    {
-        if(canTick)
+        if(TICKS >= 20)
         {
-            // Process Enchantments
 
-            if(tick.getEntity() instanceof ServerPlayer sp)
+            for(ServerPlayer sp : server.getPlayerList().getPlayers())
             {
                 FlightEnchantment.runEntityTick(sp);
                 ConsumptionMending.onEntityTick(sp);
                 NightVisionEnchantment.runEntityTick(sp);
             }
+
         }
+
+        TICKS++;
     }
 }

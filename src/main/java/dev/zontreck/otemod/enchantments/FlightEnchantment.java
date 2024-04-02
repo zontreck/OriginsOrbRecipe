@@ -87,7 +87,7 @@ public class FlightEnchantment extends Enchantment
                 MobEffectInstance inst = new MobEffectInstance(ModEffects.FLIGHT.get(), 60*20, 0, false, false, true);
                 MobEffectInstance existing = sp.getEffect(ModEffects.FLIGHT.get());
 
-                if(existing!= null)
+                if(existing != null)
                 {
                     if(existing.getDuration() <= (30 * 20))
                     {
