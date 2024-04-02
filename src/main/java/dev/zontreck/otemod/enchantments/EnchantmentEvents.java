@@ -29,6 +29,8 @@ public class EnchantmentEvents
                 NightVisionEnchantment.runEntityTick(sp);
             }
 
+            TICKS=0;
+
         }
 
         TICKS++;
