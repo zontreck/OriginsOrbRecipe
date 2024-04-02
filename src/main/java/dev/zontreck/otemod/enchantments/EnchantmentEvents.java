@@ -6,23 +6,22 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.LogicalSide;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.server.ServerLifecycleHooks;
 
 @Mod.EventBusSubscriber
 public class EnchantmentEvents
 {
-    private static int TICKS = 0;
+
     @SubscribeEvent
-    public static void onServerTick(TickEvent.ServerTickEvent event)
+    public static void handleEnchantmentTicks(TickEvent.PlayerTickEvent event)
     {
-        MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
-        if(server.getPlayerCount() == 0) return;
+        if(event.side == LogicalSide.CLIENT) return;
 
-        if(TICKS >= 20)
+        if(event.phase == TickEvent.Phase.END)
         {
-
-            for(ServerPlayer sp : server.getPlayerList().getPlayers())
+            if(event.player instanceof ServerPlayer sp)
             {
                 FlightEnchantment.runEntityTick(sp);
                 ConsumptionMending.onEntityTick(sp);
@@ -30,10 +29,6 @@ public class EnchantmentEvents
                 WaterBreathingEnchantment.runEntityTick(sp);
             }
 
-            TICKS=0;
-
         }
-
-        TICKS++;
     }
 }
