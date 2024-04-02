@@ -57,11 +57,11 @@ public class WaterBreathingEnchantment extends Enchantment
 
         ItemStack feet = sp.getItemBySlot(EquipmentSlot.HEAD);
 
-        boolean hasNV = false;
+        boolean hasEnchantment = false;
 
-        if(ItemUtils.getEnchantmentLevel(ModEnchantments.WATER_BREATHING_ENCHANT.get(), feet)>0)hasNV=true;
+        if(ItemUtils.getEnchantmentLevel(ModEnchantments.WATER_BREATHING_ENCHANT.get(), feet)>0)hasEnchantment=true;
 
-        if(hasNV)
+        if(hasEnchantment)
         {
             MobEffectInstance inst = new MobEffectInstance(MobEffects.WATER_BREATHING, 60*20, 4, false, false, true);
 

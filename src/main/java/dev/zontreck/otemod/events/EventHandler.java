@@ -167,6 +167,7 @@ public class EventHandler {
 
 
                     ev.getDrops().add(new ItemEntity(killed.level(), killed.getX(), killed.getY(), killed.getZ(), egg));
+                    LoreHandlers.updateItem(stack, ItemStatType.EGG_CHANCE);
                     LoreHandlers.updateItem(stack, ItemStatType.EGGING);
                 }
             }else{

@@ -70,13 +70,13 @@ public class MobEggEnchantment extends Enchantment
         {
             OTEMod.LOGGER.info("Spawn Egg Chance (" + CHANCE + ")");
         }
-        return rollChance((int)CHANCE);
+        return rollChance(CHANCE);
     }
 
     public static boolean rollChance(int percent)
     {
         Random rng = new Random();
-        int test = rng.nextInt(100) + 1;
+        int test = rng.nextInt(100) + 1 + (100 - percent);
         if(ServerConfig.general.debug)
         {
             OTEMod.LOGGER.info("Spawn Egg Dice Roll (" + test + " / " + percent + ")");

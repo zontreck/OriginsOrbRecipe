@@ -84,10 +84,11 @@ public class ConsumptionMending extends Enchantment
         List<ItemStack> procList = new ArrayList<>();
         procList.addAll(append(player, player.getInventory().offhand));
         procList.addAll(append(player, player.getInventory().items));
+        procList.addAll(append(player, player.getInventory().armor));
 
         for(ItemStack stack : enchanted)
         {
-            for(ItemStack item : player.getInventory().items)
+            for(ItemStack item : procList)
             {
                 // Is this a like item, and does it have the enchant?
                 boolean eligible = false;
