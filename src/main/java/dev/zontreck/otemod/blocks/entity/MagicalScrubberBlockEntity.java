@@ -6,6 +6,8 @@ import dev.zontreck.libzontreck.util.ItemUtils;
 import dev.zontreck.otemod.implementation.energy.IThresholdsEnergy;
 import dev.zontreck.otemod.implementation.energy.OTEEnergy;
 import dev.zontreck.otemod.implementation.scrubber.MagicalScrubberMenu;
+import dev.zontreck.otemod.items.ModItems;
+import dev.zontreck.otemod.items.PartialItem;
 import dev.zontreck.otemod.networking.ModMessages;
 import dev.zontreck.otemod.networking.packets.EnergySyncS2CPacket;
 import net.minecraft.core.BlockPos;
@@ -64,7 +66,6 @@ public class MagicalScrubberBlockEntity extends BlockEntity implements MenuProvi
         }
     };
     private ItemStackHandler outputSlot;
-    private ItemStackHandler inputSlot;
 
     private final OTEEnergy ENERGY_STORAGE = new OTEEnergy(ENERGY_REQ*3, ENERGY_REQ+512) {
 
@@ -85,7 +86,6 @@ public class MagicalScrubberBlockEntity extends BlockEntity implements MenuProvi
     public MagicalScrubberBlockEntity(BlockPos pos, BlockState state) {
         super(ModEntities.MAGICAL_SCRUBBER.get(), pos, state);
         outputSlot = new OutputItemStackHandler(outputItems);
-        inputSlot = new InputItemStackHandler(itemsHandler);
 
         this.data = new ContainerData() {
 
@@ -156,7 +156,7 @@ public class MagicalScrubberBlockEntity extends BlockEntity implements MenuProvi
     public void onLoad()
     {
         super.onLoad();
-        lazyItemHandler = LazyOptional.of(()->inputSlot);
+        lazyItemHandler = LazyOptional.of(()->itemsHandler);
         lazyOutputItems = LazyOptional.of(()->outputSlot);
         lazyEnergyHandler = LazyOptional.of(()->ENERGY_STORAGE);
     }
@@ -255,6 +255,13 @@ public class MagicalScrubberBlockEntity extends BlockEntity implements MenuProvi
 
             //Map<Enchantment, Integer> enchants = main.getAllEnchantments();
             Map<Enchantment, Integer> enchantments = ItemUtils.getEnchantments(main.copy());
+
+            if(!main.is(ModItems.PARTIAL_ITEM.get()))
+            {
+                entity.itemsHandler.setStackInSlot(0, PartialItem.makePartialItem(main, true, false));
+                entity.resetProgress();
+                return;
+            }
 
             if(enchantments.size()>0)
             {

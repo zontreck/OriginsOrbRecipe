@@ -45,7 +45,6 @@ public class CompressionChamberBlockEntity extends BlockEntity implements MenuPr
         super(ModEntities.COMPRESSION_CHAMBER.get(), pPos, pBlockState);
 
         outputSlot = new OutputItemStackHandler(outputItems);
-        inputSlot = new InputItemStackHandler(itemsHandler);
 
         data = new ContainerData() {
             @Override
@@ -91,7 +90,6 @@ public class CompressionChamberBlockEntity extends BlockEntity implements MenuPr
         }
     };
     private ItemStackHandler outputSlot;
-    private ItemStackHandler inputSlot;
 
     private final OTEEnergy ENERGY_STORAGE = new OTEEnergy(ENERGY_REQUIREMENT*3, ENERGY_REQUIREMENT*512) {
 
@@ -149,7 +147,7 @@ public class CompressionChamberBlockEntity extends BlockEntity implements MenuPr
     public void onLoad()
     {
         super.onLoad();
-        lazyItemHandler = LazyOptional.of(()->inputSlot);
+        lazyItemHandler = LazyOptional.of(()->itemsHandler);
         lazyOutputItems = LazyOptional.of(()->outputSlot);
         lazyEnergyHandler = LazyOptional.of(()->ENERGY_STORAGE);
     }

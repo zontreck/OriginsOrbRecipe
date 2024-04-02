@@ -58,7 +58,6 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider, I
         }
     };
     private ItemStackHandler outputSlot;
-    private ItemStackHandler inputSlot;
 
     private final OTEEnergy ENERGY_STORAGE = new OTEEnergy(ENERGY_REQ*3, ENERGY_REQ+512) {
 
@@ -79,7 +78,6 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider, I
     public UncrafterBlockEntity(BlockPos pos, BlockState state) {
         super(ModEntities.UNCRAFTER.get(), pos, state);
         outputSlot = new OutputItemStackHandler(outputItems);
-        inputSlot = new InputItemStackHandler(itemsHandler);
 
         this.data = new ContainerData() {
 
@@ -150,7 +148,7 @@ public class UncrafterBlockEntity extends BlockEntity implements MenuProvider, I
     public void onLoad()
     {
         super.onLoad();
-        lazyItemHandler = LazyOptional.of(()->inputSlot);
+        lazyItemHandler = LazyOptional.of(()->itemsHandler);
         lazyOutputItems = LazyOptional.of(()->outputSlot);
         lazyEnergyHandler = LazyOptional.of(()->ENERGY_STORAGE);
     }

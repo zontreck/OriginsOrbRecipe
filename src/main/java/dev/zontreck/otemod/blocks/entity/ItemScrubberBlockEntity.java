@@ -59,7 +59,6 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
         }
     };
     private ItemStackHandler outputSlot;
-    private ItemStackHandler inputSlot;
 
 
     private final OTEEnergy ENERGY_STORAGE = new OTEEnergy(ENERGY_REQ*3, ENERGY_REQ+512) {
@@ -81,7 +80,6 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
     public ItemScrubberBlockEntity(BlockPos pos, BlockState state) {
         super(ModEntities.ITEM_SCRUBBER.get(), pos, state);
         outputSlot = new OutputItemStackHandler(outputItems);
-        inputSlot = new InputItemStackHandler(itemsHandler);
 
         this.data = new ContainerData() {
 
@@ -152,7 +150,7 @@ public class ItemScrubberBlockEntity extends BlockEntity implements MenuProvider
     public void onLoad()
     {
         super.onLoad();
-        lazyItemHandler = LazyOptional.of(()->inputSlot);
+        lazyItemHandler = LazyOptional.of(()->itemsHandler);
         lazyOutputItems = LazyOptional.of(()->outputSlot);
         lazyEnergyHandler = LazyOptional.of(()->ENERGY_STORAGE);
     }
