@@ -59,47 +59,38 @@ public class FlightEnchantment extends Enchantment
     }
 
 
-    public static AtomicInteger TICKS = new AtomicInteger(0);
-
     public static void runEntityTick(ServerPlayer sp)
     {
         if(ServerUtilities.isClient()) return;
 
-        if(TICKS.getAndIncrement() >= 20)
+
+        if(ServerConfig.general.debug)
         {
-            TICKS.set(0);
-
-
-
-            if(ServerConfig.general.debug)
-            {
-                OTEMod.LOGGER.info("> Flight Enchantment Tick <");
-            }
-
-            ItemStack feet = sp.getItemBySlot(EquipmentSlot.FEET);
-
-            boolean hasFlight = false;
-
-            if(ItemUtils.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get(), feet)>0)hasFlight=true;
-
-            if(hasFlight)
-            {
-                MobEffectInstance inst = new MobEffectInstance(ModEffects.FLIGHT.get(), 60*20, 0, false, false, true);
-                MobEffectInstance existing = sp.getEffect(ModEffects.FLIGHT.get());
-
-                if(existing != null)
-                {
-                    if(existing.getDuration() <= (30 * 20))
-                    {
-                        sp.addEffect(inst);
-                        return;
-                    }else return;
-                }
-
-                sp.addEffect(inst);
-            }
+            OTEMod.LOGGER.info("> Flight Enchantment Tick <");
         }
 
+        ItemStack feet = sp.getItemBySlot(EquipmentSlot.FEET);
+
+        boolean hasFlight = false;
+
+        if(ItemUtils.getEnchantmentLevel(ModEnchantments.FLIGHT_ENCHANTMENT.get(), feet)>0)hasFlight=true;
+
+        if(hasFlight)
+        {
+            MobEffectInstance inst = new MobEffectInstance(ModEffects.FLIGHT.get(), 60*20, 0, false, false, true);
+            MobEffectInstance existing = sp.getEffect(ModEffects.FLIGHT.get());
+
+            if(existing != null)
+            {
+                if(existing.getDuration() <= (30 * 20))
+                {
+                    sp.addEffect(inst);
+                    return;
+                }else return;
+            }
+
+            sp.addEffect(inst);
+        }
 
     }
 
